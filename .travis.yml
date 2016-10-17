@@ -2,33 +2,33 @@ language: node_js
 node_js: stable
 
 before_sinstall:
-    - npm install -g hexo-cli
-    - npm install hexo-generator-sitemap --save  #Éú³Ésitemap.xml
-    - npm install hexo-generator-baidu-sitemap --save  #Éú³Ébaidusitemap.xml
+    - npm install -g hexo-cli hexo
+    - npm install hexo-generator-sitemap --save  #ç”Ÿæˆsitemap.xml
+    - npm install hexo-generator-baidu-sitemap --save  #ç”Ÿæˆbaidusitemap.xml
     
 install:
-    - npm install  #°²×°hexo¼°²å¼ş 
+    - npm install  #å®‰è£…hexoåŠæ’ä»¶ 
 
 script:    
-    - hexo cl  #Çå³ı   
-    - hexo g  #Éú³É 
+    - hexo cl  #æ¸…é™¤   
+    - hexo g  #ç”Ÿæˆ 
     
 after_script:   
     - cd ./public   
     - git init    
-    - git config user.name "tinyking"  #ĞŞ¸Äname   
-    - git config user.email "akingchao@qq.com"  #ĞŞ¸ÄµØÖ·   
+    - git config user.name "tinyking"  #ä¿®æ”¹name   
+    - git config user.email "akingchao@qq.com"  #ä¿®æ”¹åœ°å€   
     - git add .    
     - git commit -m "Update docs"    
     - git push --force --quiet "https://45e983225903c840cf5695d36b8f1a2896cc2251@tinyking.github.io.git" 
     
 master:
-    master  #GH_TOKENÊÇÎÒÃÇÔÚTravisÖĞÅäÖÃtokenµÄÃû³Æ£¬REFÎªµØÖ·
+    master  #GH_TOKENæ˜¯æˆ‘ä»¬åœ¨Travisä¸­é…ç½®tokençš„åç§°ï¼ŒREFä¸ºåœ°å€
 
 branches:   
     only:      
-        - hexo  #Ö»¼à²âhexo·ÖÖ§£¬hexoÊÇÎÒµÄ·ÖÖ§µÄÃû³Æ£¬¿É¸ù¾İ×Ô¼ºÇé¿öÉèÖÃ
+        - hexo  #åªç›‘æµ‹hexoåˆ†æ”¯ï¼Œhexoæ˜¯æˆ‘çš„åˆ†æ”¯çš„åç§°ï¼Œå¯æ ¹æ®è‡ªå·±æƒ…å†µè®¾ç½®
         
 env:   
     global:     
-    - GH_REF: github.com/tinyking/tinyking.github.io.git  #ÉèÖÃGH_REF£¬×¢Òâ¸ü¸Äyourname
+    - GH_REF: github.com/tinyking/tinyking.github.io.git  #è®¾ç½®GH_REFï¼Œæ³¨æ„æ›´æ”¹yourname
