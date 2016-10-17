@@ -1,7 +1,7 @@
 language: node_js
 node_js: stable
 
-before_sinstall:
+before_install:
     - nam install -g hexo
     - npm install -g hexo-cli
     - npm install hexo-generator-sitemap --save  #生成sitemap.xml
