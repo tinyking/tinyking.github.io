@@ -1,0 +1,33 @@
+language: node_js
+node_js: stable
+
+before_sinstall:
+    - npm install -g hexo-cli
+    - npm install hexo-generator-sitemap --save  #生成sitemap.xml
+    - npm install hexo-generator-baidu-sitemap --save  #生成baidusitemap.xml
+    
+install:
+    - npm install  #安装hexo及插件 
+
+script:    
+    - hexo cl  #清除   
+    - hexo g  #生成 
+    
+after_script:   
+    - cd ./public   
+    - git init    
+    - git config user.name "tinyking"  #修改name   
+    - git config user.email "akingchao@qq.com"  #修改地址   
+    - git add .    
+    - git commit -m "Update docs"    
+    - git push --force --quiet "https://45e983225903c840cf5695d36b8f1a2896cc2251@tinyking.github.io.git" 
+    
+master:master  #GH_TOKEN是我们在Travis中配置token的名称，REF为地址
+
+branches:   
+    only:      
+        - hexo  #只监测hexo分支，hexo是我的分支的名称，可根据自己情况设置
+        
+env:   
+    global:     
+    - GH_REF: github.com/tinyking/tinyking.github.io.git  #设置GH_REF，注意更改yourname
