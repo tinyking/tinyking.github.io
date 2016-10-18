@@ -21,7 +21,7 @@ after_script:
     - git add .    
     - git commit -m "Update docs"    
    # - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master  #GH_TOKEN是我们在Travis中配置token的名称，REF为地址
-    - git push --force --quiet https://4a60a9a3553758f82786c70c652b26161a780a21@github.com/tinyking/tinyking.github.io.git master
+    - git push --force --quiet https://ffa9e74704bd8d9f97c860cc06da458eaafe128b@github.com/tinyking/tinyking.github.io.git master
 
 branches:   
     only:      
