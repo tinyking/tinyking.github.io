@@ -1,0 +1,25 @@
+<head>
+  <meta charset="utf-8"><% var title = page.title;
+  if (is_archive()){
+    title = '列表';
+    if (is_month()){
+      title += ': ' + page.year + '/' + page.month;
+    } else if (is_year()){
+      title += ': ' + page.year;
+    }
+  } else if (is_category()){
+    title = '节点 ' + page.category;
+  } else if (is_tag()){
+    title = '标签 ' + page.tag;
+  } %>
+  <% if(title){ %><title><% if (title){ %><%= title %><% } %></title><%}else{%><title><%= config.title %></title><% } %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#00796b">
+  <meta name="msapplication-TileColor" content="#4E8071"/>
+  <% if(theme.apple_touch_icon){ %><meta content="<%- theme.apple_touch_icon %>" itemprop="image">
+  <link rel="apple-touch-icon" href="<%- theme.apple_touch_icon %>"><% } %>
+  <% if(theme.shortcut_icon){ %><link rel="shortcut icon" href="<%- theme.shortcut_icon %>" type="image/png"><% } %>
+  <% if (theme.rss){ %><link rel="alternative" href="<%- theme.rss %>" title="<%= config.title %>" type="application/atom+xml"><% } %>
+  <% if (theme.favicon){ %><link rel="icon" href="<%- theme.favicon %>"><% } %>
+  <% if (theme.CDN_PATH){ %><% if (theme.theme_version){ %><link rel="stylesheet" href="<%=theme.CDN_PATH %>/css/style<%=theme.theme_version %>.css" type="text/css"><% } else { %><link rel="stylesheet" href="<%=theme.CDN_PATH %>/css/style.css" type="text/css"><% } %><% } else { %><link rel="stylesheet" href="/css/style.css" type="text/css"> <% } %>
+</head>

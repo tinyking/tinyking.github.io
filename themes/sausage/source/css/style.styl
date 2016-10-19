@@ -1,0 +1,100 @@
+@import "nib"
+@import "_variables"
+@import "_util/mixin"
+@import "_util/grid"
+
+
+global-reset()
+
+ol{
+  list-style: decimal;
+  padding-left: 20px;
+}
+ul{
+  list-style: none;
+}
+input, button
+  margin: 0
+  padding: 0
+  &::-moz-focus-inner
+    border: 0
+    padding: 0
+
+
+html, body, #container
+  height: 100%
+
+body
+  font-family:font-label;
+  font-size:16px;
+  background:#fff;
+  color: rgba(0,0,0,0.6);
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch
+
+h1,h2,h3{
+  display: block;
+}
+h1 {
+  font-size:1.5em
+}
+h2 {
+  font-size:1.3em
+}
+h3 {
+  font-size:1.1em
+}
+h4,h5,h6{
+  font-size:1em
+}
+
+a {
+  text-decoration:none;
+  outline-width:0;
+  color:#258fb8;
+  outline: none;
+}
+
+.alignleft {
+  float:left
+}
+.alignright {
+  float:right
+}
+.clearfix {
+  *zoom:1
+}
+.clearfix:after {
+  content:"";
+  display:table;
+  clear:both
+}
+.inner {
+  width:1000px;
+  margin:0 auto
+}
+.hide{
+  display: none;
+}
+@media screen and (max-width:1040px) {
+  .inner {
+    width:100%
+  }
+}
+
+@import "_extend"
+if !content-selectable 
+  @import "_util/block-select.styl"
+@import "_partial/main"
+@import "_partial/archive"
+@import "_partial/article"
+@import "_partial/archive"
+@import "_partial/highlight"
+@import "_partial/footer"
+@import "_partial/share"
+@import "_partial/page"
+@import "_partial/instagram"
+@import "_partial/tagcloud"
+@import "_partial/scroll"
+@import "_partial/mobile-slider"
+

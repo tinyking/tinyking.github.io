@@ -1,0 +1,37 @@
+#page-nav{
+	text-align: center;
+	margin-top: 30px;
+	.page-number{
+		width: 20px;
+		height: 20px;
+		background: #88acdb;
+		-webkit-border-radius: 50%;
+		-moz-border-radius: 50%;
+		border-radius: 50%;
+		display: inline-block;
+		color: #fff;
+		line-height: 20px;
+		font-size: 12px;
+		margin: 0 3px 30px;
+		&:hover{
+			background: #88aee;
+		}
+	}
+	.current{
+		background: color-primary;
+		cursor: default;
+	}
+	.extend{
+		color: #5e5e5e;
+		margin: 0 27px;
+		opacity: 0;
+		&:hover{
+			color: #3e3e3e;
+		}
+	}
+	&:hover{
+		.extend{
+			opacity: 1;
+		}
+	}
+}

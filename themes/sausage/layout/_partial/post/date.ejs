@@ -1,0 +1,6 @@
+<% if (index && post.top ){ %>
+<%}else{%>
+<div class="<%= class_name %>">
+<span class="datetime-published-tag"> <%= date(post.date, date_format) %> </span>
+</div>
+<%}%>

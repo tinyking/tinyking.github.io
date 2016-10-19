@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<%- partial('_partial/head') %>
+<% if(theme.hide_left_menu){%>
+<body  oncontextmenu=self.event.returnValue=false>
+<%}else{%>
+<body>
+<%}%>
+  <div id="container" class="container">
+    <div class="left-col">
+    <%- partial('_partial/left-col', null, {cache: !config.relative_link}) %>
+    </div>
+    <div class="mid-col">
+      <%- partial('_partial/mobile-nav', null, {cache: !config.relative_link}) %>
+      <div class="body-wrap"><%- body %></div>
+      <%- partial('_partial/footer') %>
+    </div>
+    <%- partial('_partial/after-footer') %>
+  </div>
+</body>
+</html>

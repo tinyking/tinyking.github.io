@@ -1,0 +1,9 @@
+<footer id="footer" class="block-select">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">&copy; 2015-<%= date(new Date(), 'YYYY') %>
+        <% if(theme.aboutme){ %><a href="<%= theme.aboutme %>" class ="aboutme-foot-tag"> <%= config.author || config.title %></a><% } else { %><%= config.author || config.title %><% } %>
+      </div>
+    </div>
+  </div>
+</footer>
