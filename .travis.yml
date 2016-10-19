@@ -19,9 +19,10 @@ after_script:
     - git config user.name "tinyking"  #修改name   
     - git config user.email "akingchao@qq.com"  #修改地址   
     - git add .    
-    - git commit -m "Update docs"    
+    - git commit -m "Update docs" 
+    - cat ~/.ssh/id_rsa.pub
     #- git push --force --quiet https://${GH_TOKEN}@${GH_REF} master
-    - git push --force https://85f554dad55c23a153fd7aef7dd14a6f424a3db2@github.com/tinyking/tinyking.github.io.git master:master
+    #- git push --force https://85f554dad55c23a153fd7aef7dd14a6f424a3db2@github.com/tinyking/tinyking.github.io.git master:master
     
 branches:   
     only:      
