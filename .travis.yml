@@ -11,7 +11,7 @@ install:
     - npm install  #安装hexo及插件 
 
 script:    
-    - hexo clean && hexo -g d
+    - hexo clean && hexo generate
     
 after_script:   
     - cd ./public   
