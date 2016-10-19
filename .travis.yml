@@ -20,7 +20,7 @@ after_script:
     - git config user.email "akingchao@qq.com"  #修改地址   
     - git add .    
     - git commit -m "Update docs" 
-    - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+    - git push --force --quiet "https://${USER}:${GH_TOKEN}@${GH_REF}" master:master
 branches:   
     only:      
         - hexo  #只监测hexo分支，hexo是我的分支的名称，可根据自己情况设置
