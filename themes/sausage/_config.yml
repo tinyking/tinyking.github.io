@@ -2,9 +2,10 @@
 # 如要添加标签页面, 需要生成一个内容为空的markdown文件
 menu:
   文章: '/archives'
-  随笔: '/categories/note'
+  # 随笔: '/categories/note'
   标签: '/tags'
-  留言: '/feedback'
+  # 留言: '/feedback'
+  关于我: '/about'
 
 rss: '/atom.xml'
 
