@@ -4,7 +4,7 @@
 
 # Site
 title: TinyKing
-subtitle:
+subtitle: 好好学习，天天向上
 description:
 author: TinyKing
 language:
@@ -63,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: yelee
+theme: maupassant
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
