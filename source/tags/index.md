@@ -1,4 +1,4 @@
 ---
-title: {{ title }}
+title: 标签
 type: "tags"
 ---

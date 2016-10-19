@@ -1,9 +1,7 @@
 ---
 title: 前端框架
-date: {{ date }}
-tags: 
-    - framework
-    - web
+date: 2016-10-19 13:30
+tags: [framework]
 ---
 
 ## Semantic UI
