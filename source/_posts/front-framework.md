@@ -35,11 +35,6 @@ Semantic UI 对浏览器的支持：
 
 Bootstrap是快速开发Web应用程序的前端工具包。它是一个CSS和HTML的集合，它使用了最新的浏览器技术，给你的Web开发提供了时尚的版式，表单，buttons，表格，网格系统等等。
 
-![image](http://static.oschina.net/uploads/img/201203/16115128_hu5O.jpg)
-
-![image](http://static.oschina.net/uploads/img/201203/16115128_hu5O.jpg)
-
-![image](http://static.oschina.net/uploads/img/201203/16115128_hu5O.jpg)
 
 
 ## EasyUI
@@ -47,14 +42,13 @@ jQuery EasyUI 为网页开发提供了一堆的常用UI组件，包括菜单、�
 
 下图是一个具有布局效果的窗口：
 
-![image](http://www.oschina.net/uploads/img/201006/17133511_uzSV.png)
 
 
 ## Extjs
 
 ExtJS 主要用来开发RIA富客户端的AJAX应用，主要用于创建前端用户界面，与后台技术无关的前端ajax框架。因此，可以把ExtJS用在.Net、Java、Php等各种开发语言开发的应用中。ExtJs最开始基于YUI技术，由开发人员 JackSlocum开发，通过参考JavaSwing等机制来组织可视化组件，无论从UI界面上CSS样式的应用，到数据解析上的异常处理，都可算是一 款不可多得的JavaScript客户端技术的精品。
 
-![image](http://www.oschina.net/uploads/img/200901/23203214_nLq4.png)
+
 
 Ext的UI组件模型和开发理念脱胎、成型于Yahoo组件库YUI和Java平台上Swing两者，并为开发者屏蔽了大量跨浏览器方面的处理。相对来说，EXT要比开发者直接针对DOM、W3C对象模型开发UI组件轻松。
 
