@@ -1,6 +1,6 @@
 ---
-title: 【vue系列】安装nodejs
-date: 2016-10-17 11:10:40
+title: Squid 代理服务器配置
+date: 2017-04-21 11:10:50
 tags:
 ---
 
