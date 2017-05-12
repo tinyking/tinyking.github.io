@@ -12,5 +12,3 @@ comments: false
 我的51CTO: [TinyKing](http://tinyking.blog.51cto.com)
 
 我的微信：![TingKiny](http://ww1.sinaimg.cn/large/806e3151ly1fffzr8uu0zj20e80e8my0.jpg)
-
-update jdbuy_rating_supplier set handler_name='李芳', handler_erp='lifang40' where rating_id in (138,139,140);
