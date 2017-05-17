@@ -4,7 +4,20 @@
 <% if(theme.hide_left_menu){%>
 <body  oncontextmenu=self.event.returnValue=false>
 <%}else{%>
-<script type="text/javascript">
+<body>
+<%}%>
+  <div id="container" class="container">
+    <div class="left-col">
+    <%- partial('_partial/left-col', null, {cache: !config.relative_link}) %>
+    </div>
+    <div class="mid-col">
+      <%- partial('_partial/mobile-nav', null, {cache: !config.relative_link}) %>
+      <div class="body-wrap"><%- body %></div>
+      <%- partial('_partial/footer') %>
+    </div>
+    <%- partial('_partial/after-footer') %>
+  </div>
+  <script type="text/javascript">
     (function(win,doc){
         var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
         if (!win.alimamatk_show) {
@@ -23,19 +36,6 @@
         win.alimamatk_onload.push(o);
     })(window,document);
 </script>
-
-<body>
-<%}%>
-  <div id="container" class="container">
-    <div class="left-col">
-    <%- partial('_partial/left-col', null, {cache: !config.relative_link}) %>
-    </div>
-    <div class="mid-col">
-      <%- partial('_partial/mobile-nav', null, {cache: !config.relative_link}) %>
-      <div class="body-wrap"><%- body %></div>
-      <%- partial('_partial/footer') %>
-    </div>
-    <%- partial('_partial/after-footer') %>
-  </div>
+<a data-type="4" data-tmpl="390x460" data-tmplid="134" data-style="2" data-border="1" biz-s_logo="1" biz-s_hot="1" href="#">爱淘宝</a>
 </body>
 </html>
