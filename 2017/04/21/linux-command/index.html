@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Linux常用系统命令</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#00796b">
+  <meta name="msapplication-TileColor" content="#4E8071"/>
+  
+  <link rel="shortcut icon" href="http://ico.58pic.com/iconset01/DarkGlass_Reworked/gif/36655.gif" type="image/png">
+  <link rel="alternative" href="/atom.xml" title="TinyKing" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css"> 
+</head>
+
+
+<body>
+
+  <div id="container" class="container">
+    <div class="left-col">
+    <div class="intrude-less">
+  <header id="header" class="inner">
+    <a href="/" class="profilepic">
+      <img lazy-src="http://ww4.sinaimg.cn/mw690/806e3151jw8f1a2ry7axpj20ro0rpgpt.jpg" class="block-select js-avatar">
+	</a>
+	<p class="header-subtitle">好好学习，天天向上</p>
+    <nav class="header-menu">
+      <ul>
+        <li><a href="/archives">文章</a></li><li><a href="/tags">标签</a></li><li><a href="/aboutme">关于我</a></li>
+      </ul>
+    </nav>
+  </header>				
+</div>
+
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  <div class="intrude-less">
+    <header id="header" class="inner">
+      <a href="/" class="profilepic">
+        <img lazy-src="http://ww4.sinaimg.cn/mw690/806e3151jw8f1a2ry7axpj20ro0rpgpt.jpg" class="block-select js-avatar">
+	  </a>
+	  <p class="header-subtitle">好好学习，天天向上</p>
+	  <nav class="header-menu">
+	    <ul>
+        <li><a href="/archives">文章</a></li><li><a href="/tags">标签</a></li><li><a href="/aboutme">关于我</a></li><div class="clearfix"></div>
+		</ul>
+	  </nav>
+	</header>				
+  </div>
+</nav>
+
+      <div class="body-wrap">
+<article id="post-linux-command" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+    <div class="article-meta">
+      
+<div class="article-date">
+<span class="datetime-published-tag"> 2017-04-21 </span>
+</div>
+
+
+    </div>
+    
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 class="article-title" itemprop="name">
+      Linux常用系统命令
+    </h1>
+  
+
+        
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+             <div class="clearfix"></div>
+        
+      </div>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># uname -a # 查看内核/操作系统/CPU信息 </span></div><div class="line"><span class="comment"># head -n 1 /etc/issue # 查看操作系统版本 </span></div><div class="line"><span class="comment"># cat /proc/cpuinfo # 查看CPU信息 </span></div><div class="line"><span class="comment"># hostname # 查看计算机名 </span></div><div class="line"><span class="comment"># lspci -tv # 列出所有PCI设备 </span></div><div class="line"><span class="comment"># lsusb -tv # 列出所有USB设备 </span></div><div class="line"><span class="comment"># lsmod # 列出加载的内核模块 </span></div><div class="line"><span class="comment"># env # 查看环境变量资源 </span></div><div class="line"><span class="comment"># free -m # 查看内存使用量和交换区使用量 </span></div><div class="line"><span class="comment"># df -h # 查看各分区使用情况 </span></div><div class="line"><span class="comment"># du -sh &lt;目录名&gt; # 查看指定目录的大小 </span></div><div class="line"><span class="comment"># grep MemTotal /proc/meminfo # 查看内存总量 </span></div><div class="line"><span class="comment"># grep MemFree /proc/meminfo # 查看空闲内存量 </span></div><div class="line"><span class="comment"># uptime # 查看系统运行时间、用户数、负载 </span></div><div class="line"><span class="comment"># cat /proc/loadavg # 查看系统负载磁盘和分区 </span></div><div class="line"><span class="comment"># mount | column -t # 查看挂接的分区状态 </span></div><div class="line"><span class="comment"># fdisk -l # 查看所有分区 </span></div><div class="line"><span class="comment"># swapon -s # 查看所有交换分区 </span></div><div class="line"><span class="comment"># hdparm -i /dev/hda # 查看磁盘参数(仅适用于IDE设备) </span></div><div class="line"><span class="comment"># dmesg | grep IDE # 查看启动时IDE设备检测状况网络 </span></div><div class="line"><span class="comment"># ifconfig # 查看所有网络接口的属性 </span></div><div class="line"><span class="comment"># iptables -L # 查看防火墙设置 </span></div><div class="line"><span class="comment"># route -n # 查看路由表 </span></div><div class="line"><span class="comment"># netstat -lntp # 查看所有监听端口 </span></div><div class="line"><span class="comment"># netstat -antp # 查看所有已经建立的连接 </span></div><div class="line"><span class="comment"># netstat -s # 查看网络统计信息进程 </span></div><div class="line"><span class="comment"># ps -ef # 查看所有进程 </span></div><div class="line"><span class="comment"># top # 实时显示进程状态用户 </span></div><div class="line"><span class="comment"># w # 查看活动用户 </span></div><div class="line"><span class="comment"># id &lt;用户名&gt; # 查看指定用户信息 </span></div><div class="line"><span class="comment"># last # 查看用户登录日志 </span></div><div class="line"><span class="comment"># cut -d: -f1 /etc/passwd # 查看系统所有用户 </span></div><div class="line"><span class="comment"># cut -d: -f1 /etc/group # 查看系统所有组 </span></div><div class="line"><span class="comment"># crontab -l # 查看当前用户的计划任务服务 </span></div><div class="line"><span class="comment"># chkconfig –list # 列出所有系统服务 </span></div><div class="line"><span class="comment"># chkconfig –list | grep on # 列出所有启动的系统服务程序 </span></div><div class="line"><span class="comment"># rpm -qa # 查看所有安装的软件包</span></div></pre></td></tr></table></figure>
+      
+      
+      
+        <div class="post-copyright">
+<p><a href="http://wangjianchao.cn/2017/04/21/linux-command/">本文</a>为原创，转载请遵守本站的版本</p>
+<p class="updated-time" >更新于: </span>2017年6月29日 03:06</p>
+</div>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav" class="block-select">
+  
+    <a href="/2017/04/21/firewalld/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          CentOS7使用firewalld打开关闭防火墙与端口
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/21/javascript-rule/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript编程规范</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+</div>
+      <footer id="footer" class="block-select">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">&copy; 2015-2017
+        <a href="/aboutme/" class ="aboutme-foot-tag"> TinyKing</a>
+      </div>
+    </div>
+  </div>
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7f5889a162b9ce28e17ffd275a476161";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</footer>
+
+    </div>
+    <script>
+	var ThemeXConfig = {fancybox: false,mathjax: false,animate: true,isHome: false,isPost: true,isArchive: false,isTag: false,isCategory: false,open_in_new: false, CDN_PATH: '' }
+</script>
+
+
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/base.js"></script>
+    <script src="/js/jquery.lazyload.min.js"></script>
+
+
+
+
+
+  </div>
+
+</body>
+</html>

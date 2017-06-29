@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>TinyKing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#00796b">
+  <meta name="msapplication-TileColor" content="#4E8071"/>
+  
+  <link rel="shortcut icon" href="http://ico.58pic.com/iconset01/DarkGlass_Reworked/gif/36655.gif" type="image/png">
+  <link rel="alternative" href="/atom.xml" title="TinyKing" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css"> 
+</head>
+
+
+<body>
+
+  <div id="container" class="container">
+    <div class="left-col">
+    <div class="intrude-less">
+  <header id="header" class="inner">
+    <a href="/" class="profilepic">
+      <img lazy-src="http://ww4.sinaimg.cn/mw690/806e3151jw8f1a2ry7axpj20ro0rpgpt.jpg" class="block-select js-avatar">
+	</a>
+	<p class="header-subtitle">好好学习，天天向上</p>
+    <nav class="header-menu">
+      <ul>
+        <li><a href="/archives">文章</a></li><li><a href="/tags">标签</a></li><li><a href="/aboutme">关于我</a></li>
+      </ul>
+    </nav>
+  </header>				
+</div>
+
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  <div class="intrude-less">
+    <header id="header" class="inner">
+      <a href="/" class="profilepic">
+        <img lazy-src="http://ww4.sinaimg.cn/mw690/806e3151jw8f1a2ry7axpj20ro0rpgpt.jpg" class="block-select js-avatar">
+	  </a>
+	  <p class="header-subtitle">好好学习，天天向上</p>
+	  <nav class="header-menu">
+	    <ul>
+        <li><a href="/archives">文章</a></li><li><a href="/tags">标签</a></li><li><a href="/aboutme">关于我</a></li><div class="clearfix"></div>
+		</ul>
+	  </nav>
+	</header>				
+  </div>
+</nav>
+
+      <div class="body-wrap">
+  
+    
+<article id="post-rocketmq-quickstart" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/17/rocketmq-quickstart/">RocketMQ文档</a>
+    </h1>
+  
+
+        
+      </header>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><a href="https://rocketmq.incubator.apache.org/docs/quick-start/" target="_blank" rel="external">官方文档</a></p>
+</blockquote>
+<h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><p>安装以下软件：</p>
+<ol>
+<li>64位系统，推荐Linux/Unix/Mac</li>
+<li>64位 JDK 1.7+</li>
+<li>Maven 3.2.x</li>
+<li>Git</li>
+</ol>
+<h1 id="克隆-amp-编译"><a href="#克隆-amp-编译" class="headerlink" title="克隆&amp;编译"></a>克隆&amp;编译</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; git clone -b develop https://github.com/apache/incubator-rocketmq.git</div><div class="line">&gt; cd incubator-rocketmq</div><div class="line">&gt; mvn -Prelease-all -DskipTests clean install -U</div><div class="line">&gt; cd distribution/target/apache-rocketmq</div></pre></td></tr></table></figure>
+<h1 id="启动Name-Server"><a href="#启动Name-Server" class="headerlink" title="启动Name Server"></a>启动Name Server</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; nohup sh bin/mqnamesrv &amp;</div><div class="line">&gt; tail -f ~/logs/rocketmqlogs/namesrv.log</div><div class="line">The Name Server boot success...</div></pre></td></tr></table></figure>
+<h1 id="启动Broker"><a href="#启动Broker" class="headerlink" title="启动Broker"></a>启动Broker</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; nohup sh bin/mqbroker -n localhost:9876 &amp;</div><div class="line">&gt; tail -f ~/logs/rocketmqlogs/broker.log </div><div class="line">The broker[%s, 172.30.30.233:10911] boot success...</div></pre></td></tr></table></figure>
+<p>需要提供一个可以网络访问的ip。</p>
+<h1 id="发送-amp-接受消息"><a href="#发送-amp-接受消息" class="headerlink" title="发送&amp;接受消息"></a>发送&amp;接受消息</h1><p>发送&amp;接受消息之前需要通过设置环境变量<code>NAMESRV_ADDR</code>，用于通知客户端需要访问的服务地址。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; export NAMESRV_ADDR=localhost:9876</div><div class="line">&gt; sh bin/tools.sh org.apache.rocketmq.example.quickstart.Producer</div><div class="line">SendResult [sendStatus=SEND_OK, msgId= ...</div><div class="line"></div><div class="line">&gt; sh bin/tools.sh org.apache.rocketmq.example.quickstart.Consumer</div><div class="line">ConsumeMessageThread_%d Receive New Messages: [MessageExt...</div></pre></td></tr></table></figure>
+<h1 id="停止服务"><a href="#停止服务" class="headerlink" title="停止服务"></a>停止服务</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; sh bin/mqshutdown broker</div><div class="line">The mqbroker(36695) is running...</div><div class="line">Send shutdown request to mqbroker(36695) OK</div><div class="line"></div><div class="line">&gt; sh bin/mqshutdown namesrv</div><div class="line">The mqnamesrv(36664) is running...</div><div class="line">Send shutdown request to mqnamesrv(36664) OK</div></pre></td></tr></table></figure>
+      
+      
+      
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    
+<article id="post-spring" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/10/spring/">spring主要组件</a>
+    </h1>
+  
+
+        
+      </header>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Spring、Spring-Cloud主要组件"><a href="#Spring、Spring-Cloud主要组件" class="headerlink" title="Spring、Spring Cloud主要组件"></a>Spring、Spring Cloud主要组件</h1><h2 id="spring-顶级项目："><a href="#spring-顶级项目：" class="headerlink" title="spring 顶级项目："></a>spring 顶级项目：</h2><ul>
+<li>Spring IO platform:用于系统部署，是可集成的，构建现代化应用的版本平台，具体来说当你使用maven dependency引入spring jar包时它就在工作了。</li>
+<li>Spring Boot:旨在简化创建产品级的 Spring 应用和服务，简化了配置文件，使用嵌入式web服务器，含有诸多开箱即用微服务功能，可以和spring cloud联合部署。</li>
+<li>Spring Framework:即通常所说的spring 框架，是一个开源的Java/Java EE全功能栈应用程序框架，其它spring项目如spring boot也依赖于此框架。</li>
+<li>Spring Cloud：微服务工具包，为开发者提供了在分布式系统的配置管理、服务发现、断路器、智能路由、微代理、控制总线等开发工具包。</li>
+<li>Spring XD：是一种运行时环境（服务器软件，非开发框架），组合spring技术，如spring batch、spring boot、spring data，采集大数据并处理。</li>
+<li>Spring Data：是一个数据访问及操作的工具包，封装了很多种数据及数据库的访问相关技术，包括：jdbc、Redis、MongoDB、Neo4j等。</li>
+<li>Spring Batch：批处理框架，或说是批量任务执行管理器，功能包括任务调度、日志记录/跟踪等。</li>
+<li>Spring Security：是一个能够为基于Spring的企业应用系统提供声明式的安全访问控制解决方案的安全框架。</li>
+<li>Spring Integration：面向企业应用集成（EAI/ESB）的编程框架，支持的通信方式包括HTTP、FTP、TCP/UDP、JMS、RabbitMQ、Email等。</li>
+<li>Spring Social：一组工具包，一组连接社交服务API，如Twitter、Facebook、LinkedIn、GitHub等，有几十个。</li>
+<li>Spring AMQP：消息队列操作的工具包，主要是封装了RabbitMQ的操作。</li>
+<li>Spring HATEOAS：是一个用于支持实现超文本驱动的 REST Web 服务的开发库。</li>
+<li>Spring Mobile：是Spring MVC的扩展，用来简化手机上的Web应用开发。</li>
+<li>Spring for Android：是Spring框架的一个扩展，其主要目的在乎简化Android本地应用的开发，提供RestTemplate来访问Rest服务。</li>
+<li>Spring Web Flow：目标是成为管理Web应用页面流程的最佳方案，将页面跳转流程单独管理，并可配置。</li>
+<li>Spring LDAP：是一个用于操作LDAP的Java工具包，基于Spring的JdbcTemplate模式，简化LDAP访问。</li>
+<li>Spring Session：session管理的开发工具包，让你可以把session保存到redis等，进行集群化session管理。</li>
+<li>Spring Web Services：是基于Spring的Web服务框架，提供SOAP服务开发，允许通过多种方式创建Web服务。</li>
+<li>Spring Shell：提供交互式的Shell可让你使用简单的基于Spring的编程模型来开发命令，比如Spring Roo命令。</li>
+<li>Spring Roo：是一种Spring开发的辅助工具，使用命令行操作来生成自动化项目，操作非常类似于Rails。</li>
+<li>Spring Scala：为Scala语言编程提供的spring框架的封装（新的编程语言，Java平台的Scala于2003年底/2004年初发布）。</li>
+<li>Spring BlazeDS Integration：一个开发RIA工具包，可以集成Adobe Flex、BlazeDS、Spring以及Java技术创建RIA。</li>
+<li>Spring Loaded：用于实现java程序和web应用的热部署的开源工具。</li>
+<li>Spring REST Shell：可以调用Rest服务的命令行工具，敲命令行操作Rest服务。</li>
+</ul>
+<h2 id="目前来说spring主要集中于spring-boot（用于开发微服务）和spring-cloud相关框架的开发，spring-cloud子项目包括："><a href="#目前来说spring主要集中于spring-boot（用于开发微服务）和spring-cloud相关框架的开发，spring-cloud子项目包括：" class="headerlink" title="目前来说spring主要集中于spring boot（用于开发微服务）和spring cloud相关框架的开发，spring cloud子项目包括："></a>目前来说spring主要集中于spring boot（用于开发微服务）和spring cloud相关框架的开发，spring cloud子项目包括：</h2><ul>
+<li>Spring Cloud Config：配置管理开发工具包，可以让你把配置放到远程服务器，目前支持本地存储、Git以及Subversion。</li>
+<li>Spring Cloud Bus：事件、消息总线，用于在集群（例如，配置变化事件）中传播状态变化，可与Spring Cloud Config联合实现热部署。</li>
+<li>Spring Cloud Netflix：针对多种Netflix组件提供的开发工具包，其中包括Eureka、Hystrix、Zuul、Archaius等。</li>
+<li>Netflix Eureka：云端负载均衡，一个基于 REST 的服务，用于定位服务，以实现云端的负载均衡和中间层服务器的故障转移。</li>
+<li>Netflix Hystrix：容错管理工具，旨在通过控制服务和第三方库的节点,从而对延迟和故障提供更强大的容错能力。</li>
+<li>Netflix Zuul：边缘服务工具，是提供动态路由，监控，弹性，安全等的边缘服务。</li>
+<li>Netflix Archaius：配置管理API，包含一系列配置管理API，提供动态类型化属性、线程安全配置操作、轮询框架、回调机制等功能。</li>
+<li>Spring Cloud for Cloud Foundry：通过Oauth2协议绑定服务到CloudFoundry，CloudFoundry是VMware推出的开源PaaS云平台。</li>
+<li>Spring Cloud Sleuth：日志收集工具包，封装了Dapper,Zipkin和HTrace操作。</li>
+<li>Spring Cloud Data Flow：大数据操作工具，通过命令行方式操作数据流。</li>
+<li>Spring Cloud Security：安全工具包，为你的应用程序添加安全控制，主要是指OAuth2。</li>
+<li>Spring Cloud Consul：封装了Consul操作，consul是一个服务发现与配置工具，与Docker容器可以无缝集成。</li>
+<li>Spring Cloud Zookeeper：操作Zookeeper的工具包，用于使用zookeeper方式的服务注册和发现。</li>
+<li>Spring Cloud Stream：数据流操作开发包，封装了与Redis,Rabbit、Kafka等发送接收消息。</li>
+<li>Spring Cloud CLI：基于 Spring Boot CLI，可以让你以命令行方式快速建立云组件。</li>
+</ul>
+
+      
+      
+      
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    
+<article id="post-about-me" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/10/about-me/">关于我</a>
+    </h1>
+  
+
+        
+      </header>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我的微博: <a href="http://weibo.com/tinyking86" target="_blank" rel="external">TinyKing</a></p>
+<p>我的博客园：<a href="http://www.cnblogs.com/tinyking" target="_blank" rel="external">博客园TinyKing</a></p>
+<p>我的51CTO: <a href="http://tinyking.blog.51cto.com" target="_blank" rel="external">TinyKing</a></p>
+<p>我的微信：<img src="http://ww1.sinaimg.cn/large/806e3151ly1fffzr8uu0zj20e80e8my0.jpg" alt="TingKiny"></p>
+
+      
+      
+      
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    
+<article id="post-webupload" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/21/webupload/">Bootstrap模态框使WebUploader点击失效问题解决</a>
+    </h1>
+  
+
+        
+      </header>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在使用Bootstrap模态框页面上使用上传组件WebUploader，发现点击失效。</p>
+<p>解决方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> uploader;</div><div class="line"><span class="comment">//在点击弹出模态框的时候再初始化WebUploader，解决点击上传无反应问题</span></div><div class="line">$(<span class="string">"#myModal"</span>).on(<span class="string">"shown.bs.modal"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    uploader = WebUploader.create(&#123;</div><div class="line">        <span class="attr">swf</span> : <span class="string">'/web/public/Uploader.swf'</span>,</div><div class="line">        <span class="attr">server</span> : $(<span class="string">"#jumicontextPath"</span>).val()+<span class="string">'/common/file/upload'</span>,<span class="comment">// 后台路径</span></div><div class="line">        pick : <span class="string">'#filePicker'</span>, <span class="comment">// 选择文件的按钮。可选。内部根据当前运行是创建，可能是input元素，也可能是flash.</span></div><div class="line">        resize : <span class="literal">false</span>,<span class="comment">// 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！</span></div><div class="line">        chunked : <span class="literal">true</span>, <span class="comment">// 是否分片</span></div><div class="line">        duplicate:<span class="literal">true</span>,<span class="comment">//去重， 根据文件名字、文件大小和最后修改时间来生成hash Key.</span></div><div class="line">        chunkSize : <span class="number">52428</span> * <span class="number">100</span>, <span class="comment">// 分片大小， 5M</span></div><div class="line">        <span class="comment">/*    fileSingleSizeLimit:100*1024,//文件大小限制*/</span></div><div class="line">        auto : <span class="literal">true</span>,</div><div class="line">        <span class="comment">// 只允许选择图片文件。</span></div><div class="line">        accept: &#123;</div><div class="line">            <span class="attr">title</span>: <span class="string">'Images'</span>,</div><div class="line">            <span class="attr">extensions</span>: <span class="string">'gif,jpg,jpeg,bmp,png'</span>,</div><div class="line">            <span class="attr">mimeTypes</span>: <span class="string">'image/jpg,image/jpeg,image/png'</span></div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="comment">// 文件上传成功，给item添加成功class, 用样式标记上传成功。</span></div><div class="line">    uploader.on(<span class="string">'uploadSuccess'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">file,response</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> fileUrl = response.data.fileUrl;</div><div class="line">        <span class="comment">//TODO</span></div><div class="line">        $(<span class="string">"#responeseText"</span>).text(<span class="string">"上传成功,文件名："</span>+response.data.fileName);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="comment">// 当文件上传出错时触发</span></div><div class="line">    uploader.on(<span class="string">'uploadError'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">file</span>) </span>&#123;</div><div class="line">        $(<span class="string">"#responeseText"</span>).text(<span class="string">"上传失败"</span>);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="comment">//当validate不通过时触发</span></div><div class="line">    uploader.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">type</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(type==<span class="string">"F_EXCEED_SIZE"</span>)&#123;</div><div class="line">            alert(<span class="string">"文件大小不能超过xxx KB!"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>单单这样也会有问题，这样每次弹出模态框之后都加载一个边框，使按钮越来越大，所以需要在关闭模态框后销毁webuploader</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//关闭模态框销毁WebUploader，解决再次打开模态框时按钮越变越大问题</span></div><div class="line">$(<span class="string">'#myModal'</span>).on(<span class="string">'hide.bs.modal'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="string">"#responeseText"</span>).text(<span class="string">""</span>);</div><div class="line">    uploader.destroy();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<hr>
+<pre><code>事件    | 描述
+---     | ---
+</code></pre><p>show.bs.modal    | 在调用 show 方法后触发。<br>shown.bs.modal    | 当模态框对用户可见时触发（将等待 CSS 过渡效果完成）。<br>hide.bs.modal    | 当调用 hide 实例方法时触发。<br>hidden.bs.modal    | 当模态框完全对用户隐藏时触发。</p>
+
+      
+      
+      
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    
+<article id="post-firewalld" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/21/firewalld/">CentOS7使用firewalld打开关闭防火墙与端口</a>
+    </h1>
+  
+
+        
+      </header>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、firewalld的基本使用</p>
+<p>启动： systemctl start firewalld</p>
+<p>查看状态： systemctl status firewalld </p>
+<p>停止： systemctl disable firewalld</p>
+<p>禁用： systemctl stop firewalld</p>
+<p>2.systemctl是CentOS7的服务管理工具中主要的工具，它融合之前service和chkconfig的功能于一体。</p>
+<p>启动一个服务：systemctl start firewalld.service</p>
+<p>关闭一个服务：systemctl stop firewalld.service</p>
+<p>重启一个服务：systemctl restart firewalld.service</p>
+<p>显示一个服务的状态：systemctl status firewalld.service</p>
+<p>在开机时启用一个服务：systemctl enable firewalld.service</p>
+<p>在开机时禁用一个服务：systemctl disable firewalld.service</p>
+<p>查看服务是否开机启动：systemctl is-enabled firewalld.service</p>
+<p>查看已启动的服务列表：systemctl list-unit-files|grep enabled</p>
+<p>查看启动失败的服务列表：systemctl –failed</p>
+<p>3.配置firewalld-cmd</p>
+<p>查看版本： firewall-cmd –version</p>
+<p>查看帮助： firewall-cmd –help</p>
+<p>显示状态： firewall-cmd –state</p>
+<p>查看所有打开的端口： firewall-cmd<br>–zone=public –list-ports</p>
+<p>更新防火墙规则： firewall-cmd –reload</p>
+<p>查看区域信息:  firewall-cmd<br>–get-active-zones</p>
+<p>查看指定接口所属区域： firewall-cmd<br>–get-zone-of-interface=eth0</p>
+<p>拒绝所有包：firewall-cmd –panic-on</p>
+<p>取消拒绝状态： firewall-cmd –panic-off</p>
+<p>查看是否拒绝： firewall-cmd –query-panic</p>
+<p>那怎么开启一个端口呢<br>添加</p>
+<p>firewall-cmd –zone=public<br>–add-port=80/tcp –permanent<br>（–permanent永久生效，没有此参数重启后失<br>效）</p>
+<p>重新载入</p>
+<p>firewall-cmd –reload</p>
+<p>查看</p>
+<p>firewall-cmd –zone= public<br>–query-port=80/tcp</p>
+<p>删除</p>
+<p>firewall-cmd –zone= public<br>–remove-port=80/tcp –permanent</p>
+
+      
+      
+      
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    
+<article id="post-linux-command" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/21/linux-command/">Linux常用系统命令</a>
+    </h1>
+  
+
+        
+      </header>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># uname -a # 查看内核/操作系统/CPU信息 </span></div><div class="line"><span class="comment"># head -n 1 /etc/issue # 查看操作系统版本 </span></div><div class="line"><span class="comment"># cat /proc/cpuinfo # 查看CPU信息 </span></div><div class="line"><span class="comment"># hostname # 查看计算机名 </span></div><div class="line"><span class="comment"># lspci -tv # 列出所有PCI设备 </span></div><div class="line"><span class="comment"># lsusb -tv # 列出所有USB设备 </span></div><div class="line"><span class="comment"># lsmod # 列出加载的内核模块 </span></div><div class="line"><span class="comment"># env # 查看环境变量资源 </span></div><div class="line"><span class="comment"># free -m # 查看内存使用量和交换区使用量 </span></div><div class="line"><span class="comment"># df -h # 查看各分区使用情况 </span></div><div class="line"><span class="comment"># du -sh &lt;目录名&gt; # 查看指定目录的大小 </span></div><div class="line"><span class="comment"># grep MemTotal /proc/meminfo # 查看内存总量 </span></div><div class="line"><span class="comment"># grep MemFree /proc/meminfo # 查看空闲内存量 </span></div><div class="line"><span class="comment"># uptime # 查看系统运行时间、用户数、负载 </span></div><div class="line"><span class="comment"># cat /proc/loadavg # 查看系统负载磁盘和分区 </span></div><div class="line"><span class="comment"># mount | column -t # 查看挂接的分区状态 </span></div><div class="line"><span class="comment"># fdisk -l # 查看所有分区 </span></div><div class="line"><span class="comment"># swapon -s # 查看所有交换分区 </span></div><div class="line"><span class="comment"># hdparm -i /dev/hda # 查看磁盘参数(仅适用于IDE设备) </span></div><div class="line"><span class="comment"># dmesg | grep IDE # 查看启动时IDE设备检测状况网络 </span></div><div class="line"><span class="comment"># ifconfig # 查看所有网络接口的属性 </span></div><div class="line"><span class="comment"># iptables -L # 查看防火墙设置 </span></div><div class="line"><span class="comment"># route -n # 查看路由表 </span></div><div class="line"><span class="comment"># netstat -lntp # 查看所有监听端口 </span></div><div class="line"><span class="comment"># netstat -antp # 查看所有已经建立的连接 </span></div><div class="line"><span class="comment"># netstat -s # 查看网络统计信息进程 </span></div><div class="line"><span class="comment"># ps -ef # 查看所有进程 </span></div><div class="line"><span class="comment"># top # 实时显示进程状态用户 </span></div><div class="line"><span class="comment"># w # 查看活动用户 </span></div><div class="line"><span class="comment"># id &lt;用户名&gt; # 查看指定用户信息 </span></div><div class="line"><span class="comment"># last # 查看用户登录日志 </span></div><div class="line"><span class="comment"># cut -d: -f1 /etc/passwd # 查看系统所有用户 </span></div><div class="line"><span class="comment"># cut -d: -f1 /etc/group # 查看系统所有组 </span></div><div class="line"><span class="comment"># crontab -l # 查看当前用户的计划任务服务 </span></div><div class="line"><span class="comment"># chkconfig –list # 列出所有系统服务 </span></div><div class="line"><span class="comment"># chkconfig –list | grep on # 列出所有启动的系统服务程序 </span></div><div class="line"><span class="comment"># rpm -qa # 查看所有安装的软件包</span></div></pre></td></tr></table></figure>
+      
+      
+      
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    
+<article id="post-javascript-rule" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/21/javascript-rule/">JavaScript编程规范</a>
+    </h1>
+  
+
+        
+      </header>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>JavaScript是一种客户端脚本语言，Web工程都会用到它，这份指南列出了编写JavaScript时需要遵守的规则。</p>
+<h2 id="JavaScript语言规范"><a href="#JavaScript语言规范" class="headerlink" title="JavaScript语言规范"></a>JavaScript语言规范</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>声明变量必须加上var<br>关键字:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var a1 = 1;</div><div class="line">var b1 = 11;</div></pre></td></tr></table></figure></p>
+<p>当你没有写var<br>，变量就会暴露在全局上下文中，这样很可能会和现有的变量冲突。另外，如果没有加上，很难明确该变量的作用域是什么，变量很可能在局部作用域中，很容易泄漏到Document或者Window中，所以务必用var<br>变量。</p>
+<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>常量的形式如：<code>NAMES_LIKE_THIS</code>，即使用大写字符，并用下划线分割，你也可用<code>@const</code>标记来指明它是一个常量，但请不要使用<code>const</code>关键字。<br>对于基本类型的常量，只需要转换命名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * The number of seconds of minute.</div><div class="line"> * @type &#123;number&#125;</div><div class="line"> */</div><div class="line">eflag.example.SECONDES_IN_A_MINUTE = 60;</div></pre></td></tr></table></figure></p>
+<p>对于非基本类型，使用<code>@const</code><br>标记：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * The number of seconds in each of the given units.</div><div class="line"> * @type &#123;Object.&lt;number&gt;&#125;</div><div class="line"> * @const</div><div class="line"> */</div><div class="line">eflag.example.SECONDS_TABLE = &#123;minute: 60,hour: 60 * 60,day: 60 * 60 * 24&#125;</div></pre></td></tr></table></figure></p>
+<p>至于关键字<code>const</code>，因为IE不能识别，所以不要使用。</p>
+<h3 id="分号"><a href="#分号" class="headerlink" title="分号"></a>分号</h3><p>总是使用分号。 如果仅依靠语句间的隐式分割，有时会很麻烦，使用分号，你自己更能清楚那里是语句的起止。<br>行末分号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var foo = 1,bar = 2,baz = 3;</div><div class="line">var obj = &#123;foo: 1,bar: 2,baz: 3&#125;;</div></pre></td></tr></table></figure></p>
+<h3 id="单引号-39-39-和双引号-quot-quot"><a href="#单引号-39-39-和双引号-quot-quot" class="headerlink" title="单引号(&#39;&#39;)和双引号(&quot;&quot;)"></a>单引号(<code>&#39;&#39;</code>)和双引号(<code>&quot;&quot;</code>)</h3><p>由于JavaScript对于单引号和双引号都可以识别为字符串，但为了统一规范，所以在JavaScript中字符串的定义要求使用单引号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var val = &apos;a&apos;;</div></pre></td></tr></table></figure></p>
+<p>同样，html中属性使用的是双引号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input type=&quot;text&quot;&gt;</div></pre></td></tr></table></figure></p>
+<p>在JavaScript中动态生成html标签时：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var _input = &apos;&lt;input type=&quot;text&quot;&gt;&apos;;</div></pre></td></tr></table></figure></p>
+<h3 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h3><p>参数和括号间五空格：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">function fn(arg1, arg2)&#123;&#125;</div></pre></td></tr></table></figure></p>
+<p>冒号后面有空格<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;foo: 1,bar: 2,baz: 3&#125;</div></pre></td></tr></table></figure></p>
+<p>条件语句有空格<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (true) &#123;&#125;</div><div class="line">while (true) &#123;&#125;</div><div class="line">switch(v)&#123;&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="Tips-and-Tricks"><a href="#Tips-and-Tricks" class="headerlink" title="Tips and Tricks"></a>Tips and Tricks</h3><h3 id="True和False布尔表达式"><a href="#True和False布尔表达式" class="headerlink" title="True和False布尔表达式"></a>True和False布尔表达式</h3><p>下面的布尔表达式都会返回<code>false</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">null</div><div class="line">undefined</div><div class="line">&apos;&apos;</div><div class="line">空字符串</div><div class="line">0</div></pre></td></tr></table></figure></p>
+<p>数字<code>0</code> 但小心下面的，可都返回<code>true</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&apos;0&apos;</div><div class="line">字符串0</div><div class="line">[]</div><div class="line">空数组</div><div class="line">&#123;&#125;</div><div class="line">空对象</div></pre></td></tr></table></figure></p>
+<p>如果你想检查字符串是否为<code>null</code>或<code>空</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if (y != null &amp;&amp; y != &apos;&apos;) &#123;&#125;</div></pre></td></tr></table></figure></p>
+<p>写成这样会更好：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">if (y) &#123;&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="条件（三元）操作符"><a href="#条件（三元）操作符" class="headerlink" title="条件（三元）操作符(?:)"></a>条件（三元）操作符(<code>?:</code>)</h3><p>三元操作符用于替代下面的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if (val != 0) &#123;</div><div class="line">  return foo();</div><div class="line">&#125; else &#123;</div><div class="line">  return bar();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>你可以写成：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">return val ? foo() : bar();</div></pre></td></tr></table></figure></p>
+<p>在生成HTML代码时也是很有用的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var html = &apos;&lt;input type=&quot;checkbox&quot;&apos; + (isChecked ? &apos; checked&apos; : &apos;&apos;)+ (isEnabled ? &apos;&apos; : &apos; disabled&apos;)+ &apos; name=&quot;foo&quot;&gt;&apos;;</div></pre></td></tr></table></figure></p>
+<h3 id="amp-amp-和"><a href="#amp-amp-和" class="headerlink" title="&amp;&amp;和||"></a><code>&amp;&amp;</code>和<code>||</code></h3><p>二元布尔操作符是可短路的，只有在必要的时候才会计算到最后一项。 <code>||</code>被称作为<code>default</code>操作符，因为可以这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @param &#123;*=&#125; opt_win</div><div class="line"> */</div><div class="line">function foo(opt_win) &#123;</div><div class="line">  var win;</div><div class="line">  if (opt_win) &#123;</div><div class="line">    win = opt_win;</div><div class="line">  &#125; else &#123;</div><div class="line">    win = window;</div><div class="line">  &#125;</div><div class="line">// ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>你可以使用它来简化上面的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @param &#123;*=&#125; opt_win</div><div class="line"> */</div><div class="line">function foo(opt_win) &#123;</div><div class="line">  var win = opt_win || window;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="使用join-来创建字符串"><a href="#使用join-来创建字符串" class="headerlink" title="使用join()来创建字符串"></a>使用<code>join()</code>来创建字符串</h3><p>通常是这样使用的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">function listHtml(items) &#123;</div><div class="line">  var html = &apos;&lt;div class=&quot;foo&quot;&apos;;</div><div class="line">  for (var i = 0; i &lt; items.length; i++) &#123;</div><div class="line">    if (i &gt; 0) &#123;</div><div class="line">      html += &apos;,&apos;;</div><div class="line">    &#125;</div><div class="line">    html += itemHtml(items[i]);</div><div class="line">  &#125;</div><div class="line">  html += &apos;&lt;/div&gt;&apos;;</div><div class="line">  return html;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>但这样在IE下非常慢，可以用下面的方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function listHtml(items) &#123;</div><div class="line">  var html = [];</div><div class="line">  for (var i = 0; i &lt; items.length; i++) &#123;</div><div class="line">    html[i] = itemHtml(items[i]);</div><div class="line">  &#125;</div><div class="line">  return &apos;&lt;div class=&quot;foo&quot;&gt;&apos; + html.join(&apos;, &apos;) + &apos;&lt;/div&gt;&apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>你也可以使用数组作为字符串构造器，然后通过<code>myArray.join(&#39;&#39;)</code><br>转换成字符串，不过由于赋值操作快于数组的<code>push()</code>，所以尽量使用复制操作。</p>
+
+      
+      
+      
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    
+<article id="post-jdk-profile" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/21/jdk-profile/">Java系列  - JDK环境配置</a>
+    </h1>
+  
+
+        
+      </header>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><p>打开<code>/etc/profile</code>, 添加如下代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> JAVA_HOME=/opt/jdk</div><div class="line"><span class="built_in">export</span> JRE_HOME=<span class="variable">$JAVA_HOME</span>/jre</div><div class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib:<span class="variable">$JRE_HOME</span>/lib</div><div class="line"><span class="built_in">export</span> PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span></div></pre></td></tr></table></figure></p>
+<p>执行代码，使配置生效<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">source</span> /etc/profile</div></pre></td></tr></table></figure></p>
+<p>安装命令 <strong>需要root权限</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alternatives --install /usr/bin/java java /opt/jdk/bin/java 1600</div><div class="line">alternatives --install /usr/bin/javac javac /opt/jdk/bin/javac 1600</div></pre></td></tr></table></figure></p>
+<h1 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h1><blockquote>
+<p>windows下，path路径以<code>;</code>分割，bat变量<code>%JAVA_HOME%</code></p>
+</blockquote>
+
+      
+      
+      
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    
+<article id="post-Keepalived" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/21/Keepalived/">Keepalived 简单配置</a>
+    </h1>
+  
+
+        
+      </header>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>参考文档 <a href="http://wenku.baidu.com/view/8e38022d2af90242a895e532.html" target="_blank" rel="external">http://wenku.baidu.com/view/8e38022d2af90242a895e532.html</a></p>
+</blockquote>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>解压文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -xvf keepalived-x.x.x.tar.gz</div></pre></td></tr></table></figure></p>
+<p>进入文件夹<code>keepalived-x.x.x</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">./configure</div><div class="line"></div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
+<p>在安装过程中需要注意以下几点：</p>
+<ul>
+<li>gcc环境</li>
+<li>openssl环境</li>
+<li>root权限</li>
+</ul>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># cp /usr/local/etc/rc.d/init.d/keepalived /etc/rc.d/init.d/ </span></div><div class="line"><span class="comment"># cp /usr/local/etc/sysconfig/keepalived /etc/sysconfig/ </span></div><div class="line"><span class="comment"># mkdir /etc/keepalived  </span></div><div class="line"><span class="comment"># cp /usr/local/etc/keepalived/keepalived.conf /etc/keepalived/ </span></div><div class="line"><span class="comment"># cp /usr/local/sbin/keepalived /usr/sbin/</span></div></pre></td></tr></table></figure>
+<p>做成系统启动服务方便管理. </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># vi /etc/rc.local   </span></div><div class="line">/etc/init.d/keepalived start</div></pre></td></tr></table></figure>
+<p>增加上面一行。</p>
+<p>修改配置<code>/etc/keepalived/keepalived.conf</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">! Configuation File for keepalived</div><div class="line"></div><div class="line">global_defs &#123;</div><div class="line">    notification_email &#123;</div><div class="line">        acassen@firewall.loc    # 邮件地址，当异常时发邮件通知。可以是多个，每个一行</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    notification_email_from Alexandre.Cassen@firewall.loc</div><div class="line">    smtp_server 192.168.200.1</div><div class="line">    smtp_connect_timeout 30</div><div class="line">    router_id LVS_DEVEL</div><div class="line">    vrrp_skip_check_adv_addr</div><div class="line">    vrrp_strict</div><div class="line">&#125;</div><div class="line"></div><div class="line">vrrp_instance VI_1 &#123;</div><div class="line">    state MASTER    # 从机设为BACKUP</div><div class="line">    interface   eth0   # 网卡接口</div><div class="line">    mcast_src_ip 10.0.0.131  # 默认没有这项，加上这项后服务好用了</div><div class="line">    priority  100  # 优先级，从机小与主机</div><div class="line">    advert_int 1  </div><div class="line">    authentication &#123;</div><div class="line">        auth_type PASS</div><div class="line">        auth_pass 1111</div><div class="line">    &#125;</div><div class="line">    virtual_ipaddress &#123;</div><div class="line">        10.0.0.111   # 虚拟ip设置，可以是多个，主从一致</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+      
+      
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    
+<article id="post-linux-profile" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/21/linux-profile/">Linux环境变量配置</a>
+    </h1>
+  
+
+        
+      </header>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>不论使用Linux开发，还是使用Linux生产，都不可避免环境变量的配置。通常都是去修改系统文件：<code>/etc/profile</code>, <code>/etc/enviroment</code>, <code>~/.bashrc</code>, <code>~/.profile</code>等等，在这些文件的末尾<code>export</code>上自己想要添加的环境变量，<code>source</code>一下该文件，配置就立刻生效了。</p>
+<p>今天通过阅读<code>/etc/profile</code>文件：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> /etc/profile: system-wide .profile file <span class="keyword">for</span> the Bourne shell (sh(1))</span></div><div class="line"><span class="meta">#</span><span class="bash"> and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).</span></div><div class="line"></div><div class="line">if [ "`id -u`" -eq 0 ]; then</div><div class="line">  PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</div><div class="line">else</div><div class="line">  PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"</div><div class="line">fi</div><div class="line">export PATH</div><div class="line"></div><div class="line">if [ "$PS1" ]; then</div><div class="line">  if [ "$BASH" ] &amp;&amp; [ "$BASH" != "/bin/sh" ]; then</div><div class="line">    # The file bash.bashrc already sets the default PS1.</div><div class="line">    # PS1='\h:\w\$ '</div><div class="line">    if [ -f /etc/bash.bashrc ]; then</div><div class="line">      . /etc/bash.bashrc</div><div class="line">    fi</div><div class="line">  else</div><div class="line">    if [ "`id -u`" -eq 0 ]; then</div><div class="line">      PS1='# '</div><div class="line">    else</div><div class="line">      PS1='$ '</div><div class="line">    fi</div><div class="line">  fi</div><div class="line">fi</div><div class="line"></div><div class="line">if [ -d /etc/profile.d ]; then</div><div class="line">  for i in /etc/profile.d/*.sh; do</div><div class="line">    if [ -r $i ]; then</div><div class="line">      . $i</div><div class="line">    fi</div><div class="line">  done</div><div class="line">  unset i</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<p>发现最后一个<code>for</code>循环，其作用是搜用<code>/etc/profile.d</code>下的所有的<code>.sh</code>结尾的可执行文件，并运行。<br>因此，我们就可以根据不同的功能编写不同的可执行文件，将他们放到<code>/etc/profile.d</code>下，如<code>jdk.sh</code>，<code>ant.sh</code>，<code>maven.sh</code>等等。</p>
+
+      
+      
+      
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    </nav>
+  
+
+</div>
+      <footer id="footer" class="block-select">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">&copy; 2015-2017
+        <a href="/aboutme/" class ="aboutme-foot-tag"> TinyKing</a>
+      </div>
+    </div>
+  </div>
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7f5889a162b9ce28e17ffd275a476161";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</footer>
+
+    </div>
+    <script>
+	var ThemeXConfig = {fancybox: false,mathjax: false,animate: true,isHome: true,isPost: false,isArchive: false,isTag: false,isCategory: false,open_in_new: false, CDN_PATH: '' }
+</script>
+
+
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/base.js"></script>
+    <script src="/js/jquery.lazyload.min.js"></script>
+
+
+
+
+
+  </div>
+
+</body>
+</html>

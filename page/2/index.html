@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>TinyKing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#00796b">
+  <meta name="msapplication-TileColor" content="#4E8071"/>
+  
+  <link rel="shortcut icon" href="http://ico.58pic.com/iconset01/DarkGlass_Reworked/gif/36655.gif" type="image/png">
+  <link rel="alternative" href="/atom.xml" title="TinyKing" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css"> 
+</head>
+
+
+<body>
+
+  <div id="container" class="container">
+    <div class="left-col">
+    <div class="intrude-less">
+  <header id="header" class="inner">
+    <a href="/" class="profilepic">
+      <img lazy-src="http://ww4.sinaimg.cn/mw690/806e3151jw8f1a2ry7axpj20ro0rpgpt.jpg" class="block-select js-avatar">
+	</a>
+	<p class="header-subtitle">好好学习，天天向上</p>
+    <nav class="header-menu">
+      <ul>
+        <li><a href="/archives">文章</a></li><li><a href="/tags">标签</a></li><li><a href="/aboutme">关于我</a></li>
+      </ul>
+    </nav>
+  </header>				
+</div>
+
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  <div class="intrude-less">
+    <header id="header" class="inner">
+      <a href="/" class="profilepic">
+        <img lazy-src="http://ww4.sinaimg.cn/mw690/806e3151jw8f1a2ry7axpj20ro0rpgpt.jpg" class="block-select js-avatar">
+	  </a>
+	  <p class="header-subtitle">好好学习，天天向上</p>
+	  <nav class="header-menu">
+	    <ul>
+        <li><a href="/archives">文章</a></li><li><a href="/tags">标签</a></li><li><a href="/aboutme">关于我</a></li><div class="clearfix"></div>
+		</ul>
+	  </nav>
+	</header>				
+  </div>
+</nav>
+
+      <div class="body-wrap">
+  
+    
+<article id="post-logback-xml" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/21/logback-xml/">Logback配置文件</a>
+    </h1>
+  
+
+        
+      </header>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 定义变量 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"LOG_HOME"</span> <span class="attr">value</span>=<span class="string">"/mnt/raid5/log/web"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"LOG_DEBUG_HOME"</span> <span class="attr">value</span>=<span class="string">"$&#123;LOG_HOME&#125;/debug"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"LOG_INFO_HOME"</span> <span class="attr">value</span>=<span class="string">"$&#123;LOG_HOME&#125;/info"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"LOG_WARN_HOME"</span> <span class="attr">value</span>=<span class="string">"$&#123;LOG_HOME&#125;/warn"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"LOG_ERROR_HOME"</span> <span class="attr">value</span>=<span class="string">"$&#123;LOG_HOME&#125;/error"</span> /&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">	<span class="comment">&lt;!-- 控制台输出 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"STDOUT"</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.ConsoleAppender"</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 日志输出编码 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">Encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">Encoding</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">layout</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.PatternLayout"</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 格式化输出: %d表示日期, %thread表示线程名, %-5level:级别从左显示5个字符宽度, %msg:日志消息, %n换行符 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">pattern</span>&gt;</span>[%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;] %level [%thread] %logger&#123;36&#125; %X&#123;medic.eventCode&#125; %msg %ex%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">layout</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">appender</span>&gt;</span></div><div class="line"></div><div class="line">	<span class="comment">&lt;!-- DEBUG输出 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"FILE_DEBUG"</span></span></div><div class="line">		<span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</div><div class="line">		<span class="tag">&lt;<span class="name">file</span>&gt;</span>$&#123;LOG_DEBUG_HOME&#125;/debug.log<span class="tag">&lt;/<span class="name">file</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">Encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">Encoding</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 日志文件输出的文件名 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">FileNamePattern</span>&gt;</span>$&#123;LOG_DEBUG_HOME&#125;/debug.%d&#123;yyyy-MM-dd&#125;.log<span class="tag">&lt;/<span class="name">FileNamePattern</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">MaxHistory</span>&gt;</span>30<span class="tag">&lt;/<span class="name">MaxHistory</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">layout</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.PatternLayout"</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 格式化输出: %d表示日期, %thread表示线程名, %-5level:级别从左显示5个字符宽度, %msg:日志消息, %n换行符 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">pattern</span>&gt;</span>[%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;] %level [%thread] %logger&#123;36&#125; %X&#123;medic.eventCode&#125; %msg %ex%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">layout</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="comment">&lt;!--日志文件最大的大小 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">triggeringPolicy</span></span></div><div class="line">			<span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy"</span>&gt;</div><div class="line">			<span class="tag">&lt;<span class="name">MaxFileSize</span>&gt;</span>100MB<span class="tag">&lt;/<span class="name">MaxFileSize</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">triggeringPolicy</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="comment">&lt;!-- &lt;filter class="ch.qos.logback.classic.filter.LevelFilter"&gt;</span></div><div class="line">			&lt;level&gt;DEBUG&lt;/level&gt;</div><div class="line">			&lt;onMatch&gt;ACCEPT&lt;/onMatch&gt;</div><div class="line">			&lt;onMismatch&gt;DENY&lt;/onMismatch&gt;</div><div class="line">		&lt;/filter&gt; --&gt;</div><div class="line">	<span class="tag">&lt;/<span class="name">appender</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- INFO输出 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"FILE_INFO"</span></span></div><div class="line">		<span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</div><div class="line">		<span class="tag">&lt;<span class="name">file</span>&gt;</span>$&#123;LOG_INFO_HOME&#125;/info.log<span class="tag">&lt;/<span class="name">file</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">Encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">Encoding</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 日志文件输出的文件名 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">FileNamePattern</span>&gt;</span>$&#123;LOG_INFO_HOME&#125;/info.%d&#123;yyyy-MM-dd&#125;.log<span class="tag">&lt;/<span class="name">FileNamePattern</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">MaxHistory</span>&gt;</span>30<span class="tag">&lt;/<span class="name">MaxHistory</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">layout</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.PatternLayout"</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 格式化输出: %d表示日期, %thread表示线程名, %-5level:级别从左显示5个字符宽度, %msg:日志消息, %n换行符 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">pattern</span>&gt;</span>[%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;] %level [%thread] %logger&#123;36&#125; %X&#123;medic.eventCode&#125; %msg %ex%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">layout</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="comment">&lt;!--日志文件最大的大小 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">triggeringPolicy</span></span></div><div class="line">			<span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy"</span>&gt;</div><div class="line">			<span class="tag">&lt;<span class="name">MaxFileSize</span>&gt;</span>100MB<span class="tag">&lt;/<span class="name">MaxFileSize</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">triggeringPolicy</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.filter.LevelFilter"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">level</span>&gt;</span>INFO<span class="tag">&lt;/<span class="name">level</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">onMatch</span>&gt;</span>ACCEPT<span class="tag">&lt;/<span class="name">onMatch</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">onMismatch</span>&gt;</span>DENY<span class="tag">&lt;/<span class="name">onMismatch</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">filter</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">appender</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- WARN输出 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"FILE_WARN"</span></span></div><div class="line">		<span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</div><div class="line">		<span class="tag">&lt;<span class="name">file</span>&gt;</span>$&#123;LOG_WARN_HOME&#125;/warn.log<span class="tag">&lt;/<span class="name">file</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">Encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">Encoding</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 日志文件输出的文件名 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">FileNamePattern</span>&gt;</span>$&#123;LOG_WARN_HOME&#125;/warn.%d&#123;yyyy-MM-dd&#125;.log<span class="tag">&lt;/<span class="name">FileNamePattern</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">MaxHistory</span>&gt;</span>30<span class="tag">&lt;/<span class="name">MaxHistory</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">layout</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.PatternLayout"</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 格式化输出: %d表示日期, %thread表示线程名, %-5level:级别从左显示5个字符宽度, %msg:日志消息, %n换行符 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">pattern</span>&gt;</span>[%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;] %level [%thread] %logger&#123;36&#125; %X&#123;medic.eventCode&#125; %msg %ex%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">layout</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="comment">&lt;!--日志文件最大的大小 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">triggeringPolicy</span></span></div><div class="line">			<span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy"</span>&gt;</div><div class="line">			<span class="tag">&lt;<span class="name">MaxFileSize</span>&gt;</span>100MB<span class="tag">&lt;/<span class="name">MaxFileSize</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">triggeringPolicy</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.filter.LevelFilter"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">level</span>&gt;</span>WARN<span class="tag">&lt;/<span class="name">level</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">onMatch</span>&gt;</span>ACCEPT<span class="tag">&lt;/<span class="name">onMatch</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">onMismatch</span>&gt;</span>DENY<span class="tag">&lt;/<span class="name">onMismatch</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">filter</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">appender</span>&gt;</span></div><div class="line">	</div><div class="line">	<span class="comment">&lt;!-- ERROR输出 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">"FILE_ERROR"</span></span></div><div class="line">		<span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</div><div class="line">		<span class="tag">&lt;<span class="name">file</span>&gt;</span>$&#123;LOG_ERROR_HOME&#125;/error.log<span class="tag">&lt;/<span class="name">file</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">Encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">Encoding</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">rollingPolicy</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 日志文件输出的文件名 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">FileNamePattern</span>&gt;</span>$&#123;LOG_ERROR_HOME&#125;/error.%d&#123;yyyy-MM-dd&#125;.log<span class="tag">&lt;/<span class="name">FileNamePattern</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">MaxHistory</span>&gt;</span>30<span class="tag">&lt;/<span class="name">MaxHistory</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">rollingPolicy</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">layout</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.PatternLayout"</span>&gt;</span></div><div class="line">			<span class="comment">&lt;!-- 格式化输出: %d表示日期, %thread表示线程名, %-5level:级别从左显示5个字符宽度, %msg:日志消息, %n换行符 --&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">pattern</span>&gt;</span>[%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;] %level [%thread] %logger&#123;36&#125; %X&#123;medic.eventCode&#125; %msg %ex%n<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">layout</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="comment">&lt;!--日志文件最大的大小 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">triggeringPolicy</span></span></div><div class="line">			<span class="attr">class</span>=<span class="string">"ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy"</span>&gt;</div><div class="line">			<span class="tag">&lt;<span class="name">MaxFileSize</span>&gt;</span>100MB<span class="tag">&lt;/<span class="name">MaxFileSize</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">triggeringPolicy</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">"ch.qos.logback.classic.filter.LevelFilter"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">level</span>&gt;</span>ERROR<span class="tag">&lt;/<span class="name">level</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">onMatch</span>&gt;</span>ACCEPT<span class="tag">&lt;/<span class="name">onMatch</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">onMismatch</span>&gt;</span>DENY<span class="tag">&lt;/<span class="name">onMismatch</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">filter</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">appender</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">	<span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">"DEBUG"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"STDOUT"</span> /&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"FILE_DEBUG"</span> /&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"FILE_INFO"</span> /&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"FILE_WARN"</span> /&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"FILE_ERROR"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">root</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure>
+      
+      
+      
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    
+<article id="post-mysql-password" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/21/mysql-password/">MySQL修改root密码的多种方法</a>
+    </h1>
+  
+
+        
+      </header>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>方法1： 用SET PASSWORD命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">　　mysql -u root</div><div class="line">　　mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;localhost&apos; = PASSWORD(&apos;newpass&apos;);</div></pre></td></tr></table></figure></p>
+<p>方法2：用mysqladmin<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">　　mysqladmin -u root password &quot;newpass&quot;</div><div class="line">　　如果root已经设置过密码，采用如下方法</div><div class="line">　　mysqladmin -u root password oldpass &quot;newpass&quot;</div></pre></td></tr></table></figure></p>
+<p>方法3： 用UPDATE直接编辑user表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">　　mysql -u root</div><div class="line">　　mysql&gt; use mysql;</div><div class="line">　　mysql&gt; UPDATE user SET Password = PASSWORD(&apos;newpass&apos;) WHERE user = &apos;root&apos;;</div><div class="line">　　mysql&gt; FLUSH PRIVILEGES;</div></pre></td></tr></table></figure></p>
+<p>在丢失root密码的时候，可以这样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">　　mysqld_safe --skip-grant-tables&amp;</div><div class="line">　　mysql -u root mysql</div><div class="line">　　mysql&gt; UPDATE user SET password=PASSWORD(&quot;new password&quot;) WHERE user=&apos;root&apos;;</div><div class="line">　　mysql&gt; FLUSH PRIVILEGES;</div></pre></td></tr></table></figure></p>
+
+      
+      
+      
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    
+<article id="post-squid" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/21/squid/">Squid 代理服务器配置</a>
+    </h1>
+  
+
+        
+      </header>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>去官网下载安装包 </p>
+<h2 id="npm常用命令"><a href="#npm常用命令" class="headerlink" title="npm常用命令"></a>npm常用命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">npm install xxx // 安装模块</div><div class="line"></div><div class="line">npm install xxx -g  // 将模块安装到全局环境中 参考http://goddyzhao.tumblr.com/post/9835631010/no-direct-command-for-local-installed-command-line-modul</div><div class="line"></div><div class="line">npm ls // 查看安装的模块及依赖</div><div class="line"></div><div class="line">npm ls -g // 查看全局安装的模块及依赖</div><div class="line"></div><div class="line">npm uninstall xxx  (-g) // 卸载模块</div><div class="line"></div><div class="line">npm cache clean // 清理缓存</div></pre></td></tr></table></figure>
+<h2 id="淘宝npm源"><a href="#淘宝npm源" class="headerlink" title="淘宝npm源"></a>淘宝npm源</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g cnpm --registry=https://registry.npm.taobao.org</div></pre></td></tr></table></figure>
+<p>然后就可以使用<code>cnpm</code></p>
+<h2 id="使用webpack-server"><a href="#使用webpack-server" class="headerlink" title="使用webpack server"></a>使用webpack server</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./node_modules/.bin/webpack-dev-server --progress --colors</div></pre></td></tr></table></figure>
+
+      
+      
+      
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    
+<article id="post-vue" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/21/vue/">【vue系列】安装nodejs</a>
+    </h1>
+  
+
+        
+      </header>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>去官网下载安装包 </p>
+<h2 id="npm常用命令"><a href="#npm常用命令" class="headerlink" title="npm常用命令"></a>npm常用命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">npm install xxx // 安装模块</div><div class="line"></div><div class="line">npm install xxx -g  // 将模块安装到全局环境中 参考http://goddyzhao.tumblr.com/post/9835631010/no-direct-command-for-local-installed-command-line-modul</div><div class="line"></div><div class="line">npm ls // 查看安装的模块及依赖</div><div class="line"></div><div class="line">npm ls -g // 查看全局安装的模块及依赖</div><div class="line"></div><div class="line">npm uninstall xxx  (-g) // 卸载模块</div><div class="line"></div><div class="line">npm cache clean // 清理缓存</div></pre></td></tr></table></figure>
+<h2 id="淘宝npm源"><a href="#淘宝npm源" class="headerlink" title="淘宝npm源"></a>淘宝npm源</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g cnpm --registry=https://registry.npm.taobao.org</div></pre></td></tr></table></figure>
+<p>然后就可以使用<code>cnpm</code></p>
+<h2 id="使用webpack-server"><a href="#使用webpack-server" class="headerlink" title="使用webpack server"></a>使用webpack server</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./node_modules/.bin/webpack-dev-server --progress --colors</div></pre></td></tr></table></figure>
+
+      
+      
+      
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    
+<article id="post-front-framework" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/19/front-framework/">前端框架</a>
+    </h1>
+  
+
+        
+      </header>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Semantic-UI"><a href="#Semantic-UI" class="headerlink" title="Semantic UI"></a>Semantic UI</h2><p>Semantic UI—完全语义化的前端界面开发框架，跟 Bootstrap 和 Foundation 比起来，还是有些不同的，在功能特性上、布局设计上、用户体验上均存在很多差异。</p>
+<p>Semantic UI 特点：</p>
+<ul>
+<li>文档和演示非常完善</li>
+<li>易于学习和使用</li>
+<li>配备网格布局</li>
+<li>支持 Sass 和 LESS 动态样式语言</li>
+<li>有一些非常实用的附加配置，例如inverted类。</li>
+<li>对于社区贡献来说是比较开放的。</li>
+<li>有一个非常好的按钮实现，情态动词，和进度条。</li>
+<li>在许多功能上使用图标字体。</li>
+</ul>
+<p>Semantic UI 对浏览器的支持：</p>
+<ul>
+<li>Last 2 Versions FF, Chrome, IE (aka 10+)</li>
+<li>Safari 6</li>
+<li>IE 9+ (Browser prefix only)</li>
+<li>Android 4</li>
+<li>Blackberry 10</li>
+</ul>
+<p><img src="http://static.oschina.net/uploads/space/2013/1008/140748_1T9v_119807.jpg" alt="Semantic UI"></p>
+<h2 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h2><p>Bootstrap是快速开发Web应用程序的前端工具包。它是一个CSS和HTML的集合，它使用了最新的浏览器技术，给你的Web开发提供了时尚的版式，表单，buttons，表格，网格系统等等。</p>
+<h2 id="EasyUI"><a href="#EasyUI" class="headerlink" title="EasyUI"></a>EasyUI</h2><p>jQuery EasyUI 为网页开发提供了一堆的常用UI组件，包括菜单、对话框、布局、窗帘、表格、表单等等组件。</p>
+<p>下图是一个具有布局效果的窗口：</p>
+<h2 id="Extjs"><a href="#Extjs" class="headerlink" title="Extjs"></a>Extjs</h2><p>ExtJS 主要用来开发RIA富客户端的AJAX应用，主要用于创建前端用户界面，与后台技术无关的前端ajax框架。因此，可以把ExtJS用在.Net、Java、Php等各种开发语言开发的应用中。ExtJs最开始基于YUI技术，由开发人员 JackSlocum开发，通过参考JavaSwing等机制来组织可视化组件，无论从UI界面上CSS样式的应用，到数据解析上的异常处理，都可算是一 款不可多得的JavaScript客户端技术的精品。</p>
+<p>Ext的UI组件模型和开发理念脱胎、成型于Yahoo组件库YUI和Java平台上Swing两者，并为开发者屏蔽了大量跨浏览器方面的处理。相对来说，EXT要比开发者直接针对DOM、W3C对象模型开发UI组件轻松。</p>
+<p>特点如下：</p>
+<ul>
+<li>高性能, customizable UI widgets</li>
+<li>Well designed, documented and extensible Component model</li>
+<li>Commercial and Open Source licenses available</li>
+<li></li>
+</ul>
+<h2 id="Amaze-UI"><a href="#Amaze-UI" class="headerlink" title="Amaze UI"></a>Amaze UI</h2><p> Amaze UI是国内首款Html5开源跨屏前端框架，优秀开源前端框架，拥有丰富的CSS+JS组件。轻量级高性能开源框架，以移动优先（Mobile first）为理念，从小屏逐步扩展到大屏，最终实现所有屏幕适配，适应移动互联潮流；面向 HTML5 开发，使用 CSS3 来做动画交互，平滑、高效，更适合移动设备，让 Web 应用更快速载；含近 20 个 CSS 组件、10 个 JS 组件，更有 17 款包含近 60 个主题的 Web 组件，可快速构建界面出色、体验优秀的跨屏页面，大幅提升开发效率；相比国外框架，Amaze UI 关注中文排版，根据用户代理调整字体，实现更好的中文排版效果；兼顾国内主流浏览器及 App 内置浏览器兼容支持。</p>
+
+      
+      
+      
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    
+<article id="post-auto-deploy-traivs" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/19/auto-deploy-traivs/">基于Traivs的自动部署</a>
+    </h1>
+  
+
+        
+      </header>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+      
+      
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    
+<article id="post-HashMap" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/19/HashMap/">HashMap</a>
+    </h1>
+  
+
+        
+      </header>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>代码基于JDK 1.8</p>
+</blockquote>
+<h2 id="基数知识"><a href="#基数知识" class="headerlink" title="基数知识"></a>基数知识</h2><p>Map是保存了Key-Value键值对的数据集合接口。HashMap是基于HashCode的Map实现。因为基于Key的HashCode进行存储，所以HashMap中Key都是唯一的。</p>
+<ul>
+<li><strong>HashMap中Key，Value均可以为null。</strong></li>
+</ul>
+<h2 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h2><h3 id="类声明"><a href="#类声明" class="headerlink" title="类声明"></a>类声明</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMap</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt;, <span class="title">Cloneable</span>, <span class="title">Serializable</span> </span>&#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>Map</code> -  <code>AbstractMap&lt;K,V&gt;</code>本身实现了<code>Map&lt;K,V&gt;</code>接口，在这里再次强调了<code>HashMap</code>实现了<code>Map</code></li>
+<li><code>Cloneable</code>  实现了克隆接口</li>
+<li><code>Serializable</code>  实现了序列化接口</li>
+</ul>
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * table, 在初次使用时进行初始化, 必要时进行大小调整。</div><div class="line"> * 在分配大小时，长度总是 2的幂</div><div class="line"> */</div><div class="line"><span class="keyword">transient</span> Node&lt;K,V&gt;[] table;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// Node静态内部类，链表数据结构</span></div><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">final</span> <span class="keyword">int</span> hash;</div><div class="line">    <span class="keyword">final</span> K key;</div><div class="line">    V value;</div><div class="line">    Node&lt;K, V&gt; next;</div><div class="line">    Node(<span class="keyword">int</span> hash, K key, V value, Node&lt;K,V&gt; next) &#123;</div><div class="line">        <span class="keyword">this</span>.hash = hash;</div><div class="line">        <span class="keyword">this</span>.key = key;</div><div class="line">        <span class="keyword">this</span>.value = value;</div><div class="line">        <span class="keyword">this</span>.next = next;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面代码描述了<code>HashMap</code>的底层数据结构：<code>数组</code> + <code>链表</code>。 </p>
+<blockquote>
+<p><em>在1.8中，增加了红黑树，带详细研究…</em></p>
+</blockquote>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>对于构造函数，提供了多个重载，以方便创建实例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">()</span></span></div><div class="line"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span></div><div class="line"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span></div><div class="line"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(Map&lt;? extends K, ? extends V&gt; m)</span></div></pre></td></tr></table></figure></p>
+<p>在构造函数中，<code>initialCapacity</code>和<code>loadFactor</code>两个参数对map的性能有很大的影响。</p>
+<ul>
+<li><code>initialCapacity</code>: 初始化大小， 即<code>table</code>数组的长度，如果此值太小，可能会因引起<code>table</code>频繁调整数组大小，如果太大，实际内容很少，则造成资源浪费，默认 1 &lt;&lt; 4。</li>
+<li><code>loadFactor</code>: 加载因子，取值范围（0,1）的浮点数，如果此值太小，可能会因引起<code>table</code>频繁调整数组大小，如果太大，<code>table</code>大小很长时间不调整，调整时内容移动大。默认值0.75</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">i = (n - <span class="number">1</span>) &amp; h;</div></pre></td></tr></table></figure>
+<p>计算key在table中的索引,h为key的hashcode，n为当前table的大小。</p>
+<p>HashMap为非线程安全Map，其中key和value均可以为null。</p>
+
+      
+      
+      
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
+  
+
+</div>
+      <footer id="footer" class="block-select">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">&copy; 2015-2017
+        <a href="/aboutme/" class ="aboutme-foot-tag"> TinyKing</a>
+      </div>
+    </div>
+  </div>
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7f5889a162b9ce28e17ffd275a476161";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</footer>
+
+    </div>
+    <script>
+	var ThemeXConfig = {fancybox: false,mathjax: false,animate: true,isHome: true,isPost: false,isArchive: false,isTag: false,isCategory: false,open_in_new: false, CDN_PATH: '' }
+</script>
+
+
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/base.js"></script>
+    <script src="/js/jquery.lazyload.min.js"></script>
+
+
+
+
+
+  </div>
+
+</body>
+</html>

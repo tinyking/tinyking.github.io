@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>HashMap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#00796b">
+  <meta name="msapplication-TileColor" content="#4E8071"/>
+  
+  <link rel="shortcut icon" href="http://ico.58pic.com/iconset01/DarkGlass_Reworked/gif/36655.gif" type="image/png">
+  <link rel="alternative" href="/atom.xml" title="TinyKing" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css"> 
+</head>
+
+
+<body>
+
+  <div id="container" class="container">
+    <div class="left-col">
+    <div class="intrude-less">
+  <header id="header" class="inner">
+    <a href="/" class="profilepic">
+      <img lazy-src="http://ww4.sinaimg.cn/mw690/806e3151jw8f1a2ry7axpj20ro0rpgpt.jpg" class="block-select js-avatar">
+	</a>
+	<p class="header-subtitle">好好学习，天天向上</p>
+    <nav class="header-menu">
+      <ul>
+        <li><a href="/archives">文章</a></li><li><a href="/tags">标签</a></li><li><a href="/aboutme">关于我</a></li>
+      </ul>
+    </nav>
+  </header>				
+</div>
+
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  <div class="intrude-less">
+    <header id="header" class="inner">
+      <a href="/" class="profilepic">
+        <img lazy-src="http://ww4.sinaimg.cn/mw690/806e3151jw8f1a2ry7axpj20ro0rpgpt.jpg" class="block-select js-avatar">
+	  </a>
+	  <p class="header-subtitle">好好学习，天天向上</p>
+	  <nav class="header-menu">
+	    <ul>
+        <li><a href="/archives">文章</a></li><li><a href="/tags">标签</a></li><li><a href="/aboutme">关于我</a></li><div class="clearfix"></div>
+		</ul>
+	  </nav>
+	</header>				
+  </div>
+</nav>
+
+      <div class="body-wrap">
+<article id="post-HashMap" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+    <div class="article-meta">
+      
+<div class="article-date">
+<span class="datetime-published-tag"> 2016-07-19 </span>
+</div>
+
+
+    </div>
+    
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 class="article-title" itemprop="name">
+      HashMap
+    </h1>
+  
+
+        
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud block-select">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+	</div>
+
+
+        
+             <div class="clearfix"></div>
+        
+      </div>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>代码基于JDK 1.8</p>
+</blockquote>
+<h2 id="基数知识"><a href="#基数知识" class="headerlink" title="基数知识"></a>基数知识</h2><p>Map是保存了Key-Value键值对的数据集合接口。HashMap是基于HashCode的Map实现。因为基于Key的HashCode进行存储，所以HashMap中Key都是唯一的。</p>
+<ul>
+<li><strong>HashMap中Key，Value均可以为null。</strong></li>
+</ul>
+<h2 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h2><h3 id="类声明"><a href="#类声明" class="headerlink" title="类声明"></a>类声明</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMap</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt;, <span class="title">Cloneable</span>, <span class="title">Serializable</span> </span>&#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>Map</code> -  <code>AbstractMap&lt;K,V&gt;</code>本身实现了<code>Map&lt;K,V&gt;</code>接口，在这里再次强调了<code>HashMap</code>实现了<code>Map</code></li>
+<li><code>Cloneable</code>  实现了克隆接口</li>
+<li><code>Serializable</code>  实现了序列化接口</li>
+</ul>
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * table, 在初次使用时进行初始化, 必要时进行大小调整。</div><div class="line"> * 在分配大小时，长度总是 2的幂</div><div class="line"> */</div><div class="line"><span class="keyword">transient</span> Node&lt;K,V&gt;[] table;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// Node静态内部类，链表数据结构</span></div><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">final</span> <span class="keyword">int</span> hash;</div><div class="line">    <span class="keyword">final</span> K key;</div><div class="line">    V value;</div><div class="line">    Node&lt;K, V&gt; next;</div><div class="line">    Node(<span class="keyword">int</span> hash, K key, V value, Node&lt;K,V&gt; next) &#123;</div><div class="line">        <span class="keyword">this</span>.hash = hash;</div><div class="line">        <span class="keyword">this</span>.key = key;</div><div class="line">        <span class="keyword">this</span>.value = value;</div><div class="line">        <span class="keyword">this</span>.next = next;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面代码描述了<code>HashMap</code>的底层数据结构：<code>数组</code> + <code>链表</code>。 </p>
+<blockquote>
+<p><em>在1.8中，增加了红黑树，带详细研究…</em></p>
+</blockquote>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>对于构造函数，提供了多个重载，以方便创建实例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">()</span></span></div><div class="line"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span></div><div class="line"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span></div><div class="line"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(Map&lt;? extends K, ? extends V&gt; m)</span></div></pre></td></tr></table></figure></p>
+<p>在构造函数中，<code>initialCapacity</code>和<code>loadFactor</code>两个参数对map的性能有很大的影响。</p>
+<ul>
+<li><code>initialCapacity</code>: 初始化大小， 即<code>table</code>数组的长度，如果此值太小，可能会因引起<code>table</code>频繁调整数组大小，如果太大，实际内容很少，则造成资源浪费，默认 1 &lt;&lt; 4。</li>
+<li><code>loadFactor</code>: 加载因子，取值范围（0,1）的浮点数，如果此值太小，可能会因引起<code>table</code>频繁调整数组大小，如果太大，<code>table</code>大小很长时间不调整，调整时内容移动大。默认值0.75</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">i = (n - <span class="number">1</span>) &amp; h;</div></pre></td></tr></table></figure>
+<p>计算key在table中的索引,h为key的hashcode，n为当前table的大小。</p>
+<p>HashMap为非线程安全Map，其中key和value均可以为null。</p>
+
+      
+      
+      
+        <div class="post-copyright">
+<p><a href="http://wangjianchao.cn/2016/07/19/HashMap/">本文</a>为原创，转载请遵守本站的版本</p>
+<p class="updated-time" >更新于: </span>2017年6月29日 03:06</p>
+</div>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav" class="block-select">
+  
+    <a href="/2016/10/19/auto-deploy-traivs/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          基于Traivs的自动部署
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+</div>
+      <footer id="footer" class="block-select">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">&copy; 2015-2017
+        <a href="/aboutme/" class ="aboutme-foot-tag"> TinyKing</a>
+      </div>
+    </div>
+  </div>
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7f5889a162b9ce28e17ffd275a476161";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</footer>
+
+    </div>
+    <script>
+	var ThemeXConfig = {fancybox: false,mathjax: false,animate: true,isHome: false,isPost: true,isArchive: false,isTag: false,isCategory: false,open_in_new: false, CDN_PATH: '' }
+</script>
+
+
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/base.js"></script>
+    <script src="/js/jquery.lazyload.min.js"></script>
+
+
+
+
+
+  </div>
+
+</body>
+</html>

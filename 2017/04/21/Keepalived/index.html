@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Keepalived 简单配置</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#00796b">
+  <meta name="msapplication-TileColor" content="#4E8071"/>
+  
+  <link rel="shortcut icon" href="http://ico.58pic.com/iconset01/DarkGlass_Reworked/gif/36655.gif" type="image/png">
+  <link rel="alternative" href="/atom.xml" title="TinyKing" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css"> 
+</head>
+
+
+<body>
+
+  <div id="container" class="container">
+    <div class="left-col">
+    <div class="intrude-less">
+  <header id="header" class="inner">
+    <a href="/" class="profilepic">
+      <img lazy-src="http://ww4.sinaimg.cn/mw690/806e3151jw8f1a2ry7axpj20ro0rpgpt.jpg" class="block-select js-avatar">
+	</a>
+	<p class="header-subtitle">好好学习，天天向上</p>
+    <nav class="header-menu">
+      <ul>
+        <li><a href="/archives">文章</a></li><li><a href="/tags">标签</a></li><li><a href="/aboutme">关于我</a></li>
+      </ul>
+    </nav>
+  </header>				
+</div>
+
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  <div class="intrude-less">
+    <header id="header" class="inner">
+      <a href="/" class="profilepic">
+        <img lazy-src="http://ww4.sinaimg.cn/mw690/806e3151jw8f1a2ry7axpj20ro0rpgpt.jpg" class="block-select js-avatar">
+	  </a>
+	  <p class="header-subtitle">好好学习，天天向上</p>
+	  <nav class="header-menu">
+	    <ul>
+        <li><a href="/archives">文章</a></li><li><a href="/tags">标签</a></li><li><a href="/aboutme">关于我</a></li><div class="clearfix"></div>
+		</ul>
+	  </nav>
+	</header>				
+  </div>
+</nav>
+
+      <div class="body-wrap">
+<article id="post-Keepalived" class="article article-type-post" itemscope itemprop="blogPost">
+
+   
+    
+    <div class="article-meta">
+      
+<div class="article-date">
+<span class="datetime-published-tag"> 2017-04-21 </span>
+</div>
+
+
+    </div>
+    
+    
+  
+  <div class="article-inner block-select">
+  
+    
+    
+      <header class="article-header">
+        
+           
+  
+    <h1 class="article-title" itemprop="name">
+      Keepalived 简单配置
+    </h1>
+  
+
+        
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+             <div class="clearfix"></div>
+        
+      </div>
+      
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>参考文档 <a href="http://wenku.baidu.com/view/8e38022d2af90242a895e532.html" target="_blank" rel="external">http://wenku.baidu.com/view/8e38022d2af90242a895e532.html</a></p>
+</blockquote>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>解压文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -xvf keepalived-x.x.x.tar.gz</div></pre></td></tr></table></figure></p>
+<p>进入文件夹<code>keepalived-x.x.x</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">./configure</div><div class="line"></div><div class="line">make &amp;&amp; make install</div></pre></td></tr></table></figure>
+<p>在安装过程中需要注意以下几点：</p>
+<ul>
+<li>gcc环境</li>
+<li>openssl环境</li>
+<li>root权限</li>
+</ul>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># cp /usr/local/etc/rc.d/init.d/keepalived /etc/rc.d/init.d/ </span></div><div class="line"><span class="comment"># cp /usr/local/etc/sysconfig/keepalived /etc/sysconfig/ </span></div><div class="line"><span class="comment"># mkdir /etc/keepalived  </span></div><div class="line"><span class="comment"># cp /usr/local/etc/keepalived/keepalived.conf /etc/keepalived/ </span></div><div class="line"><span class="comment"># cp /usr/local/sbin/keepalived /usr/sbin/</span></div></pre></td></tr></table></figure>
+<p>做成系统启动服务方便管理. </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># vi /etc/rc.local   </span></div><div class="line">/etc/init.d/keepalived start</div></pre></td></tr></table></figure>
+<p>增加上面一行。</p>
+<p>修改配置<code>/etc/keepalived/keepalived.conf</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">! Configuation File for keepalived</div><div class="line"></div><div class="line">global_defs &#123;</div><div class="line">    notification_email &#123;</div><div class="line">        acassen@firewall.loc    # 邮件地址，当异常时发邮件通知。可以是多个，每个一行</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    notification_email_from Alexandre.Cassen@firewall.loc</div><div class="line">    smtp_server 192.168.200.1</div><div class="line">    smtp_connect_timeout 30</div><div class="line">    router_id LVS_DEVEL</div><div class="line">    vrrp_skip_check_adv_addr</div><div class="line">    vrrp_strict</div><div class="line">&#125;</div><div class="line"></div><div class="line">vrrp_instance VI_1 &#123;</div><div class="line">    state MASTER    # 从机设为BACKUP</div><div class="line">    interface   eth0   # 网卡接口</div><div class="line">    mcast_src_ip 10.0.0.131  # 默认没有这项，加上这项后服务好用了</div><div class="line">    priority  100  # 优先级，从机小与主机</div><div class="line">    advert_int 1  </div><div class="line">    authentication &#123;</div><div class="line">        auth_type PASS</div><div class="line">        auth_pass 1111</div><div class="line">    &#125;</div><div class="line">    virtual_ipaddress &#123;</div><div class="line">        10.0.0.111   # 虚拟ip设置，可以是多个，主从一致</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+      
+      
+        <div class="post-copyright">
+<p><a href="http://wangjianchao.cn/2017/04/21/Keepalived/">本文</a>为原创，转载请遵守本站的版本</p>
+<p class="updated-time" >更新于: </span>2017年6月29日 03:06</p>
+</div>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav" class="block-select">
+  
+    <a href="/2017/04/21/jdk-profile/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          Java系列  - JDK环境配置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/21/linux-profile/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux环境变量配置</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+</div>
+      <footer id="footer" class="block-select">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">&copy; 2015-2017
+        <a href="/aboutme/" class ="aboutme-foot-tag"> TinyKing</a>
+      </div>
+    </div>
+  </div>
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7f5889a162b9ce28e17ffd275a476161";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</footer>
+
+    </div>
+    <script>
+	var ThemeXConfig = {fancybox: false,mathjax: false,animate: true,isHome: false,isPost: true,isArchive: false,isTag: false,isCategory: false,open_in_new: false, CDN_PATH: '' }
+</script>
+
+
+    <script src="/js/jquery-1.9.1.min.js"></script>
+    <script src="/js/base.js"></script>
+    <script src="/js/jquery.lazyload.min.js"></script>
+
+
+
+
+
+  </div>
+
+</body>
+</html>
