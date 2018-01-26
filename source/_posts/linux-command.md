@@ -1,7 +1,7 @@
 ---
 title: Linux常用系统命令
 date: 2017-04-21 13:10:50
-tags:
+tags: [Linux]
 ---
 ```bash
 # uname -a # 查看内核/操作系统/CPU信息 

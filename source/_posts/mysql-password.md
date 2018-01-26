@@ -1,7 +1,7 @@
 ---
 title: MySQL修改root密码的多种方法
 date: 2017-04-21 13:10:50
-tags:
+tags: 
 ---
 
 方法1： 用SET PASSWORD命令
