@@ -35,7 +35,7 @@ favicon:
   #ms_browserconfig: /images/browserconfig.xml
 
 # Set default keywords (Use a comma to separate)
-keywords: "Hexo, NexT"
+keywords: "TinyKing tinyking 笑笑粑粑 大王"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -98,8 +98,8 @@ menu:
   categories: /categories/ || th
   archives: /archives/ || archive
 #  schedule: /schedule/ || calendar
-  sitemap: /sitemap.xml || sitemap
-  commonweal: /404/ || heartbeat
+  # sitemap: /sitemap.xml || sitemap
+  # commonweal: /404/ || heartbeat
 
 # Enable/Disable menu icons.
 menu_icons:
@@ -128,7 +128,7 @@ scheme: Gemini
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
 social:
   GitHub: https://github.com/tinyking || github
-  E-Mail: mailto:tinyking86@gmail.com || envelope
+  E-Mail: mailto:akingchao@qq.com || envelope
   Weibo: https://weibo.com/tinyking86 || weibo
   ZhiHu: https://zhuanlan.zhihu.com/tinyking
   #Google: https://plus.google.com/yourname || google
@@ -279,7 +279,7 @@ custom_logo:
 # Available value:
 #    normal | night | night eighties | night blue | night bright
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: normal
+highlight_theme: night bright
 
 
 # ---------------------------------------------------------------
