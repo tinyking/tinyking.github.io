@@ -9,7 +9,6 @@ tags: [Java]
 2. 枚举类型Enumeration
 3. 自动装箱（自动类型包装和解包）autoboxing & unboxing
 4. 可变参数varargs（varargs number of arguments）
- ![806e3151ly1fs3wc8cne6j20mw0ei0u8.jpg][1]
 5. Annotations
 6. 新的迭代语句
 7. 静态导入
@@ -28,14 +27,10 @@ tags: [Java]
 
 # Java 7
 1. switch中可以使用字符串
- ![806e3151ly1fs3wc8gvnej20os0kiac8.jpg][2]
 2. 泛型实例化类型自动推断
 3. 语法上支持集合，而不一定是数组
-   ![806e3151ly1fs3wc7sty2j20s00aiq42.jpg][3]
 4. 新增了一些取环境信息的工具方法
-    ![806e3151ly1fs3wcbsxusj20t80dimzf.jpg][4]
 5. Boolean类型反转，空指针安全，参与为运算
-   ![806e3151ly1fs3wcb8qkzj20r40jiwhd.jpg][5]
 6. 两个char间的equals
 7. 安全的加减乘除
 8. Map集合支持并发请求
@@ -66,9 +61,3 @@ PermGen空间被移除了，取而代之的是Metaspace。JVM选项-XX:PermSize�
 4. 集合工厂方法
 5. 改进了Stream API
 
-
-  [1]: /img/bVbb4hz
-  [2]: /img/bVbb4hD
-  [3]: /img/bVbb4hW
-  [4]: /img/bVbb4h4
-  [5]: /img/bVbb4ia
