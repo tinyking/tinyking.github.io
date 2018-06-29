@@ -1,4 +1,10 @@
-# Display real-time data in Angular
+---
+title: Display real-time data in Angular
+date: 2018-06-28 10:49:46
+tags:
+    - Angular
+---
+
 
 > [原文地址](https://fullstack-developer.academy/display-real-time-data-in-angular/)
 
