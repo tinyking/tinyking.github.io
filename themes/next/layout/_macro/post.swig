@@ -73,7 +73,9 @@
                 {{ date(post.date, config.date_format) }}
               </time>
             {% endif %}
-
+            <span id="busuanzi_container_page_pv">
+              本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+            </span>
             {% if theme.post_meta.created_at and theme.post_meta.updated_at %}
               <span class="post-meta-divider">|</span>
             {% endif %}
