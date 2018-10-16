@@ -9,6 +9,7 @@ tags:
 
 
 In this lesson, you will learn how to build native desktop apps with Angular and Electron. You might be surprised how easy it is to start building high-quality desktop apps for any platform, or even port your existing Angular app to native desktop platforms.
+通过本文，你可以学到如何使用Angular和Electron构建桌面应用。
 
 This lesson covers the following topics:
 
@@ -107,7 +108,7 @@ That’s it for the Electron setup, all the desktop app magic is happens under t
 The deployed desktop app will be an Angular AOT build - this happens by default when you run ng build --prod. It’s useful to have a command that will run an AOT production build and start Electron at the same time. This can be easily configured in the package.json file.
 
 # package.json
-```
+```json
 {
   "name": "angular-electron",
   "version": "0.0.0",
@@ -181,7 +182,7 @@ The app works by allowing the user to set the number of seconds the timer will r
 
 I also defined several getters help deal with NaN values that can cause errors in the progress circle. They also help keep the HTML logic clean and readable.
 
-```
+```typescript
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
