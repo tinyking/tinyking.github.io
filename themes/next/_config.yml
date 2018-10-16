@@ -410,7 +410,7 @@ gitment:
   cleanly: false # Hide 'Powered by ...' on footer, and more
   language: # Force language, or auto switch by theme
   github_user: tinyking # MUST HAVE, Your Github ID
-  github_repo: https://github.com/tinyking/tinyking.github.io.git # MUST HAVE, The repo you use to store Gitment comments
+  github_repo: tinyking.github.io # MUST HAVE, The repo you use to store Gitment comments
   client_id: d4082f033c43ff1acea7 # MUST HAVE, Github client id for the Gitment
   client_secret: 290f1ca0004d7b38a19a206956598c8b541b639a # EITHER this or proxy_gateway, Github access secret token for the Gitment
   proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect
