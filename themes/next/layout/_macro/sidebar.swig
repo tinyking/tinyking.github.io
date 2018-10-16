@@ -169,19 +169,9 @@
           {% endif %}
         </div>
       {% endif %}
-
-      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- 单元1 -->
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-9508321495212724"
-            data-ad-slot="3221759322"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+      <a href="https://promotion.aliyun.com/ntms/act/vmpt/aliyun-group/home.html?userCode=4depe8bm"><img src="https://img.alicdn.com/tfs/TB17qJhXpzqK1RjSZFvXXcB7VXa-200-126.jpg" data-spm-anchor-id="5176.11533457.1089570.i2.646077e3euSchJ"></a>
+      <a href="https://promotion.aliyun.com/ntms/act/enterprise-discount.html?userCode=4depe8bm" ><img src="https://img.alicdn.com/tfs/TB1aDXhXpzqK1RjSZFvXXcB7VXa-259-194.jpg" data-spm-anchor-id="5176.11533457.1089570.i1.646077e3euSchJ"></a>
     </div>
-    
+
   </aside>
 {% endmacro %}
