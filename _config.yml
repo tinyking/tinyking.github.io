@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 梦语仙境
+title: 王建朝的官网
 subtitle: 天生我才必有用
 description: Talk is cheap. Show me the code
 author: TinyKing
@@ -69,7 +69,7 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 #deploy:
 #  type:
-deploy: 
+deploy:
   type: git
   #elfwalk改为你的github用户名
   repository: git@github.com:tinyking/tinyking.github.io.git
