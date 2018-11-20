@@ -1,8 +1,8 @@
 ---
-title: Nginx常用功能全揭秘
-date: 2018-11-20 11:24:30
+title: nginx功能解密
+date: 2018-11-20 12:24:30
 tags:
-    - Nginx
+    - nginx
 ---
 
 来自：[编程无界](https://mp.weixin.qq.com/s/DDbLVj0jxpfOmJDZxt9SYg)（微信号：qianshic），作者：假不理
