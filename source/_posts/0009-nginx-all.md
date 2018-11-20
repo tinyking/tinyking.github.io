@@ -43,16 +43,16 @@ nginx作为一个高性能的web服务器，想必大家垂涎已久，蠢蠢欲
 > 正向代理的配置:
 
 ```
- 1server {
- 2    #指定DNS服务器IP地址  
- 3    resolver 114.114.114.114;   
- 4    #指定代理端口    
- 5    listen 8080;  
- 6    location / {
- 7        #设定代理服务器的协议和地址（固定不变）    
- 8        proxy_pass http://$http_host$request_uri;
- 9    }  
-10}
+server {
+    #指定DNS服务器IP地址  
+    resolver 114.114.114.114;   
+    #指定代理端口    
+    listen 8080;  
+    location / {
+        #设定代理服务器的协议和地址（固定不变）    
+        proxy_pass http://$http_host$request_uri;
+    }  
+}
 ```
 
 这样就可以做到内网中端口为8080的服务器主动请求到1.2.13.4的主机上，如在Linux下可以：
@@ -93,29 +93,29 @@ nginx作为一个高性能的web服务器，想必大家垂涎已久，蠢蠢欲
 > 反向代理配置:
 
 ```
- 1server {
- 2    #监听端口
- 3    listen 80;
- 4    #服务器名称，也就是客户端访问的域名地址
- 5    server_name  a.xxx.com;
- 6    #nginx日志输出文件
- 7    access_log  logs/nginx.access.log  main;
- 8    #nginx错误日志输出文件
- 9    error_log  logs/nginx.error.log;
-10    root   html;
-11    index  index.html index.htm index.php;
-12    location / {
-13        #被代理服务器的地址
-14        proxy_pass  http://localhost:8081;
-15        #对发送给客户端的URL进行修改的操作
-16        proxy_redirect     off;
-17        proxy_set_header   Host             $host;
-18        proxy_set_header   X-Real-IP        $remote_addr;
-19        proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
-20        proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
-21        proxy_max_temp_file_size 0;
-22   }
-23}
+server {
+    #监听端口
+    listen 80;
+    #服务器名称，也就是客户端访问的域名地址
+    server_name  a.xxx.com;
+    #nginx日志输出文件
+    access_log  logs/nginx.access.log  main;
+    #nginx错误日志输出文件
+    error_log  logs/nginx.error.log;
+    root   html;
+    index  index.html index.htm index.php;
+    location / {
+        #被代理服务器的地址
+        proxy_pass  http://localhost:8081;
+        #对发送给客户端的URL进行修改的操作
+        proxy_redirect     off;
+        proxy_set_header   Host             $host;
+        proxy_set_header   X-Real-IP        $remote_addr;
+        proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+        proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+        proxy_max_temp_file_size 0;
+   }
+}
 ```
 
 这样就可以通过a.xxx.com来访问a项目对应的网站了，而不需要带上难看的端口号。
@@ -153,11 +153,11 @@ nginx实现负载均衡有几种模式：
 下面的配置是指：**负载中有三台服务器，当请求到达时，nginx按照时间顺序把请求分配给三台服务器处理。**
 
 ```
-1upstream serverList {
-2    server 1.2.3.4;
-3    server 1.2.3.5;
-4    server 1.2.3.6;
-5}
+upstream serverList {
+    server 1.2.3.4;
+    server 1.2.3.5;
+    server 1.2.3.6;
+}
 ```
 
 > 1. ip_hash：每个请求按访问IP的hash结果分配，同一个IP客户端固定访问一个后端服务器。可以保证来自同一ip的请求被打到固定的机器上，可以解决session问题。
@@ -165,35 +165,35 @@ nginx实现负载均衡有几种模式：
 下面的配置是指：**负载中有三台服务器，当请求到达时，nginx优先按照ip_hash的结果进行分配，也就是同一个IP的请求固定在某一台服务器上，其它则按时间顺序把请求分配给三台服务器处理。**
 
 ```
-1upstream serverList {
-2    ip_hash
-3    server 1.2.3.4;
-4    server 1.2.3.5;
-5    server 1.2.3.6;
-6}
+upstream serverList {
+    ip_hash
+    server 1.2.3.4;
+    server 1.2.3.5;
+    server 1.2.3.6;
+}
 ```
 
 > 1. url_hash：按访问url的hash结果来分配请求，相同的url固定转发到同一个后端服务器处理。
 
 ```
-1upstream serverList {
-2    server 1.2.3.4;
-3    server 1.2.3.5;
-4    server 1.2.3.6;
-5    hash $request_uri;
-6    hash_method crc32;
-7}
+upstream serverList {
+    server 1.2.3.4;
+    server 1.2.3.5;
+    server 1.2.3.6;
+    hash $request_uri;
+    hash_method crc32;
+}
 ```
 
 > 1. fair：按后端服务器的响应时间来分配请求，响应时间短的优先分配。
 
 ```
-1upstream serverList {
-2    server 1.2.3.4;
-3    server 1.2.3.5;
-4    server 1.2.3.6;
-5    fair;
-6}
+upstream serverList {
+    server 1.2.3.4;
+    server 1.2.3.5;
+    server 1.2.3.6;
+    fair;
+}
 ```
 
 而在每一种模式中，每一台服务器后面的可以携带的参数有：
@@ -207,21 +207,21 @@ nginx实现负载均衡有几种模式：
 如下面的配置是指：**负载中有三台服务器，当请求到达时，nginx按时间顺序和权重把请求分配给三台服务器处理，例如有100个请求，有30%是服务器4处理，有50%的请求是服务器5处理，有20%的请求是服务器6处理。**
 
 ```
-1upstream serverList {
-2    server 1.2.3.4 weight=30;
-3    server 1.2.3.5 weight=50;
-4    server 1.2.3.6 weight=20;
-5}
+upstream serverList {
+    server 1.2.3.4 weight=30;
+    server 1.2.3.5 weight=50;
+    server 1.2.3.6 weight=20;
+}
 ```
 
 如下面的配置是指：**负载中有三台服务器，服务器4的失败超时时间为60s，服务器5暂不参与负载，服务器6只用作备份机。**
 
 ```
-1upstream serverList {
-2    server 1.2.3.4 fail_timeout=60s;
-3    server 1.2.3.5 down;
-4    server 1.2.3.6 backup;
-5}
+upstream serverList {
+    server 1.2.3.4 fail_timeout=60s;
+    server 1.2.3.5 down;
+    server 1.2.3.6 backup;
+}
 ```
 
 > 下面是一个配置负载均衡的示例（只写了关键配置）：
@@ -232,23 +232,23 @@ nginx实现负载均衡有几种模式：
 > 3. proxy_pass：是指向负载的列表的模块，如serverList
 
 ```
- 1upstream serverList {
- 2    server 1.2.3.4 weight=30;
- 3    server 1.2.3.5 down;
- 4    server 1.2.3.6 backup;
- 5}   
- 6
- 7server {
- 8    listen 80;
- 9    server_name  www.xxx.com;
-10    root   html;
-11    index  index.html index.htm index.php;
-12    location / {
-13        proxy_pass  http://serverList;
-14        proxy_redirect     off;
-15        proxy_set_header   Host             $host;
-16   }
-17}
+upstream serverList {
+    server 1.2.3.4 weight=30;
+    server 1.2.3.5 down;
+    server 1.2.3.6 backup;
+}   
+
+server {
+    listen 80;
+    server_name  www.xxx.com;
+    root   html;
+    index  index.html index.htm index.php;
+    location / {
+        proxy_pass  http://serverList;
+        proxy_redirect     off;
+        proxy_set_header   Host             $host;
+   }
+}
 ```
 
 ### 5. 静态服务器
@@ -261,15 +261,15 @@ nginx实现负载均衡有几种模式：
 > 2. server_name : 静态网站访问的域名地址。
 
 ```
-1server {
-2        listen       80;                                                         
-3        server_name  www.xxx.com;                                               
-4        client_max_body_size 1024M;
-5        location / {
-6               root   /var/www/xxx_static;
-7               index  index.html;
-8           }
-9    }
+server {
+        listen       80;                                                         
+        server_name  www.xxx.com;                                               
+        client_max_body_size 1024M;
+        location / {
+               root   /var/www/xxx_static;
+               index  index.html;
+           }
+    }
 ```
 
 ### 6. nginx的安装
@@ -279,33 +279,33 @@ nginx实现负载均衡有几种模式：
 1. 安装依赖：
 
 ```
-1//一键安装上面四个依赖
-2yum -y install gcc zlib zlib-devel pcre-devel openssl openssl-devel
+//一键安装上面四个依赖
+yum -y install gcc zlib zlib-devel pcre-devel openssl openssl-devel
 ```
 
 1. 安装nginx：
 
 ```
-1yum install nginx
+yum install nginx
 ```
 
 1. 检查是否安装成功：
 
 ```
-1nginx -v
+nginx -v
 ```
 
 1. 启动/挺尸nginx：
 
 ```
-1/etc/init.d/nginx start
-2/etc/init.d/nginx stop
+/etc/init.d/nginx start
+/etc/init.d/nginx stop
 ```
 
 1. 编辑配置文件：
 
 ```
-1/etc/nginx/nginx.conf
+/etc/nginx/nginx.conf
 ```
 
 这些步骤都完成之后，我们就可以进入nginx的配置文件nginx.conf对上面的各个知识点，进行配置和测试了。
