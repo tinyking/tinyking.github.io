@@ -12,8 +12,8 @@ tags:
 
 ```
 zuul:
-servlet-path: /
-sensitive-headers:
+    servlet-path: /
+    sensitive-headers:
 ```
 
 在这种配置下，zuul对于后台其他restful服务进行的自动转发：
@@ -25,11 +25,11 @@ sensitive-headers:
 ```
 zuul:
 # servlet-path: /
-sensitive-headers:
-ignored-services: '*'
-routes:
-a: /a/**
-b: /b/**
+    sensitive-headers:
+    ignored-services: '*'
+    routes:
+        a: /a/**
+        b: /b/**
 ```
 
 禁用zuul的自动路由配置，通过指定路由，去掉`serlvet-path`
