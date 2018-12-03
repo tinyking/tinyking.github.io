@@ -7,6 +7,8 @@ tags:
 
 在项目开发中，用到了Material的分页组件，需要对该组件进行汉化。
 
+![](https://ws1.sinaimg.cn/large/806e3151ly1fxtkeefsycj20gt065jrd.jpg)
+
 首先创建自定义汉化类：
 
 ```typescript
