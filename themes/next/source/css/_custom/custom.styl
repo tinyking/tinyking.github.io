@@ -2,3 +2,19 @@
 .site-meta, .headband, ::selection {
     background: #4CAF50;
 }
+
+.menu-item-active a {
+    color: #4CAF50;
+}
+
+.menu-item-active a:after{
+    content: " ";
+    position: absolute;
+    top: 50%;
+    margin-top: -3px;
+    right: 15px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #4CAF50;
+}
