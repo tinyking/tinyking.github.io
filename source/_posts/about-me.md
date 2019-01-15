@@ -11,4 +11,4 @@ comments: false
 
 我的51CTO: [TinyKing](http://tinyking.blog.51cto.com)
 
-我的微信：![TingKiny](http://ww1.sinaimg.cn/large/806e3151ly1fffzr8uu0zj20e80e8my0.jpg)
+我的微信：<img src="http://ww1.sinaimg.cn/large/806e3151ly1fffzr8uu0zj20e80e8my0.jpg" width="200">
