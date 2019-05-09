@@ -5,14 +5,14 @@
 # Site
 title: 爱笑笑，爱生活
 subtitle: 
-description: Talk is cheap. Show me the code
+description: 努力做最好的自己
 author: TinyKing
-language: zh-Hans
+language: zh-CN
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://wangjianchao.cn
+url: https://wangjianchao.cn
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:

@@ -1,9 +1,10 @@
 ---
 title: 使用 Docker 部署 Spring Boot
 date: 2019-04-17 16:11:01
+photos:
+    - https://cdn.pixabay.com/photo/2019/05/02/18/47/park-4174278_960_720.jpg
 ---
 
-> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 https://www.cnblogs.com/ityouknow/p/8599093.html
 
 Docker 技术发展为微服务落地提供了更加便利的环境，使用 Docker 部署 Spring Boot 其实非常简单，这篇文章我们就来简单学习下。
 
@@ -13,7 +14,7 @@ Docker 技术发展为微服务落地提供了更加便利的环境，使用 Doc
 
 在 `pom.xml` 中 ，使用 Spring Boot 2.0 相关依赖
 
-```
+```xml
 <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
@@ -23,7 +24,7 @@ Docker 技术发展为微服务落地提供了更加便利的环境，使用 Doc
 
 添加 web 和测试依赖
 
-```
+```xml
 <dependencies>
      <dependency>
     <groupId>org.springframework.boot</groupId>
@@ -296,3 +297,8 @@ Hello Docker!
 
 [Spring Boot with Docker](https://spring.io/guides/gs/spring-boot-docker/)
 [Docker：Spring Boot 应用发布到 Docker](https://lw900925.github.io/docker/docker-springboot.html)
+
+
+> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码
+>
+> 原文地址 https://www.cnblogs.com/ityouknow/p/8599093.html
