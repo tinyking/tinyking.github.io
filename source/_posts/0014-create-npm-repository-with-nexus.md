@@ -2,7 +2,7 @@
 title: 【Nexus系列】之npm私服库配置
 date: 2018-12-21 15:44:01
 tags:
-    - npm
+    - Npm
     - Nexus
 ---
 

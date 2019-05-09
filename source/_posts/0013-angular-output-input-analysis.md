@@ -2,7 +2,7 @@
 title: Angular的@Output与@Input浅析
 date: 2018-12-04 09:44:01
 tags:
-    - angular
+    - Angular
 ---
 
 # @Output与@Input理解

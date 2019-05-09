@@ -1,7 +1,8 @@
 ---
 title: Java发展史
 date: 2018-06-06
-tags: [Java]
+tags:
+    - Java
 ---
 
 ![图片描述](https://segmentfault.com/img/bVbcbFO?w=220&h=209)

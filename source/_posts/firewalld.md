@@ -1,7 +1,8 @@
 ---
 title: CentOS7使用firewalld打开关闭防火墙与端口
 date: 2017-04-21 13:10:50
-tags: [Linux]
+tags:
+    - Linux
 ---
 
 1、firewalld的基本使用

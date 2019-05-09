@@ -1,8 +1,10 @@
 ---
 title: Linux常用系统命令
 date: 2017-04-21 13:10:50
-tags: [Linux]
+tags:
+    - Linux
 ---
+
 ```bash
 # uname -a # 查看内核/操作系统/CPU信息 
 # head -n 1 /etc/issue # 查看操作系统版本 

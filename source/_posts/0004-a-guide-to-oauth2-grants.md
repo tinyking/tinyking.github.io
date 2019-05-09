@@ -5,10 +5,9 @@ tags:
     - Oauth
 ---
 
->[alexbilbie.com](http://alexbilbie.com/guide-to-oauth-2-grants/) · by Alex Bilbie
-
-
 The [OAuth 2.0 specification](http://tools.ietf.org/html/rfc6749) is a flexibile authorization framework that describes a number of grants (“methods”) for a client application to acquire an access token (which represents a user’s permission for the client to access their data) which can be used to authenticate a request to an API endpoint.
+
+<!--more-->
 
 The specification describes five grants for acquiring an access token:
 
@@ -201,3 +200,8 @@ If the client is a web application that has runs entirely on the front end (e.g.
 If the client is a native application such as a mobile app you should implement the password grant.
 
 Third party native applications should use the authorization code grant (via the native browser, not an embedded browser - e.g. for iOS push the user to Safari or use [SFSafariViewController](https://developer.apple.com/library/ios/documentation/SafariServices/Reference/SFSafariViewController_Ref/), don't use an embedded [WKWebView](https://developer.apple.com/library/ios/documentation/WebKit/Reference/WKWebView_Ref/)).
+
+---
+
+> [alexbilbie.com](http://alexbilbie.com/guide-to-oauth-2-grants/) · by Alex Bilbie
+

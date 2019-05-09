@@ -1,7 +1,9 @@
 ---
 title: Bootstrap模态框使WebUploader点击失效问题解决
 date: 2017-04-21 13:10:50
-tags: [bootstrap, webuploader]
+tags
+    - Bootstrap
+    - webuploader
 ---
 
 在使用Bootstrap模态框页面上使用上传组件WebUploader，发现点击失效。

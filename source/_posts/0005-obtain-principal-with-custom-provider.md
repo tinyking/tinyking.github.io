@@ -2,10 +2,12 @@
 title: Security自定义Provider如何获取更多用户信息
 date: 2018-10-30 10:24:30
 tags:
-    - Security
+    - Java
 ---
 
 在使用Spring Security集成Oauth2.0做Auth server时，使用自定义的UserDetailsService实现时，在Controller层通过自动注入，可以获取详细的用户信息。
+
+<!--more-->
 
 ```java
 @GetMapping("/user")

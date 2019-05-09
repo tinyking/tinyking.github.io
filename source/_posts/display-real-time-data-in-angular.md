@@ -6,7 +6,7 @@ tags:
 ---
 
 
-> [原文地址](https://fullstack-developer.academy/display-real-time-data-in-angular/)
+
 
 In this article, we'll be taking a look at two ways to display real-time data in an Angular application. We'll discuss how to push real-time data via a service. One approach will be using sockets while the other will be using the Angular AsyncPipe and Observables.
 
@@ -184,3 +184,5 @@ Adding a new product will also now mean that the list of products is updated.
 
 # Conclusion
 In this article, we had a look at two ways to achieve real-time data updates in Angular components.
+
+> [原文地址](https://fullstack-developer.academy/display-real-time-data-in-angular/)

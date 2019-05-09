@@ -5,8 +5,6 @@ tags:
     - Java
 ---
 
-> 作者：Big_Monkey
-> 原文地址: [动态代理：JDK动态代理和CGLIB代理的区别](https://www.cnblogs.com/bigmonkeys/p/7823268.html)
 
 代理模式：代理类和被代理类实现共同的接口（或继承），代理类中存有被代理类的索引，实际执行时通过调用代理类的方法，实际执行的是被代理类的方法。
 
@@ -33,3 +31,6 @@ tags:
 　 (1)使用CGLib实现动态代理，CGLib底层采用ASM字节码生成框架，使用字节码技术生成代理类，比使用Java反射效率要高。唯一需要注意的是，CGLib不能对声明为final的方法进行代理，因为CGLib原理是动态生成被代理类的子类。
 
 　 (2)在对JDK动态代理与CGlib动态代理的代码实验中看，1W次执行下，JDK7及8的动态代理性能比CGlib要好20%左右。
+
+> 作者：Big_Monkey
+> 原文地址: [动态代理：JDK动态代理和CGLIB代理的区别](https://www.cnblogs.com/bigmonkeys/p/7823268.html)

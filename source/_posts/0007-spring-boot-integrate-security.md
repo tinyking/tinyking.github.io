@@ -2,14 +2,14 @@
 title: SpringBoot整合SpringSecurity简单实现登入登出从零搭建
 date: 2018-11-12 10:24:30
 tags:
-    - Security
+    - Java
 ---
 
-技术栈 : SpringBoot + SpringSecurity + jpa + freemark ，完整项目地址 : <https://github.com/EalenXie/spring-security-login>
+
 
 1 . 新建一个spring-security-login的maven项目 ，pom.xml添加基本依赖 :
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -80,7 +80,7 @@ tags:
 
 2 . 准备你的数据库，设计表结构，要用户使用登入登出，新建用户表。
 
-```
+```sql
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -101,7 +101,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 3 . 用户对象User.java :
 
-```
+```java
 import javax.persistence.*;
 
 /**
@@ -224,7 +224,7 @@ public class User {
 
 4 . application.yml配置一些基本属性
 
-```
+```yaml
 spring:
   resources:
     static-locations: classpath:/
@@ -248,7 +248,7 @@ server:
 
 5 . 考虑我们应用的效率 , 可以配置数据源和线程池 :
 
-```
+```java
 package com.wuxicloud.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
@@ -329,7 +329,7 @@ public class DruidConfig {
 
 配置线程池 :
 
-```
+```java
 package com.wuxicloud.config;
 
 import org.springframework.context.annotation.Bean;
@@ -359,7 +359,7 @@ public class ThreadPoolConfig {
 
 6.用户需要根据用户名进行登录，访问数据库 :
 
-```
+```java
 import com.wuxicloud.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -375,7 +375,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 7.构建真正用于SpringSecurity登录的安全用户(UserDetails)，我这里使用新建了一个POJO来实现 :
 
-```
+```java
 package com.wuxicloud.security;
 
 import com.wuxicloud.model.User;
@@ -438,7 +438,7 @@ public class SecurityUser extends User implements UserDetails {
 
 8 . 核心配置，配置SpringSecurity访问策略，包括登录处理，登出处理，资源访问，密码基本加密。
 
-```
+```java
 package com.wuxicloud.config;
 
 import com.wuxicloud.dao.UserRepository;
@@ -542,7 +542,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 9.至此，已经基本将配置搭建好了，从上面核心可以看出，配置的登录页的url 为/login，可以创建基本的Controller来验证登录了。
 
-```
+```java
 package com.wuxicloud.web;
 
 import com.wuxicloud.model.User;
@@ -590,7 +590,7 @@ public class LoginController {
 
 11 . SpringBoot基本的启动类 Application.class
 
-```
+```java
 package com.wuxicloud;
 
 import org.springframework.boot.SpringApplication;
@@ -612,7 +612,7 @@ public class Application {
 
 login.html
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -633,7 +633,7 @@ login.html
 
 index.html
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -656,7 +656,7 @@ index.html
 
 　测试类如下 :
 
-```
+```java
 package com.wuxicloud.security;
 
 import org.junit.Test;
@@ -679,7 +679,7 @@ public class TestEncoder {
 
 测试登录，从上面的加密的密码我们插入一条数据到数据库中。
 
-```
+```sql
 INSERT INTO `USER` VALUES (1, 'd242ae49-4734-411e-8c8d-d2b09e87c3c8', 'EalenXie', '$2a$04$petEXpgcLKfdLN4TYFxK0u8ryAzmZDHLASWLX/XXm8hgQar1C892W', 'SSSSS', 'ssssssssss', 1, 'g', '0:0:0:0:0:0:0:1', '2018-07-11 11:26:27');
 ```
 
@@ -702,7 +702,6 @@ INSERT INTO `USER` VALUES (1, 'd242ae49-4734-411e-8c8d-d2b09e87c3c8', 'EalenXie'
 ![img](https://images2018.cnblogs.com/blog/994599/201807/994599-20180711154539312-15547252.png)
 
 
+> 技术栈 : SpringBoot + SpringSecurity + jpa + freemark ，完整项目地址 : <https://github.com/EalenXie/spring-security-login>
 
-```
 
-```

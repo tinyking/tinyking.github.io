@@ -2,6 +2,7 @@
 title: JavaScript编程规范
 date: 2017-04-21 13:10:50
 tags:
+    - JavaScript
 ---
 
 ## 背景

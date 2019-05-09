@@ -2,7 +2,7 @@
 title: Angular项目中集成Font Awesome图标
 date: 2019-04-15 17:48
 tags:
-    - Augular
+    - Angular
 ---
 
 

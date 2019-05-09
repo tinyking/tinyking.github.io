@@ -2,9 +2,8 @@
 title: Keepalived 简单配置
 date: 2017-04-21 13:10:50
 tags:
+    - Keepalived
 ---
-
-> 参考文档 http://wenku.baidu.com/view/8e38022d2af90242a895e532.html
 
 
 ## 安装
@@ -81,3 +80,6 @@ vrrp_instance VI_1 {
 }
 
 ```
+
+
+> 参考文档 http://wenku.baidu.com/view/8e38022d2af90242a895e532.html

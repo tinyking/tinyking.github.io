@@ -1,7 +1,9 @@
 ---
 title: Spring常用Annotation详解
 date: 2018-01-26 09:16:06
-tags: [spring]
+tags:
+    - Spring
+    - Java
 ---
 
 

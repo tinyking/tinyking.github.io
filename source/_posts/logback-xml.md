@@ -1,7 +1,9 @@
 ---
 title: Logback配置文件
 date: 2017-04-21 13:10:50
-tags: [Log]
+tags: 
+    - Java
+    - Log
 ---
 
 ```xml

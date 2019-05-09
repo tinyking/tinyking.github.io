@@ -1,7 +1,8 @@
 ---
 title: Spring Boot依赖引入的多种方式
 date: 2018-10-15 09:06:30
-tags: [Java]
+tags: 
+    - Java
 ---
 
 使用Spring Boot开发，不可避免的会面临Maven依赖包版本的管理。

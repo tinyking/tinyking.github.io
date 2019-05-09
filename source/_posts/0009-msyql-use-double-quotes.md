@@ -2,10 +2,11 @@
 title: Mysql建表语句中显示双引号
 date: 2018-11-20 20:24:30
 tags:
-    - mysql
+    - MySQL
 ---
 
 在工作中使用Mysql数据库，发现建表后的ddl显示表名、字段都是双引号。这样的ddl在线上工单系统无法通过，需要将双引号转成反引号(`)才行。
+
 
 通过执行命令`show VARIABLES like '%sql%'`发现，`sql_mode`的值是`ANSI_QUOTES`。
 

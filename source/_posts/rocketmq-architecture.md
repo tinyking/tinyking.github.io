@@ -2,8 +2,7 @@
 title: RocketMQ架构简介
 date: 2018-04-09
 tags: 
-    - mq
-    - 分布式
+    - MQ
 ---
 
 

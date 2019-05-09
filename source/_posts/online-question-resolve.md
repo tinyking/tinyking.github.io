@@ -2,8 +2,8 @@
 title: 记一次线上问题的排查过程
 date: 2018-04-05
 tags: 
-    - nginx
-    - tomcat
+    - Nginx
+    - Tomcat
 ---
 
 # 问题

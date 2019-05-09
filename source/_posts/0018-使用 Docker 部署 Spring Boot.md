@@ -1,6 +1,9 @@
 ---
 title: 使用 Docker 部署 Spring Boot
 date: 2019-04-17 16:11:01
+tags:
+    - Docker
+    - Spring Boot
 photos:
     - https://cdn.pixabay.com/photo/2019/05/02/18/47/park-4174278_960_720.jpg
 ---

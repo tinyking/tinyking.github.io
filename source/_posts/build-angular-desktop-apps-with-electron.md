@@ -2,8 +2,8 @@
 title: 构建基于Electron技术的Angular桌面应用
 date: 2018-10-15 17:06:30
 tags:
-    - angular
-    - electron
+    - Angular
+    - Electron
 ---
 
 

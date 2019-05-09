@@ -1,14 +1,15 @@
 ---
 title: Linux环境变量配置
 date: 2017-04-21 13:10:50
-tags: [Linux]
+tags:
+    - Linux
 ---
 
 
 不论使用Linux开发，还是使用Linux生产，都不可避免环境变量的配置。通常都是去修改系统文件：`/etc/profile`, `/etc/enviroment`, `~/.bashrc`, `~/.profile`等等，在这些文件的末尾`export`上自己想要添加的环境变量，`source`一下该文件，配置就立刻生效了。
 
 今天通过阅读`/etc/profile`文件：
-```shell
+```bash
 # /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
 # and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
 
