@@ -4,7 +4,7 @@
 
 # Site
 title: 爱笑笑，爱生活
-subtitle: 
+subtitle:
 description: 努力做最好的自己
 author: TinyKing
 language: zh-CN
@@ -74,3 +74,10 @@ deploy:
   #elfwalk改为你的github用户名
   repository: git@github.com:tinyking/tinyking.github.io.git
   branch: master
+
+# search
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
