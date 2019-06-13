@@ -8,6 +8,9 @@ menu:
   home: 首页
   archives: 归档
   categories: 分类
+  frontends: 前端
+  backends: 后端
+  tools: 工具
   tags: 标签
   about: 关于
   search: 搜索

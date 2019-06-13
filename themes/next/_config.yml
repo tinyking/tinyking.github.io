@@ -158,13 +158,16 @@ baidu_push: true
 # External url should start with http:// or https://
 menu:
   home: / || home
-  about: /about/ || user
-  tags: /tags/ || tags
-  categories: /categories/ || th
+  # tags: /tags/ || tags
+  # categories: /categories/ || th
+  frontends: /categories/前端 || html5
+  backends: /categories/后端 || envira
+  tools: /categories/工具 || rocket
   archives: /archives/ || archive
 #  schedule: /schedule/ || calendar
-  sitemap: /sitemap.xml || sitemap
-  commonweal: /404/ || heartbeat
+  about: /about/ || user
+  # sitemap: /sitemap.xml || sitemap
+  # commonweal: /404/ || heartbeat
 
 # Enable / Disable menu icons / item badges.
 menu_settings:
@@ -312,7 +315,7 @@ excerpt_description: true
 # Automatically Excerpt (Not recommend).
 # Use <!-- more --> in the post to control excerpt accurately.
 auto_excerpt:
-  enable: false
+  enable: true
   length: 150
 
 # Read more button
