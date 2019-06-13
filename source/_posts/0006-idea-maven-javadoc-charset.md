@@ -3,6 +3,8 @@ title: Idea下maven package时，javadoc乱码
 date: 2018-10-30 20:24:30
 tags:
     - Java
+categories:
+    - 后端
 ---
 
 在idea中，使用maven打包应用的，javadoc在console输出乱码。解决方法如下：

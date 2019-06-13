@@ -3,6 +3,8 @@ title: Squid 代理服务器配置
 date: 2017-04-21 11:10:50
 tags:
     - Squid
+categories:
+    - 工具
 ---
 ## 安装
 

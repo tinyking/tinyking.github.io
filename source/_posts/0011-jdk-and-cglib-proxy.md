@@ -3,6 +3,8 @@ title: 动态代理：JDK动态代理和CGLIB代理的区别
 date: 2018-11-26 18:24:30
 tags:
     - Java
+categories:
+    - 后端
 ---
 
 

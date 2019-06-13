@@ -4,6 +4,8 @@ date: 2017-04-21 13:10:50
 tags:
     - Bootstrap
     - webuploader
+categories:
+    - 前端
 ---
 
 在使用Bootstrap模态框页面上使用上传组件WebUploader，发现点击失效。

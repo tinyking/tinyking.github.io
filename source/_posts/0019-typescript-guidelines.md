@@ -3,13 +3,14 @@ title: TypeScript编码指南
 date: 2019-06-05 16:17
 tags:
     - TypeScript
+categories:
+    - 前端
 ---
 
 # TypeScript编码指南
 
 ![](https://cdn.pixabay.com/photo/2016/10/20/08/39/business-1754904_960_720.jpg)
 
-<!-- more -->
 ## 命名
 1. 使用 `PascalCase` 方式对类进行命名.
 2. 接口命名中不要使用前缀字母 `I` .

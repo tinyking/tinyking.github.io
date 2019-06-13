@@ -3,6 +3,8 @@ title: SpringBoot整合SpringSecurity简单实现登入登出从零搭建
 date: 2018-11-12 10:24:30
 tags:
     - Java
+categories:
+    - 后端
 ---
 
 

@@ -3,6 +3,8 @@ title: 【vue系列】安装nodejs
 date: 2017-04-21 11:10:50
 tags:
     - Vue
+categories:
+    - 前端
 ---
 
 去官网下载安装包 

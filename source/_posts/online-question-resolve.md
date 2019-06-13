@@ -4,6 +4,8 @@ date: 2018-04-05
 tags: 
     - Nginx
     - Tomcat
+categories:
+    - 工具
 ---
 
 # 问题

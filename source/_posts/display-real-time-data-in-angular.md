@@ -3,6 +3,8 @@ title: Display real-time data in Angular
 date: 2018-06-28 10:49:46
 tags:
     - Angular
+categories:
+    - 前端
 ---
 
 

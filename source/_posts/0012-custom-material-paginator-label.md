@@ -3,6 +3,8 @@ title: Angular material中自定义分页信息
 date: 2018-12-03 14:44:01
 tags:
     - Angular
+categories:
+    - 前端
 ---
 
 在项目开发中，用到了Material的分页组件，需要对该组件进行汉化。

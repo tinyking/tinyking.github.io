@@ -3,6 +3,8 @@ title: A Guide To OAuth 2.0 Grants
 date: 2018-10-26 14:24:30
 tags:
     - Oauth
+categories:
+    - 后端
 ---
 
 The [OAuth 2.0 specification](http://tools.ietf.org/html/rfc6749) is a flexibile authorization framework that describes a number of grants (“methods”) for a client application to acquire an access token (which represents a user’s permission for the client to access their data) which can be used to authenticate a request to an API endpoint.

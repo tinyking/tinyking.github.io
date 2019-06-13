@@ -3,6 +3,8 @@ title: nginx功能解密
 date: 2018-11-20 12:24:30
 tags:
     - Nginx
+categories:
+    - 工具
 ---
 
 > 本文旨在用最通俗的语言讲述最枯燥的基本知识

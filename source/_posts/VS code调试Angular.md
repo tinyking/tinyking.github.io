@@ -4,7 +4,8 @@ date: 2018-07-10 10:49:46
 tags:
     - Angular
     - VS Code
-    - Chrome
+categories:
+    - 前端
 ---
 
 # vs code调试Angular

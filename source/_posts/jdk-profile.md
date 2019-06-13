@@ -3,6 +3,8 @@ title: Java系列  - JDK环境配置
 date: 2017-04-21 13:10:50
 tags:
     - Java
+categories:
+    - 工具
 ---
 
 # Linux

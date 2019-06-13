@@ -3,6 +3,8 @@ title: RocketMQ文档
 date: 2017-05-17 09:06:25
 tags:
     - MQ
+categories:
+    - 后端
 comments: false
 ---
 

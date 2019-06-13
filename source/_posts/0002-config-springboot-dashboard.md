@@ -1,9 +1,11 @@
 ---
-title: 设置Spring Boot项目使用Run Dashboard运行
+title: Idea手动设置Spring Boot项目使用Run Dashboard运行
 date: 2018-10-17 09:24:30
 tags:
     - Idea
     - Java
+categories:
+    - 工具
 ---
 
 最近在做基于Spring cloud的微服务开发，开发过程中，要启动很多Spring Boot项目，Idea提供了`Run Dashboard`功能，来方便管理Spring Boot项目。

@@ -3,6 +3,8 @@ title: Keepalived 简单配置
 date: 2017-04-21 13:10:50
 tags:
     - Keepalived
+categories:
+    - 工具
 ---
 
 

@@ -3,6 +3,8 @@ title: 如何用Angular6创建各种动画效果
 date: 2019-02-15 09:44:01
 tags:
     - Angular
+categories:
+    - 前端
 ---
 
 

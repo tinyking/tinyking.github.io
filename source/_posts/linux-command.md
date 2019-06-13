@@ -3,6 +3,8 @@ title: Linux常用系统命令
 date: 2017-04-21 13:10:50
 tags:
     - Linux
+categories:
+    - 工具
 ---
 
 ```bash

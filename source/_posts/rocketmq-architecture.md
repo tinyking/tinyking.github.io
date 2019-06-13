@@ -3,6 +3,8 @@ title: RocketMQ架构简介
 date: 2018-04-09
 tags: 
     - MQ
+categories:
+    - 后端
 ---
 
 
