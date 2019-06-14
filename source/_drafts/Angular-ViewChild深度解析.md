@@ -2,12 +2,15 @@
 title: Angular @ViewChild深度解析
 tags:
     - Angular
+categories:
+    - 前端
 ---
+
+![Angular Framework](https://i.loli.net/2019/06/10/5cfdf6dca539f47762.png)
 
 Angular `@ViewChild`装饰器是我们在学习Angular的过程中常用的装饰器之一。这个装饰器有很多特性，其中的一些特性可能不是很常见，但却非常有用。
 
 本文中，我们将快速的介绍这个装饰器中所有可用的特性。
-<!--more-->
 
 ## 目录
 
