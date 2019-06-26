@@ -5,6 +5,8 @@ tags:
     - Angular
 categories:
   - 前端
+photos:
+    - https://i.loli.net/2019/06/10/5cfdf6dca539f47762.png
 ---
 
 ## 概述
