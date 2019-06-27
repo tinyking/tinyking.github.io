@@ -108,10 +108,10 @@ npm install --save-dev tslint-config-prettier
 
 ```json
 {
-    "extends": {
+    "extends": [
         "tslint:latest",
         "tslint-config-prettier"
-    }
+    ]
 }
 ```
 
