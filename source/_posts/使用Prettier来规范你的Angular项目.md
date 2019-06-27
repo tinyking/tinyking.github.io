@@ -120,7 +120,7 @@ npm install --save-dev tslint-config-prettier
 安装`husky`，创建一个Git hook
 
 ```sh
-npm install  --save-dev prettier-quick husky
+npm install  --save-dev pretty-quick husky
 ```
 
 在`package.json`中添加下面的配置:
