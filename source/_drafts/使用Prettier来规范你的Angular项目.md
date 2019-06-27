@@ -4,7 +4,7 @@ tags:
 tags:
   - Angualr
 categories:
-  - 前端
+  - 工具
 photos:
   - https://static.xmt.cn/a8e918a8225c4bc9ac669a67aedaffaa.png
 ---
