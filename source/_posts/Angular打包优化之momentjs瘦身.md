@@ -9,20 +9,18 @@ photos:
     - https://i.loli.net/2019/06/10/5cfdf6dca539f47762.png
 ---
 
-
-![Angular Framework](https://i.loli.net/2019/06/10/5cfdf6dca539f47762.png)
-
 项目中使用到了moment.js，编译后发现moment的locale文件全部被打包到发布文件中，且moment的大部分都是locale文件，实际上我们只需要zh-cn这个语言包。
 
 使用`webpack-bundle-analyzer`分析见图:
-![](https://cdn.nlark.com/yuque/0/2019/png/269363/1561536056876-assets/web-upload/321acf7d-a2f8-4649-ad76-dcf826773709.png)
+
+![PIC](https://cdn.nlark.com/yuque/0/2019/png/269363/1561536056876-assets/web-upload/321acf7d-a2f8-4649-ad76-dcf826773709.png)
 
 moment.js 并不是一个现代化的模块化的库， 无法对其进行Tree Shaking优化。
 
 我们需要借助第三方的builder组件: `@angular-builders/custom-webpack`，来扩展Angular的编译过程。
 
-
 ## 安装
+
 > npm i -D @angular-builders/custom-webpack
 
 因为是开发中需要的包，我们要把`@angular-builders/custom-webpack`添加到`devDependencies`中。
@@ -69,6 +67,6 @@ module.exports = {
 
 再次执行`webpack-bundle-analyzer`分析：
 
-![](https://cdn.nlark.com/yuque/0/2019/png/269363/1561537017238-assets/web-upload/ffc4b654-ab56-4185-8b4b-df925e8052d1.png)
+![PIC](https://cdn.nlark.com/yuque/0/2019/png/269363/1561537017238-assets/web-upload/ffc4b654-ab56-4185-8b4b-df925e8052d1.png)
 
 我们会发现，新编辑的文件中locale文件只剩下了我们需要的zh-cn。
