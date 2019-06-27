@@ -1,7 +1,7 @@
 ---
 title: Angular打包优化之momentjs瘦身
 tags:
-  - Angualr
+  - Angular
 categories:
   - 前端
 date: 2019-06-26 16:18:46

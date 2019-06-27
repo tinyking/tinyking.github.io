@@ -1,8 +1,7 @@
 ---
 title: 使用Prettier来规范你的Angular项目
 tags:
-tags:
-  - Angualr
+  - Angular
 categories:
   - 工具
 photos:
