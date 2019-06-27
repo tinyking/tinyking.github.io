@@ -5,8 +5,10 @@ tags:
 categories:
   - 工具
 photos:
-  - https://static.xmt.cn/a8e918a8225c4bc9ac669a67aedaffaa.png
+  - 'https://static.xmt.cn/a8e918a8225c4bc9ac669a67aedaffaa.png'
+date: 2019-06-27 17:10:42
 ---
+
 
 在实际项目中，我们经常会遇到团队人员写的代码风格不统一，尤其是前端代码。比如在JavaScript中，字符串可以是使用单引号`'This is string'`，也可以使用双引号`"This is string"`。对于JavaScript语言来说，这两种格式都是正确的，但是对于一个项目来讲，这就是没有规范的表现。
 
