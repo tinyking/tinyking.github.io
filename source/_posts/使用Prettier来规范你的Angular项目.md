@@ -128,7 +128,7 @@ npm install  --save-dev pretty-quick husky
 ```json
 "husky": {
     "hooks": {
-      "pre-commit": "run-s format:check lint"
+      "pre-commit": "pretty-quick --staged"
     }
 }
 ```
