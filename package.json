@@ -1,30 +1,102 @@
 {
-  "name": "tinyking.github.io",
-  "version": "1.0.0",
-  "private": true,
+  "name": "vuepress-theme-meteorlxy",
+  "version": "1.3.1",
+  "description": "Vuepress blog theme - Meteorlxy",
+  "keywords": [
+    "blog",
+    "theme",
+    "vuepress"
+  ],
+  "homepage": "https://github.com/meteorlxy/vuepress-theme-meteorlxy",
+  "bugs": {
+    "url": "https://github.com/meteorlxy/vuepress-theme-meteorlxy/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meteorlxy/vuepress-theme-meteorlxy.git"
+  },
+  "license": "MIT",
+  "author": "meteorlxy <meteor.lxy@foxmail.com>",
+  "files": [
+    "lib/"
+  ],
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "vuepress build docs --dest docs-dist",
+    "dev": "vuepress dev docs --temp .temp",
+    "lint": "eslint --ext .js,.vue .",
+    "publish": "git push origin master:master --tags",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1 && git add CHANGELOG.md"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "package.json": [
+      "sort-package-json",
+      "git add"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "standard",
+      "plugin:vue/recommended"
+    ],
+    "root": true,
+    "rules": {
+      "comma-dangle": [
+        "error",
+        "always-multiline"
+      ]
+    }
+  },
+  "dependencies": {
+    "@vssue/api-github-v3": "^1.0.0",
+    "@vssue/vuepress-plugin-vssue": "^1.0.0",
+    "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
+    "@vue/babel-preset-jsx": "^1.0.0",
+    "@vuepress/plugin-back-to-top": "^1.0.0",
+    "@vuepress/plugin-google-analytics": "^1.0.0",
+    "@vuepress/shared-utils": "^1.0.0",
+    "date-fns": "^1.30.1",
+    "geopattern": "^1.2.3",
+    "lodash.debounce": "^4.0.8",
+    "lodash.throttle": "^4.1.1",
+    "vuepress-plugin-container": "^1.1.1",
+    "vuepress-plugin-nprogress": "^1.1.0",
+    "vuepress-plugin-smooth-scroll": "^0.0.3",
+    "vuepress-plugin-table-of-contents": "^1.0.2",
+    "vuepress-plugin-zooming": "^1.1.2"
+  },
   "devDependencies": {
-    "@textlint-rule/textlint-rule-no-unmatched-pair": "^1.0.7",
-    "@vuepress/plugin-back-to-top": "^1.1.0",
-    "@vuepress/plugin-google-analytics": "^1.1.0",
-    "@vuepress/plugin-medium-zoom": "^1.1.0",
-    "@vuepress/plugin-pwa": "^1.1.0",
-    "@vuepress/theme-vue": "^1.1.0",
-    "lint-staged": "^8.1.5",
-    "remark-cli": "^7.0.0",
-    "remark-lint": "^6.0.5",
-    "remark-preset-lint-consistent": "^2.0.3",
-    "remark-preset-lint-recommended": "^3.0.3",
-    "textlint": "^11.3.1",
-    "textlint-filter-rule-comments": "^1.2.2",
-    "textlint-rule-apostrophe": "^1.0.0",
-    "textlint-rule-common-misspellings": "^1.0.1",
-    "textlint-rule-diacritics": "^1.0.0",
-    "textlint-rule-en-capitalization": "^2.0.2",
-    "textlint-rule-stop-words": "^1.0.17",
-    "textlint-rule-terminology": "^1.1.30",
-    "textlint-rule-write-good": "^1.6.2",
-    "vue-toasted": "^1.1.25",
-    "vuepress": "^1.1.0",
-    "vuepress-plugin-flowchart": "^1.4.2"
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
+    "conventional-changelog-cli": "^2.0.21",
+    "eslint": "^6.3.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-vue": "^5.2.3",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.2.5",
+    "sort-package-json": "^1.22.1",
+    "vuepress": "^1.0.4"
+  },
+  "peerDependencies": {
+    "vuepress": "^1.0.0"
   }
 }
