@@ -1,66 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e365523a-80a5-491a-887c-fbd82a3efdac" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2016/07/19/HashMap/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2016/10/19/auto-deploy-traivs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2016/10/19/front-framework/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2017/04/21/Keepalived/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2017/04/21/firewalld/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2017/04/21/javascript-rule/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2017/04/21/jdk-profile/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2017/04/21/linux-command/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2017/04/21/linux-profile/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2017/04/21/logback-xml/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2017/04/21/mysql-password/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2017/04/21/squid/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2017/04/21/vue/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2017/04/21/webupload/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2017/05/10/about-me/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2017/05/10/spring/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2017/05/17/rocketmq-quickstart/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/404.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CNAME" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/aboutme/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/archives/2016/07/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/archives/2016/10/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/archives/2016/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/archives/2017/04/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/archives/2017/04/page/2/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/archives/2017/05/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/archives/2017/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/archives/2017/page/2/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/archives/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/archives/page/2/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/baidusitemap.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/coderwall.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/delicious.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/img-err.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/img-loading.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/pinboard.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/pinterest.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/rss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/scrollbar_arrow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/jd_root.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/base.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/instagram.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/jquery-1.9.1.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/jquery.lazyload.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/mobile.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/pc.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/page/2/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/root.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sitemap.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tags/Java/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tags/framework/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tags/github/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tags/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tags/spring/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tags/travis/index.html" beforeDir="false" />
-    </list>
+    <list default="true" id="e365523a-80a5-491a-887c-fbd82a3efdac" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -91,6 +32,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -119,12 +61,32 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1575252231466</updated>
-      <workItem from="1575252236045" duration="180000" />
+      <workItem from="1575252236045" duration="479000" />
     </task>
+    <task id="LOCAL-00001" summary="Merge branch 'master' of https://github.com/tinyking/tinyking.github.io&#10;&#10;# Conflicts:&#10;#&#9;2016/07/19/HashMap/index.html&#10;#&#9;2016/10/19/front-framework/index.html&#10;#&#9;2017/04/21/Keepalived/index.html&#10;#&#9;2017/04/21/firewalld/index.html&#10;#&#9;2017/04/21/javascript-rule/index.html&#10;#&#9;2017/04/21/jdk-profile/index.html&#10;#&#9;2017/04/21/linux-command/index.html&#10;#&#9;2017/04/21/linux-profile/index.html&#10;#&#9;2017/04/21/logback-xml/index.html&#10;#&#9;2017/04/21/mysql-password/index.html&#10;#&#9;2017/04/21/squid/index.html&#10;#&#9;2017/04/21/vue/index.html&#10;#&#9;2017/04/21/webupload/index.html&#10;#&#9;2017/05/10/spring/index.html&#10;#&#9;2017/05/17/rocketmq-quickstart/index.html&#10;#&#9;archives/2016/07/index.html&#10;#&#9;archives/2016/10/index.html&#10;#&#9;archives/2016/index.html&#10;#&#9;archives/2017/04/index.html&#10;#&#9;archives/2017/04/page/2/index.html&#10;#&#9;archives/2017/05/index.html&#10;#&#9;archives/2017/index.html&#10;#&#9;archives/2017/page/2/index.html&#10;#&#9;archives/index.html&#10;#&#9;archives/page/2/index.html&#10;#&#9;index.html&#10;#&#9;page/2/index.html&#10;#&#9;tags/Java/index.html&#10;#&#9;tags/index.html&#10;#&#9;tags/spring/index.html">
+      <created>1575252426880</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1575252426880</updated>
+    </task>
+    <task id="LOCAL-00002" summary="sdfsd">
+      <created>1575252673533</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1575252673533</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Merge branch 'master' of https://github.com/tinyking/tinyking.github.io&#10;&#10;# Conflicts:&#10;#&#9;2016/07/19/HashMap/index.html&#10;#&#9;2016/10/19/front-framework/index.html&#10;#&#9;2017/04/21/Keepalived/index.html&#10;#&#9;2017/04/21/firewalld/index.html&#10;#&#9;2017/04/21/javascript-rule/index.html&#10;#&#9;2017/04/21/jdk-profile/index.html&#10;#&#9;2017/04/21/linux-command/index.html&#10;#&#9;2017/04/21/linux-profile/index.html&#10;#&#9;2017/04/21/logback-xml/index.html&#10;#&#9;2017/04/21/mysql-password/index.html&#10;#&#9;2017/04/21/squid/index.html&#10;#&#9;2017/04/21/vue/index.html&#10;#&#9;2017/04/21/webupload/index.html&#10;#&#9;2017/05/10/spring/index.html&#10;#&#9;2017/05/17/rocketmq-quickstart/index.html&#10;#&#9;archives/2016/07/index.html&#10;#&#9;archives/2016/10/index.html&#10;#&#9;archives/2016/index.html&#10;#&#9;archives/2017/04/index.html&#10;#&#9;archives/2017/04/page/2/index.html&#10;#&#9;archives/2017/05/index.html&#10;#&#9;archives/2017/index.html&#10;#&#9;archives/2017/page/2/index.html&#10;#&#9;archives/index.html&#10;#&#9;archives/page/2/index.html&#10;#&#9;index.html&#10;#&#9;page/2/index.html&#10;#&#9;tags/Java/index.html&#10;#&#9;tags/index.html&#10;#&#9;tags/spring/index.html" />
+    <MESSAGE value="sdfsd" />
+    <option name="LAST_COMMIT_MESSAGE" value="sdfsd" />
   </component>
   <component name="WindowStateProjectService">
     <state x="752" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1575252312602">
