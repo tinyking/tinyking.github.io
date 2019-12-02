@@ -1,0 +1,17 @@
+language: ruby
+rvm:
+  - 2.1
+install: gem install jekyll -v 2.4.0
+script: jekyll build
+after_success:
+  - cd ./_site
+  - git init
+  - git config user.name "tinyking"  #修改name
+  - git config user.email "akingchao@qq.com"  #修改地址
+  - git add .
+  - git commit -m "Update docs"
+  - git push --force --quiet "https://${USER}:${GH_TOKEN}@${GH_REF}" master:master
+
+branches:
+  only:
+    - jekyll
