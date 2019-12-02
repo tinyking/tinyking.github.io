@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="什么是主题主题就是一组要应用于 Angular Material 的颜色，也可以理解成应用的皮肤。在以前使用 QQ 空间的时候，腾讯就做好多些空间皮肤（主题）进行出售。现在 Android 手机系统也都有好多主题，让用户自己手机系统的主题。 在 Angular Material 中，主题由多个调色板组成。具体来说，包括：  主调色板：那些在所有屏幕和组件中广泛使用的颜色。 强调调色板：那些用于浮动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何实现Angular Material自定义主题">
+<meta property="og:url" content="https://wangjianchao.cn/2019/08/02/如何实现Angular-Material自定义主题/index.html">
+<meta property="og:site_name" content="爱笑笑，爱生活">
+<meta property="og:description" content="什么是主题主题就是一组要应用于 Angular Material 的颜色，也可以理解成应用的皮肤。在以前使用 QQ 空间的时候，腾讯就做好多些空间皮肤（主题）进行出售。现在 Android 手机系统也都有好多主题，让用户自己手机系统的主题。 在 Angular Material 中，主题由多个调色板组成。具体来说，包括：  主调色板：那些在所有屏幕和组件中广泛使用的颜色。 强调调色板：那些用于浮动">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-02T01:41:19.948Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何实现Angular Material自定义主题">
+<meta name="twitter:description" content="什么是主题主题就是一组要应用于 Angular Material 的颜色，也可以理解成应用的皮肤。在以前使用 QQ 空间的时候，腾讯就做好多些空间皮肤（主题）进行出售。现在 Android 手机系统也都有好多主题，让用户自己手机系统的主题。 在 Angular Material 中，主题由多个调色板组成。具体来说，包括：  主调色板：那些在所有屏幕和组件中广泛使用的颜色。 强调调色板：那些用于浮动">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://wangjianchao.cn/2019/08/02/如何实现Angular-Material自定义主题/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>如何实现Angular Material自定义主题 | 爱笑笑，爱生活</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-85471038-2"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-85471038-2');
+    }
+  </script>
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7f5889a162b9ce28e17ffd275a476161";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script data-ad-client="ca-pub-9508321495212724" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">爱笑笑，爱生活</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-frontends">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/%E5%89%8D%E7%AB%AF" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-html5&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;前端</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-backends">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/%E5%90%8E%E7%AB%AF" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-envira&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;后端</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tools">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/%E5%B7%A5%E5%85%B7" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-rocket&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;工具</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-user&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/tinyking" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank">&lt;svg width&#x3D;&quot;80&quot; height&#x3D;&quot;80&quot; viewBox&#x3D;&quot;0 0 250 250&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;path d&#x3D;&quot;M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z&quot;&gt;&lt;&#x2F;path&gt;&lt;path d&#x3D;&quot;M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2&quot; fill&#x3D;&quot;currentColor&quot; style&#x3D;&quot;transform-origin: 130px 106px;&quot; class&#x3D;&quot;octo-arm&quot;&gt;&lt;&#x2F;path&gt;&lt;path d&#x3D;&quot;M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z&quot; fill&#x3D;&quot;currentColor&quot; class&#x3D;&quot;octo-body&quot;&gt;&lt;&#x2F;path&gt;&lt;&#x2F;svg&gt;</a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangjianchao.cn/2019/08/02/如何实现Angular-Material自定义主题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TinyKing">
+      <meta itemprop="description" content="努力做最好的自己">
+      <meta itemprop="image" content="https://static.xmt.cn/4049127922357121891.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱笑笑，爱生活">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">如何实现Angular Material自定义主题
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-02 18:08:21" itemprop="dateCreated datePublished" datetime="2019-08-02T18:08:21+00:00">2019-08-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-12-02 01:41:19" itemprop="dateModified" datetime="2019-12-02T01:41:19+00:00">2019-12-02</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="什么是主题"><a href="#什么是主题" class="headerlink" title="什么是主题"></a>什么是主题</h2><p><strong>主题</strong>就是一组要应用于 Angular Material 的颜色，也可以理解成应用的皮肤。在以前使用 QQ 空间的时候，腾讯就做好多些空间皮肤（主题）进行出售。现在 Android 手机系统也都有好多主题，让用户自己手机系统的主题。</p>
+<p>在 Angular Material 中，主题由多个调色板组成。具体来说，包括：</p>
+<ul>
+<li>主调色板：那些在所有屏幕和组件中广泛使用的颜色。</li>
+<li>强调调色板：那些用于浮动按钮和可交互元素的颜色。</li>
+<li>警告调色板：那些用于传达出错状态的颜色。</li>
+<li>前景调色板：那些用于问题和图标的颜色。</li>
+<li>背景色调色板：那些用做原色背景色的颜色。</li>
+</ul>
+<p><a name="93502147"></a></p>
+<h2 id="预定义主题"><a href="#预定义主题" class="headerlink" title="预定义主题"></a>预定义主题</h2><p>Angular Material 自带了几个预构建主题的 <code>css</code> 文件。这些主题文件包含了所有核心样式（所有组件中通用的），这样你的应用就只需要包含单个 <code>css</code> 文件了。</p>
+<p>有效的预定义主题有：</p>
+<ul>
+<li><code>deeppurple-amber.css</code></li>
+<li><code>indigo-pink.css</code></li>
+<li><code>pink-bluegrey.css</code></li>
+<li><code>purple-green.css</code></li>
+</ul>
+<p>你可以从 <code>@angular/material/prebuilt-themes</code> 直接把主题文件包含到应用中。</p>
+<p>如果你正在使用 Angular CLI，那么只需要在 <code>styles.css</code> 文件中添加一行就可以了：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">import</span> <span class="string">'@angular/material/prebuilt-themes/deeppurple-amber.css'</span>;</span><br></pre></td></tr></table></figure>
+<p>如果你使用的 <code>ng add @angular/material</code> 添加的依赖，Material Schematics 会在控制台给出交互信息，在选择相应的主题后，会自动将样式添加到 <code>angular.json</code> 中：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">"styles": [</span><br><span class="line">              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",</span><br><span class="line">              <span class="string">"src/styles.scss"</span></span><br><span class="line">   ],</span><br></pre></td></tr></table></figure>
+<p><a name="76fe220f"></a></p>
+<h2 id="自定义主题"><a href="#自定义主题" class="headerlink" title="自定义主题"></a>自定义主题</h2><p>自定义主题文件要做两件事：</p>
+<ol>
+<li>导入 <code>mat-core()</code> 混入器。它包括所有功能多个组件使用的公共样式。<strong>在你的应用中，应该只包含一次该混入器。</strong>如果包含多次，你的应用就会出现这些公共样式的多个副本。</li>
+<li>定义一个主题数据结构，它由多个调色板组成。该对象可以用 <code>mat-light-theme</code> 或 <code>mat-dark-theme</code> 函数构建。然后，函数的输出会传给 <code>angular-material-theme</code> 混入器，它会输出所有该主题所对应的样式。</li>
+</ol>
+<p>典型的主题文件定义如下：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入material的theming，其中包含了混入器</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">'~@angular/material/theming'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入核心混入器，确保只导入一次</span></span><br><span class="line">@<span class="keyword">include</span> mat-core();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义主调色板</span></span><br><span class="line"><span class="variable">$candy-app-primary</span>: mat-palette(<span class="variable">$mat-indigo</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 强调调色板</span></span><br><span class="line"><span class="variable">$candy-app-accent</span>:  mat-palette(<span class="variable">$mat-pink</span>, A200, A100, A400);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 警告调色板</span></span><br><span class="line"><span class="variable">$candy-app-warn</span>:    mat-palette(<span class="variable">$mat-red</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个light主题</span></span><br><span class="line"><span class="variable">$candy-app-theme</span>: mat-light-theme(<span class="variable">$candy-app-primary</span>, <span class="variable">$candy-app-accent</span>, <span class="variable">$candy-app-warn</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 启动主题</span></span><br><span class="line">@<span class="keyword">include</span> angular-material-theme(<span class="variable">$candy-app-theme</span>);</span><br></pre></td></tr></table></figure>
+<p><a name="a54b8e84"></a></p>
+<h2 id="多重主题"><a href="#多重主题" class="headerlink" title="多重主题"></a>多重主题</h2><p>你可以通过多次调用 <code>angular-material-theme</code> 混入器，每次包含一些额外的 CSS 类，来为应用创建多个主题。</p>
+<p>记住，只能包含 <code>@mat-core</code> 一次；不应该让每个主题都包含它一次。</p>
+<p>多重主题的例子：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入material的theming，其中包含了混入器</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">'~@angular/material/theming'</span>;</span><br><span class="line"><span class="comment">// Plus imports for other components in your app.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入核心混入器，确保只导入一次</span></span><br><span class="line">@<span class="keyword">include</span> mat-core();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义主调色板</span></span><br><span class="line"><span class="variable">$candy-app-primary</span>: mat-palette(<span class="variable">$mat-indigo</span>);</span><br><span class="line"><span class="comment">// 强调调色板</span></span><br><span class="line"><span class="variable">$candy-app-accent</span>:  mat-palette(<span class="variable">$mat-pink</span>, A200, A100, A400);</span><br><span class="line"><span class="comment">// 创建一个light主题</span></span><br><span class="line"><span class="variable">$candy-app-theme</span>:   mat-light-theme(<span class="variable">$candy-app-primary</span>, <span class="variable">$candy-app-accent</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将candy-app-theme定义成默认主题</span></span><br><span class="line">@<span class="keyword">include</span> angular-material-theme(<span class="variable">$candy-app-theme</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义个深色主题.</span></span><br><span class="line"><span class="variable">$dark-primary</span>: mat-palette(<span class="variable">$mat-blue-grey</span>);</span><br><span class="line"><span class="variable">$dark-accent</span>:  mat-palette(<span class="variable">$mat-amber</span>, A200, A100, A400);</span><br><span class="line"><span class="variable">$dark-warn</span>:    mat-palette(<span class="variable">$mat-deep-orange</span>);</span><br><span class="line"><span class="variable">$dark-theme</span>:   mat-dark-theme(<span class="variable">$dark-primary</span>, <span class="variable">$dark-accent</span>, <span class="variable">$dark-warn</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 所有在unicorn-dark-theme样式下的组件主题都将是深色的</span></span><br><span class="line"><span class="selector-class">.unicorn-dark-theme</span> &#123;</span><br><span class="line">  @<span class="keyword">include</span> angular-material-theme(<span class="variable">$dark-theme</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a name="be9cb3aa"></a></p>
+<h2 id="基于浮层的组件"><a href="#基于浮层的组件" class="headerlink" title="基于浮层的组件"></a>基于浮层的组件</h2><p>由于某些组件（比如菜单、选择框、对话框等）位于全局的浮层容器中，所以想要让它们被主题的 css 类选择器（比如 <code>.unicorn-dark-theme</code>）影响到还需要做一个额外的步骤。</p>
+<p>要做到这一点，你可以给全局浮层容器添加一个合适的类。比如上面的例子要改成这样：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;OverlayContainer&#125; <span class="keyword">from</span> <span class="string">'@angular/cdk/overlay'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> UnicornCandyAppModule &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params">overlayContainer: OverlayContainer</span>) &#123;</span><br><span class="line">    overlayContainer.getContainerElement().classList.add(<span class="string">'unicorn-dark-theme'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然，浮层容器也是渲染在 body 中的，所以可以在 body 中添加样式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">class</span>=<span class="string">"unicorn-dark-theme"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--....--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这样就不需要上面的 <code>ts</code> 类了。</p>
+<p><a name="4b02068c"></a></p>
+<h2 id="主题动态切换"><a href="#主题动态切换" class="headerlink" title="主题动态切换"></a>主题动态切换</h2><p>在上面多主题的基础上，我们实现主题的动态切换。可以通过修改 body 的 class，从而实现主题的切换。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppComponent &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"><span class="meta">@Inject</span>(DOCUMENT) <span class="keyword">private</span> <span class="built_in">document</span>: Document</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  changeTheme() &#123;</span><br><span class="line">    <span class="keyword">const</span> theme = <span class="string">'unicorn-dark-theme'</span>;</span><br><span class="line">    <span class="keyword">this</span>.document.body.classList.toggle(theme);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+
+      
+
+      
+      
+      
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <!-- 单元1 -->
+          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9508321495212724" data-ad-slot="3221759322" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/02/Angular开发必不可少的代理配置/" rel="next" title="Angular开发必不可少的代理配置">
+                <i class="fa fa-chevron-left"></i> Angular开发必不可少的代理配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/02/Angular核心技术之组件/" rel="prev" title="Angular核心技术之组件">
+                Angular核心技术之组件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://static.xmt.cn/4049127922357121891.png" alt="TinyKing">
+            
+              <p class="site-author-name" itemprop="name">TinyKing</p>
+              <div class="site-description motion-element" itemprop="description">努力做最好的自己</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">56</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/tinyking" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;tinyking" rel="noopener" target="_blank">&lt;i class&#x3D;&quot;fa fa-fw fa-github&quot;&gt;&lt;&#x2F;i&gt;GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/tinyking86" title="Weibo &amp;rarr; https:&#x2F;&#x2F;weibo.com&#x2F;tinyking86" rel="noopener" target="_blank">&lt;i class&#x3D;&quot;fa fa-fw fa-weibo&quot;&gt;&lt;&#x2F;i&gt;Weibo</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是主题"><span class="nav-number">1.</span> <span class="nav-text">什么是主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预定义主题"><span class="nav-number">2.</span> <span class="nav-text">预定义主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义主题"><span class="nav-number">3.</span> <span class="nav-text">自定义主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多重主题"><span class="nav-number">4.</span> <span class="nav-text">多重主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于浮层的组件"><span class="nav-number">5.</span> <span class="nav-text">基于浮层的组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主题动态切换"><span class="nav-number">6.</span> <span class="nav-text">主题动态切换</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TinyKing</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

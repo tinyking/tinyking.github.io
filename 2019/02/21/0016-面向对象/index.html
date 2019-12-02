@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="面向对象什么是面向对象面向对象(Object Oriented,OO)是软件开发方法。面向对象的概念和应用已超越了程序设计和软件开发，扩展到如数据库系统、交互式界面、应用结构、应用平台、分布式系统、网络管理结构、CAD技术、人工智能等领域。面向对象是一种对现实世界理解和抽象的方法，是计算机编程技术发展到一定阶段后的产物。 面向过程(Procedure Oriented)是一种以过程为中心的编程思想">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向对象">
+<meta property="og:url" content="https://wangjianchao.cn/2019/02/21/0016-面向对象/index.html">
+<meta property="og:site_name" content="爱笑笑，爱生活">
+<meta property="og:description" content="面向对象什么是面向对象面向对象(Object Oriented,OO)是软件开发方法。面向对象的概念和应用已超越了程序设计和软件开发，扩展到如数据库系统、交互式界面、应用结构、应用平台、分布式系统、网络管理结构、CAD技术、人工智能等领域。面向对象是一种对现实世界理解和抽象的方法，是计算机编程技术发展到一定阶段后的产物。 面向过程(Procedure Oriented)是一种以过程为中心的编程思想">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://www.cnitblog.com/images/cnitblog_com/lily/1972/o_OOBase.gif">
+<meta property="og:image" content="https://ss.csdn.net/p?http://codebay.cn/wp-content/uploads/2018/05/image.php_-1-660x344.gif">
+<meta property="og:image" content="https://ss.csdn.net/p?http://codebay.cn/wp-content/uploads/2018/05/image.php_-2-660x274.gif">
+<meta property="og:image" content="https://ss.csdn.net/p?http://codebay.cn/wp-content/uploads/2018/05/image.php_-3.gif">
+<meta property="og:image" content="https://ss.csdn.net/p?http://codebay.cn/wp-content/uploads/2018/05/image.php_-4-660x291.gif">
+<meta property="og:image" content="https://ss.csdn.net/p?http://codebay.cn/wp-content/uploads/2018/05/image.php_-5.gif">
+<meta property="og:image" content="https://ss.csdn.net/p?http://codebay.cn/wp-content/uploads/2018/05/image.php_-6-660x206.gif">
+<meta property="og:image" content="https://ss.csdn.net/p?http://codebay.cn/wp-content/uploads/2018/05/image.php_-7.gif">
+<meta property="og:image" content="https://ss.csdn.net/p?http://codebay.cn/wp-content/uploads/2018/05/image.php_-8.gif">
+<meta property="og:image" content="https://ss.csdn.net/p?http://codebay.cn/wp-content/uploads/2018/05/image.php_-9.gif">
+<meta property="og:updated_time" content="2019-12-02T01:41:19.948Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面向对象">
+<meta name="twitter:description" content="面向对象什么是面向对象面向对象(Object Oriented,OO)是软件开发方法。面向对象的概念和应用已超越了程序设计和软件开发，扩展到如数据库系统、交互式界面、应用结构、应用平台、分布式系统、网络管理结构、CAD技术、人工智能等领域。面向对象是一种对现实世界理解和抽象的方法，是计算机编程技术发展到一定阶段后的产物。 面向过程(Procedure Oriented)是一种以过程为中心的编程思想">
+<meta name="twitter:image" content="http://www.cnitblog.com/images/cnitblog_com/lily/1972/o_OOBase.gif">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://wangjianchao.cn/2019/02/21/0016-面向对象/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>面向对象 | 爱笑笑，爱生活</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-85471038-2"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-85471038-2');
+    }
+  </script>
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7f5889a162b9ce28e17ffd275a476161";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script data-ad-client="ca-pub-9508321495212724" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">爱笑笑，爱生活</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-home&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-frontends">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/%E5%89%8D%E7%AB%AF" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-html5&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;前端</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-backends">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/%E5%90%8E%E7%AB%AF" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-envira&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;后端</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tools">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/%E5%B7%A5%E5%85%B7" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-rocket&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;工具</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-archive&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section">&lt;i class&#x3D;&quot;menu-item-icon fa fa-fw fa-user&quot;&gt;&lt;&#x2F;i&gt; &lt;br&#x2F;&gt;关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/tinyking" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank">&lt;svg width&#x3D;&quot;80&quot; height&#x3D;&quot;80&quot; viewBox&#x3D;&quot;0 0 250 250&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;path d&#x3D;&quot;M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z&quot;&gt;&lt;&#x2F;path&gt;&lt;path d&#x3D;&quot;M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2&quot; fill&#x3D;&quot;currentColor&quot; style&#x3D;&quot;transform-origin: 130px 106px;&quot; class&#x3D;&quot;octo-arm&quot;&gt;&lt;&#x2F;path&gt;&lt;path d&#x3D;&quot;M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z&quot; fill&#x3D;&quot;currentColor&quot; class&#x3D;&quot;octo-body&quot;&gt;&lt;&#x2F;path&gt;&lt;&#x2F;svg&gt;</a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangjianchao.cn/2019/02/21/0016-面向对象/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TinyKing">
+      <meta itemprop="description" content="努力做最好的自己">
+      <meta itemprop="image" content="https://static.xmt.cn/4049127922357121891.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="爱笑笑，爱生活">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">面向对象
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-21 09:44:01" itemprop="dateCreated datePublished" datetime="2019-02-21T09:44:01+00:00">2019-02-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-12-02 01:41:19" itemprop="dateModified" datetime="2019-12-02T01:41:19+00:00">2019-12-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/后端/" itemprop="url" rel="index"><span itemprop="name">后端</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h3 id="什么是面向对象"><a href="#什么是面向对象" class="headerlink" title="什么是面向对象"></a>什么是面向对象</h3><p>面向对象(Object Oriented,OO)是软件开发方法。面向对象的概念和应用已超越了程序设计和软件开发，扩展到如数据库系统、交互式界面、应用结构、应用平台、分布式系统、网络管理结构、CAD技术、人工智能等领域。面向对象是一种对现实世界理解和抽象的方法，是计算机编程技术发展到一定阶段后的产物。</p>
+<p>面向过程(Procedure Oriented)是一种以过程为中心的编程思想。这些都是以什么正在发生为主要目标进行编程，不同于面向对象的是谁在受影响。与面向对象明显的不同就是封装、继承、类。</p>
+<h3 id="面向对象的三大基本特征"><a href="#面向对象的三大基本特征" class="headerlink" title="面向对象的三大基本特征"></a>面向对象的三大基本特征</h3><p>面向对象的三个基本特征是：封装、继承、多态。</p>
+<p><img src="http://www.cnitblog.com/images/cnitblog_com/lily/1972/o_OOBase.gif" alt></p>
+<p>面向对象的三大基本特征和五大基本原则</p>
+<p><strong>封装</strong></p>
+<p>封装最好理解了。封装是面向对象的特征之一，是对象和类概念的主要特性。</p>
+<p>封装，也就是把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏。</p>
+<p><strong>继承</strong></p>
+<p>面向对象编程(OOP)语言的一个主要功能就是“继承”。继承是指这样一种能力：它可以使用现有类的所有功能，并在无需重新编写原来的类的情况下对这些功能进行扩展。</p>
+<p>通过继承创建的新类称为<strong>子类</strong>或<strong>派生类</strong>。被继承的类称为<strong>基类</strong>、<strong>父类</strong>或<strong>超类</strong>。</p>
+<p>继承的过程，就是从一般到特殊的过程。</p>
+<p>要实现继承，可以通过<code>继承（Inheritance）</code>和<code>组合（Composition）</code>来实现。<br>在某些 OOP 语言中，一个子类可以继承多个基类。但是一般情况下，一个子类只能有一个基类，要实现多重继承，可以通过多级继承来实现。</p>
+<p>继承概念的实现方式有三类：实现继承、接口继承和可视继承。</p>
+<ul>
+<li>实现继承是指使用基类的属性和方法而无需额外编码的能力；</li>
+<li>接口继承是指仅使用属性和方法的名称、但是子类必须提供实现的能力；</li>
+<li>可视继承是指子窗体（类）使用基窗体（类）的外观和实现代码的能力。</li>
+</ul>
+<p>在考虑使用继承时，有一点需要注意，那就是两个类之间的关系应该是<strong>属于</strong>关系。例如，<code>Employee</code>是一个人，<code>Manager</code>也是一个人，因此这两个类都可以继承<code>Person</code>类。但是<code>Leg</code> 类却不能继承<code>Person</code>类，因为腿并不是一个人。</p>
+<p>抽象类仅定义将由子类创建的一般属性和方法，创建抽象类时，请使用关键字 <code>interface</code> 而不是<code>class</code>。</p>
+<p>OO开发范式大致为：划分对象-&gt;抽象类-&gt;将类组织成为层次化结构(继承和合成) -&gt;用类与实例进行设计和实现几个阶段。</p>
+<p><strong>多态</strong></p>
+<p>多态性（polymorphisn）是允许你将父对象设置成为和一个或更多的他的子对象相等的技术，赋值之后，父对象就可以根据当前赋值给它的子对象的特性以不同的方式运作。简单的说，就是一句话：允许将子类类型的指针赋值给父类类型的指针。</p>
+<p>实现多态，有二种方式: <strong>覆盖</strong>、<strong>重载</strong>。</p>
+<ul>
+<li><strong>覆盖</strong>，是指子类重新定义父类的虚函数的做法。</li>
+<li><strong>重载</strong>，是指允许存在多个同名函数，而这些函数的参数表不同（或许参数个数不同，或许参数类型不同，或许两者都不同）。</li>
+</ul>
+<p>其实，重载的概念并不属于“面向对象编程”，重载的实现是：编译器根据函数不同的参数表，对同名函数的名称做修饰，然后这些同名函数就成了不同的函数（至少对于编译器来说是这样的）。如，有两个同名函数：<code>function func(p:integer):integer;</code>和<code>function func(p:string):integer;</code>。那么编译器做过修饰后的函数名称可能是这样的：<code>int_func</code>、<code>str_func</code>。对于这两个函数的调用，在编译器间就已经确定了，是静态的（记住：是静态）。也就是说，它们的地址在编译期就绑定了（早绑定），因此，重载和多态无关！真正和多态相关的是“覆盖”。当子类重新定义了父类的虚函数后，父类指针根据赋给它的不同的子类指针，动态（记住：是动态！）的调用属于子类的该函数，这样的函数调用在编译期间是无法确定的（调用的子类的虚函数的地址无法给出）。因此，这样的函数地址是在运行期绑定的（晚邦定）。结论就是：重载只是一种语言特性，与多态无关，与面向对象也无关！引用一句Bruce Eckel的话：“不要犯傻，如果它不是晚邦定，它就不是多态。”</p>
+<p>那么，多态的作用是什么呢？</p>
+<p>我们知道，封装可以隐藏实现细节，使得代码模块化；继承可以扩展已存在的代码模块（类）；它们的目的都是为了——代码重用。而多态则是为了实现另一个目的——接口重用！多态的作用，就是为了类在继承和派生的时候，保证使用“家谱”中任一类的实例的某一属性时的正确调用。</p>
+<h3 id="平台无关性"><a href="#平台无关性" class="headerlink" title="平台无关性"></a>平台无关性</h3><p>Java是平台无关的语言是指用Java写的应用程序不用修改就可在不同的软硬件平台上运行。平台无关有两种：源代码级和目标代码级。C和C++具有一定程度的源代码级平台无关，表明用C或C++写的应用程序不用修改只需重新编译就可以在不同平台上运行。</p>
+<p>Java主要靠Java虚拟机（JVM）在目标码级实现平台无关性。JVM是一种抽象机器，它附着在具体操作系统之上，本身具有一套虚机器指令，并有自己的栈、寄存器组等。但JVM通常是在软件上而不是在硬件上实现。（目前，SUN系统公司已经设计实现了Java芯片，主要使用在网络计算机NC上。另外，Java芯片的出现也会使Java更容易嵌入到家用电器中。）JVM是Java平台无关的基础，在JVM上，有一个Java解释器用来解释Java编译器编译后的程序。Java编程人员在编写完软件后，通过Java编译器将Java源程序编译为JVM的字节代码。任何一台机器只要配备了Java解释器，就可以运行这个程序，而不管这种字节码是在何种平台上生成的（过程如图1所示）。另外，Java采用的是基于IEEE标准的数据类型。通过JVM保证数据类型的一致性，也确保了Java的平台无关性。</p>
+<p>Java的平台无关性具有深远意义。首先，它使得编程人员所梦寐以求的事情（开发一次软件在任意平台上运行）变成事实，这将大大加快和促进软件产品的开发。其次Java的平台无关性正好迎合了 “网络计算机 “思想。如果大量常用的应用软件（如字处理软件等）都用Java重新编写，并且放在某个Internet服务器上，那么具有NC的用户将不需要占用大量空间安装软件，他们只需要一个Java解释器，每当需要使用某种应用软件时，下载该软件的字节代码即可，运行结果也可以发回服务器。目前，已有数家公司开始使用这种新型的计算模式构筑自己的企业信息系统。</p>
+<h4 id="JVM-还支持哪些语言"><a href="#JVM-还支持哪些语言" class="headerlink" title="JVM 还支持哪些语言"></a>JVM 还支持哪些语言</h4><p><strong>Kotlin</strong></p>
+<p><img src="https://ss.csdn.net/p?http://codebay.cn/wp-content/uploads/2018/05/image.php_-1-660x344.gif" alt></p>
+<p>官方站点：<a href="https://kotlinlang.org/" target="_blank" rel="noopener">https://kotlinlang.org/</a></p>
+<p>由JetBrains于2010年创建，并于2012年开源， Kotlin比Java更加简洁和安全。 您完全可以将Kotlin视为是一种“更加简单但高效的Java”。Kotlin的编译速度通常比Java代码快，而且在其创建之初，就非常明确的支持了函数式编程，这一点，Java是到Java 8才开始支持的。</p>
+<p>特别的，因为有了Google的加持，越来越多的Android开发人员，开始选择Kotlin来开发应用程序，与此同时，独立的超越JVM的行动也已经在展开，通过一项名为LLVM的项目，Kotlin正在努力实现代码编译的本地化，而不在基于JVM 。</p>
+<p>但无论如何，至少现在，它还活在JVM中。</p>
+<p><strong>Scala</strong></p>
+<p><img src="https://ss.csdn.net/p?http://codebay.cn/wp-content/uploads/2018/05/image.php_-2-660x274.gif" alt></p>
+<p>官方站点：<a href="http://www.scala-lang.org/" target="_blank" rel="noopener">http://www.scala-lang.org/</a></p>
+<p>和Kotlin一样， Scala也是为了让Java开发人员提高工作效率而创建的。 作为一种完全的面向对象语言和一种完全的函数式编程语言，Scala巧妙的将这两种编程范式结合到了一起。</p>
+<p>特别是在函数式编程方面，Scala几乎支持函数式编程语言中所有已知的特性，比如，模式匹配（Pattern matching）、延迟初始化（Lazy initialization）、偏函数（Partial Function）、不变性（Immutability）等等等等，</p>
+<p>因此，虽然Scala的类Lisp的语法会让初学者倍感迷惑，但花时间在这上面，永远是值得的，很快，就会让你体会到那种只需要关注 What（做什么），而不用关注How（如何做）的酸爽。</p>
+<p>一个最新的关于Scala的消息是，它似乎也在和Kotlin一样，在加速准备逃离JVM的控制，这对于JVM，恐怕不是一个什么特别好的消息，虽然，其距离用于生产可能还为时尚早。</p>
+<p><strong>Clojure</strong></p>
+<p><img src="https://ss.csdn.net/p?http://codebay.cn/wp-content/uploads/2018/05/image.php_-3.gif" alt></p>
+<p>官方站点：<a href="https://clojure.org/" target="_blank" rel="noopener">https://clojure.org/</a></p>
+<p>Clojure是由开发人员Rich Hickey在JVM下，所创建的一种Lisp方言，借助于JVM的执行效率越来越高，Clojure也常被嵌入在Java中，用于编写其中需要高并发、高性能的部分 。</p>
+<p><strong>Groovy</strong></p>
+<p><img src="https://ss.csdn.net/p?http://codebay.cn/wp-content/uploads/2018/05/image.php_-4-660x291.gif" alt></p>
+<p>官方站点：<a href="http://www.groovy-lang.org/" target="_blank" rel="noopener">http://www.groovy-lang.org/</a></p>
+<p>Groovy是在Java现有基础上，吸收Python和Ruby等动态语言的特性，而创建的一种新型语言，也是Jenkins持续集成服务器，所直接支持的语言之一，并且最关键的一点，通过基于Groovy的Web开发框架Grails，可以快速的完成相关Web项目的构建 。</p>
+<p>在未来，Groovy则拟包含Java和JVM的一些更新的特性，比如如Java 8的lambda语法等。</p>
+<p><strong>Jython</strong></p>
+<p><img src="https://ss.csdn.net/p?http://codebay.cn/wp-content/uploads/2018/05/image.php_-5.gif" alt></p>
+<p>官方站点：<a href="http://www.jython.org/" target="_blank" rel="noopener">http://www.jython.org/</a></p>
+<p>Jython是JVM的Python实现，与Python的2.x分支兼容，可以动态编译为Java字节码，并且可以与其他JVM语言（特别是Java）自由交互操作。</p>
+<p> <strong>JRuby</strong></p>
+<p><img src="https://ss.csdn.net/p?http://codebay.cn/wp-content/uploads/2018/05/image.php_-6-660x206.gif" alt></p>
+<p>官方站点：<a href="http://jruby.org" target="_blank" rel="noopener">http://jruby.org</a></p>
+<p>JRuby几乎就是Jython的翻版，所不同的是，JRuby所对标的语言是Ruby，当前所支持的语法规范则和Ruby 2.3兼容。</p>
+<p><strong>Ceylon</strong></p>
+<p><img src="https://ss.csdn.net/p?http://codebay.cn/wp-content/uploads/2018/05/image.php_-7.gif" alt></p>
+<p>官方站点：<a href="https://www.ceylon-lang.org" target="_blank" rel="noopener">https://www.ceylon-lang.org</a></p>
+<p>这个以大象为Logo的语言，其创建初衷可不是像大象一样笨拙，恰恰相反，语言的创始人 Gavin King，是出于对Java所存在问题的深刻认识，如泛型等特性的复杂性、粗劣的注解语法、不完善的块结构、对 XML 的依赖性等等，才萌生了创建一种新的静态类型语言语言，即Ceylon来一劳永逸的解决这些问题的想法。</p>
+<p>Ceylon保留了一些好的 Java 语言特性，改进了语言的可读性和内置的模块性，还吸收了高阶函数等函数语言特性，此外，Ceylon 还融合了 C 和 Smalltalk 的一些特性。与 Java 语言一样，这种新语言也以业务计算为重点，但是它在其他领域也很灵活、很有用。并且，通过这些年的努力，Ceylon已经跨出了其自身跨平台的第一步，其代码已经可以在JVM，Dart VM或Node.js上进行编译或运行。</p>
+<p><strong>Eta</strong></p>
+<p><img src="https://ss.csdn.net/p?http://codebay.cn/wp-content/uploads/2018/05/image.php_-8.gif" alt></p>
+<p>官方站点：<a href="https://eta-lang.org/" target="_blank" rel="noopener">https://eta-lang.org/</a></p>
+<p>我们的名单中怎么能少了时下最能装酷，也是被Node.js的创建者称为觉得暂无能力驾驭的语言Haskell的JVM实现？</p>
+<p>它来了，就是Eta，它的优势，不仅仅在于它可以在JVM下执行，更在于它可以使用Haskell的软件包仓库中的软件包，最大程度的兼容了整个Haskell生态系统。</p>
+<p><strong>Haxe</strong></p>
+<p><img src="https://ss.csdn.net/p?http://codebay.cn/wp-content/uploads/2018/05/image.php_-9.gif" alt></p>
+<p>官方站点：<a href="http://haxe.org" target="_blank" rel="noopener">http://haxe.org</a></p>
+<p>Haxe的口号是：One Language，Everywhere！是不是有点熟悉？是的，在非常久远的过去，这其实正是Java的初心。</p>
+<p>但是，这二者又是如此的迥异。Java的策略是，我做一个平台JVM，给出一种规范，你们来生成我需要的代码；Haxe的策略则正好相反，既然芸芸众生，语言纷杂，每个人都各有偏好，那好，来吧，我可以把我的代码，生成任何一种你们想要的语言下的代码！</p>
+<p>多么疯狂的想法！就为这点疯狂，就值得我们每个开发人员去膜拜一番了，毕竟，在Haxe看来，JVM，不过是其可以编译的一个“小”对象而已。</p>
+<h3 id="值传递、引用传递"><a href="#值传递、引用传递" class="headerlink" title="值传递、引用传递"></a>值传递、引用传递</h3><p><strong>值传递</strong>：(形式参数类型是基本数据类型)：方法调用时，实际参数把它的值传递给对应的形式参数，形式参数只是用实际参数的值初始化自己的存储单元内容，是两个不同的存储单元，所以方法执行中形式参数值的改变不影响实际参数的值。</p>
+<p><strong>引用传递</strong>：(形式参数类型是引用数据类型参数)：也称为传地址。方法调用时，实际参数是对象(或数组)，这时实际参数与形式参数指向同一个地址，在方法执行中，对形式参数的操作实际上就是对实际参数的操作，这个结果在方法结束后被保留了下来，所以方法执行中形式参数的改变将会影响实际参数。</p>
+<p>说明：</p>
+<p>（1）：“在Java里面参数传递都是按值传递”这句话的意思是：按值传递是传递的值的拷贝，按引用传递其实传递的是引用的地址值，所以统称按值传递。</p>
+<p>（2）：在Java里面只有基本类型和按照下面这种定义方式的String是按值传递，其它的都是按引用传递。就是直接使用双引号定义字符串方式：String str = “Java私塾”;</p>
+<p>为什么说 Java 中只有值传递: <a href="https://blog.csdn.net/bjweimengshu/article/details/79799485" target="_blank" rel="noopener">https://blog.csdn.net/bjweimengshu/article/details/79799485</a></p>
+<hr>
+<blockquote>
+<p>附参考</p>
+<ul>
+<li><a href="https://www.cnblogs.com/autumn001/p/9036148.html" target="_blank" rel="noopener">https://www.cnblogs.com/autumn001/p/9036148.html</a></li>
+<li><a href="https://blog.csdn.net/B9Q8e64lO6mm/article/details/80235376" target="_blank" rel="noopener">https://blog.csdn.net/B9Q8e64lO6mm/article/details/80235376</a></li>
+</ul>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <!-- 单元1 -->
+          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9508321495212724" data-ad-slot="3221759322" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/15/0015-如何用Angular6创建各种动画效果/" rel="next" title="如何用Angular6创建各种动画效果">
+                <i class="fa fa-chevron-left"></i> 如何用Angular6创建各种动画效果
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/15/0015-angular-font-awesome/" rel="prev" title="Angular项目中集成Font Awesome图标">
+                Angular项目中集成Font Awesome图标 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://static.xmt.cn/4049127922357121891.png" alt="TinyKing">
+            
+              <p class="site-author-name" itemprop="name">TinyKing</p>
+              <div class="site-description motion-element" itemprop="description">努力做最好的自己</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">56</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/tinyking" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;tinyking" rel="noopener" target="_blank">&lt;i class&#x3D;&quot;fa fa-fw fa-github&quot;&gt;&lt;&#x2F;i&gt;GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/tinyking86" title="Weibo &amp;rarr; https:&#x2F;&#x2F;weibo.com&#x2F;tinyking86" rel="noopener" target="_blank">&lt;i class&#x3D;&quot;fa fa-fw fa-weibo&quot;&gt;&lt;&#x2F;i&gt;Weibo</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象"><span class="nav-number">1.</span> <span class="nav-text">面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是面向对象"><span class="nav-number">1.1.</span> <span class="nav-text">什么是面向对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象的三大基本特征"><span class="nav-number">1.2.</span> <span class="nav-text">面向对象的三大基本特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平台无关性"><span class="nav-number">1.3.</span> <span class="nav-text">平台无关性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JVM-还支持哪些语言"><span class="nav-number">1.3.1.</span> <span class="nav-text">JVM 还支持哪些语言</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#值传递、引用传递"><span class="nav-number">1.4.</span> <span class="nav-text">值传递、引用传递</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TinyKing</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
