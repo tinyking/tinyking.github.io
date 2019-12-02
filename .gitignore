@@ -1,5 +1,11 @@
-# Created by .ignore support plugin (hsz.mobi)
-.idea
-*.iml
-node_modules/
-package-lock.json
+_site/*
+_theme_packages/*
+
+Thumbs.db
+.DS_Store
+
+!.gitkeep
+
+.rbenv-version
+.rvmrc
+/vendor
