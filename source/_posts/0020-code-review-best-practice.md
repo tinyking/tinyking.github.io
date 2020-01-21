@@ -3,7 +3,7 @@ title: 代码Review最佳实践
 date: 2019-11-29 16:17
 ---
 
-![](https://cdn.nlark.com/yuque/0/2019/png/269363/1575016919787-b74782bd-be96-4bee-bbb8-336da439c044.png#align=left&display=inline&height=440&originHeight=440&originWidth=760&size=0&status=done&style=none&width=760)
+![](https://i.loli.net/2020/01/21/d4zatYNGZIxVrsS.png)
 
 在实际工作中，经常会遇到项目交接或者二次开发的情况，在这个过程中，我们经常会听到“这是什么垃圾代码啊”。有时候我们翻看自己几年前写的代码，也会忍不住鄙视自己。
 

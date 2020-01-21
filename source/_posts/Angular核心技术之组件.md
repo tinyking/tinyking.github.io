@@ -1,5 +1,6 @@
 ---
 title: Angular核心技术之组件
+id: angular-he-xin-ji-shu-zhi-zu-jian
 date: 2019-08-02 18:09:40
 tags:
 ---
