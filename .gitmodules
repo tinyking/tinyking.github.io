@@ -1,0 +1,3 @@
+[submodule "themes/next2"]
+	path = themes/next2
+	url = https://github.com/tinyking/hexo-theme-next.git
