@@ -13,7 +13,7 @@ photos:
 
 使用`webpack-bundle-analyzer`分析见图:
 
-![PIC](https://cdn.nlark.com/yuque/0/2019/png/269363/1561536056876-assets/web-upload/321acf7d-a2f8-4649-ad76-dcf826773709.png)
+![321acf7d-a2f8-4649-ad76-dcf826773709.png](https://i.loli.net/2020/07/29/QwCLiAhmzOusfak.png)
 
 moment.js 并不是一个现代化的模块化的库， 无法对其进行Tree Shaking优化。
 
