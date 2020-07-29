@@ -153,7 +153,7 @@ banner_parallax: true  # 头图滚动视差
 #---------------------------
 footer:
   statistics:  # 展示网站的 PV、UV 统计数
-    enable: false
+    enable: true
     source: "busuanzi"  # 统计数据来源，可选：busuanzi | leancloud，使用 leancloud 需要在 web_analytics 中设置 api 参数，使用 busuanzi 注意可能间歇抽风
     pv_format: "总访问量 {} 次"  # 显示的文本，{}是数字的占位符（必须包含)，下同
     uv_format: "总访客数 {} 人"
@@ -173,7 +173,7 @@ scroll_top_arrow:  # 向顶部滚动的箭头
 # Index Page
 #---------------------------
 index:
-  banner_img: https://static.zkqiang.cn/images/20200307203002.jpg  # 首页 Banner 头图，以下相同
+  banner_img: https://cn.bing.com/th?id=OHR.KallurLighthouse_ZH-CN3407251246_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp  # 首页 Banner 头图，以下相同
   banner_img_height: 100  # 头图高度，屏幕百分比，available: 0 - 100
   banner_mask_alpha: 0.3  # 头图黑色蒙版的透明度，available: 0 - 1.0， 0 是完全透明（无蒙版），1 是完全不透明
   post_default_img: '' # 默认的文章封面图，当没有指定 index_img 时会使用该图片，若都为空则不显示任何图片
@@ -191,7 +191,7 @@ index:
 # 通过 hexo new page 命令创建的页面
 # Custom Page
 page:
-  banner_img: /img/default.png
+  banner_img: https://cn.bing.com/th?id=OHR.KapamaCousins_ZH-CN2164304882_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp
   banner_img_height: 60  # available: 0 - 100
   banner_mask_alpha: 0.3  # available: 0 - 1.0
 
