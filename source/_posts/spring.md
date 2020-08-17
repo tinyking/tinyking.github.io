@@ -1,4 +1,6 @@
 ---
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 title: spring主要组件
 date: 2017-05-10 09:16:06
 tags:

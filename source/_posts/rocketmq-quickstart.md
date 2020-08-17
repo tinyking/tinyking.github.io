@@ -1,4 +1,6 @@
 ---
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 title: RocketMQ文档
 date: 2017-05-17 09:06:25
 tags:
@@ -43,7 +45,7 @@ The Name Server boot success...
 
 ```
 > nohup sh bin/mqbroker -n localhost:9876 &
-> tail -f ~/logs/rocketmqlogs/broker.log 
+> tail -f ~/logs/rocketmqlogs/broker.log
 The broker[%s, 172.30.30.233:10911] boot success...
 
 ```

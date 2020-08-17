@@ -6,8 +6,8 @@ tags:
     - Java
 categories:
     - 后端
-index_img: https://images.unsplash.com/photo-1593642634443-44adaa06623a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=925&q=80
-banner_img: https://images.unsplash.com/photo-1593642634443-44adaa06623a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=925&q=80
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 ---
 <a name="sGDYO"></a>
 
@@ -24,7 +24,7 @@ banner_img: https://images.unsplash.com/photo-1593642634443-44adaa06623a?ixlib=r
 ```java
 class Car {
     Engine engine;
- 
+
     @Autowired
     Car(Engine engine) {
         this.engine = engine;
@@ -35,7 +35,7 @@ class Car {
 ```java
 class Car {
     Engine engine;
- 
+
     @Autowired
     void setEngine(Engine engine) {
         this.engine = engine;
@@ -79,7 +79,7 @@ Engine getEngine() {
 例如，下面两个bean实现了相同的接口:
 ```java
 class Bike implements Vehicle {}
- 
+
 class Car implements Vehicle {}
 ```
 如果Spring需要注入一个Vehicle bean，它最终会得到多个匹配的定义。在这种情况下，我们可以使用@Qualifier注释显式地提供bean的名称。
@@ -211,7 +211,7 @@ Engine engine() {
 @Configuration
 @Lazy
 class VehicleFactoryConfig {
- 
+
     @Bean
     @Lazy(false)
     Engine engine() {
@@ -230,16 +230,16 @@ class VehicleFactoryConfig {
 @Component
 @Primary
 class Car implements Vehicle {}
- 
+
 @Component
 class Bike implements Vehicle {}
- 
+
 @Component
 class Driver {
     @Autowired
     Vehicle vehicle;
 }
- 
+
 @Component
 class Biker {
     @Autowired
@@ -309,7 +309,7 @@ class VehicleFactoryConfig {}
 我们可以使用这个注释来指定多个@PropertySource配置:
 ```java
 @Configuration
-@PropertySources({ 
+@PropertySources({
     @PropertySource("classpath:/annotations.properties"),
     @PropertySource("classpath:/vehicle-factory.properties")
 })

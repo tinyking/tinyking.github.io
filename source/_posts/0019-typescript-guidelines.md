@@ -1,4 +1,6 @@
 ---
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 title: TypeScript编码指南
 date: 2019-06-05 16:17
 tags:

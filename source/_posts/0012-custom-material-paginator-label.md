@@ -5,6 +5,8 @@ tags:
     - Angular
 categories:
     - 前端
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 ---
 
 在项目开发中，用到了Material的分页组件，需要对该组件进行汉化。

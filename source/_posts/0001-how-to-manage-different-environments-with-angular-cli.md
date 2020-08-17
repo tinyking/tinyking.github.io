@@ -5,6 +5,8 @@ tags:
     - Angular
 categories:
     - 前端
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 ---
 
 大多数的web应用在发布生产之前，需要在多种环境下去运行。例如，您可能需要为QA团队构建一个构建以执行某些测试，或者在您的持续集成服务器上运行特定构建。

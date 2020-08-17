@@ -6,8 +6,8 @@ tags:
 categories:
     - 后端
 excerpt: 在本文中，我们将深入研究Jackson注解。我们将看到如何使用现有的注释，如何创建自定义的注释，最后—如何禁用它们。
-index_img: https://images.unsplash.com/photo-1541462608143-67571c6738dd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80
-banner_img: https://images.unsplash.com/photo-1541462608143-67571c6738dd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 ---
 
 ## 1. 概述
@@ -1157,7 +1157,7 @@ public void whenSerializingUsingMixInAnnotation_thenCorrect()
 }
 ```
 <a name="mqKJV"></a>
-## **9. 禁用Jackson注解
+## 9. 禁用Jackson注解
 最后，让我们看看如何禁用所有Jackson注释。我们可以通过禁用MapperFeature来做到这一点。如下例所示:
 ```java
 @JsonInclude(Include.NON_NULL)

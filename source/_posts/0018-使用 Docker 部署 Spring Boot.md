@@ -1,4 +1,6 @@
 ---
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 title: 使用 Docker 部署 Spring Boot
 date: 2019-04-17 16:11:01
 tags:
@@ -183,8 +185,8 @@ yum -y install java-1.8.0-openjdk*
 添加一下内容
 
 ```
-export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.161-0.b14.el7_4.x86_64 
-export PATH=$PATH:$JAVA_HOME/bin 
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.161-0.b14.el7_4.x86_64
+export PATH=$PATH:$JAVA_HOME/bin
 ```
 
 修改完成之后，使其生效

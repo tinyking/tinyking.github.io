@@ -1,4 +1,6 @@
 ---
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 title: Bootstrap模态框使WebUploader点击失效问题解决
 date: 2017-04-21 13:10:50
 tags:
@@ -69,10 +71,9 @@ $('#myModal').on('hide.bs.modal', function () {
 
 -----
 
-        事件	| 描述
-        ---     | ---
-show.bs.modal	| 在调用 show 方法后触发。
-shown.bs.modal	| 当模态框对用户可见时触发（将等待 CSS 过渡效果完成）。
-hide.bs.modal	| 当调用 hide 实例方法时触发。
-hidden.bs.modal	| 当模态框完全对用户隐藏时触发。
-
+| 事件            | 描述                                                  |
+|:----------------|:------------------------------------------------------|
+| show.bs.modal   | 在调用 show 方法后触发。                              |
+| shown.bs.modal  | 当模态框对用户可见时触发（将等待 CSS 过渡效果完成）。 |
+| hide.bs.modal   | 当调用 hide 实例方法时触发。                          |
+| hidden.bs.modal | 当模态框完全对用户隐藏时触发。                        |

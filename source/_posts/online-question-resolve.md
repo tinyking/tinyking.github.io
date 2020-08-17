@@ -1,7 +1,9 @@
 ---
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 title: 记一次线上问题的排查过程
 date: 2018-04-05
-tags: 
+tags:
     - Nginx
     - Tomcat
 categories:
@@ -35,7 +37,7 @@ XX系统中，一个用户需要维护的项目数过多，填写的任务数超
 
 在idea中直接启动tomcat，无nginx环境，如果没有问题，则可暂时确定为nginx问题。
 
-然而，在过程中发现了新的问题。 
+然而，在过程中发现了新的问题。
 
 ```
 org.springframework.beans.InvalidPropertyException: Invalid property 'detail[256]' of bean class [com.suning.asvp.mer.entity.InviteCooperationInfo]: Index of out of bounds in property path 'detail[256]'; nested exception is java.lang.IndexOutOfBoundsException: Index: 256, Size: 256  
@@ -47,7 +49,7 @@ org.springframework.beans.InvalidPropertyException: Invalid property 'detail[256
     at org.springframework.validation.DataBinder.applyPropertyValues(DataBinder.java:692) ~[spring-context-3.1.2.RELEASE.jar:3.1.2.RELEASE]  
     at org.springframework.validation.DataBinder.doBind(DataBinder.java:588) ~[spring-context-3.1.2.RELEASE.jar:3.1.2.RELEASE]  
     at org.springframework.web.bind.WebDataBinder.doBind(WebDataBinder.java:191) ~[spring-web-3.1.2.RELEASE.jar:3.1.2.RELEASE]  
-    at org.springframework.web.bind.ServletRequestDataBinder.bind(ServletRequestDataBinder.java:112) ~[spring-web-3.1.2.RELEASE.jar:3.1.2.RELEASE] 
+    at org.springframework.web.bind.ServletRequestDataBinder.bind(ServletRequestDataBinder.java:112) ~[spring-web-3.1.2.RELEASE.jar:3.1.2.RELEASE]
 ```
 
 查看BeanWrapperImpl源码
@@ -64,8 +66,8 @@ else if (value instanceof List) {
 @SuppressWarnings("unchecked")  
     private void growCollectionIfNecessary(  
             Collection collection, int index, String name, PropertyDescriptor pd, int nestingLevel) {  
-  
-  
+
+
         if (!this.autoGrowNestedPaths) {  
             return;  
         }  
@@ -86,14 +88,14 @@ else if (value instanceof List) {
 
 ```
 public class DataBinder implements PropertyEditorRegistry, TypeConverter {  
-  
+
     /** Default object name used for binding: "target" */  
     public static final String DEFAULT_OBJECT_NAME = "target";  
-  
+
     /** Default limit for array and collection growing: 256 */  
     public static final int DEFAULT_AUTO_GROW_COLLECTION_LIMIT = 256;  
-  
-    private int autoGrowCollectionLimit = DEFAULT_AUTO_GROW_COLLECTION_LIMIT; 
+
+    private int autoGrowCollectionLimit = DEFAULT_AUTO_GROW_COLLECTION_LIMIT;
 ```
 
 解决方案，是在自己的Controller中加入如下方法
@@ -121,11 +123,11 @@ server {
     listen       80;
     server_name  xxxxxxx.com;
     client_max_body_size 100M;  # 配置post size
-    
+
     #charset koi8-r;
-  
+
     #access_log  logs/host.access.log  main;
-	
+
    location / {
 		#proxy_next_upstream     http_500 http_502 http_503 http_504 error timeout invalid_header;
 		proxy_set_header        Host  $host;
@@ -164,11 +166,11 @@ server {
 两个方案：
 
 - 修改线上配置
-  
+
     *该上实施难度系数高，因为公司使用的统一发布部署平台，开发人员无服务器操作权限。*
 
 - 修改代码
-    
+
     *修改保存逻辑，分片存储*
 
 

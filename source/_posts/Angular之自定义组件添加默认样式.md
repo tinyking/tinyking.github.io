@@ -2,9 +2,9 @@
 title: Angular之自定义组件添加默认样式
 tags:
   - Angular
-photos:
-  - 'https://i.loli.net/2019/06/10/5cfdf6dca539f47762.png'
 date: 2020-01-21 11:28:02
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 ---
 
 

@@ -1,4 +1,6 @@
 ---
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 title: 前端框架
 date: 2016-10-19 13:30
 categories:
@@ -58,7 +60,7 @@ Ext的UI组件模型和开发理念脱胎、成型于Yahoo组件库YUI和Java平
 - 高性能, customizable UI widgets
 - Well designed, documented and extensible Component model
 - Commercial and Open Source licenses available
-- 
+-
 
 
 ## Amaze UI

@@ -1,10 +1,12 @@
 ---
 title: win10下手动编译Spring
 date: 2018-10-12 09:06:30
-tags: 
+tags:
     - Spring
 categories:
     - 后端
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 ---
 
 

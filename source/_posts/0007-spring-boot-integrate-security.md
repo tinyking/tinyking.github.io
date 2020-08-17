@@ -5,6 +5,8 @@ tags:
     - Java
 categories:
     - 后端
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 ---
 
 
@@ -705,5 +707,3 @@ INSERT INTO `USER` VALUES (1, 'd242ae49-4734-411e-8c8d-d2b09e87c3c8', 'EalenXie'
 
 
 > 技术栈 : SpringBoot + SpringSecurity + jpa + freemark ，完整项目地址 : <https://github.com/EalenXie/spring-security-login>
-
-

@@ -5,6 +5,8 @@ tags:
     - Angular
 categories:
     - 前端
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 ---
 
 
@@ -43,7 +45,7 @@ Angular能够让我们创建出具有原生表现效果的动画。我们将通�
 - 使用一个整数值，来表示以毫秒为单位的时间，例如：500
 - 使用一个字符串值，来表示以毫秒为单位的时间，例如：’500ms’
 - 使用一个字符串值，来表示以秒为单位的时间。例如：’0.5’
-  
+
 2. 延迟(Delay)
 
 此属性代表动画从触发到和实际转换开始之间的时间间隔。该属性遵循与上述持续时间相同的语法规则。要定义延迟，我们需要在持续时间值的后面，以字符串的形式添加延迟的数值，即：'Duration Delay'。例如' 0.3s 500ms’，表示转换将等待500毫秒，然后运行0.3秒。
@@ -72,7 +74,7 @@ Angular能够让我们创建出具有原生表现效果的动画。我们将通�
 请执行以下命令，以创建相应的组件：
 
 ```
-ng g c animationdemo 
+ng g c animationdemo
 ```
 
 它将在/src/app文件夹内创建我们的组件--animationdemo。
@@ -89,15 +91,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 下面，我们在组件的元数据中编写动画代码。其语法如下：
 
 ```ts
-@Component({ 
-// other component properties. 
-  animations: [ 
-    trigger('triggerName'), [ 
-      state('stateName', style()) 
-      transition('stateChangeExpression', [Animation Steps]) 
-    ] 
-  ] 
-}) 
+@Component({
+// other component properties.
+  animations: [
+    trigger('triggerName'), [
+      state('stateName', style())
+      transition('stateChangeExpression', [Animation Steps])
+    ]
+  ]
+})
 ```
 
 此处，我们用到了名为animations的属性。该属性的输入是一个阵列，此阵列包含一个或多个“触发器”。同时，每个触发器都带有唯一的名称、和用来定义动画的状态和各种转换的具体实现。
@@ -125,27 +127,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 请打开animationdemo.component.ts文件，将如下代码添加到导入定义之中。
 
 ```ts
-import { trigger, state, style, animate, transition } from '@angular/animations'; 
+import { trigger, state, style, animate, transition } from '@angular/animations';
 ```
 
 在组件的元数据中添加如下的动画属性定义。
 
 ```ts
-animations: [ 
-  trigger('changeDivSize', [ 
-    state('initial', style({ 
-      backgroundColor: 'green', 
-      width: '100px', 
-      height: '100px' 
-    })), 
-    state('final', style({ 
-      backgroundColor: 'red', 
-      width: '200px', 
-      height: '200px' 
-    })), 
-    transition('initial=>final', animate('1500ms')), 
-    transition('final=>initial', animate('1000ms')) 
-  ]), 
+animations: [
+  trigger('changeDivSize', [
+    state('initial', style({
+      backgroundColor: 'green',
+      width: '100px',
+      height: '100px'
+    })),
+    state('final', style({
+      backgroundColor: 'red',
+      width: '200px',
+      height: '200px'
+    })),
+    transition('initial=>final', animate('1500ms')),
+    transition('final=>initial', animate('1000ms'))
+  ]),
 ]  
 
 ```
@@ -157,9 +159,9 @@ animations: [
 为了改变元素的状态，我们在组件的类定义中定义了一个功能函数。我们将如下代码包含在AnimationdemoComponent类中：
 
 ```ts
-currentState = 'initial'; 
-changeState() { 
-  this.currentState = this.currentState === 'initial' ? 'final' : 'initial'; 
+currentState = 'initial';
+changeState() {
+  this.currentState = this.currentState === 'initial' ? 'final' : 'initial';
 }  
 ```
 
@@ -168,11 +170,11 @@ changeState() {
 请打开animationdemo.component.html文件，并添加以下代码：
 
 ```html
-<h3>Change the div size</h3> 
-<button (click)="changeState()">Change Size</button> 
-<br /> 
-<div [@changeDivSize]=currentState></div> 
-<br /> 
+<h3>Change the div size</h3>
+<button (click)="changeState()">Change Size</button>
+<br />
+<div [@changeDivSize]=currentState></div>
+<br />
 ```
 
 我们定义了一个按钮，来调用点击时的changeState函数。由于我们前面已经定义了元素，并对它应用了changeDivSize动画触发器，因此当按钮被点击时，它会更新元素的状态，其大小则会伴随着转换效果而发生变化。
@@ -182,7 +184,7 @@ changeState() {
 打开app.component.html文件，您会发现该文件中已包含了一些默认的HTML代码。请删除所有的代码，并按照下图所示放置组件的选择器：
 
 ```html
-<app-animationdemo></app-animationdemo> 
+<app-animationdemo></app-animationdemo>
 ```
 
 请在Visual Studio Code的终端窗口里运行ng serve命令，以执行该代码。运行完毕后，它会提示您在浏览器中打开http://localhost:4200。随后，您就会在浏览器中看到如下点击按钮的动画效果。
@@ -196,18 +198,18 @@ changeState() {
 请在动画属性中添加如下的触发器定义。
 
 ```ts
-trigger('balloonEffect', [ 
-   state('initial', style({ 
-     backgroundColor: 'green', 
-     transform: 'scale(1)' 
-   })), 
-   state('final', style({ 
-     backgroundColor: 'red', 
-     transform: 'scale(1.5)' 
-   })), 
-   transition('final=>initial', animate('1000ms')), 
-   transition('initial=>final', animate('1500ms')) 
- ]), 
+trigger('balloonEffect', [
+   state('initial', style({
+     backgroundColor: 'green',
+     transform: 'scale(1)'
+   })),
+   state('final', style({
+     backgroundColor: 'red',
+     transform: 'scale(1.5)'
+   })),
+   transition('final=>initial', animate('1000ms')),
+   transition('initial=>final', animate('1500ms'))
+ ]),
  ```
 
 在此，我们使用转换属性来更改所有方向的尺寸大小。当该元素的状态发生变化时转换随即发生。
@@ -215,11 +217,11 @@ trigger('balloonEffect', [
 请在app.component.html文件中添加如下HTML代码。
 
 ```html
-<h3>Balloon Effect</h3> 
+<h3>Balloon Effect</h3>
 <div (click)="changeState()"  
-  style="width:100px;height:100px; border-radius: 100%; margin: 3rem; background-color: green" 
-  [@balloonEffect]=currentState> 
-</div> 
+  style="width:100px;height:100px; border-radius: 100%; margin: 3rem; background-color: green"
+  [@balloonEffect]=currentState>
+</div>
 ```
 
 在此，我们定义了一个div，并通过CSS样式来定义成一个圆圈。我们将通过点击div去调用changeState，从而实现元素状态的切换。
@@ -235,26 +237,26 @@ trigger('balloonEffect', [
 请将如下代码插入AnimationdemoComponent类的定义之中。
 
 ```ts
-listItem = []; 
-list_order: number = 1; 
-addItem() { 
-  var listitem = "ListItem " + this.list_order; 
-  this.list_order++; 
-  this.listItem.push(listitem); 
-} 
-removeItem() { 
-  this.listItem.length -= 1; 
-} 
+listItem = [];
+list_order: number = 1;
+addItem() {
+  var listitem = "ListItem " + this.list_order;
+  this.list_order++;
+  this.listItem.push(listitem);
+}
+removeItem() {
+  this.listItem.length -= 1;
+}
 ```
 
 请在该动画的属性中添加如下的触发器定义。
 
 ```ts
-trigger('fadeInOut', [ 
-  state('void', style({ 
-    opacity: 0 
-  })), 
-  transition('void <=> *', animate(1000)), 
+trigger('fadeInOut', [
+  state('void', style({
+    opacity: 0
+  })),
+  transition('void <=> *', animate(1000)),
 ]),  
 ```
 
@@ -265,17 +267,17 @@ trigger('fadeInOut', [
 请在app.component.html文件中添加如下HTML代码。
 
 ```html
-<h3>Fade-In and Fade-Out animation</h3> 
-<button (click)="addItem()">Add List</button> 
-<button (click)="removeItem()">Remove List</button> 
-<div style="width:200px; margin-left: 20px"> 
-  <ul> 
-    <li *ngFor="let list of listItem" [@fadeInOut]> 
-      {{list}} 
-    </li> 
-  </ul> 
-</div> 
-``` 
+<h3>Fade-In and Fade-Out animation</h3>
+<button (click)="addItem()">Add List</button>
+<button (click)="removeItem()">Remove List</button>
+<div style="width:200px; margin-left: 20px">
+  <ul>
+    <li *ngFor="let list of listItem" [@fadeInOut]>
+      {{list}}
+    </li>
+  </ul>
+</div>
+```
 
 在此，我们定义了两个按钮来添加和删除条目。我们将fadeInOut触发器与元素绑定，以实现在对DOM进行添加、删除时，能够出现淡入和淡出的效果。
 
@@ -297,15 +299,15 @@ trigger('fadeInOut', [
 请在动画的属性中添加如下触发器的定义。
 
 ```ts
-trigger('EnterLeave', [ 
-  state('flyIn', style({ transform: 'translateX(0)' })), 
-  transition(':enter', [ 
-    style({ transform: 'translateX(-100%)' }), 
-    animate('0.5s 300ms ease-in') 
-  ]), 
-  transition(':leave', [ 
-    animate('0.3s ease-out', style({ transform: 'translateX(100%)' })) 
-  ]) 
+trigger('EnterLeave', [
+  state('flyIn', style({ transform: 'translateX(0)' })),
+  transition(':enter', [
+    style({ transform: 'translateX(-100%)' }),
+    animate('0.5s 300ms ease-in')
+  ]),
+  transition(':leave', [
+    animate('0.3s ease-out', style({ transform: 'translateX(100%)' }))
+  ])
 ])  
 ```
 
@@ -314,16 +316,16 @@ trigger('EnterLeave', [
 请在app.component.html文件中添加如下HTML代码。
 
 ```html
-<h3>Enter and Leave animation</h3> 
-<button (click)="addItem()">Add List</button> 
-<button (click)="removeItem()">Remove List</button> 
-<div style="width:200px; margin-left: 20px"> 
-  <ul> 
-    <li *ngFor="let list of listItem" [@EnterLeave]="'flyIn'"> 
-      {{list}} 
-    </li> 
-  </ul> 
-</div> 
+<h3>Enter and Leave animation</h3>
+<button (click)="addItem()">Add List</button>
+<button (click)="removeItem()">Remove List</button>
+<div style="width:200px; margin-left: 20px">
+  <ul>
+    <li *ngFor="let list of listItem" [@EnterLeave]="'flyIn'">
+      {{list}}
+    </li>
+  </ul>
+</div>
 ```
 
 在此，我们定义了两个按钮来对列表添加和删除条目。我们将EnterLeave触发器与元素绑定，以实现在对DOM进行添加、删除时，出现滑入和滑出的效果。

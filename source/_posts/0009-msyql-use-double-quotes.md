@@ -5,6 +5,8 @@ tags:
     - MySQL
 categories:
     - 工具
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 ---
 
 在工作中使用Mysql数据库，发现建表后的ddl显示表名、字段都是双引号。这样的ddl在线上工单系统无法通过，需要将双引号转成反引号(`)才行。

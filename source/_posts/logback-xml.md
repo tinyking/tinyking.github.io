@@ -1,7 +1,9 @@
 ---
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 title: Logback配置文件
 date: 2017-04-21 13:10:50
-tags: 
+tags:
     - Java
     - Log
 ---
@@ -55,7 +57,7 @@ tags:
 			<onMismatch>DENY</onMismatch>
 		</filter> -->
 	</appender>
-	
+
 	<!-- INFO输出 -->
 	<appender name="FILE_INFO"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -84,7 +86,7 @@ tags:
 			<onMismatch>DENY</onMismatch>
 		</filter>
 	</appender>
-	
+
 	<!-- WARN输出 -->
 	<appender name="FILE_WARN"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -113,7 +115,7 @@ tags:
 			<onMismatch>DENY</onMismatch>
 		</filter>
 	</appender>
-	
+
 	<!-- ERROR输出 -->
 	<appender name="FILE_ERROR"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">

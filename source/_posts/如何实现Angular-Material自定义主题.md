@@ -2,6 +2,8 @@
 title: 如何实现Angular Material自定义主题
 date: 2019-08-02 18:08:21
 tags:
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 ---
 ## 什么是主题
 

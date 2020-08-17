@@ -5,6 +5,8 @@ tags:
     - Java
 categories:
     - 后端
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 ---
 
 在idea中，使用maven打包应用的，javadoc在console输出乱码。解决方法如下：
@@ -12,4 +14,3 @@ categories:
 2. 在idea64.exe.vmoptions中设置-Dfile.encoding=UTF-8
 
 <!--more-->
-

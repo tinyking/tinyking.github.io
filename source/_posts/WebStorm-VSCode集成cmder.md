@@ -1,4 +1,6 @@
 ---
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 title: WebStorm VSCode集成cmder
 date: 2019-06-26 18:27:25
 categories:

@@ -6,6 +6,8 @@ tags:
     - Electron
 categories:
     - 前端
+    index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+    banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 ---
 
 

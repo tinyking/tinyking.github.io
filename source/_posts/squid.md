@@ -1,4 +1,6 @@
 ---
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 title: Squid 代理服务器配置
 date: 2017-04-21 11:10:50
 tags:
@@ -23,15 +25,15 @@ yum install perl-ExtUtils-CBuilder perl-ExtUtils-MakeMaker -y
 
 
 
-安装`DBI-1.636.tar.gz` 
+安装`DBI-1.636.tar.gz`
 
 ```
 wget http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-1.636.tar.gz
-tar -xvf DBI-1.636.tar.gz 
+tar -xvf DBI-1.636.tar.gz
 
 cd DBI-1.636
 
-make 
+make
 make install
 ```
 
@@ -39,7 +41,7 @@ make install
 安装 `DBD-mysql-4.039.tar.gz` 时，需要设置
 ```
 wget http://www.cpan.org/authors/id/C/CA/CAPTTOFU/DBD-mysql-4.039.tar.gz
-tar -xvf DBD-mysql-4.039.tar.gz 
+tar -xvf DBD-mysql-4.039.tar.gz
 
 cd DBD-mysql-4.039
 
@@ -124,7 +126,7 @@ http_access allow all
 http_port 3128
 
 # Uncomment and adjust the following to add a disk cache directory.
-                                          
+
 # Uncomment and adjust the following to add a disk cache directory.
 #cache_dir ufs /var/spool/squid 100 16 256
 
@@ -146,7 +148,7 @@ refresh_pattern .               0       20%     4320
 #acl test123 proxy_auth REQUIRED  
 #http_access allow test123    
 
-#auth_param basic program /usr/lib64/squid/basic_ncsa_auth /etc/squid/passwd 
+#auth_param basic program /usr/lib64/squid/basic_ncsa_auth /etc/squid/passwd
 #auth_param basic children 5
 #auth_param basic realm Squid proxy-caching web server
 #auth_param basic credentialsttl 2 hours

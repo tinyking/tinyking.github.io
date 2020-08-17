@@ -2,7 +2,8 @@
 title: Angular核心技术之组件
 id: angular-he-xin-ji-shu-zhi-zu-jian
 date: 2019-08-02 18:09:40
-tags:
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 ---
 
 # 组件(component)
@@ -115,7 +116,7 @@ export class HeroComponent {
   public form = new FormGroup({
     name: new FormControl('', Validators.required)
   });
-  
+
   submit(event) {
     console.log(event);
     console.log(this.form.controls.name.value);
@@ -134,38 +135,38 @@ import { ReactiveFormsModule } from '@angular/forms';
 describe('HeroComponent', () => {
   let component: HeroComponent;
   let fixture: ComponentFixture<HeroComponent>;
-  
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [HeroComponent],
       imports: [ReactiveFormsModule]
     }).compileComponents();
-    
+
     fixtrue = TestBed.createComponent(HeroComponent);
     component = fixtrue.componentInstance;
     fixture.detectChanges();
   }));
-  
+
   it('should be created', () => {
     expect(component).toBetruthy();
   });
-  
+
   it('should log hero name in the console when user submit form', async(() => {
     const heroName = 'Saitama';
     const element = <HTMLFormElement>fixture.debugElement.nativeElement.querySelector('form');
-    
+
     spyOn(console, 'log').and.callThrough();
-    
+
     component.form.controls['name'].setValue(heroName);
-    
+
     element.querySelector('button').click();
-    
+
     fixture.whenStable().then(() => {
       fixture.detectChanges();
       expect(console.log).toHaveBeenCalledWith(heroName);
     });
   }));
-  
+
   it('should validate name field as required', () => {
     component.form.controls['name'].setValue('');
     expect(component.form.invalid).toBeTruthy();
@@ -206,4 +207,3 @@ export class SampleComponent {
   public name = '';
 }
 ```
-

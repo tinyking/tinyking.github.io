@@ -1,4 +1,6 @@
 ---
+index_img: https://sm.ms/image/35FZ8rubRnfAKhG
+banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
 title: vs code调试Angular
 date: 2018-07-10 10:49:46
 tags:
@@ -49,4 +51,3 @@ categories:
 
 可以用`F10`单步调试。还可以查看变量信息，栈信息。
 ![image](https://code.visualstudio.com/assets/docs/nodejs/angular/debug-variable.png)
-
