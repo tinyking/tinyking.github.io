@@ -7,8 +7,8 @@ tags:
 categories:
     - 后端
 excerpt: 本文介绍了Spring Boot的常用注解。
-index_img: https://sm.ms/image/35FZ8rubRnfAKhG
-banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 
 # Spring Boot注解

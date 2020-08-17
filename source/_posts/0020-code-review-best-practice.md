@@ -1,6 +1,6 @@
 ---
-index_img: https://sm.ms/image/35FZ8rubRnfAKhG
-banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 title: 代码Review最佳实践
 date: 2019-11-29 16:17
 ---

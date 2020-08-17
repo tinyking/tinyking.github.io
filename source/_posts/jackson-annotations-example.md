@@ -6,8 +6,8 @@ tags:
 categories:
     - 后端
 excerpt: 在本文中，我们将深入研究Jackson注解。我们将看到如何使用现有的注释，如何创建自定义的注释，最后—如何禁用它们。
-index_img: https://sm.ms/image/35FZ8rubRnfAKhG
-banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 
 ## 1. 概述

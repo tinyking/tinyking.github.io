@@ -1,6 +1,6 @@
 ---
-index_img: https://sm.ms/image/35FZ8rubRnfAKhG
-banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 title: 使用 Docker 部署 Spring Boot
 date: 2019-04-17 16:11:01
 tags:

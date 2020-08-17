@@ -2,8 +2,8 @@
 title: Angular核心技术之组件
 id: angular-he-xin-ji-shu-zhi-zu-jian
 date: 2019-08-02 18:09:40
-index_img: https://sm.ms/image/35FZ8rubRnfAKhG
-banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 
 # 组件(component)

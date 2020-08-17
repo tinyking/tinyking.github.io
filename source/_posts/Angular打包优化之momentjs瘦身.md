@@ -5,8 +5,8 @@ tags:
 categories:
   - 前端
 date: 2019-06-26 16:18:46
-index_img: https://sm.ms/image/35FZ8rubRnfAKhG
-banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 
 项目中使用到了moment.js，编译后发现moment的locale文件全部被打包到发布文件中，且moment的大部分都是locale文件，实际上我们只需要zh-cn这个语言包。

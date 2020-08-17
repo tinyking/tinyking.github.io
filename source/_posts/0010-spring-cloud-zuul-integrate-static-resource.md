@@ -6,8 +6,8 @@ tags:
     - Spring Cloud
 categories:
     - 后端
-index_img: https://sm.ms/image/35FZ8rubRnfAKhG
-banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 
 项目中需要将前端的静态资源打包集成到zuul中，直接将静态资源放到zuul项目的/src/main/resources/static下，通过浏览器访问，发现无法访问。原因是zuul对所有的请求都进行了路由转发。

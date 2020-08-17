@@ -5,8 +5,8 @@ tags:
     - Java
 categories:
     - 后端
-index_img: https://sm.ms/image/35FZ8rubRnfAKhG
-banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 
 在使用Spring Security集成Oauth2.0做Auth server时，使用自定义的UserDetailsService实现时，在Controller层通过自动注入，可以获取详细的用户信息。

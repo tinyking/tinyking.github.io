@@ -2,8 +2,8 @@
 title: 当ThreadLocal碰上线程池
 date: 2019-08-02 18:05:32
 tags:
-index_img: https://sm.ms/image/35FZ8rubRnfAKhG
-banner_img: https://sm.ms/image/35FZ8rubRnfAKhG
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 ThreadLocal可以让线程拥有本地变量，在web环境中，为了方便代码解耦，我们通常用它来保存上下文信息，然后用一个util类提供访问入口，从controller层到service层可以很方便的获取上下文。下面我们通过代码来研究一下ThreadLocal。
 
