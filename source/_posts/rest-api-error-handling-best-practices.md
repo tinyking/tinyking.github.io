@@ -100,3 +100,132 @@ curl -X GET -H "Accept: application/json" http://localhost:8082/spring-rest/api/
     "detail": "Ensure that the username and password included in the request are correct"
 }
 ```
+
+错误字段不应该与响应代码匹配。相反，它应该是应用程序特有的错误代码。通常，错误字段没有约定，希望它是唯一的。
+
+通常，该字段只包含字母数字和连接字符，如破折号或下划线。例如，0001、auth-0001和incorrect-user-pass都是错误代码的典型示例。
+
+通常认为主体的消息部分在用户界面上是可显示的。因此，如果我们支持国际化，就应该翻译这个标题。因此，如果客户端发送一个带有对应于法语的Accept-Language头的请求，则title值应该被翻译成法语。
+
+细节部分是为客户端的开发人员而不是最终用户使用的，因此不需要进行翻译。
+
+此外，我们还可以提供一个URL -如帮助字段-客户可以跟踪发现更多的信息:
+
+```json
+{
+    "error": "auth-0001",
+    "message": "Incorrect username and password",
+    "detail": "Ensure that the username and password included in the request are correct",
+    "help": "https://example.com/help/error/auth-0001"
+}
+```
+
+有时，我们可能希望为一个请求报告多个错误。在这种情况下，我们应该返回一个列表中的错误:
+
+```json
+{
+    "errors": [
+        {
+            "error": "auth-0001",
+            "message": "Incorrect username and password",
+            "detail": "Ensure that the username and password included in the request are correct",
+            "help": "https://example.com/help/error/auth-0001"
+        },
+        ...
+    ]
+}
+```
+
+当出现单个错误时，我们使用包含一个元素的列表进行响应。注意，对于简单的应用程序来说，响应多个错误可能过于复杂。在许多情况下，使用第一个或最重要的错误来响应就足够了。
+
+### 3.4. 标准响应体
+
+虽然大多数REST api遵循类似的约定，但具体细节通常不同，包括字段的名称和响应体中包含的信息。这些差异使得库和框架很难统一地处理错误。
+
+为了标准化REST API错误处理，IETF设计了RFC 7807，它创建了一个通用的错误处理模式。
+
+这个方案由五部分组成:
+
+- type — 对错误进行分类的URI标识符
+- title — 一个简短的、人类可读的关于错误的消息
+- status — HTTP响应码
+- detail — 错误信息
+- instance — 标识错误发生的特定位置的URI
+
+而不是使用我们的自定义错误响应体，我们可以转换响应:
+
+```json
+{
+    "type": "/errors/incorrect-user-pass",
+    "title": "Incorrect username or password.",
+    "status": 401,
+    "detail": "Authentication failed due to incorrect username or password.",
+    "instance": "/login/log/abc123"
+}
+```
+
+请注意，type字段对错误类型进行分类，而instance分别以类似于类和对象的方式标识错误的特定发生。
+
+通过使用uri，客户机可以按照这些路径查找有关错误的更多信息，就像使用HATEOAS链接导航REST API一样。
+
+## 4. 示例
+
+上述实践在一些最流行的REST api中很常见。虽然字段或格式的具体名称可能在不同的站点之间有所不同，但一般的模式几乎是通用的。
+
+### 4.1. Twitter
+例如，让我们发送一个GET请求而不提供必需的身份验证数据:
+
+```
+curl -X GET https://api.twitter.com/1.1/statuses/update.json?include_entities=true
+```
+
+Twitter API响应一个错误，如下正文:
+
+```json
+{
+    "errors": [
+        {
+            "code":215,
+            "message":"Bad Authentication data."
+        }
+    ]
+}
+```
+
+此响应包括一个包含单个错误的列表，以及错误代码和消息。在Twitter的例子中，没有详细的信息，并且使用一个普遍的错误——而不是更具体的401错误——来表示认证失败。
+
+有时更通用的状态代码更容易实现，我们将在下面的Spring示例中看到这一点。它允许开发人员捕获异常组，而不区分应该返回的状态代码。但是，在可能的情况下，应该使用最特定的状态代码。
+
+### 4.2. Facebook
+与Twitter类似，Facebook的Graph REST API也在响应中包含详细信息。
+
+例如，让我们用Facebook Graph API执行一个POST请求来验证:
+
+```
+curl -X GET https://graph.facebook.com/oauth/access_token?client_id=foo&client_secret=bar&grant_type=baz
+```
+
+我们收到以下错误:
+
+```json
+{
+    "error": {
+        "message": "Missing redirect_uri parameter.",
+        "type": "OAuthException",
+        "code": 191,
+        "fbtrace_id": "AWswcVwbcqfgrSgjG80MtqJ"
+    }
+}
+```
+
+像Twitter一样，Facebook也使用通用错误——而不是更具体的400级错误——来表示失败。除了消息和数字代码外，Facebook还包括一个类型字段，用于对错误进行分类，以及一个作为内部支持标识符的跟踪ID (fbtrace_id)。
+
+## 5. 结论
+在本文中，我们研究了一些REST API错误处理的最佳实践，包括:
+- 提供特定状态码
+- 在响应主体中包括附加信息
+- 以统一的方式处理异常
+
+虽然错误处理的细节因应用程序而异，但这些通用原则几乎适用于所有REST api，并且应该尽可能遵守。
+
+这不仅允许客户机以一致的方式处理错误，而且还简化了我们在实现REST API时创建的代码。
