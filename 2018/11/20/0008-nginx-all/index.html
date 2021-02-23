@@ -1,0 +1,744 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="努力做最好的自己">
+  <meta name="author" content="TinyKing">
+  <meta name="keywords" content="undefined">
+  <title>nginx功能解密 - 爱笑笑，爱生活</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css">
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>爱笑笑，爱生活</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2018-11-20 12:24" pubdate>
+      2018年11月20日 中午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      36
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">nginx功能解密</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <blockquote>
+<p>本文旨在用最通俗的语言讲述最枯燥的基本知识</p>
+</blockquote>
+<p>Nginx作为一个高性能的web服务器，想必大家垂涎已久，蠢蠢欲动，想学习一番了吧，语法不多说，网上一大堆。下面博主就nginx<br>的非常常用的几个功能做一些讲述和分析，学会了这几个功能，平常的开发和部署就不是什么问题了。因此希望大家看完之后，能自己装个nginx来学习配置测试，这样才能真正的掌握它。</p>
+<blockquote>
+<p>文章提纲：</p>
+<ol>
+<li>正向代理</li>
+<li>反向代理</li>
+<li>透明代理</li>
+<li>负载均衡</li>
+<li>静态服务器</li>
+<li>Nginx的安装</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="1-正向代理"><a href="#1-正向代理" class="headerlink" title="1. 正向代理"></a>1. 正向代理</h3><blockquote>
+<p>正向代理：内网服务器主动去请求外网的服务的一种行为</p>
+</blockquote>
+<p>光看概念，可能有读者还是搞不明白：什么叫做“正向”，什么叫做“代理”，我们分别来理解一下这两个名词。</p>
+<blockquote>
+<p>正向：相同的或一致的方向<br>代理：自己做不了的事情或者自己不打算做的事情，委托或依靠别人来完成。</p>
+</blockquote>
+<p>借助解释，回归到nginx的概念，正向代理其实就是说客户端无法主动或者不打算完成主动去向某服务器发起请求，而是委托了nginx代理服务器去向服务器发起请求，并且获得处理结果，返回给客户端。<br>从下图可以看出：<strong>客户端向目标服务器发起的请求，是由代理服务器代替它向目标主机发起，得到结果之后，通过代理服务器返回给客户端。</strong></p>
+<p><img src="https://www.itcodemonkey.com/data/upload/portal/20181114/1542195547528384.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>举个栗子：广大社会主义接班人都知道，为了保护祖国的花朵不受外界的乌烟瘴气熏陶，国家对网络做了一些“优化”，正常情况下是不能外网的，但作为程序员的我们如果没有谷歌等搜索引擎的帮助，再销魂的代码也会因此失色，因此，网络上也曾出现过一些fan qiang技术和软件供有需要的人使用，如某VPN等，其实VPN的原理大体上也类似于一个正向代理，也就是需要访问外网的电脑，发起一个访问外网的请求，通过本机上的VPN去寻找一个可以访问国外网站的代理服务器，代理服务器向外国网站发起请求，然后把结果返回给本机。</p>
+<blockquote>
+<p>正向代理的配置:</p>
+</blockquote>
+<pre><code class="hljs undefined"><span class="hljs-section">server</span> &#123;
+    <span class="hljs-comment">#指定DNS服务器IP地址  </span>
+    <span class="hljs-attribute">resolver</span> <span class="hljs-number">114.114.114.114</span>;   
+    <span class="hljs-comment">#指定代理端口    </span>
+    <span class="hljs-attribute">listen</span> <span class="hljs-number">8080</span>;  
+    <span class="hljs-attribute">location</span> / &#123;
+        <span class="hljs-comment">#设定代理服务器的协议和地址（固定不变）    </span>
+        <span class="hljs-attribute">proxy_pass</span> http://<span class="hljs-variable">$http_host</span><span class="hljs-variable">$request_uri</span>;
+    &#125;  
+&#125;</code></pre>
+<p>这样就可以做到内网中端口为8080的服务器主动请求到1.2.13.4的主机上，如在Linux下可以：</p>
+<pre><code class="hljs undefined"><span class="hljs-number">1</span>curl --proxy <span class="hljs-string">proxy_server:</span><span class="hljs-number">8080</span> <span class="hljs-string">http:</span><span class="hljs-comment">//www.taobao.com/</span></code></pre>
+<p>正向代理的关键配置：</p>
+<blockquote>
+<ol>
+<li>resolver：DNS服务器IP地址</li>
+<li>listen：主动发起请求的内网服务器端口</li>
+<li>proxy_pass：代理服务器的协议和地址</li>
+</ol>
+</blockquote>
+<h3 id="2-反向代理"><a href="#2-反向代理" class="headerlink" title="2. 反向代理"></a>2. 反向代理</h3><blockquote>
+<p>反向代理：reverse proxy，是指用代理服务器来接受客户端发来的请求，然后将请求转发给内网中的上游服务器，上游服务器处理完之后，把结果通过nginx返回给客户端。</p>
+</blockquote>
+<p>上面讲述了正向代理的原理，相信对于反向代理，就很好理解了吧。<br>反向代理是对于来自外界的请求，先通过nginx统一接受，然后按需转发给内网中的服务器，并且把处理请求返回给外界客户端，此时代理服务器对外表现的就是一个web服务器，客户端根本不知道“上游服务器”的存在。</p>
+<p><img src="https://www.itcodemonkey.com/data/upload/portal/20181114/1542195548421886.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>举个栗子：一个服务器的80端口只有一个，而服务器中可能有多个项目，如果A项目是端口是8081，B项目是8082，C项目是8083，假设指向该服务器的域名为<a href="http://www.xxx.com，此时访问B项目是www.xxx.com:8082，以此类推其它项目的URL也是要加上一个端口号，这样就很不美观了，这时我们把80端口给nginx服务器，给每个项目分配一个独立的子域名，如A项目是a.xxx.com，并且在nginx中设置每个项目的转发配置，然后对所有项目的访问都由nginx服务器接受，然后根据配置转发给不同的服务器处理。具体流程如下图所示：" target="_blank" rel="noopener">www.xxx.com，此时访问B项目是www.xxx.com:8082，以此类推其它项目的URL也是要加上一个端口号，这样就很不美观了，这时我们把80端口给nginx服务器，给每个项目分配一个独立的子域名，如A项目是a.xxx.com，并且在nginx中设置每个项目的转发配置，然后对所有项目的访问都由nginx服务器接受，然后根据配置转发给不同的服务器处理。具体流程如下图所示：</a></p>
+<p><img src="https://www.itcodemonkey.com/data/upload/portal/20181114/1542195548507062.jpg" srcset="/img/loading.gif" alt="img"></p>
+<blockquote>
+<p>反向代理配置:</p>
+</blockquote>
+<pre><code class="hljs undefined"><span class="hljs-section">server</span> &#123;
+    <span class="hljs-comment">#监听端口</span>
+    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;
+    <span class="hljs-comment">#服务器名称，也就是客户端访问的域名地址</span>
+    <span class="hljs-attribute">server_name</span>  a.xxx.com;
+    <span class="hljs-comment">#nginx日志输出文件</span>
+    <span class="hljs-attribute">access_log</span>  logs/nginx.access.log  main;
+    <span class="hljs-comment">#nginx错误日志输出文件</span>
+    <span class="hljs-attribute">error_log</span>  logs/nginx.<span class="hljs-literal">error</span>.log;
+    <span class="hljs-attribute">root</span>   html;
+    <span class="hljs-attribute">index</span>  index.html index.htm index.php;
+    <span class="hljs-attribute">location</span> / &#123;
+        <span class="hljs-comment">#被代理服务器的地址</span>
+        <span class="hljs-attribute">proxy_pass</span>  http://localhost:8081;
+        <span class="hljs-comment">#对发送给客户端的URL进行修改的操作</span>
+        <span class="hljs-attribute">proxy_redirect</span>     <span class="hljs-literal">off</span>;
+        <span class="hljs-attribute">proxy_set_header</span>   Host             <span class="hljs-variable">$host</span>;
+        <span class="hljs-attribute">proxy_set_header</span>   X-Real-IP        <span class="hljs-variable">$remote_addr</span>;
+        <span class="hljs-attribute">proxy_set_header</span>   X-Forwarded-For  <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;
+        <span class="hljs-attribute">proxy_next_upstream</span> <span class="hljs-literal">error</span> timeout invalid_header http_500 http_502 http_503 http_504;
+        <span class="hljs-attribute">proxy_max_temp_file_size</span> <span class="hljs-number">0</span>;
+   &#125;
+&#125;</code></pre>
+<p>这样就可以通过a.xxx.com来访问a项目对应的网站了，而不需要带上难看的端口号。<br>反向代理的配置关键点是：</p>
+<blockquote>
+<ol>
+<li>server_name：代表客户端向服务器发起请求时输入的域名</li>
+<li>proxy_pass：代表源服务器的访问地址，也就是真正处理请求的服务器（localhost+端口号）。</li>
+</ol>
+</blockquote>
+<h3 id="3-透明代理"><a href="#3-透明代理" class="headerlink" title="3. 透明代理"></a>3. 透明代理</h3><blockquote>
+<p>透明代理：也叫做简单代理，意思客户端向服务端发起请求时，请求会先到达透明代理服务器，代理服务器再把请求转交给真实的源服务器处理，也就是是客户端根本不知道有代理服务器的存在。</p>
+</blockquote>
+<p>举个栗子：它的用法有点类似于拦截器，如某些制度严格的公司里的办公电脑，无论我们用电脑做了什么事情，安全部门都能拦截我们对外发送的任何东西，这是因为电脑在对外发送时，实际上先经过网络上的一个透明的服务器，经过它的处理之后，才接着往外网走，而我们在网上冲浪时，根本没有感知到有拦截器拦截我们的数据和信息。</p>
+<p><img src="https://www.itcodemonkey.com/data/upload/portal/20181114/1542195548380599.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>有人说透明代理和反向代理有点像，都是由代理服务器先接受请求，再转发到源服务器。其实本质上是有区别的，透明代理是客户端感知不到代理服务器的存在，而反向代理是客户端感知只有一个代理服务器的存在，因此他们一个是隐藏了自己，一个是隐藏了源服务器。事实上，透明代理和正向代理才是相像的，都是由客户端主动发起请求，代理服务器处理；他们差异点在于：正向代理是代理服务器代替客户端请求，而透明代理是客户端在发起请求时，会先经过透明代理服务器，再达到服务端，在这过程中，客户端是感知不到这个代理服务器的。</p>
+<h3 id="4-负载均衡"><a href="#4-负载均衡" class="headerlink" title="4. 负载均衡"></a>4. 负载均衡</h3><p>负载均衡：将服务器接收到的请求按照规则分发的过程，称为负载均衡。负载均衡是反向代理的一种体现。</p>
+<p>可能绝大部分人接触到的web项目，刚开始时都是一台服务器就搞定了，但当网站访问量越来越大时，单台服务器就扛不住了，这时候需要增加服务器做成集群来分担流量压力，而在架设这些服务器时，nginx就充当了接受流量和分流的作用了，当请求到nginx服务器时，nginx就可以根据设置好的负载信息，把请求分配到不同的服务器，服务器处理完毕后，nginx获取处理结果返回给客户端，这样，用nginx的反向代理，即可实现了负载均衡。</p>
+<p><img src="https://www.itcodemonkey.com/data/upload/portal/20181114/1542195549241458.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>nginx实现负载均衡有几种模式：</p>
+<blockquote>
+<ol>
+<li>轮询：每个请求按时间顺序逐一分配到不同的后端服务器，也是nginx的默认模式。轮询模式的配置很简单，只需要把服务器列表加入到upstream模块中即可。</li>
+</ol>
+</blockquote>
+<p>下面的配置是指：<strong>负载中有三台服务器，当请求到达时，nginx按照时间顺序把请求分配给三台服务器处理。</strong></p>
+<pre><code class="hljs undefined">upstream serverList &#123;
+   <span class="hljs-built_in"> server </span>1.2.3.4;
+   <span class="hljs-built_in"> server </span>1.2.3.5;
+   <span class="hljs-built_in"> server </span>1.2.3.6;
+&#125;</code></pre>
+<blockquote>
+<ol>
+<li>ip_hash：每个请求按访问IP的hash结果分配，同一个IP客户端固定访问一个后端服务器。可以保证来自同一ip的请求被打到固定的机器上，可以解决session问题。</li>
+</ol>
+</blockquote>
+<p>下面的配置是指：<strong>负载中有三台服务器，当请求到达时，nginx优先按照ip_hash的结果进行分配，也就是同一个IP的请求固定在某一台服务器上，其它则按时间顺序把请求分配给三台服务器处理。</strong></p>
+<pre><code class="hljs undefined">upstream serverList &#123;
+    ip_hash
+   <span class="hljs-built_in"> server </span>1.2.3.4;
+   <span class="hljs-built_in"> server </span>1.2.3.5;
+   <span class="hljs-built_in"> server </span>1.2.3.6;
+&#125;</code></pre>
+<blockquote>
+<ol>
+<li>url_hash：按访问url的hash结果来分配请求，相同的url固定转发到同一个后端服务器处理。</li>
+</ol>
+</blockquote>
+<pre><code class="hljs undefined">upstream serverList &#123;
+   <span class="hljs-built_in"> server </span>1.2.3.4;
+   <span class="hljs-built_in"> server </span>1.2.3.5;
+   <span class="hljs-built_in"> server </span>1.2.3.6;
+    hash <span class="hljs-variable">$request_uri</span>;
+    hash_method crc32;
+&#125;</code></pre>
+<blockquote>
+<ol>
+<li>fair：按后端服务器的响应时间来分配请求，响应时间短的优先分配。</li>
+</ol>
+</blockquote>
+<pre><code class="hljs undefined">upstream serverList &#123;
+   <span class="hljs-built_in"> server </span>1.2.3.4;
+   <span class="hljs-built_in"> server </span>1.2.3.5;
+   <span class="hljs-built_in"> server </span>1.2.3.6;
+    fair;
+&#125;</code></pre>
+<p>而在每一种模式中，每一台服务器后面的可以携带的参数有：</p>
+<blockquote>
+<ol>
+<li>down: 当前服务器暂不参与负载</li>
+<li>weight: 权重，值越大，服务器的负载量越大。</li>
+<li>max_fails：允许请求失败的次数，默认为1。</li>
+<li>fail_timeout:max_fails次失败后暂停的时间。</li>
+<li>backup：备份机， 只有其它所有的非backup机器down或者忙时才会请求backup机器。</li>
+</ol>
+</blockquote>
+<p>如下面的配置是指：<strong>负载中有三台服务器，当请求到达时，nginx按时间顺序和权重把请求分配给三台服务器处理，例如有100个请求，有30%是服务器4处理，有50%的请求是服务器5处理，有20%的请求是服务器6处理。</strong></p>
+<pre><code class="hljs undefined">upstream serverList &#123;
+   <span class="hljs-built_in"> server </span>1.2.3.4 <span class="hljs-attribute">weight</span>=30;
+   <span class="hljs-built_in"> server </span>1.2.3.5 <span class="hljs-attribute">weight</span>=50;
+   <span class="hljs-built_in"> server </span>1.2.3.6 <span class="hljs-attribute">weight</span>=20;
+&#125;</code></pre>
+<p>如下面的配置是指：<strong>负载中有三台服务器，服务器4的失败超时时间为60s，服务器5暂不参与负载，服务器6只用作备份机。</strong></p>
+<pre><code class="hljs undefined">upstream serverList &#123;
+   <span class="hljs-built_in"> server </span>1.2.3.4 <span class="hljs-attribute">fail_timeout</span>=60s;
+   <span class="hljs-built_in"> server </span>1.2.3.5 down;
+   <span class="hljs-built_in"> server </span>1.2.3.6 backup;
+&#125;</code></pre>
+<blockquote>
+<p>下面是一个配置负载均衡的示例（只写了关键配置）：<br>其中：</p>
+<ol>
+<li>upstream：是负载的配置模块，serverList是名称，随便起</li>
+<li>server_name：是客户端请求的域名地址</li>
+<li>proxy_pass：是指向负载的列表的模块，如serverList</li>
+</ol>
+</blockquote>
+<pre><code class="hljs undefined"><span class="hljs-attribute">upstream</span> serverList &#123;
+    <span class="hljs-attribute">server</span> <span class="hljs-number">1.2.3.4</span> weight=<span class="hljs-number">30</span>;
+    <span class="hljs-attribute">server</span> <span class="hljs-number">1.2.3.5</span> down;
+    <span class="hljs-attribute">server</span> <span class="hljs-number">1.2.3.6</span> backup;
+&#125;   
+
+<span class="hljs-section">server</span> &#123;
+    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;
+    <span class="hljs-attribute">server_name</span>  www.xxx.com;
+    <span class="hljs-attribute">root</span>   html;
+    <span class="hljs-attribute">index</span>  index.html index.htm index.php;
+    <span class="hljs-attribute">location</span> / &#123;
+        <span class="hljs-attribute">proxy_pass</span>  http://serverList;
+        <span class="hljs-attribute">proxy_redirect</span>     <span class="hljs-literal">off</span>;
+        <span class="hljs-attribute">proxy_set_header</span>   Host             <span class="hljs-variable">$host</span>;
+   &#125;
+&#125;</code></pre>
+<h3 id="5-静态服务器"><a href="#5-静态服务器" class="headerlink" title="5. 静态服务器"></a>5. 静态服务器</h3><p>现在很多项目流行前后分离，也就是前端服务器和后端服务器分离，分别部署，这样的方式能让前后端人员能各司其职，不需要互相依赖，而前后分离中，前端项目的运行是不需要用Tomcat、Apache等服务器环境的，因此可以直接用nginx来作为静态服务器。</p>
+<blockquote>
+<p>静态服务器的配置如下,其中关键配置为：</p>
+<ol>
+<li>root：直接静态项目的绝对路径的根目录。</li>
+<li>server_name : 静态网站访问的域名地址。</li>
+</ol>
+</blockquote>
+<pre><code class="hljs undefined"><span class="hljs-section">server</span> &#123;
+        <span class="hljs-attribute">listen</span>       <span class="hljs-number">80</span>;                                                         
+        <span class="hljs-attribute">server_name</span>  www.xxx.com;                                               
+        <span class="hljs-attribute">client_max_body_size</span> <span class="hljs-number">1024M</span>;
+        <span class="hljs-attribute">location</span> / &#123;
+               <span class="hljs-attribute">root</span>   /var/www/xxx_static;
+               <span class="hljs-attribute">index</span>  index.html;
+           &#125;
+    &#125;</code></pre>
+<h3 id="6-nginx的安装"><a href="#6-nginx的安装" class="headerlink" title="6. nginx的安装"></a>6. nginx的安装</h3><p>学了这么多nginx的配置用法之后，我们需要对每一个知识点做一下测试，才能印象深刻，在此之前，我们需要知道nginx是怎么安装，下面以Linux环境为例，简述yum方式安装nginx的步骤：</p>
+<ol>
+<li>安装依赖：</li>
+</ol>
+<pre><code class="hljs undefined">//一键安装上面四个依赖
+yum -y install gcc <span class="hljs-literal">zlib</span> <span class="hljs-literal">zlib</span>-devel pcre-devel openssl openssl-devel</code></pre>
+<ol>
+<li>安装nginx：</li>
+</ol>
+<pre><code class="hljs undefined">yum <span class="hljs-keyword">install</span> nginx</code></pre>
+<ol>
+<li>检查是否安装成功：</li>
+</ol>
+<pre><code class="hljs undefined"><span class="hljs-attribute">nginx -v</span></code></pre>
+<ol>
+<li>启动/挺尸nginx：</li>
+</ol>
+<pre><code class="hljs undefined">/etc/init.d/nginx <span class="hljs-literal">start</span>
+/etc/init.d/nginx <span class="hljs-literal">stop</span></code></pre>
+<ol>
+<li>编辑配置文件：</li>
+</ol>
+<pre><code class="hljs undefined"><span class="hljs-regexp">/etc/</span>nginx<span class="hljs-regexp">/nginx.conf</span></code></pre>
+<p>这些步骤都完成之后，我们就可以进入nginx的配置文件nginx.conf对上面的各个知识点，进行配置和测试了。</p>
+<blockquote>
+<p>来自：<a href="https://mp.weixin.qq.com/s/DDbLVj0jxpfOmJDZxt9SYg" target="_blank" rel="noopener">编程无界</a>（微信号：qianshic），作者：假不理</p>
+</blockquote>
+
+              <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                  <!-- 单元1 -->
+                  <ins class="adsbygoogle"
+                      style="display:block"
+                      data-ad-client="ca-pub-9508321495212724"
+                      data-ad-slot="3221759322"
+                      data-ad-format="auto"
+                      data-full-width-responsive="true"></ins>
+              <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/工具/">工具</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Nginx/">Nginx</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/11/20/0009-msyql-use-double-quotes/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Mysql建表语句中显示双引号</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/11/12/0007-spring-boot-integrate-security/">
+                        <span class="hidden-mobile">SpringBoot整合SpringSecurity简单实现登入登出从零搭建</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "nginx功能解密&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script data-ad-client="ca-pub-9508321495212724" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+</body>
+</html>

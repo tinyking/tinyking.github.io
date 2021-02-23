@@ -1,0 +1,589 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="努力做最好的自己">
+  <meta name="author" content="TinyKing">
+  <meta name="keywords" content="undefined">
+  <title>Angular开发必不可少的代理配置 - 爱笑笑，爱生活</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css">
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>爱笑笑，爱生活</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2019-08-02 18:07" pubdate>
+      2019年8月2日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      816 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">Angular开发必不可少的代理配置</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p>此处说的代理是 <code>ng serve</code> 提供的代理服务。</p>
+<p>在开发环境中，Angular应用与后端服务联调测试时，Chrome浏览器会对发请求进行跨域检测。通过代理服务，来解决开发模式下的跨域问题。</p>
+<p>接下来我们通过代理服务实现请求 <code>http://localhost:4200/api</code>  时代理到后端服务<code>http://localhost:8080/api</code> </p>
+<p><a name="WehaY"></a></p>
+<h2 id="基本代理"><a href="#基本代理" class="headerlink" title="基本代理"></a>基本代理</h2><p>首先我们需要在项目更目录下创建一个名为 <code>proxy.conf.json</code> 的代理配置文件，内容如下：</p>
+<pre><code class="hljs json">&#123;
+  <span class="hljs-attr">"/api"</span>: &#123;
+    <span class="hljs-attr">"target"</span>: <span class="hljs-string">"http://localhost:8080"</span>,
+    <span class="hljs-attr">"secure"</span>: <span class="hljs-literal">false</span>
+  &#125;
+&#125;</code></pre>
+<p>我们通过 <code>--proxy-config</code> 参数来加载代理配置文件：</p>
+<pre><code class="hljs bash">ng serve --proxy-config=proxy.conf.json</code></pre>
+<p>我们还可以在 <code>angular.json</code> 中通过 <code>proxyConfig</code> 属性来设置代理：</p>
+<pre><code class="hljs json">"architect": &#123;
+  "serve": &#123;
+    "builder": "@angular-devkit/build-angular:dev-server",
+    "options": &#123;
+      "browserTarget": "your-application-name:build",
+      "proxyConfig": "proxy.conf.json"
+    &#125;,</code></pre>
+<blockquote>
+<p><code>angular.json</code> 是Angular CLI的配置文件</p>
+</blockquote>
+<p><a name="B8I6W"></a></p>
+<h2 id="路径重写"><a href="#路径重写" class="headerlink" title="路径重写"></a>路径重写</h2><p>在基本代理中，我们配置了<code>http://localhost:4200/api</code> 代理后端服务 <code>http://localhost:8080/api</code>。而在实际开发中，我们的后端服务可能没有提供 <code>/api</code> 前缀，实际的后端服务可能是这样的：</p>
+<pre><code class="hljs undefined"><span class="hljs-symbol">http:</span><span class="hljs-comment">//localhost:8080/users</span>
+<span class="hljs-symbol">http:</span><span class="hljs-comment">//localhost:8080/orders</span></code></pre>
+<p>在这种情况下，上面配置的基本代理就无法满足我们的需求了，因此后端不存在 <code>http://localhost:8080/api/users</code> 服务。幸运的是， <code>Angular CLI</code> 代理提供了路径重写功能。</p>
+<pre><code class="hljs json">&#123;
+  <span class="hljs-attr">"/api"</span>: &#123;
+    <span class="hljs-attr">"target"</span>: <span class="hljs-string">"http://localhost:8080"</span>,
+    <span class="hljs-attr">"secure"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"pathRewrite"</span>: &#123;
+      <span class="hljs-attr">"^/api"</span>: <span class="hljs-string">""</span>
+    &#125;
+  &#125;
+&#125;</code></pre>
+<p>此时我们在浏览器访问 <code>http://localhost:4200/api/users</code> , 代理服务会给我们代理到后端服务 <code>http://localhost:8080/users</code> 上。</p>
+<p>路径重写功能可以让我们很好的区分前端路由和后端服务。可以一目了然的知道<code>http://localhost:4200/api/users</code>访问的是一个后端服务。</p>
+<p><a name="5vMiu"></a></p>
+<h2 id="非本地域"><a href="#非本地域" class="headerlink" title="非本地域"></a>非本地域</h2><p>随着互联技术的发展，前后端分工越来越明确。前后端的交互就是REST接口。在这样的实际环境中，我们的前端工程师的本地不会运行后端服务，而是使用后端工程师提供的服务，此时，我们的后端服务的域就不会是 <code>localhost</code> , 而可能是 <code>http://test.domain.com/users</code> 。</p>
+<p>此时我们就需要用的代理的另一个参数 <code>changeOrigin</code> 来满足我们的需求：</p>
+<pre><code class="hljs json">&#123;
+  <span class="hljs-attr">"/api"</span>: &#123;
+    <span class="hljs-attr">"target"</span>: <span class="hljs-string">"http://test.domain.com"</span>,
+    <span class="hljs-attr">"secure"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"pathRewrite"</span>: &#123;
+      <span class="hljs-attr">"^/api"</span>: <span class="hljs-string">""</span>
+    &#125;,
+    <span class="hljs-attr">"changeOrigin"</span>: <span class="hljs-literal">true</span>
+  &#125;
+&#125;</code></pre>
+<p>这样，我们访问 <code>http://localhost:4200/api/users</code> 就会被代理到<code>http://test.domain.com/users</code> 。</p>
+<p><a name="P0aeg"></a></p>
+<h2 id="代理日志"><a href="#代理日志" class="headerlink" title="代理日志"></a>代理日志</h2><p>在使用前端代理的过程中，如果想要调试代理是否正常工作，还可以添加 <code>logLevel</code> 选项：</p>
+<pre><code class="hljs json">&#123;
+  <span class="hljs-attr">"/api"</span>: &#123;
+    <span class="hljs-attr">"target"</span>: <span class="hljs-string">"http://test.domain.com"</span>,
+    <span class="hljs-attr">"secure"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"pathRewrite"</span>: &#123;
+      <span class="hljs-attr">"^/api"</span>: <span class="hljs-string">""</span>
+    &#125;,
+    <span class="hljs-attr">"logLevel"</span>: <span class="hljs-string">"debug"</span>
+  &#125;
+&#125;</code></pre>
+<p><code>logLevel</code> 支持的级别选项有 <code>debug</code> , <code>info</code> , <code>warn</code> , <code>silent</code> ，默认是 <code>info</code> 级别.</p>
+<p><a name="n4saq"></a></p>
+<h2 id="多代理入口"><a href="#多代理入口" class="headerlink" title="多代理入口"></a>多代理入口</h2><p>如果前端需要配置多个入口代理到同一个后端服务，不想使用前面的路径重写方式，我们可以创建一个 <code>proxy.conf.js</code> 文件来替代我们上面的 <code>proxy.conf.json</code> ：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> PROXY_CONFIG = [
+    &#123;
+        <span class="hljs-attr">context</span>: [
+            <span class="hljs-string">"/my"</span>,
+            <span class="hljs-string">"/many"</span>,
+            <span class="hljs-string">"/endpoints"</span>,
+            <span class="hljs-string">"/i"</span>,
+            <span class="hljs-string">"/need"</span>,
+            <span class="hljs-string">"/to"</span>,
+            <span class="hljs-string">"/proxy"</span>
+        ],
+        <span class="hljs-attr">target</span>: <span class="hljs-string">"http://localhost:3000"</span>,
+        <span class="hljs-attr">secure</span>: <span class="hljs-literal">false</span>
+    &#125;
+]
+
+<span class="hljs-built_in">module</span>.exports = PROXY_CONFIG;</code></pre>
+<p>修改我们的 <code>angular.json</code> 中的 <code>proxyConfig</code> 为 <code>proxy.conf.js</code> ：</p>
+<pre><code class="hljs json">"architect": &#123;
+  "serve": &#123;
+    "builder": "@angular-devkit/build-angular:dev-server",
+    "options": &#123;
+      "browserTarget": "your-application-name:build",
+      "proxyConfig": "proxy.conf.js"
+    &#125;,</code></pre>
+<p><img src="https://user-gold-cdn.xitu.io/2019/7/23/16c1ed307173ecee?w=900&amp;h=450&amp;f=png&amp;s=153639" srcset="/img/loading.gif" alt></p>
+
+              <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                  <!-- 单元1 -->
+                  <ins class="adsbygoogle"
+                      style="display:block"
+                      data-ad-client="ca-pub-9508321495212724"
+                      data-ad-slot="3221759322"
+                      data-ad-format="auto"
+                      data-full-width-responsive="true"></ins>
+              <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/08/02/ru-he-shi-xian-angular-material-zi-ding-yi-zhu-ti/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">如何实现Angular Material自定义主题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/08/02/dang-threadlocal-peng-shang-xian-cheng-chi/">
+                        <span class="hidden-mobile">当ThreadLocal碰上线程池</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Angular开发必不可少的代理配置&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script data-ad-client="ca-pub-9508321495212724" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,625 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="努力做最好的自己">
+  <meta name="author" content="TinyKing">
+  <meta name="keywords" content="undefined">
+  <title>Squid 代理服务器配置 - 爱笑笑，爱生活</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css">
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>爱笑笑，爱生活</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2017-04-21 11:10" pubdate>
+      2017年4月21日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      581 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">Squid 代理服务器配置</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code class="hljs shell">yum -y install squid</code></pre>
+<p>安装<code>Mysql</code></p>
+<pre><code class="hljs undefined">yum <span class="hljs-keyword">install </span>perl-<span class="hljs-keyword">ExtUtils-CBuilder </span>perl-<span class="hljs-keyword">ExtUtils-MakeMaker </span>-y</code></pre>
+<p>安装<code>DBI-1.636.tar.gz</code></p>
+<pre><code class="hljs undefined">wget http://<span class="hljs-built_in">search</span>.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-<span class="hljs-number">1.636</span>.tar.gz
+tar -xvf DBI-<span class="hljs-number">1.636</span>.tar.gz
+
+<span class="hljs-keyword">cd</span> DBI-<span class="hljs-number">1.636</span>
+
+<span class="hljs-keyword">make</span>
+<span class="hljs-keyword">make</span> install</code></pre>
+<p>安装 <code>DBD-mysql-4.039.tar.gz</code> 时，需要设置<br><pre><code class="hljs undefined">wget http:<span class="hljs-comment">//www.cpan.org/authors/id/C/CA/CAPTTOFU/DBD-mysql-4.039.tar.gz</span>
+tar -xvf DBD-mysql-<span class="hljs-number">4.039</span><span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.gz</span>
+
+cd DBD-mysql-<span class="hljs-number">4.039</span>
+
+perl Makefile<span class="hljs-selector-class">.PL</span> --mysql_config=/usr/bin/mysql_config
+make
+make install</code></pre></p>
+<p><em>配置文件 <code>squid.conf</code></em><br><pre><code class="hljs undefined"><span class="hljs-comment">#auth_param basic program /usr/lib64/squid/basic_ncsa_auth /etc/squid/passwd</span>
+auth_param basic program /usr/lib64/squid/basic_db_auth --user root --password mysql2016 --plaintext --persist
+auth_param basic children 5
+auth_param basic realm Squid proxy-caching web<span class="hljs-built_in"> server
+</span>auth_param basic credentialsttl 2 hours
+acl normal proxy_auth REQUIRED
+http_access allow normal
+
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Recommended minimum configuration:</span>
+<span class="hljs-comment">#</span>
+
+<span class="hljs-comment"># Example rule allowing access from your local networks.</span>
+<span class="hljs-comment"># Adapt to list your (internal) IP networks from where browsing</span>
+<span class="hljs-comment"># should be allowed</span>
+acl localnet src 10.0.0.0/8     # RFC1918 possible internal<span class="hljs-built_in"> network
+</span>acl localnet src 172.16.0.0/12  # RFC1918 possible internal<span class="hljs-built_in"> network
+</span>acl localnet src 192.168.0.0/16 # RFC1918 possible internal<span class="hljs-built_in"> network
+</span>acl localnet src fc00::/7       # RFC 4193 local private<span class="hljs-built_in"> network </span>range
+acl localnet src fe80::/10      # RFC 4291 link-local (directly plugged) machines
+
+acl SSL_ports<span class="hljs-built_in"> port </span>443
+acl Safe_ports<span class="hljs-built_in"> port </span>80          # http
+acl Safe_ports<span class="hljs-built_in"> port </span>21          # ftp
+acl Safe_ports<span class="hljs-built_in"> port </span>443         # https
+acl Safe_ports<span class="hljs-built_in"> port </span>70          # gopher
+acl Safe_ports<span class="hljs-built_in"> port </span>210         # wais
+acl Safe_ports<span class="hljs-built_in"> port </span>1025-65535  # unregistered ports
+acl Safe_ports<span class="hljs-built_in"> port </span>280         # http-mgmt
+acl Safe_ports<span class="hljs-built_in"> port </span>488         # gss-http
+acl Safe_ports<span class="hljs-built_in"> port </span>591         # filemaker
+acl Safe_ports<span class="hljs-built_in"> port </span>777         # multiling http
+acl CONNECT method CONNECT
+
+
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Recommended minimum Access Permission configuration:</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Deny requests to certain unsafe ports</span>
+http_access deny !Safe_ports
+
+<span class="hljs-comment"># Deny CONNECT to other than secure SSL ports</span>
+http_access deny CONNECT !SSL_ports
+
+<span class="hljs-comment"># Only allow cachemgr access from localhost</span>
+http_access allow localhost manager
+http_access deny manager
+
+<span class="hljs-comment"># We strongly recommend the following be uncommented to protect innocent</span>
+<span class="hljs-comment"># web applications running on the proxy server who think the only</span>
+<span class="hljs-comment"># one who can access services on "localhost" is a local user</span>
+<span class="hljs-comment">#http_access deny to_localhost</span>
+
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># INSERT YOUR OWN RULE(S) HERE TO ALLOW ACCESS FROM YOUR CLIENTS</span>
+<span class="hljs-comment">#</span>
+
+<span class="hljs-comment"># Example rule allowing access from your local networks.</span>
+<span class="hljs-comment"># Adapt localnet in the ACL section to list your (internal) IP networks</span>
+<span class="hljs-comment"># from where browsing should be allowed</span>
+http_access allow localnet
+http_access allow localhost
+
+<span class="hljs-comment"># And finally deny all other access to this proxy</span>
+http_access allow all
+
+<span class="hljs-comment"># Squid normally listens to port 3128</span>
+http_port 3128
+
+<span class="hljs-comment"># Uncomment and adjust the following to add a disk cache directory.</span>
+
+<span class="hljs-comment"># Uncomment and adjust the following to add a disk cache directory.</span>
+<span class="hljs-comment">#cache_dir ufs /var/spool/squid 100 16 256</span>
+
+<span class="hljs-comment"># Leave coredumps in the first cache dir</span>
+coredump_dir /var/spool/squid
+
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Add any of your own refresh_pattern entries above these.</span>
+<span class="hljs-comment">#</span>
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern .               0       20%     4320
+
+<span class="hljs-comment">#auth_param basic program /usr/lib64/squid/ncsa_auth /etc/squid/passwd</span>
+<span class="hljs-comment">#auth_param basic children 5        </span>
+<span class="hljs-comment">#auth_param basic credentialsttl 1 hours    </span>
+<span class="hljs-comment">#auth_param basic realm my test prosy         </span>
+<span class="hljs-comment">#acl test123 proxy_auth REQUIRED  </span>
+<span class="hljs-comment">#http_access allow test123    </span>
+
+<span class="hljs-comment">#auth_param basic program /usr/lib64/squid/basic_ncsa_auth /etc/squid/passwd</span>
+<span class="hljs-comment">#auth_param basic children 5</span>
+<span class="hljs-comment">#auth_param basic realm Squid proxy-caching web server</span>
+<span class="hljs-comment">#auth_param basic credentialsttl 2 hours</span>
+<span class="hljs-comment">#acl normal proxy_auth REQUIRED</span>
+<span class="hljs-comment">#http_access allow normal</span></code></pre></p>
+
+              <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                  <!-- 单元1 -->
+                  <ins class="adsbygoogle"
+                      style="display:block"
+                      data-ad-client="ca-pub-9508321495212724"
+                      data-ad-slot="3221759322"
+                      data-ad-format="auto"
+                      data-full-width-responsive="true"></ins>
+              <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/工具/">工具</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Squid/">Squid</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2017/04/21/vue/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【vue系列】安装nodejs</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2016/10/19/front-framework/">
+                        <span class="hidden-mobile">前端框架</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Squid 代理服务器配置&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script data-ad-client="ca-pub-9508321495212724" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+</body>
+</html>

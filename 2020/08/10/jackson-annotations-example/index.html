@@ -1,0 +1,1353 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="努力做最好的自己">
+  <meta name="author" content="TinyKing">
+  <meta name="keywords" content="undefined">
+  <title>Jackson注解示例 - 爱笑笑，爱生活</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css">
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>爱笑笑，爱生活</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-08-10 18:27" pubdate>
+      2020年8月10日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      70
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">Jackson注解示例</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>在本文中，我们将深入研究Jackson注解。<br>我们将看到如何使用现有的注释，如何创建自定义的注释，最后—如何禁用它们。</p>
+<h2 id="2-Jackson序列化注解"><a href="#2-Jackson序列化注解" class="headerlink" title="2. Jackson序列化注解"></a>2. Jackson序列化注解</h2><p>首先，我们将查看序列化注释。</p>
+<h3 id="2-1-JsonAnyGetter"><a href="#2-1-JsonAnyGetter" class="headerlink" title="2.1. @JsonAnyGetter"></a>2.1. @JsonAnyGetter</h3><p>@JsonAnyGetter注释允许灵活地使用映射字段作为标准属性。<br>下面是一个快速的例子——ExtendableBean实体拥有name属性和一组可扩展属性，它们以键/值对的形式存在:</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ExtendableBean</span> </span>&#123;
+    <span class="hljs-keyword">public</span> String name;
+    <span class="hljs-keyword">private</span> Map&lt;String, String&gt; properties;
+
+    <span class="hljs-meta">@JsonAnyGetter</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Map&lt;String, String&gt; <span class="hljs-title">getProperties</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> properties;
+    &#125;
+&#125;</code></pre>
+<p>当我们序列化这个实体的一个实例时，我们会得到Map中所有的键值作为标准的普通属性:</p>
+<pre><code class="hljs json">&#123;
+    <span class="hljs-attr">"name"</span>:<span class="hljs-string">"My bean"</span>,
+    <span class="hljs-attr">"attr2"</span>:<span class="hljs-string">"val2"</span>,
+    <span class="hljs-attr">"attr1"</span>:<span class="hljs-string">"val1"</span>
+&#125;</code></pre>
+<p>这里是如何序列化这个实体看起来像在实践:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingJsonAnyGetter_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException </span>&#123;
+
+    ExtendableBean bean = <span class="hljs-keyword">new</span> ExtendableBean(<span class="hljs-string">"My bean"</span>);
+    bean.add(<span class="hljs-string">"attr1"</span>, <span class="hljs-string">"val1"</span>);
+    bean.add(<span class="hljs-string">"attr2"</span>, <span class="hljs-string">"val2"</span>);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper().writeValueAsString(bean);
+
+    assertThat(result, containsString(<span class="hljs-string">"attr1"</span>));
+    assertThat(result, containsString(<span class="hljs-string">"val1"</span>));
+&#125;</code></pre>
+<p>我们还可以使用可选参数enabled为false来禁用@JsonAnyGetter()。在本例中，映射将被转换为JSON，并在序列化之后出现在properties变量下。</p>
+<h3 id="2-2-JsonGetter"><a href="#2-2-JsonGetter" class="headerlink" title="2.2. @JsonGetter"></a>2.2. @JsonGetter</h3><p>@JsonGetter注释是@JsonProperty注释的替代品，它将方法标记为getter方法。<br>在下面的例子中-我们指定getTheName()方法作为MyBean实体的name属性的getter方法:</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyBean</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">private</span> String name;
+
+    <span class="hljs-meta">@JsonGetter</span>(<span class="hljs-string">"name"</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getTheName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+&#125;</code></pre>
+<p>这是如何在实践中运作的:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingJsonGetter_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException </span>&#123;
+
+    MyBean bean = <span class="hljs-keyword">new</span> MyBean(<span class="hljs-number">1</span>, <span class="hljs-string">"My bean"</span>);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper().writeValueAsString(bean);
+
+    assertThat(result, containsString(<span class="hljs-string">"My bean"</span>));
+    assertThat(result, containsString(<span class="hljs-string">"1"</span>));
+&#125;</code></pre>
+<h3 id="2-3-JsonPropertyOrder"><a href="#2-3-JsonPropertyOrder" class="headerlink" title="2.3. @JsonPropertyOrder"></a>2.3. @JsonPropertyOrder</h3><p>我们可以使用@JsonPropertyOrder注释来指定序列化时属性的顺序。<br>让我们为MyBean实体的属性设置一个自定义顺序:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@JsonPropertyOrder</span>(&#123; <span class="hljs-string">"name"</span>, <span class="hljs-string">"id"</span> &#125;)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyBean</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">public</span> String name;
+&#125;</code></pre>
+<p>这是序列化的输出:</p>
+<pre><code class="hljs java">&#123;
+    <span class="hljs-string">"name"</span>:<span class="hljs-string">"My bean"</span>,
+    <span class="hljs-string">"id"</span>:<span class="hljs-number">1</span>
+&#125;</code></pre>
+<p>还有一个简单的测试:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingJsonPropertyOrder_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException </span>&#123;
+
+    MyBean bean = <span class="hljs-keyword">new</span> MyBean(<span class="hljs-number">1</span>, <span class="hljs-string">"My bean"</span>);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper().writeValueAsString(bean);
+    assertThat(result, containsString(<span class="hljs-string">"My bean"</span>));
+    assertThat(result, containsString(<span class="hljs-string">"1"</span>));
+&#125;</code></pre>
+<p>我们还可以使用@JsonPropertyOrder(alphabetic=true)按字母顺序排列属性。在这种情况下，序列化的输出将是:</p>
+<pre><code class="hljs java">&#123;
+    <span class="hljs-string">"id"</span>:<span class="hljs-number">1</span>,
+    <span class="hljs-string">"name"</span>:<span class="hljs-string">"My bean"</span>
+&#125;</code></pre>
+<h3 id="2-4-JsonRawValue"><a href="#2-4-JsonRawValue" class="headerlink" title="2.4. @JsonRawValue"></a>2.4. @JsonRawValue</h3><p>@JsonRawValue注释可以指示Jackson按原样序列化属性。<br>在下面的例子中，我们使用@JsonRawValue嵌入一些定制的JSON作为一个实体的值:</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RawBean</span> </span>&#123;
+    <span class="hljs-keyword">public</span> String name;
+
+    <span class="hljs-meta">@JsonRawValue</span>
+    <span class="hljs-keyword">public</span> String json;
+&#125;</code></pre>
+<p>序列化实体的输出为:</p>
+<pre><code class="hljs java">&#123;
+    <span class="hljs-string">"name"</span>:<span class="hljs-string">"My bean"</span>,
+    <span class="hljs-string">"json"</span>:&#123;
+        <span class="hljs-string">"attr"</span>:<span class="hljs-keyword">false</span>
+    &#125;
+&#125;</code></pre>
+<p>还有一个简单的测试:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingJsonRawValue_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException </span>&#123;
+
+    RawBean bean = <span class="hljs-keyword">new</span> RawBean(<span class="hljs-string">"My bean"</span>, <span class="hljs-string">"&#123;\"attr\":false&#125;"</span>);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper().writeValueAsString(bean);
+    assertThat(result, containsString(<span class="hljs-string">"My bean"</span>));
+    assertThat(result, containsString(<span class="hljs-string">"&#123;\"attr\":false&#125;"</span>));
+&#125;</code></pre>
+<p>我们还可以使用可选的布尔参数值来定义这个注释是否是活动的。</p>
+<h3 id="2-5-JsonValue"><a href="#2-5-JsonValue" class="headerlink" title="2.5. @JsonValue"></a>2.5. @JsonValue</h3><p>@JsonValue表示库将使用一个方法来序列化整个实例。<br>例如，在枚举中，我们用@JsonValue注释getName，这样任何这样的实体都可以通过其名称序列化:</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> TypeEnumWithValue &#123;
+    TYPE1(<span class="hljs-number">1</span>, <span class="hljs-string">"Type A"</span>), TYPE2(<span class="hljs-number">2</span>, <span class="hljs-string">"Type 2"</span>);
+
+    <span class="hljs-keyword">private</span> Integer id;
+    <span class="hljs-keyword">private</span> String name;
+
+    <span class="hljs-comment">// standard constructors</span>
+
+    <span class="hljs-meta">@JsonValue</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+&#125;</code></pre>
+<p>我们的测试:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingJsonValue_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonParseException, IOException </span>&#123;
+
+    String enumAsString = <span class="hljs-keyword">new</span> ObjectMapper()
+      .writeValueAsString(TypeEnumWithValue.TYPE1);
+
+    assertThat(enumAsString, is(<span class="hljs-string">""</span>Type A<span class="hljs-string">""</span>));
+&#125;</code></pre>
+<h3 id="2-6-JsonRootName"><a href="#2-6-JsonRootName" class="headerlink" title="2.6. @JsonRootName"></a>2.6. @JsonRootName</h3><p>如果启用了包装，则使用@JsonRootName注释来指定要使用的根包装器的名称。<br>包装意味着不将用户序列化为以下内容:<br>它会像这样包装:</p>
+<pre><code class="hljs Json">&#123;
+    <span class="hljs-attr">"User"</span>: &#123;
+        <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"John"</span>
+    &#125;
+&#125;</code></pre>
+<p>那么，让我们来看一个例子——我们将使用@JsonRootName注释来表示这个潜在的包装实体的名称:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@JsonRootName</span>(value = <span class="hljs-string">"user"</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserWithRoot</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">public</span> String name;
+&#125;</code></pre>
+<p>默认情况下，包装器的名称将是类的名称- UserWithRoot。通过使用注释，我们得到了看起来更干净的用户:</p>
+<pre><code class="hljs Java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingJsonRootName_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException </span>&#123;
+
+    UserWithRoot user = <span class="hljs-keyword">new</span> User(<span class="hljs-number">1</span>, <span class="hljs-string">"John"</span>);
+
+    ObjectMapper mapper = <span class="hljs-keyword">new</span> ObjectMapper();
+    mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+    String result = mapper.writeValueAsString(user);
+
+    assertThat(result, containsString(<span class="hljs-string">"John"</span>));
+    assertThat(result, containsString(<span class="hljs-string">"user"</span>));
+&#125;</code></pre>
+<p>这是序列化的输出:</p>
+<pre><code class="hljs Json">&#123;
+    <span class="hljs-attr">"user"</span>:&#123;
+        <span class="hljs-attr">"id"</span>:<span class="hljs-number">1</span>,
+        <span class="hljs-attr">"name"</span>:<span class="hljs-string">"John"</span>
+    &#125;
+&#125;</code></pre>
+<p>自Jackson 2.4以来，一个新的可选参数名称空间可用于XML等数据格式。如果我们添加它，它将成为完全限定名的一部分:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@JsonRootName</span>(value = <span class="hljs-string">"user"</span>, namespace=<span class="hljs-string">"users"</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserWithRootNamespace</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">public</span> String name;
+
+    <span class="hljs-comment">// ...</span>
+&#125;</code></pre>
+<p>如果我们用XmlMapper序列化它，输出将是:</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">user</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"users"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">id</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">""</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">name</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">""</span>&gt;</span>John<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">items</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">""</span>/&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">user</span>&gt;</span></code></pre>
+<h3 id="2-7-JsonSerialize"><a href="#2-7-JsonSerialize" class="headerlink" title="2.7. @JsonSerialize"></a>2.7. @JsonSerialize</h3><p>让我们看一个简单的例子。我们将使用@JsonSerialize用CustomDateSerializer来序列化eventDate属性:</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EventWithSerializer</span> </span>&#123;
+    <span class="hljs-keyword">public</span> String name;
+
+    <span class="hljs-meta">@JsonSerialize</span>(using = CustomDateSerializer<span class="hljs-class">.<span class="hljs-keyword">class</span>)
+    <span class="hljs-title">public</span> <span class="hljs-title">Date</span> <span class="hljs-title">eventDate</span></span>;
+&#125;</code></pre>
+<p>下面是简单的自定义Jackson序列化器:</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomDateSerializer</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StdSerializer</span>&lt;<span class="hljs-title">Date</span>&gt; </span>&#123;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> SimpleDateFormat formatter
+      = <span class="hljs-keyword">new</span> SimpleDateFormat(<span class="hljs-string">"dd-MM-yyyy hh:mm:ss"</span>);
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CustomDateSerializer</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">this</span>(<span class="hljs-keyword">null</span>);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CustomDateSerializer</span><span class="hljs-params">(Class&lt;Date&gt; t)</span> </span>&#123;
+        <span class="hljs-keyword">super</span>(t);
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">serialize</span><span class="hljs-params">(
+      Date value, JsonGenerator gen, SerializerProvider arg2)</span>
+      <span class="hljs-keyword">throws</span> IOException, JsonProcessingException </span>&#123;
+        gen.writeString(formatter.format(value));
+    &#125;
+&#125;</code></pre>
+<p>让我们在测试中使用这些:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingJsonSerialize_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException, ParseException </span>&#123;
+
+    SimpleDateFormat df
+      = <span class="hljs-keyword">new</span> SimpleDateFormat(<span class="hljs-string">"dd-MM-yyyy hh:mm:ss"</span>);
+
+    String toParse = <span class="hljs-string">"20-12-2014 02:30:00"</span>;
+    Date date = df.parse(toParse);
+    EventWithSerializer event = <span class="hljs-keyword">new</span> EventWithSerializer(<span class="hljs-string">"party"</span>, date);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper().writeValueAsString(event);
+    assertThat(result, containsString(toParse));
+&#125;</code></pre>
+<h2 id="Jackson反序列化注解"><a href="#Jackson反序列化注解" class="headerlink" title="Jackson反序列化注解"></a>Jackson反序列化注解</h2><p>接下来——让我们研究Jackson反序列化注解。</p>
+<h3 id="3-1-JsonCreator"><a href="#3-1-JsonCreator" class="headerlink" title="3.1. @JsonCreator"></a>3.1. @JsonCreator</h3><p>我们可以使用@JsonCreator注释来调优反序列化中使用的构造器/工厂。<br>当我们需要反序列化一些与我们需要获取的目标实体不完全匹配的JSON时，它非常有用。<br>我们来看一个例子;说我们需要反序列化以下JSON:</p>
+<pre><code class="hljs Json">&#123;
+    <span class="hljs-attr">"id"</span>:<span class="hljs-number">1</span>,
+    <span class="hljs-attr">"theName"</span>:<span class="hljs-string">"My bean"</span>
+&#125;</code></pre>
+<p>但是，在我们的目标实体中没有theName字段—只有name字段。现在，我们不想改变实体本身—我们只需要对数据编出过程进行更多的控制—通过使用@JsonCreator和@JsonProperty注释来注释构造函数:</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BeanWithCreator</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">public</span> String name;
+
+    <span class="hljs-meta">@JsonCreator</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BeanWithCreator</span><span class="hljs-params">(
+      @JsonProperty(<span class="hljs-string">"id"</span>)</span> <span class="hljs-keyword">int</span> id,
+      @<span class="hljs-title">JsonProperty</span><span class="hljs-params">(<span class="hljs-string">"theName"</span>)</span> String name) </span>&#123;
+        <span class="hljs-keyword">this</span>.id = id;
+        <span class="hljs-keyword">this</span>.name = name;
+    &#125;
+&#125;</code></pre>
+<p>让我们来看看这是怎么回事:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenDeserializingUsingJsonCreator_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> IOException </span>&#123;
+
+    String json = <span class="hljs-string">"&#123;\"id\":1,\"theName\":\"My bean\"&#125;"</span>;
+
+    BeanWithCreator bean = <span class="hljs-keyword">new</span> ObjectMapper()
+      .readerFor(BeanWithCreator<span class="hljs-class">.<span class="hljs-keyword">class</span>)
+      .<span class="hljs-title">readValue</span>(<span class="hljs-title">json</span>)</span>;
+    assertEquals(<span class="hljs-string">"My bean"</span>, bean.name);
+&#125;</code></pre>
+<h3 id="3-2-JacksonInject"><a href="#3-2-JacksonInject" class="headerlink" title="3.2. @JacksonInject"></a>3.2. @JacksonInject</h3><p>@JacksonInject表示属性将从注入中获得其值，而不是从JSON数据中。<br>在下面的例子中，我们使用@JacksonInject注入属性id:</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BeanWithInject</span> </span>&#123;
+    <span class="hljs-meta">@JacksonInject</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+
+    <span class="hljs-keyword">public</span> String name;
+&#125;</code></pre>
+<p>它是这样工作的:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenDeserializingUsingJsonInject_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> IOException </span>&#123;
+
+    String json = <span class="hljs-string">"&#123;\"name\":\"My bean\"&#125;"</span>;
+
+    InjectableValues inject = <span class="hljs-keyword">new</span> InjectableValues.Std()
+      .addValue(<span class="hljs-keyword">int</span><span class="hljs-class">.<span class="hljs-keyword">class</span>, 1)</span>;
+    BeanWithInject bean = <span class="hljs-keyword">new</span> ObjectMapper().reader(inject)
+      .forType(BeanWithInject<span class="hljs-class">.<span class="hljs-keyword">class</span>)
+      .<span class="hljs-title">readValue</span>(<span class="hljs-title">json</span>)</span>;
+
+    assertEquals(<span class="hljs-string">"My bean"</span>, bean.name);
+    assertEquals(<span class="hljs-number">1</span>, bean.id);
+&#125;</code></pre>
+<h3 id="3-3-JsonAnySetter"><a href="#3-3-JsonAnySetter" class="headerlink" title="3.3. @JsonAnySetter"></a>3.3. @JsonAnySetter</h3><p>@JsonAnySetter允许我们灵活地使用映射作为标准属性。在反序列化时，JSON的属性将被添加到映射中。</p>
+<p>让我们看看这是如何工作的-我们将使用@JsonAnySetter来反序列化实体ExtendableBean:</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ExtendableBean</span> </span>&#123;
+    <span class="hljs-keyword">public</span> String name;
+    <span class="hljs-keyword">private</span> Map&lt;String, String&gt; properties;
+
+    <span class="hljs-meta">@JsonAnySetter</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(String key, String value)</span> </span>&#123;
+        properties.put(key, value);
+    &#125;
+&#125;</code></pre>
+<p>这是我们需要反序列化的JSON:</p>
+<pre><code class="hljs Json">&#123;
+    <span class="hljs-attr">"name"</span>:<span class="hljs-string">"My bean"</span>,
+    <span class="hljs-attr">"attr2"</span>:<span class="hljs-string">"val2"</span>,
+    <span class="hljs-attr">"attr1"</span>:<span class="hljs-string">"val1"</span>
+&#125;</code></pre>
+<p>而这一切是如何联系在一起的:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenDeserializingUsingJsonAnySetter_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> IOException </span>&#123;
+    String json
+      = <span class="hljs-string">"&#123;\"name\":\"My bean\",\"attr2\":\"val2\",\"attr1\":\"val1\"&#125;"</span>;
+
+    ExtendableBean bean = <span class="hljs-keyword">new</span> ObjectMapper()
+      .readerFor(ExtendableBean<span class="hljs-class">.<span class="hljs-keyword">class</span>)
+      .<span class="hljs-title">readValue</span>(<span class="hljs-title">json</span>)</span>;
+
+    assertEquals(<span class="hljs-string">"My bean"</span>, bean.name);
+    assertEquals(<span class="hljs-string">"val2"</span>, bean.getProperties().get(<span class="hljs-string">"attr2"</span>));
+&#125;</code></pre>
+<h3 id="3-4-JsonSetter"><a href="#3-4-JsonSetter" class="headerlink" title="3.4. @JsonSetter"></a>3.4. @JsonSetter</h3><p>@JsonSetter是@JsonProperty的替代方法—它将方法标记为setter方法。</p>
+<p>当我们需要读取一些JSON数据，但目标实体类与该数据不完全匹配时，这非常有用，因此我们需要调优流程以使其适合该数据。</p>
+<p>在下面的例子中，我们将指定方法setTheName()作为MyBean实体中name属性的setter:</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyBean</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">private</span> String name;
+
+    <span class="hljs-meta">@JsonSetter</span>(<span class="hljs-string">"name"</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setTheName</span><span class="hljs-params">(String name)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+    &#125;
+&#125;</code></pre>
+<p>现在，当我们需要unmarshall一些JSON数据-这是完美的工作:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenDeserializingUsingJsonSetter_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> IOException </span>&#123;
+
+    String json = <span class="hljs-string">"&#123;\"id\":1,\"name\":\"My bean\"&#125;"</span>;
+
+    MyBean bean = <span class="hljs-keyword">new</span> ObjectMapper()
+      .readerFor(MyBean<span class="hljs-class">.<span class="hljs-keyword">class</span>)
+      .<span class="hljs-title">readValue</span>(<span class="hljs-title">json</span>)</span>;
+    assertEquals(<span class="hljs-string">"My bean"</span>, bean.getTheName());
+&#125;</code></pre>
+<h3 id="3-5-JsonDeserialize"><a href="#3-5-JsonDeserialize" class="headerlink" title="3.5. @JsonDeserialize"></a>3.5. @JsonDeserialize</h3><p>@JsonDeserialize表示使用自定义反序列化器。</p>
+<p>让我们看看这是如何实现的-我们将使用@JsonDeserialize来反序列化eventDate属性与CustomDateDeserializer:</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EventWithSerializer</span> </span>&#123;
+    <span class="hljs-keyword">public</span> String name;
+
+    <span class="hljs-meta">@JsonDeserialize</span>(using = CustomDateDeserializer<span class="hljs-class">.<span class="hljs-keyword">class</span>)
+    <span class="hljs-title">public</span> <span class="hljs-title">Date</span> <span class="hljs-title">eventDate</span></span>;
+&#125;</code></pre>
+<p>这是自定义反序列化器:</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomDateDeserializer</span>
+  <span class="hljs-keyword">extends</span> <span class="hljs-title">StdDeserializer</span>&lt;<span class="hljs-title">Date</span>&gt; </span>&#123;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> SimpleDateFormat formatter
+      = <span class="hljs-keyword">new</span> SimpleDateFormat(<span class="hljs-string">"dd-MM-yyyy hh:mm:ss"</span>);
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CustomDateDeserializer</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">this</span>(<span class="hljs-keyword">null</span>);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CustomDateDeserializer</span><span class="hljs-params">(Class&lt;?&gt; vc)</span> </span>&#123;
+        <span class="hljs-keyword">super</span>(vc);
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Date <span class="hljs-title">deserialize</span><span class="hljs-params">(
+      JsonParser jsonparser, DeserializationContext context)</span>
+      <span class="hljs-keyword">throws</span> IOException </span>&#123;
+
+        String date = jsonparser.getText();
+        <span class="hljs-keyword">try</span> &#123;
+            <span class="hljs-keyword">return</span> formatter.parse(date);
+        &#125; <span class="hljs-keyword">catch</span> (ParseException e) &#123;
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(e);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<p>这是背靠背的测试:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenDeserializingUsingJsonDeserialize_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> IOException </span>&#123;
+
+    String json
+      = <span class="hljs-string">"&#123;"</span>name<span class="hljs-string">":"</span>party<span class="hljs-string">","</span>eventDate<span class="hljs-string">":"</span><span class="hljs-number">20</span>-<span class="hljs-number">12</span>-<span class="hljs-number">2014</span> <span class="hljs-number">02</span>:<span class="hljs-number">30</span>:<span class="hljs-number">00</span><span class="hljs-string">"&#125;"</span>;
+
+    SimpleDateFormat df
+      = <span class="hljs-keyword">new</span> SimpleDateFormat(<span class="hljs-string">"dd-MM-yyyy hh:mm:ss"</span>);
+    EventWithSerializer event = <span class="hljs-keyword">new</span> ObjectMapper()
+      .readerFor(EventWithSerializer<span class="hljs-class">.<span class="hljs-keyword">class</span>)
+      .<span class="hljs-title">readValue</span>(<span class="hljs-title">json</span>)</span>;
+
+    assertEquals(
+      <span class="hljs-string">"20-12-2014 02:30:00"</span>, df.format(event.eventDate));
+&#125;</code></pre>
+<h3 id="3-6-JsonAlias"><a href="#3-6-JsonAlias" class="headerlink" title="3.6 @JsonAlias"></a>3.6 @JsonAlias</h3><p>@JsonAlias在反序列化期间为属性定义一个或多个替代名称。<br>让我们通过一个简单的例子来看看这个注释是如何工作的:</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AliasBean</span> </span>&#123;
+    <span class="hljs-meta">@JsonAlias</span>(&#123; <span class="hljs-string">"fName"</span>, <span class="hljs-string">"f_name"</span> &#125;)
+    <span class="hljs-keyword">private</span> String firstName;   
+    <span class="hljs-keyword">private</span> String lastName;
+&#125;</code></pre>
+<p>在这里，我们有一个POJO，我们想用fName、f_name和firstName等值反序列化JSON到POJO的firstName变量中。<br>这里有一个测试，确保这个注释像expecte一样工作:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenDeserializingUsingJsonAlias_thenCorrect</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;
+    String json = <span class="hljs-string">"&#123;\"fName\": \"John\", \"lastName\": \"Green\"&#125;"</span>;
+    AliasBean aliasBean = <span class="hljs-keyword">new</span> ObjectMapper().readerFor(AliasBean<span class="hljs-class">.<span class="hljs-keyword">class</span>).<span class="hljs-title">readValue</span>(<span class="hljs-title">json</span>)</span>;
+    assertEquals(<span class="hljs-string">"John"</span>, aliasBean.getFirstName());
+&#125;</code></pre>
+<h2 id="4-Jackson属性包含注释"><a href="#4-Jackson属性包含注释" class="headerlink" title="4. Jackson属性包含注释"></a>4. Jackson属性包含注释</h2><h3 id="4-1-JsonIgnoreProperties"><a href="#4-1-JsonIgnoreProperties" class="headerlink" title="4.1. @JsonIgnoreProperties"></a>4.1. @JsonIgnoreProperties</h3><p>@JsonIgnoreProperties是一个类级注释，它标记Jackson将忽略的一个属性或一列属性。<br>让我们来看一个忽略属性id的例子:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@JsonIgnoreProperties</span>(&#123; <span class="hljs-string">"id"</span> &#125;)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BeanWithIgnore</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">public</span> String name;
+&#125;</code></pre>
+<p>下面是确保忽略发生的测试:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingJsonIgnoreProperties_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException </span>&#123;
+
+    BeanWithIgnore bean = <span class="hljs-keyword">new</span> BeanWithIgnore(<span class="hljs-number">1</span>, <span class="hljs-string">"My bean"</span>);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper()
+      .writeValueAsString(bean);
+
+    assertThat(result, containsString(<span class="hljs-string">"My bean"</span>));
+    assertThat(result, not(containsString(<span class="hljs-string">"id"</span>)));
+&#125;</code></pre>
+<p>为了毫无例外地忽略JSON输入中的任何未知属性，我们可以对@JsonIgnoreProperties注释设置ignoreUnknown=true。</p>
+<h3 id="4-2-JsonIgnore"><a href="#4-2-JsonIgnore" class="headerlink" title="4.2. @JsonIgnore"></a>4.2. @JsonIgnore</h3><p>@JsonIgnore注释用于在字段级别标记要忽略的属性。</p>
+<p>让我们使用@JsonIgnore来忽略序列化中的属性id:</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BeanWithIgnore</span> </span>&#123;
+    <span class="hljs-meta">@JsonIgnore</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+
+    <span class="hljs-keyword">public</span> String name;
+&#125;</code></pre>
+<p>确保id被成功忽略的测试:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingJsonIgnore_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException </span>&#123;
+
+    BeanWithIgnore bean = <span class="hljs-keyword">new</span> BeanWithIgnore(<span class="hljs-number">1</span>, <span class="hljs-string">"My bean"</span>);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper()
+      .writeValueAsString(bean);
+
+    assertThat(result, containsString(<span class="hljs-string">"My bean"</span>));
+    assertThat(result, not(containsString(<span class="hljs-string">"id"</span>)));
+&#125;</code></pre>
+<h3 id="4-3-JsonIgnoreType"><a href="#4-3-JsonIgnoreType" class="headerlink" title="4.3. @JsonIgnoreType"></a><strong>4.3. <em>@JsonIgnoreType</em></strong></h3><p>@JsonIgnoreType将注释类型的所有属性标记为忽略。<br>让我们使用注释来标记所有类型名称的属性被忽略:<br><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">public</span> Name name;
+
+    <span class="hljs-meta">@JsonIgnoreType</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Name</span> </span>&#123;
+        <span class="hljs-keyword">public</span> String firstName;
+        <span class="hljs-keyword">public</span> String lastName;
+    &#125;
+&#125;</code></pre></p>
+<p>这里有一个简单的测试，确保忽略工作正确:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingJsonIgnoreType_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException, ParseException </span>&#123;
+
+    User.Name name = <span class="hljs-keyword">new</span> User.Name(<span class="hljs-string">"John"</span>, <span class="hljs-string">"Doe"</span>);
+    User user = <span class="hljs-keyword">new</span> User(<span class="hljs-number">1</span>, name);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper()
+      .writeValueAsString(user);
+
+    assertThat(result, containsString(<span class="hljs-string">"1"</span>));
+    assertThat(result, not(containsString(<span class="hljs-string">"name"</span>)));
+    assertThat(result, not(containsString(<span class="hljs-string">"John"</span>)));
+&#125;</code></pre>
+<h3 id="4-4-JsonInclude"><a href="#4-4-JsonInclude" class="headerlink" title="4.4. @JsonInclude"></a><strong>4.4. <em>@JsonInclude</em></strong></h3><p>我们可以使用@JsonInclude来排除具有空/空/默认值的属性。<br>让我们看一个例子-排除null从序列化:<br><pre><code class="hljs java"><span class="hljs-meta">@JsonInclude</span>(Include.NON_NULL)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyBean</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">public</span> String name;
+&#125;</code></pre></p>
+<p>下面是完整的测试:<br><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingJsonInclude_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException </span>&#123;
+
+    MyBean bean = <span class="hljs-keyword">new</span> MyBean(<span class="hljs-number">1</span>, <span class="hljs-keyword">null</span>);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper()
+      .writeValueAsString(bean);
+
+    assertThat(result, containsString(<span class="hljs-string">"1"</span>));
+    assertThat(result, not(containsString(<span class="hljs-string">"name"</span>)));
+&#125;</code></pre></p>
+<h3 id="4-5-JsonAutoDetect"><a href="#4-5-JsonAutoDetect" class="headerlink" title="4.5. @JsonAutoDetect"></a><strong>4.5. <em>@JsonAutoDetect</em></strong></h3><p>@JsonAutoDetect可以覆盖哪些属性可见，哪些不可见的默认语义。<br>让我们通过一个简单的例子来看看这个注释是如何非常有用的——让我们启用序列化私有属性:<br><pre><code class="hljs java"><span class="hljs-meta">@JsonAutoDetect</span>(fieldVisibility = Visibility.ANY)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PrivateBean</span> </span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">private</span> String name;
+&#125;</code></pre></p>
+<p>测试：<br><pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingJsonAutoDetect_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException </span>&#123;
+
+    PrivateBean bean = <span class="hljs-keyword">new</span> PrivateBean(<span class="hljs-number">1</span>, <span class="hljs-string">"My bean"</span>);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper()
+      .writeValueAsString(bean);
+
+    assertThat(result, containsString(<span class="hljs-string">"1"</span>));
+    assertThat(result, containsString(<span class="hljs-string">"My bean"</span>));
+&#125;</code></pre></p>
+<p><a name="JkWhc"></a></p>
+<h2 id="5-Jackson多态类型处理注释"><a href="#5-Jackson多态类型处理注释" class="headerlink" title="5. Jackson多态类型处理注释"></a>5. Jackson多态类型处理注释</h2><p>接下来，让我们看看Jackson多态类型处理注释:</p>
+<ul>
+<li>@JsonTypeInfo——指示要在序列化中包含什么类型信息的详细信息</li>
+<li>@JsonSubTypes——指示注释类型的子类型</li>
+<li>@JsonTypeName—定义了一个用于注释类的逻辑类型名</li>
+</ul>
+<p>让我们看一个更复杂的例子，使用所有这三个——@JsonTypeInfo， @JsonSubTypes，和@JsonTypeName——来序列化/反序列化实体Zoo:<br><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Zoo</span> </span>&#123;
+    <span class="hljs-keyword">public</span> Animal animal;
+
+    <span class="hljs-meta">@JsonTypeInfo</span>(
+      use = JsonTypeInfo.Id.NAME,
+      include = As.PROPERTY,
+      property = <span class="hljs-string">"type"</span>)
+    <span class="hljs-meta">@JsonSubTypes</span>(&#123;
+        <span class="hljs-meta">@JsonSubTypes</span>.Type(value = Dog<span class="hljs-class">.<span class="hljs-keyword">class</span>, <span class="hljs-title">name</span> </span>= <span class="hljs-string">"dog"</span>),
+        <span class="hljs-meta">@JsonSubTypes</span>.Type(value = Cat<span class="hljs-class">.<span class="hljs-keyword">class</span>, <span class="hljs-title">name</span> </span>= <span class="hljs-string">"cat"</span>)
+    &#125;)
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Animal</span> </span>&#123;
+        <span class="hljs-keyword">public</span> String name;
+    &#125;
+
+    <span class="hljs-meta">@JsonTypeName</span>(<span class="hljs-string">"dog"</span>)
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dog</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Animal</span> </span>&#123;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> barkVolume;
+    &#125;
+
+    <span class="hljs-meta">@JsonTypeName</span>(<span class="hljs-string">"cat"</span>)
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Cat</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Animal</span> </span>&#123;
+        <span class="hljs-keyword">boolean</span> likesCream;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> lives;
+    &#125;
+&#125;</code></pre></p>
+<p>当我们进行序列化时:<br><pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingPolymorphic_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException </span>&#123;
+    Zoo.Dog dog = <span class="hljs-keyword">new</span> Zoo.Dog(<span class="hljs-string">"lacy"</span>);
+    Zoo zoo = <span class="hljs-keyword">new</span> Zoo(dog);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper()
+      .writeValueAsString(zoo);
+
+    assertThat(result, containsString(<span class="hljs-string">"type"</span>));
+    assertThat(result, containsString(<span class="hljs-string">"dog"</span>));
+&#125;</code></pre></p>
+<p>下面是将动物园实例与狗序列化将得到的结果:<br><pre><code class="hljs java">&#123;
+    <span class="hljs-string">"animal"</span>: &#123;
+        <span class="hljs-string">"type"</span>: <span class="hljs-string">"dog"</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"lacy"</span>,
+        <span class="hljs-string">"barkVolume"</span>: <span class="hljs-number">0</span>
+    &#125;
+&#125;</code></pre></p>
+<p>现在反序列化-让我们从以下JSON输入开始:<br><pre><code class="hljs java">&#123;
+    <span class="hljs-string">"animal"</span>:&#123;
+        <span class="hljs-string">"name"</span>:<span class="hljs-string">"lacy"</span>,
+        <span class="hljs-string">"type"</span>:<span class="hljs-string">"cat"</span>
+    &#125;
+&#125;</code></pre></p>
+<p>让我们看看它是如何被分解到一个动物园实例的:<br><pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenDeserializingPolymorphic_thenCorrect</span><span class="hljs-params">()</span>
+<span class="hljs-keyword">throws</span> IOException </span>&#123;
+    String json = <span class="hljs-string">"&#123;\"animal\":&#123;\"name\":\"lacy\",\"type\":\"cat\"&#125;&#125;"</span>;
+
+    Zoo zoo = <span class="hljs-keyword">new</span> ObjectMapper()
+      .readerFor(Zoo<span class="hljs-class">.<span class="hljs-keyword">class</span>)
+      .<span class="hljs-title">readValue</span>(<span class="hljs-title">json</span>)</span>;
+
+    assertEquals(<span class="hljs-string">"lacy"</span>, zoo.animal.name);
+    assertEquals(Zoo.Cat<span class="hljs-class">.<span class="hljs-keyword">class</span>, <span class="hljs-title">zoo</span>.<span class="hljs-title">animal</span>.<span class="hljs-title">getClass</span>())</span>;
+&#125;</code></pre></p>
+<p><a name="EPNDX"></a></p>
+<h2 id="6-Jackson通用注解"><a href="#6-Jackson通用注解" class="headerlink" title="6. Jackson通用注解"></a><strong>6. Jackson通用注解</strong></h2><p>接下来——让我们讨论Jackson的一些更通用的注释。<br><a name="yZcQ1"></a></p>
+<h3 id="6-1-JsonProperty"><a href="#6-1-JsonProperty" class="headerlink" title="6.1. @JsonProperty"></a><strong>6.1. <em>@JsonProperty</em></strong></h3><p>我们可以添加@JsonProperty注释来表示JSON中的属性名。<br>当我们处理非标准的getter和setter时，让我们使用@JsonProperty来序列化/反序列化属性名:<br><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyBean</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">private</span> String name;
+
+    <span class="hljs-meta">@JsonProperty</span>(<span class="hljs-string">"name"</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setTheName</span><span class="hljs-params">(String name)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.name = name;
+    &#125;
+
+    <span class="hljs-meta">@JsonProperty</span>(<span class="hljs-string">"name"</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getTheName</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> name;
+    &#125;
+&#125;</code></pre></p>
+<p>我们的测试:<br><pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenUsingJsonProperty_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> IOException </span>&#123;
+    MyBean bean = <span class="hljs-keyword">new</span> MyBean(<span class="hljs-number">1</span>, <span class="hljs-string">"My bean"</span>);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper().writeValueAsString(bean);
+
+    assertThat(result, containsString(<span class="hljs-string">"My bean"</span>));
+    assertThat(result, containsString(<span class="hljs-string">"1"</span>));
+
+    MyBean resultBean = <span class="hljs-keyword">new</span> ObjectMapper()
+      .readerFor(MyBean<span class="hljs-class">.<span class="hljs-keyword">class</span>)
+      .<span class="hljs-title">readValue</span>(<span class="hljs-title">result</span>)</span>;
+    assertEquals(<span class="hljs-string">"My bean"</span>, resultBean.getTheName());
+&#125;</code></pre></p>
+<p><a name="RbKDb"></a></p>
+<h3 id="6-2-JsonFormat"><a href="#6-2-JsonFormat" class="headerlink" title="6.2. @JsonFormat"></a><strong>6.2. <em>@JsonFormat</em></strong></h3><p>@JsonFormat注释在序列化日期/时间值时指定一种格式。<br>在下面的例子中，我们使用@JsonFormat来控制属性eventDate的格式:<br><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EventWithFormat</span> </span>&#123;
+    <span class="hljs-keyword">public</span> String name;
+
+    <span class="hljs-meta">@JsonFormat</span>(
+      shape = JsonFormat.Shape.STRING,
+      pattern = <span class="hljs-string">"dd-MM-yyyy hh:mm:ss"</span>)
+    <span class="hljs-keyword">public</span> Date eventDate;
+&#125;</code></pre></p>
+<p>下面是测试:<br><pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingJsonFormat_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException, ParseException </span>&#123;
+    SimpleDateFormat df = <span class="hljs-keyword">new</span> SimpleDateFormat(<span class="hljs-string">"dd-MM-yyyy hh:mm:ss"</span>);
+    df.setTimeZone(TimeZone.getTimeZone(<span class="hljs-string">"UTC"</span>));
+
+    String toParse = <span class="hljs-string">"20-12-2014 02:30:00"</span>;
+    Date date = df.parse(toParse);
+    EventWithFormat event = <span class="hljs-keyword">new</span> EventWithFormat(<span class="hljs-string">"party"</span>, date);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper().writeValueAsString(event);
+
+    assertThat(result, containsString(toParse));
+&#125;</code></pre></p>
+<p><a name="gTZ8U"></a></p>
+<h3 id="6-3-JsonUnwrapped"><a href="#6-3-JsonUnwrapped" class="headerlink" title="6.3. @JsonUnwrapped"></a><strong>6.3. <em>@JsonUnwrapped</em></strong></h3><p>@JsonUnwrapped定义了在序列化/反序列化时应该被解包装/扁平化的值。<br>我们来看看它是如何工作的;我们将使用注释来展开属性名:<br><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UnwrappedUser</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+
+    <span class="hljs-meta">@JsonUnwrapped</span>
+    <span class="hljs-keyword">public</span> Name name;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Name</span> </span>&#123;
+        <span class="hljs-keyword">public</span> String firstName;
+        <span class="hljs-keyword">public</span> String lastName;
+    &#125;
+&#125;</code></pre></p>
+<p>现在让我们序列化这个类的一个实例:<br><pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingJsonUnwrapped_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException, ParseException </span>&#123;
+    UnwrappedUser.Name name = <span class="hljs-keyword">new</span> UnwrappedUser.Name(<span class="hljs-string">"John"</span>, <span class="hljs-string">"Doe"</span>);
+    UnwrappedUser user = <span class="hljs-keyword">new</span> UnwrappedUser(<span class="hljs-number">1</span>, name);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper().writeValueAsString(user);
+
+    assertThat(result, containsString(<span class="hljs-string">"John"</span>));
+    assertThat(result, not(containsString(<span class="hljs-string">"name"</span>)));
+&#125;</code></pre></p>
+<p>下面是输出的样子-静态嵌套类的字段与其他字段一起展开:<br><pre><code class="hljs java">&#123;
+    <span class="hljs-string">"id"</span>:<span class="hljs-number">1</span>,
+    <span class="hljs-string">"firstName"</span>:<span class="hljs-string">"John"</span>,
+    <span class="hljs-string">"lastName"</span>:<span class="hljs-string">"Doe"</span>
+&#125;</code></pre></p>
+<p><a name="NqUJn"></a></p>
+<h3 id="6-4-JsonView"><a href="#6-4-JsonView" class="headerlink" title="6.4. @JsonView"></a><strong>6.4. <em>@JsonView</em></strong></h3><p>@JsonView表示将包含该属性进行序列化/反序列化的视图。<br>我们将使用@JsonView来序列化项目实体的实例。<br>让我们从视图开始:<br><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Views</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Public</span> </span>&#123;&#125;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Internal</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Public</span> </span>&#123;&#125;
+&#125;</code></pre></p>
+<p>现在这是Item实体，使用视图:<br><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Item</span> </span>&#123;
+    <span class="hljs-meta">@JsonView</span>(Views.Public<span class="hljs-class">.<span class="hljs-keyword">class</span>)
+    <span class="hljs-title">public</span> <span class="hljs-title">int</span> <span class="hljs-title">id</span></span>;
+
+    <span class="hljs-meta">@JsonView</span>(Views.Public<span class="hljs-class">.<span class="hljs-keyword">class</span>)
+    <span class="hljs-title">public</span> <span class="hljs-title">String</span> <span class="hljs-title">itemName</span></span>;
+
+    <span class="hljs-meta">@JsonView</span>(Views.Internal<span class="hljs-class">.<span class="hljs-keyword">class</span>)
+    <span class="hljs-title">public</span> <span class="hljs-title">String</span> <span class="hljs-title">ownerName</span></span>;
+&#125;</code></pre></p>
+<p>最后-完整测试:<br><pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingJsonView_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException </span>&#123;
+    Item item = <span class="hljs-keyword">new</span> Item(<span class="hljs-number">2</span>, <span class="hljs-string">"book"</span>, <span class="hljs-string">"John"</span>);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper()
+      .writerWithView(Views.Public<span class="hljs-class">.<span class="hljs-keyword">class</span>)
+      .<span class="hljs-title">writeValueAsString</span>(<span class="hljs-title">item</span>)</span>;
+
+    assertThat(result, containsString(<span class="hljs-string">"book"</span>));
+    assertThat(result, containsString(<span class="hljs-string">"2"</span>));
+    assertThat(result, not(containsString(<span class="hljs-string">"John"</span>)));
+&#125;</code></pre></p>
+<p><a name="SWLxT"></a></p>
+<h3 id="6-5-JsonManagedReference-JsonBackReference"><a href="#6-5-JsonManagedReference-JsonBackReference" class="headerlink" title="6.5. @JsonManagedReference, @JsonBackReference"></a><strong>6.5. <em>@JsonManagedReference, @JsonBackReference</em></strong></h3><p>@JsonManagedReference和@JsonBackReference注释可以处理父/子关系并在循环中工作。<br>在下面的例子中-我们使用@JsonManagedReference和@JsonBackReference来序列化我们的ItemWithRef实体:<br><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ItemWithRef</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">public</span> String itemName;
+
+    <span class="hljs-meta">@JsonManagedReference</span>
+    <span class="hljs-keyword">public</span> UserWithRef owner;
+&#125;</code></pre></p>
+<p>我们的UserWithRef实体:<br><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserWithRef</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">public</span> String name;
+
+    <span class="hljs-meta">@JsonBackReference</span>
+    <span class="hljs-keyword">public</span> List&lt;ItemWithRef&gt; userItems;
+&#125;</code></pre></p>
+<p>测试:<br><pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingJacksonReferenceAnnotation_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException </span>&#123;
+    UserWithRef user = <span class="hljs-keyword">new</span> UserWithRef(<span class="hljs-number">1</span>, <span class="hljs-string">"John"</span>);
+    ItemWithRef item = <span class="hljs-keyword">new</span> ItemWithRef(<span class="hljs-number">2</span>, <span class="hljs-string">"book"</span>, user);
+    user.addItem(item);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper().writeValueAsString(item);
+
+    assertThat(result, containsString(<span class="hljs-string">"book"</span>));
+    assertThat(result, containsString(<span class="hljs-string">"John"</span>));
+    assertThat(result, not(containsString(<span class="hljs-string">"userItems"</span>)));
+&#125;</code></pre></p>
+<p><a name="N9f5i"></a></p>
+<h3 id="6-6-JsonIdentityInfo"><a href="#6-6-JsonIdentityInfo" class="headerlink" title="6.6. @JsonIdentityInfo"></a><strong>6.6. <em>@JsonIdentityInfo</em></strong></h3><p>@JsonIdentityInfo表示在序列化/反序列化值时应该使用对象标识—例如，用于处理无限递归类型的问题。<br>在下面的例子中-我们有一个ItemWithIdentity实体，它与UserWithIdentity实体具有双向关系:<br><pre><code class="hljs java"><span class="hljs-meta">@JsonIdentityInfo</span>(
+  generator = ObjectIdGenerators.PropertyGenerator<span class="hljs-class">.<span class="hljs-keyword">class</span>,
+  <span class="hljs-title">property</span> </span>= <span class="hljs-string">"id"</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ItemWithIdentity</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">public</span> String itemName;
+    <span class="hljs-keyword">public</span> UserWithIdentity owner;
+&#125;</code></pre></p>
+<p>和UserWithIdentity实体:<br><pre><code class="hljs java"><span class="hljs-meta">@JsonIdentityInfo</span>(
+  generator = ObjectIdGenerators.PropertyGenerator<span class="hljs-class">.<span class="hljs-keyword">class</span>,
+  <span class="hljs-title">property</span> </span>= <span class="hljs-string">"id"</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserWithIdentity</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">public</span> String name;
+    <span class="hljs-keyword">public</span> List&lt;ItemWithIdentity&gt; userItems;
+&#125;</code></pre></p>
+<p>现在，让我们看看无限递归问题是如何处理的:<br><pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingJsonIdentityInfo_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException </span>&#123;
+    UserWithIdentity user = <span class="hljs-keyword">new</span> UserWithIdentity(<span class="hljs-number">1</span>, <span class="hljs-string">"John"</span>);
+    ItemWithIdentity item = <span class="hljs-keyword">new</span> ItemWithIdentity(<span class="hljs-number">2</span>, <span class="hljs-string">"book"</span>, user);
+    user.addItem(item);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper().writeValueAsString(item);
+
+    assertThat(result, containsString(<span class="hljs-string">"book"</span>));
+    assertThat(result, containsString(<span class="hljs-string">"John"</span>));
+    assertThat(result, containsString(<span class="hljs-string">"userItems"</span>));
+&#125;</code></pre></p>
+<p>下面是序列化的项目和用户的完整输出:<br><pre><code class="hljs java">&#123;
+    <span class="hljs-string">"id"</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-string">"itemName"</span>: <span class="hljs-string">"book"</span>,
+    <span class="hljs-string">"owner"</span>: &#123;
+        <span class="hljs-string">"id"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"John"</span>,
+        <span class="hljs-string">"userItems"</span>: [
+            <span class="hljs-number">2</span>
+        ]
+    &#125;
+&#125;</code></pre></p>
+<p><a name="ASuNM"></a></p>
+<h3 id="6-7-JsonFilter"><a href="#6-7-JsonFilter" class="headerlink" title="6.7. @JsonFilter"></a><strong>6.7. <em>@JsonFilter</em></strong></h3><p>@JsonFilter注释指定要在序列化期间使用的过滤器。<br>让我们看一个例子;首先，我们定义实体，并指向过滤器:<br><pre><code class="hljs java"><span class="hljs-meta">@JsonFilter</span>(<span class="hljs-string">"myFilter"</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BeanWithFilter</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">public</span> String name;
+&#125;</code></pre></p>
+<p>现在，在完整的测试中，我们定义了过滤器——它排除了序列化中除了name之外的所有其他属性:<br><pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingJsonFilter_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException </span>&#123;
+    BeanWithFilter bean = <span class="hljs-keyword">new</span> BeanWithFilter(<span class="hljs-number">1</span>, <span class="hljs-string">"My bean"</span>);
+
+    FilterProvider filters
+      = <span class="hljs-keyword">new</span> SimpleFilterProvider().addFilter(
+        <span class="hljs-string">"myFilter"</span>,
+        SimpleBeanPropertyFilter.filterOutAllExcept(<span class="hljs-string">"name"</span>));
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper()
+      .writer(filters)
+      .writeValueAsString(bean);
+
+    assertThat(result, containsString(<span class="hljs-string">"My bean"</span>));
+    assertThat(result, not(containsString(<span class="hljs-string">"id"</span>)));
+&#125;</code></pre></p>
+<p><a name="ike8t"></a></p>
+<h2 id="7-Jackson自定义注释"><a href="#7-Jackson自定义注释" class="headerlink" title="7. Jackson自定义注释"></a>7. Jackson自定义注释</h2><p>接下来，让我们看看如何创建自定义Jackson注释。我们可以使用@JacksonAnnotationsInside注释:<br><pre><code class="hljs java"><span class="hljs-meta">@Retention</span>(RetentionPolicy.RUNTIME)
+    <span class="hljs-meta">@JacksonAnnotationsInside</span>
+    <span class="hljs-meta">@JsonInclude</span>(Include.NON_NULL)
+    <span class="hljs-meta">@JsonPropertyOrder</span>(&#123; <span class="hljs-string">"name"</span>, <span class="hljs-string">"id"</span>, <span class="hljs-string">"dateCreated"</span> &#125;)
+    <span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> CustomAnnotation &#123;&#125;</code></pre></p>
+<p>现在，如果我们对一个实体使用新的注释:<br><pre><code class="hljs java"><span class="hljs-meta">@CustomAnnotation</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BeanWithCustomAnnotation</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">public</span> String name;
+    <span class="hljs-keyword">public</span> Date dateCreated;
+&#125;</code></pre></p>
+<p>我们可以看到它是如何将现有的注解组合成一个更简单的、自定义的注解，我们可以使用它作为速记:<br><pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingCustomAnnotation_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException </span>&#123;
+    BeanWithCustomAnnotation bean
+      = <span class="hljs-keyword">new</span> BeanWithCustomAnnotation(<span class="hljs-number">1</span>, <span class="hljs-string">"My bean"</span>, <span class="hljs-keyword">null</span>);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper().writeValueAsString(bean);
+
+    assertThat(result, containsString(<span class="hljs-string">"My bean"</span>));
+    assertThat(result, containsString(<span class="hljs-string">"1"</span>));
+    assertThat(result, not(containsString(<span class="hljs-string">"dateCreated"</span>)));
+&#125;</code></pre></p>
+<p>序列化过程的输出:<br><pre><code class="hljs java">&#123;
+    <span class="hljs-string">"name"</span>:<span class="hljs-string">"My bean"</span>,
+    <span class="hljs-string">"id"</span>:<span class="hljs-number">1</span>
+&#125;</code></pre></p>
+<p><a name="Uto7K"></a></p>
+<h2 id="8-Jackson-MixIn-注解"><a href="#8-Jackson-MixIn-注解" class="headerlink" title="8. Jackson MixIn 注解"></a><strong>8. Jackson MixIn 注解</strong></h2><p>接下来——让我们看看如何使用Jackson MixIn注释。<br>让我们使用MixIn注释——例如——忽略类型User的属性:<br><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Item</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">public</span> String itemName;
+    <span class="hljs-keyword">public</span> User owner;
+&#125;
+
+<span class="hljs-meta">@JsonIgnoreType</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyMixInForIgnoreType</span> </span>&#123;&#125;</code></pre></p>
+<p>让我们来看看这是怎么回事:<br><pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenSerializingUsingMixInAnnotation_thenCorrect</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> JsonProcessingException </span>&#123;
+    Item item = <span class="hljs-keyword">new</span> Item(<span class="hljs-number">1</span>, <span class="hljs-string">"book"</span>, <span class="hljs-keyword">null</span>);
+
+    String result = <span class="hljs-keyword">new</span> ObjectMapper().writeValueAsString(item);
+    assertThat(result, containsString(<span class="hljs-string">"owner"</span>));
+
+    ObjectMapper mapper = <span class="hljs-keyword">new</span> ObjectMapper();
+    mapper.addMixIn(User<span class="hljs-class">.<span class="hljs-keyword">class</span>, <span class="hljs-title">MyMixInForIgnoreType</span>.<span class="hljs-title">class</span>)</span>;
+
+    result = mapper.writeValueAsString(item);
+    assertThat(result, not(containsString(<span class="hljs-string">"owner"</span>)));
+&#125;</code></pre></p>
+<p><a name="mqKJV"></a></p>
+<h2 id="9-禁用Jackson注解"><a href="#9-禁用Jackson注解" class="headerlink" title="9. 禁用Jackson注解"></a>9. 禁用Jackson注解</h2><p>最后，让我们看看如何禁用所有Jackson注释。我们可以通过禁用MapperFeature来做到这一点。如下例所示:<br><pre><code class="hljs java"><span class="hljs-meta">@JsonInclude</span>(Include.NON_NULL)
+<span class="hljs-meta">@JsonPropertyOrder</span>(&#123; <span class="hljs-string">"name"</span>, <span class="hljs-string">"id"</span> &#125;)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyBean</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">public</span> String name;
+&#125;</code></pre></p>
+<p>现在，禁用注释后，这些应该没有效果，库的默认值应该适用:<br><pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenDisablingAllAnnotations_thenAllDisabled</span><span class="hljs-params">()</span>
+  <span class="hljs-keyword">throws</span> IOException </span>&#123;
+    MyBean bean = <span class="hljs-keyword">new</span> MyBean(<span class="hljs-number">1</span>, <span class="hljs-keyword">null</span>);
+
+    ObjectMapper mapper = <span class="hljs-keyword">new</span> ObjectMapper();
+    mapper.disable(MapperFeature.USE_ANNOTATIONS);
+    String result = mapper.writeValueAsString(bean);
+
+    assertThat(result, containsString(<span class="hljs-string">"1"</span>));
+    assertThat(result, containsString(<span class="hljs-string">"name"</span>));</code></pre></p>
+<p>禁用注释之前序列化的结果:<br><pre><code class="hljs java">&#123;<span class="hljs-string">"id"</span>:<span class="hljs-number">1</span>&#125;</code></pre></p>
+<p>禁用注释后序列化的结果:<br><pre><code class="hljs java">&#123;
+    <span class="hljs-string">"id"</span>:<span class="hljs-number">1</span>,
+    <span class="hljs-string">"name"</span>:<span class="hljs-keyword">null</span>
+&#125;</code></pre></p>
+<p><a name="PmJqL"></a></p>
+<h2 id="10-结论"><a href="#10-结论" class="headerlink" title="10. 结论"></a>10. 结论</h2><p>本教程对Jackson注释进行了深入的研究，只触及了正确使用它们所能获得的灵活性的表面。</p>
+
+              <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                  <!-- 单元1 -->
+                  <ins class="adsbygoogle"
+                      style="display:block"
+                      data-ad-client="ca-pub-9508321495212724"
+                      data-ad-slot="3221759322"
+                      data-ad-format="auto"
+                      data-full-width-responsive="true"></ins>
+              <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/后端/">后端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/11/java-microservices-share-dto/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">如何跨微服务共享DTO</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/06/spring-scheduling-annotations/">
+                        <span class="hidden-mobile">Spring 调度注解</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Jackson注解示例&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script data-ad-client="ca-pub-9508321495212724" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+</body>
+</html>

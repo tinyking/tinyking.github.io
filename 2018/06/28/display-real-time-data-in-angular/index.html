@@ -1,0 +1,649 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="努力做最好的自己">
+  <meta name="author" content="TinyKing">
+  <meta name="keywords" content="undefined">
+  <title>Display real-time data in Angular - 爱笑笑，爱生活</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css">
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>爱笑笑，爱生活</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2018-06-28 10:49" pubdate>
+      2018年6月28日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">Display real-time data in Angular</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p>In this article, we’ll be taking a look at two ways to display real-time data in an Angular application. We’ll discuss how to push real-time data via a service. One approach will be using sockets while the other will be using the Angular AsyncPipe and Observables.</p>
+<h2 id="Setting-the-scene"><a href="#Setting-the-scene" class="headerlink" title="Setting the scene"></a>Setting the scene</h2><p>Often in an application, we work with a backend API service. We create a component, we call an Angular service which in turn calls an API. That API call returns some data and that data is then displayed in the template of the component. This is a very simple scenario. But what happens when data that arrives is updated frequently - think about stock symbols and their values, an online radio that needs to display a new artist &amp; song title. We somehow need to update the component when the data changes at the API level.</p>
+<h2 id="Async-Pipe-amp-Observables"><a href="#Async-Pipe-amp-Observables" class="headerlink" title="Async Pipe &amp; Observables"></a>Async Pipe &amp; Observables</h2><p>The first approach that we’ll take a look doesn’t require any modification at the API level. In light of this, we’ll be using the <code>Async Pipe</code>. Pipes in Angular work just as pipes work in Linux. They accept an input and produce an output. What the output is going to be is determined by the pipe’s functionality. This pipe accepts a promise or an observable as an input, and it can update the template whenever the promise is resolved or when the observable emits some new value. As with all pipes, we need to apply the pipe in the template.</p>
+<p>Let’s assume that we have a list of products returned by an API and that we have the following service available:</p>
+<pre><code class="hljs typescript"><span class="hljs-comment">// api.service.ts</span>
+<span class="hljs-keyword">import</span> &#123; Injectable &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> &#123; HttpClient &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common/http'</span>;
+
+<span class="hljs-meta">@Injectable</span>()
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> ApiService &#123;
+
+  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> http: HttpClient</span>) &#123; &#125;
+
+  getProducts() &#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http.get(<span class="hljs-string">'http://localhost:3000/api/products'</span>);
+  &#125;
+&#125;</code></pre>
+<p>The code above is straightforward - we specify the <code>getProducts()</code> method that returns the HTTP GET call.</p>
+<p>It’s time to consume this service in the component. And what we’ll do here is create an Observable and assign the result of the <code>getProducts()</code> method to it. Furthermore, we’ll make that call every 1 second, so if there’s an update at the API level, we can refresh the template:</p>
+<pre><code class="hljs typescript"><span class="hljs-comment">// some.component.ts</span>
+<span class="hljs-keyword">import</span> &#123; Component, OnInit, OnDestroy, Input &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> &#123; ApiService &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'./../api.service'</span>;
+<span class="hljs-keyword">import</span> &#123; Observable &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/Observable'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'rxjs/add/observable/interval'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'rxjs/add/operator/startWith'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'rxjs/add/operator/switchMap'</span>;
+
+<span class="hljs-meta">@Component</span>(&#123;
+  selector: <span class="hljs-string">'app-products'</span>,
+  templateUrl: <span class="hljs-string">'./products.component.html'</span>,
+  styleUrls: [<span class="hljs-string">'./products.component.css'</span>]
+&#125;)
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> ProductsComponent <span class="hljs-keyword">implements</span> OnInit &#123;
+  <span class="hljs-meta">@Input</span>() products$: Observable&lt;<span class="hljs-built_in">any</span>&gt;;
+  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> api: ApiService</span>) &#123; &#125;
+
+  ngOnInit() &#123;
+    <span class="hljs-keyword">this</span>.products$ = Observable      
+                        .interval(<span class="hljs-number">1000</span>)
+                        .startWith(<span class="hljs-number">0</span>).switchMap(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-keyword">this</span>.api.getProducts());
+  &#125;
+&#125;</code></pre>
+<p>And last but not least, we need to apply the async pipe in our template:</p>
+<pre><code class="hljs html"><span class="hljs-comment">&lt;!-- some.component.html --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"let product of products$ | async"</span>&gt;</span>&#123;&#123; product.prod_name &#125;&#125; for &#123;&#123; product.price | currency:'£'&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></code></pre>
+<p>This way, if we push a new item to the API (or remove one or multiple item(s)) the updates are going to be visible in the component in 1 second.</p>
+<h2 id="Sockets"><a href="#Sockets" class="headerlink" title="Sockets"></a>Sockets</h2><p>Another approach to creating a component and a service that accepts push data from the server is by implementing sockets. To achieve such functionality, changes need to be performed both at the API and the Client side as well.</p>
+<h2 id="API-level-modifications"><a href="#API-level-modifications" class="headerlink" title="API level modifications"></a>API level modifications</h2><p>At the API level, we need to enable sockets, and one of the most used packages that developers use is <code>socket.io</code> which can be installed via <code>npm i socket.io</code>.</p>
+<p>Here’s an implementation of the server using Restify and Socket.io:</p>
+<pre><code class="hljs typescript"><span class="hljs-keyword">const</span> restify = <span class="hljs-built_in">require</span>(<span class="hljs-string">'restify'</span>);
+<span class="hljs-keyword">const</span> server = restify.createServer();
+<span class="hljs-keyword">const</span> products = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./products'</span>);
+<span class="hljs-keyword">const</span> io = <span class="hljs-built_in">require</span>(<span class="hljs-string">'socket.io'</span>)(server.server);
+
+<span class="hljs-keyword">let</span> sockets = <span class="hljs-keyword">new</span> Set();
+<span class="hljs-keyword">const</span> corsMiddleware = <span class="hljs-built_in">require</span>(<span class="hljs-string">'restify-cors-middleware'</span>);
+<span class="hljs-keyword">const</span> port = <span class="hljs-number">3000</span>;
+<span class="hljs-keyword">const</span> cors = corsMiddleware(&#123;origins: [<span class="hljs-string">'*'</span>],&#125;);
+server.use(restify.plugins.bodyParser());
+server.pre(cors.preflight);
+server.use(cors.actual);
+io.on(<span class="hljs-string">'connection'</span>, <span class="hljs-function"><span class="hljs-params">socket</span> =&gt;</span> &#123;
+  sockets.add(socket);
+  socket.emit(<span class="hljs-string">'data'</span>, &#123; data: products &#125;);
+  socket.on(<span class="hljs-string">'clientData'</span>, <span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(data));
+  socket.on(<span class="hljs-string">'disconnect'</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> sockets.delete(socket));
+&#125;);
+
+server.get(<span class="hljs-string">'/'</span>, <span class="hljs-function">(<span class="hljs-params">request, response, next</span>) =&gt;</span> &#123;
+  response.end();
+  next();
+&#125;);
+
+server.post(<span class="hljs-string">'/api/products'</span>, <span class="hljs-function">(<span class="hljs-params">request, response</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">const</span> product = request.body;
+  products.push(product);
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> socket of sockets) &#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Emitting value: <span class="hljs-subst">$&#123;products&#125;</span>`</span>);
+    socket.emit(<span class="hljs-string">'data'</span>, &#123; data: products &#125;);
+  &#125;
+  response.json(products);
+&#125;);
+
+server.listen(port, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">console</span>.info(<span class="hljs-string">`Server is up on <span class="hljs-subst">$&#123;port&#125;</span>.`</span>));</code></pre>
+<blockquote>
+<p>Note how Restify requires us to use <code>server.server</code> when requiring <code>socket.io</code>.</p>
+</blockquote>
+<p>The above code may look complex; however, it is a straightforward implementation. The required <code>products</code> file contains an array of objects which represent some data. On the first connection to the server we send data to the requester as well as making sure that we store the socket in a JavaScript <code>Set</code>:</p>
+<pre><code class="hljs typescript">io.on(<span class="hljs-string">'connection'</span>, <span class="hljs-function"><span class="hljs-params">socket</span> =&gt;</span> &#123;
+  sockets.add(socket);
+  socket.emit(<span class="hljs-string">'data'</span>, &#123; data: products &#125;);
+  socket.on(<span class="hljs-string">'clientData'</span>, <span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(data));
+  socket.on(<span class="hljs-string">'disconnect'</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> sockets.delete(socket));
+&#125;);</code></pre>
+<p>When a new product is added (in this case it’s just a simple push to the <code>products</code> array), then we again, emit the updated array to all the clients who are connected:</p>
+<pre><code class="hljs typescript">server.post(<span class="hljs-string">'/api/products'</span>, <span class="hljs-function">(<span class="hljs-params">request, response</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">const</span> product = request.body;
+  products.push(product);
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> socket of sockets) &#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Emitting value: <span class="hljs-subst">$&#123;products&#125;</span>`</span>);
+    socket.emit(<span class="hljs-string">'data'</span>, &#123; data: products &#125;);
+  &#125;
+  response.json(products);
+&#125;);</code></pre>
+<blockquote>
+<p>Note, that in this article we’re only going through the basics and henceforth the API is kept at an elementary level.</p>
+</blockquote>
+<h1 id="Client-side-modifications"><a href="#Client-side-modifications" class="headerlink" title="Client side modifications"></a>Client side modifications</h1><p>At the client side - from our Angular application - we also need to connect to the socket, and for this, we’ll be using a package called <code>socket.io-client</code> along with its typing. Both of these can be installed via npm: <code>npm i socket.io-client @types/socket.io-client</code>.</p>
+<p>Once installed we can update our Angular service:</p>
+<pre><code class="hljs typescript"><span class="hljs-comment">// api.service.ts</span>
+<span class="hljs-keyword">import</span> &#123; Injectable &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> &#123; HttpClient &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/common/http'</span>;
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> socketIo <span class="hljs-keyword">from</span> <span class="hljs-string">'socket.io-client'</span>;
+<span class="hljs-keyword">import</span> &#123; Observer &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/Observer'</span>;
+<span class="hljs-keyword">import</span> &#123; Observable &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/Observable'</span>;
+<span class="hljs-meta">@Injectable</span>()
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> ApiService &#123;
+
+  observer: Observer&lt;<span class="hljs-built_in">any</span>&gt;;
+
+  getProducts() &#123;
+    <span class="hljs-keyword">const</span> socket = socketIo(<span class="hljs-string">'http://localhost:3000/'</span>);
+    socket.on(<span class="hljs-string">'data'</span>, <span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> &#123;
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.observer.next(response.data);
+    &#125;);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.createObservable();
+  &#125;
+
+  createObservable() &#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Observable(<span class="hljs-function"><span class="hljs-params">observer</span> =&gt;</span> <span class="hljs-keyword">this</span>.observer = observer);
+  &#125;
+&#125;</code></pre>
+<p>Here we are creating an observer first, then connect to the socket server running on port 3000 (or whatever port we have specified for the API). If data is emitted from the socket server (which happens on the first load as well as when someone adds a new product), an observable is created. This is what gets passed on to the component and then to the template which still utilises the async pipe - the rest of the code does not change.</p>
+<p>Adding a new product will also now mean that the list of products is updated.</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>In this article, we had a look at two ways to achieve real-time data updates in Angular components.</p>
+<blockquote>
+<p><a href="https://fullstack-developer.academy/display-real-time-data-in-angular/" target="_blank" rel="noopener">原文地址</a></p>
+</blockquote>
+
+              <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                  <!-- 单元1 -->
+                  <ins class="adsbygoogle"
+                      style="display:block"
+                      data-ad-client="ca-pub-9508321495212724"
+                      data-ad-slot="3221759322"
+                      data-ad-format="auto"
+                      data-full-width-responsive="true"></ins>
+              <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/前端/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Angular/">Angular</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/07/10/vs-code-diao-shi-angular/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vs code调试Angular</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/06/27/how-to-monitor-java-garbage-collection/">
+                        <span class="hidden-mobile">how to monitor java garbage collection</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Display real-time data in Angular&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script data-ad-client="ca-pub-9508321495212724" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+</body>
+</html>
