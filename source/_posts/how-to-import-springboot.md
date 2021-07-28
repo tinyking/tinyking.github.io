@@ -1,7 +1,9 @@
 ---
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 title: Spring Boot依赖引入的多种方式
 date: 2018-10-15 09:06:30
-tags: 
+tags:
     - Java
 categories:
     - 后端

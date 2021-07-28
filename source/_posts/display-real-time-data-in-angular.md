@@ -1,4 +1,6 @@
 ---
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 title: Display real-time data in Angular
 date: 2018-06-28 10:49:46
 tags:
@@ -118,7 +120,7 @@ server.post('/api/products', (request, response) => {
   }
   response.json(products);
 });
-  
+
 server.listen(port, () => console.info(`Server is up on ${port}.`));
 ```
 

@@ -1,4 +1,6 @@
 ---
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 title: Java发展史
 date: 2018-06-06
 tags:

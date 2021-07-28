@@ -1,7 +1,9 @@
 ---
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 title: HashMap
 date: 2016-07-19 09:06:30
-tags: 
+tags:
     - Java
 categories:
     - 后端
@@ -51,7 +53,7 @@ static class Node<K, V> implements Map.Entry<K, V> {
 ```
 
 
-上面代码描述了`HashMap`的底层数据结构：`数组` + `链表`。 
+上面代码描述了`HashMap`的底层数据结构：`数组` + `链表`。
 >*在1.8中，增加了红黑树，带详细研究...*
 
 ### 构造函数

@@ -40,7 +40,7 @@ future: true
 highlight:
   enable: true
   line_number: true
-  auto_detect: true
+  auto_detect: false
   tab_replace:
 
 # Category & Tag
@@ -63,8 +63,9 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+#theme: next2
 # theme: hexo-theme-snippet
+theme: fluid
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -82,3 +83,7 @@ search:
   field: post
   format: html
   limit: 10000
+
+permalink_pinyin:
+  enable: true
+  separator: '-'

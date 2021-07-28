@@ -1,12 +1,12 @@
 language: node_js
 node_js:
-    - "7"
+    - "8"
 
 before_install:
-    - npm install -g hexo
-    - npm install -g hexo-cli
-    - npm install hexo-generator-sitemap --save  #生成sitemap.xml
-    - npm install hexo-generator-baidu-sitemap --save  #生成baidusitemap.xml
+    - npm install -g hexo@3.7.1
+#    - npm install -g hexo-cli@1.1.0
+#    - npm install hexo-generator-sitemap --save  #生成sitemap.xml
+#    - npm install hexo-generator-baidu-sitemap --save  #生成baidusitemap.xml
 
 install:
     - npm install  #安装hexo及插件

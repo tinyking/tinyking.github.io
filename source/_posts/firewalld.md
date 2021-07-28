@@ -1,4 +1,6 @@
 ---
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 title: CentOS7使用firewalld打开关闭防火墙与端口
 date: 2017-04-21 13:10:50
 tags:
@@ -11,12 +13,12 @@ categories:
 
 启动： systemctl start firewalld
 
-查看状态： systemctl status firewalld 
+查看状态： systemctl status firewalld
 
 停止： systemctl disable firewalld
 
 禁用： systemctl stop firewalld
- 
+
 2.systemctl是CentOS7的服务管理工具中主要的工具，它融合之前service和chkconfig的功能于一体。
 
 启动一个服务：systemctl start firewalld.service
@@ -46,15 +48,15 @@ categories:
 
 显示状态： firewall-cmd --state
 
-查看所有打开的端口： firewall-cmd 
+查看所有打开的端口： firewall-cmd
 --zone=public --list-ports
 
 更新防火墙规则： firewall-cmd --reload
 
-查看区域信息:  firewall-cmd 
+查看区域信息:  firewall-cmd
 --get-active-zones
 
-查看指定接口所属区域： firewall-cmd 
+查看指定接口所属区域： firewall-cmd
 --get-zone-of-interface=eth0
 
 拒绝所有包：firewall-cmd --panic-on
@@ -62,11 +64,11 @@ categories:
 取消拒绝状态： firewall-cmd --panic-off
 
 查看是否拒绝： firewall-cmd --query-panic
- 
+
 那怎么开启一个端口呢
 添加
 
-firewall-cmd --zone=public 
+firewall-cmd --zone=public
 --add-port=80/tcp --permanent    
 （--permanent永久生效，没有此参数重启后失
 效）
@@ -77,10 +79,10 @@ firewall-cmd --reload
 
 查看
 
-firewall-cmd --zone= public 
+firewall-cmd --zone= public
 --query-port=80/tcp
 
 删除
 
-firewall-cmd --zone= public 
+firewall-cmd --zone= public
 --remove-port=80/tcp --permanent

@@ -1,4 +1,6 @@
 ---
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 title: how to monitor java garbage collection
 date: 2018-06-27 10:49:46
 tags:
@@ -44,12 +46,12 @@ You can try running the following in the command line.
 
 ```
 $> jstat –gc  $<vmid$> 1000
- 
+
 S0C       S1C       S0U    S1U      EC         EU          OC         OU         PC         PU         YGC     YGCT    FGC      FGCT     GCT
 3008.0   3072.0    0.0     1511.1   343360.0   46383.0     699072.0   283690.2   75392.0    41064.3    2540    18.454    4      1.133    19.588
 3008.0   3072.0    0.0     1511.1   343360.0   47530.9     699072.0   283690.2   75392.0    41064.3    2540    18.454    4      1.133    19.588
 3008.0   3072.0    0.0     1511.1   343360.0   47793.0     699072.0   283690.2   75392.0    41064.3    2540    18.454    4      1.133    19.588
- 
+
 $>
 ```
 
@@ -61,24 +63,21 @@ Just like in the example, the real type data will be output along with the follo
 
 Find out the vmid of the Java application that you want to monitor by using jps, then use it as a parameter in jstat. If you use jps alone, only bootstrap information will show when several WAS instances are running in one equipment. We suggest that you use `ps -ef | grep java` command along with jps.
 
-GC performance data needs constant observation, therefore when running jstat, try to output the GC monitoring information on a regular basis. 
+GC performance data needs constant observation, therefore when running jstat, try to output the GC monitoring information on a regular basis.
 
 For example, running "`jstat –gc <vmid> 1000`" (or 1s) will display the GC monitoring data on the console every 1 second. "`jstat –gc <vmid> 1000 10`" will display the GC monitoring information once every 1 second for 10 times in total.
 
 There are many options other than `-gc`, among which GC related ones are listed below.
 
 
-Option Name	| Description
-----|----------
-gc|	It shows the current size for each heap area and its current usage (Ede, survivor, old, etc.), total number of GC performed, and the accumulated time for GC operations.
-gccapactiy|	It shows the minimum size (ms) and maximum size (mx) of each heap area, current size, and the number of GC performed for each area. (Does not show current usage and accumulated time for GC operations.)
-gccause|	It shows the "information provided by -gcutil" + reason for the last GC and the reason for the current GC.
-gcnew|	Shows the GC performance data for the new area.
-gcnewcapacity|	Shows statistics for the size of new area.
-gcold|	Shows the GC performance data for the old area.
-gcoldcapacity|	Shows statistics for the size of old area.
-gcpermcapacity|	Shows statistics for the permanent area.
-gcutil|	Shows the usage for each heap area in percentage. Also shows the total number of GC performed and the accumulated time for GC operations.
-
-
-
+| Option Name    | Description                                                                                                                                                                                               |
+|:---------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| gc             | It shows the current size for each heap area and its current usage (Ede, survivor, old, etc.), total number of GC performed, and the accumulated time for GC operations.                                  |
+| gccapactiy     | It shows the minimum size (ms) and maximum size (mx) of each heap area, current size, and the number of GC performed for each area. (Does not show current usage and accumulated time for GC operations.) |
+| gccause        | It shows the "information provided by -gcutil" + reason for the last GC and the reason for the current GC.                                                                                                |
+| gcnew          | Shows the GC performance data for the new area.                                                                                                                                                           |
+| gcnewcapacity  | Shows statistics for the size of new area.                                                                                                                                                                |
+| gcold          | Shows the GC performance data for the old area.                                                                                                                                                           |
+| gcoldcapacity  | Shows statistics for the size of old area.                                                                                                                                                                |
+| gcpermcapacity | Shows statistics for the permanent area.                                                                                                                                                                  |
+| gcutil         | Shows the usage for each heap area in percentage. Also shows the total number of GC performed and the accumulated time for GC operations.                                                                 |

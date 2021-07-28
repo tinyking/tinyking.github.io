@@ -4,9 +4,9 @@ tags:
   - Angular
 categories:
   - 工具
-photos:
-  - 'https://static.xmt.cn/a8e918a8225c4bc9ac669a67aedaffaa.png'
 date: 2019-06-27 17:10:42
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 
 

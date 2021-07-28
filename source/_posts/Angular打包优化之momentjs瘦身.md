@@ -5,15 +5,15 @@ tags:
 categories:
   - 前端
 date: 2019-06-26 16:18:46
-photos:
-    - https://i.loli.net/2019/06/10/5cfdf6dca539f47762.png
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 
 项目中使用到了moment.js，编译后发现moment的locale文件全部被打包到发布文件中，且moment的大部分都是locale文件，实际上我们只需要zh-cn这个语言包。
 
 使用`webpack-bundle-analyzer`分析见图:
 
-![PIC](https://cdn.nlark.com/yuque/0/2019/png/269363/1561536056876-assets/web-upload/321acf7d-a2f8-4649-ad76-dcf826773709.png)
+![321acf7d-a2f8-4649-ad76-dcf826773709.png](https://i.loli.net/2020/07/29/QwCLiAhmzOusfak.png)
 
 moment.js 并不是一个现代化的模块化的库， 无法对其进行Tree Shaking优化。
 

@@ -5,8 +5,8 @@ tags:
 categories:
   - 前端
 date: 2019-06-14 20:57:53
-photos:
-    - https://i.loli.net/2019/06/10/5cfdf6dca539f47762.png
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 
 
@@ -104,7 +104,7 @@ export class ReactiveFormDemoComponent implements OnInit {
 
   }
 
- 
+
 
   doSubmit() {
     console.log(this.formGroup.value);

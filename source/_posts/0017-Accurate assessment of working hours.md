@@ -1,6 +1,8 @@
 ---
 title: 程序员如何精确评估开发时间？
 date: 2019-04-16 20:11:01
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 
 

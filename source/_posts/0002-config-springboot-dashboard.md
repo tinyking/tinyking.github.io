@@ -6,6 +6,8 @@ tags:
     - Java
 categories:
     - 工具
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 
 最近在做基于Spring cloud的微服务开发，开发过程中，要启动很多Spring Boot项目，Idea提供了`Run Dashboard`功能，来方便管理Spring Boot项目。
