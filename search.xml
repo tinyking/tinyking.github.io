@@ -5451,10 +5451,9 @@ ThreadContext.unbindUser();</code></pre>
       </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/2021/08/16/creating-efficient-docker-images-with-spring-boot-2-3/</url>
-    <content><![CDATA[<p>在生产中如何关闭Swagger-ui</p>
-<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>Swagger用户界面允许我们查看关于REST服务的信息。这对于开发非常方便。然而，出于安全考虑，我们可能不希望在公共环境中允许这种行为。</p>
+    <title>在生产中如何关闭Swagger-ui</title>
+    <url>/2021/06/28/creating-efficient-docker-images-with-spring-boot-2-3/</url>
+    <content><![CDATA[<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>Swagger用户界面允许我们查看关于REST服务的信息。这对于开发非常方便。然而，出于安全考虑，我们可能不希望在公共环境中允许这种行为。</p>
 <p>在这个简短的教程中，我们将看看如何在生产中摆脱Swagger。</p>
 <h2 id="2-Swagger配置"><a href="#2-Swagger配置" class="headerlink" title="2. Swagger配置"></a>2. Swagger配置</h2><p>为了使用Spring设置Swagger，我们在配置bean中定义它。</p>
 <p>让我们创建一个SwaggerConfig类:</p>
@@ -5522,6 +5521,12 @@ ThreadContext.unbindUser();</code></pre>
 <h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h2><p>在本文中，我们研究了在生产中禁用Swagger的解决方案。</p>
 <p>我们了解了如何通过@Profile和@ConditionalOnExpression注释来切换打开Swagger的bean。我们还考虑了如何防止错误配置和不希望看到的默认值。</p>
 ]]></content>
+      <categories>
+        <category>后端</category>
+      </categories>
+      <tags>
+        <tag>Swagger</tag>
+      </tags>
   </entry>
   <entry>
     <title>基于Jackson的两个Json对象进行比较</title>
