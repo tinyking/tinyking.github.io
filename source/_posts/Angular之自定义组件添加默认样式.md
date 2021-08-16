@@ -53,8 +53,7 @@ export class MatTable<T> extends CdkTable<T> {
 {% note danger %}
 **注意**
 
-虽然在Angular中提供了host属性，并且官方的Material库也是使用该属性实现了很多功能，但是，在Angular编码规范中却不推荐使用该方法。详见：[HostListener 和 HostBinding 装饰器 vs. 组件元数据 host
-](https://angular.cn/guide/styleguide#hostlistenerhostbinding-decorators-versus-host-metadata)
+虽然在Angular中提供了host属性，并且官方的Material库也是使用该属性实现了很多功能，但是，在Angular编码规范中却不推荐使用该方法。详见：[HostListener 和 HostBinding 装饰器 vs. 组件元数据 host](https://angular.cn/guide/styleguide#hostlistenerhostbinding-decorators-versus-host-metadata)
 {% endnote %}
 
 
