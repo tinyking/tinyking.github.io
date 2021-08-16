@@ -50,11 +50,9 @@ export class MatTable<T> extends CdkTable<T> {
 
 在MatTable的源码中，我们可以看到为host属性设置了`'class': 'mat-table'`，在我们使用MatTable组件时，就会添加上默认的样式: `mat-table`.
 
-{% note danger %}
-**注意**
-
-虽然在Angular中提供了host属性，并且官方的Material库也是使用该属性实现了很多功能，但是，在Angular编码规范中却不推荐使用该方法。详见：[HostListener 和 HostBinding 装饰器 vs. 组件元数据 host](https://angular.cn/guide/styleguide#hostlistenerhostbinding-decorators-versus-host-metadata)
-{% endnote %}
+> **注意**
+>
+> 虽然在Angular中提供了host属性，并且官方的Material库也是使用该属性实现了很多功能，但是，在Angular编码规范中却不推荐使用该方法。详见：[HostListener 和 HostBinding 装饰器 vs. 组件元数据 host](https://angular.cn/guide/styleguide#hostlistenerhostbinding-decorators-versus-host-metadata)
 
 
 ## 方法二：HostBinding
