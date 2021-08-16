@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12]
+        node-version: [12.x]
 
     steps:
       - name: Checkout 🛎️
@@ -17,10 +17,9 @@ jobs:
         with:
           submodules: 'true'
       - name: Setup Node Version
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v1
         with:
-          node-version: '12'
-          cache: 'npm'      
+          node-version: 12.x    
 
       - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
         run: |
