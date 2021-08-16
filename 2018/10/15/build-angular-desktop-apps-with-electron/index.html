@@ -1,0 +1,730 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="努力做最好的自己">
+  <meta name="author" content="TinyKing">
+  <meta name="keywords" content="undefined">
+  <title>构建基于Electron技术的Angular桌面应用 - 爱笑笑，爱生活</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css">
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>爱笑笑，爱生活</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2018-10-15 17:06" pubdate>
+      2018年10月15日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      28
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">构建基于Electron技术的Angular桌面应用</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p>In this lesson, you will learn how to build native desktop apps with Angular and Electron. You might be surprised how easy it is to start building high-quality desktop apps for any platform, or even port your existing Angular app to native desktop platforms.<br>通过本文，你可以学到如何使用Angular和Electron构建桌面应用。</p>
+<p>This lesson covers the following topics:</p>
+<ol>
+<li>Configure Electron 1.7 with Angular 4.x.</li>
+<li>Build a simple timer app in Angular.</li>
+<li>Package the app for install on Windows 10, macOS, and Linux Ubuntu.</li>
+</ol>
+<p>You can obtain the <a href="https://github.com/AngularFirebase/angular-electron" target="_blank" rel="noopener">source code</a> for this project on Github.</p>
+<p><img src="https://angularfirebase.com/images/electron-angular-macos.gif" srcset="/img/loading.gif" alt></p>
+<h1 id="Initial-Setup"><a href="#Initial-Setup" class="headerlink" title="Initial Setup"></a>Initial Setup</h1><p>Let’s kick things off by building a new angular app from scratch.</p>
+<h1 id="Generate-the-Angular-App"><a href="#Generate-the-Angular-App" class="headerlink" title="Generate the Angular App"></a>Generate the Angular App</h1><p>Generate a default app with the Angular CLI.</p>
+<pre><code class="hljs undefined"><span class="hljs-built_in">npm</span> install -g @angular/cli
+ng <span class="hljs-keyword">new</span> angular-electron
+cd angular-electron</code></pre>
+<h1 id="Update-index-html"><a href="#Update-index-html" class="headerlink" title="Update index.html"></a>Update index.html</h1><p>The generated root page in Angular points the base href to <code>/</code> - this will cause problems with Electron later on, so let’s update it now. Just add a period in front of the slash in <code>src/index.html</code>.</p>
+<pre><code class="hljs undefined">&lt;base <span class="hljs-attribute">href</span>=<span class="hljs-string">"./"</span>&gt;</code></pre>
+<h1 id="Install-Electron"><a href="#Install-Electron" class="headerlink" title="Install Electron"></a>Install Electron</h1><p>You can install Electron in the Angular development environment.</p>
+<pre><code class="hljs undefined">npm install electron --<span class="hljs-built_in">save</span>-<span class="hljs-built_in">dev</span></code></pre>
+<h1 id="Configure-Electron"><a href="#Configure-Electron" class="headerlink" title="Configure Electron"></a>Configure Electron</h1><p>The next step is to configure Electron. There are all sorts of possibilities for customization and we’re just scratching the surface.</p>
+<h1 id="main-js"><a href="#main-js" class="headerlink" title="main.js"></a>main.js</h1><p>Create a new file named main.js in the root of your project - this is the Electron NodeJS backend. This is the entry point for Electron and defines how our desktop app will react to various events performed via the desktop operating system.</p>
+<p>The createWindow function defines the properties of the program window that the user will see. There are many more window options that faciliate additional customization, child windows, modals, etc.</p>
+<p>Notice we are loading the window by pointing it to the index.html file in the dist/ folder. Do NOT confuse this with the index file in the src/ folder. At this point, this file does not exist, but it will be created automatically in the next step by running ng build –prod</p>
+<pre><code class="hljs typescript"><span class="hljs-keyword">const</span> &#123; app, BrowserWindow &#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">'electron'</span>)
+
+<span class="hljs-keyword">let</span> win;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createWindow</span> (<span class="hljs-params"></span>) </span>&#123;
+
+  win = <span class="hljs-keyword">new</span> BrowserWindow(&#123;
+    width: <span class="hljs-number">600</span>,
+    height: <span class="hljs-number">600</span>,
+    backgroundColor: <span class="hljs-string">'#ffffff'</span>,
+    icon: <span class="hljs-string">`file://<span class="hljs-subst">$&#123;__dirname&#125;</span>/dist/assets/logo.png`</span>
+  &#125;)
+
+
+  win.loadURL(<span class="hljs-string">`file://<span class="hljs-subst">$&#123;__dirname&#125;</span>/dist/index.html`</span>)
+
+
+
+
+
+  win.on(<span class="hljs-string">'closed'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    win = <span class="hljs-literal">null</span>
+  &#125;)
+&#125;
+
+
+app.on(<span class="hljs-string">'ready'</span>, createWindow)
+
+
+app.on(<span class="hljs-string">'window-all-closed'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+
+
+  <span class="hljs-keyword">if</span> (process.platform !== <span class="hljs-string">'darwin'</span>) &#123;
+    app.quit()
+  &#125;
+&#125;)
+
+app.on(<span class="hljs-string">'activate'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+
+  <span class="hljs-keyword">if</span> (win === <span class="hljs-literal">null</span>) &#123;
+    createWindow()
+  &#125;
+&#125;)</code></pre>
+<p>That’s it for the Electron setup, all the desktop app magic is happens under the hood.</p>
+<h1 id="Custom-Build-Command"><a href="#Custom-Build-Command" class="headerlink" title="Custom Build Command"></a>Custom Build Command</h1><p>The deployed desktop app will be an Angular AOT build - this happens by default when you run ng build –prod. It’s useful to have a command that will run an AOT production build and start Electron at the same time. This can be easily configured in the package.json file.</p>
+<h1 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h1><pre><code class="hljs json">&#123;
+  <span class="hljs-attr">"name"</span>: <span class="hljs-string">"angular-electron"</span>,
+  <span class="hljs-attr">"version"</span>: <span class="hljs-string">"0.0.0"</span>,
+  <span class="hljs-attr">"license"</span>: <span class="hljs-string">"MIT"</span>,
+  <span class="hljs-attr">"main"</span>: <span class="hljs-string">"main.js"</span>,
+  <span class="hljs-attr">"scripts"</span>: &#123;
+    <span class="hljs-attr">"ng"</span>: <span class="hljs-string">"ng"</span>,
+    <span class="hljs-attr">"start"</span>: <span class="hljs-string">"ng serve"</span>,
+    <span class="hljs-attr">"build"</span>: <span class="hljs-string">"ng build"</span>,
+    <span class="hljs-attr">"test"</span>: <span class="hljs-string">"ng test"</span>,
+    <span class="hljs-attr">"lint"</span>: <span class="hljs-string">"ng lint"</span>,
+    <span class="hljs-attr">"e2e"</span>: <span class="hljs-string">"ng e2e"</span>,
+    <span class="hljs-attr">"electron"</span>: <span class="hljs-string">"electron ."</span>,
+    <span class="hljs-attr">"electron-build"</span>: <span class="hljs-string">"ng build --prod &amp;&amp; electron ."</span>
+  &#125;,
+
+&#125;</code></pre>
+<h1 id="Run-the-command"><a href="#Run-the-command" class="headerlink" title="Run the command"></a>Run the command</h1><p>You can run your angular app as an native desktop app with the following command.</p>
+<pre><code class="hljs undefined">npm <span class="hljs-keyword">run</span><span class="bash"> electron-build</span></code></pre>
+<p>At this point, you can run the command (it will take a few seconds) and it will create the dist/ folder and will automatically bring up a window on your operating system with default Angular app.</p>
+<p>This setup does not support hot code reloads. Whenever you change some Angular code, you need to rerun the electron-build command. It is possible to setup hot reloads by pointing the window to a remote URL (such as <a href="https://localhost:4200" target="_blank" rel="noopener">https://localhost:4200</a>) and running ng serve in a separate terminal.</p>
+<h1 id="Building-the-Angular-App"><a href="#Building-the-Angular-App" class="headerlink" title="Building the Angular App"></a>Building the Angular App</h1><p>Now we need to build an Angular App that’s worthy of being installed. I am building a single page timer that will animate a progress circle, then make a chime sound when complete.</p>
+<p><img src="https://angularfirebase.com/images/angular-electron-timer.gif" srcset="/img/loading.gif" alt></p>
+<p>To keep things super simple, I am writing all the code in the app.component</p>
+<h1 id="Install-Round-Progress-Bar"><a href="#Install-Round-Progress-Bar" class="headerlink" title="Install Round Progress Bar"></a>Install Round Progress Bar</h1><p>To get the progress timer looking good quickly, I installed the angular-svg-round-progressbar package. It gives us a pre-built component that we can animate based on the current state of the timer.</p>
+<pre><code class="hljs undefined">npm <span class="hljs-keyword">install</span> angular-svg-<span class="hljs-keyword">round</span>-progressbar <span class="hljs-comment">--save</span></code></pre>
+<p>Then add it to the app.module.ts (also add the FormsModule).</p>
+<pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; BrowserModule &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;
+<span class="hljs-keyword">import</span> &#123; NgModule &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+
+<span class="hljs-keyword">import</span> &#123; AppComponent &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.component'</span>;
+
+<span class="hljs-keyword">import</span> &#123; FormsModule &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/forms'</span>;
+<span class="hljs-keyword">import</span> &#123; RoundProgressModule &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'angular-svg-round-progressbar'</span>;
+
+<span class="hljs-meta">@NgModule</span>(&#123;
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    RoundProgressModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+&#125;)
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppModule &#123; &#125;</code></pre>
+<h1 id="app-component-ts"><a href="#app-component-ts" class="headerlink" title="app.component.ts"></a>app.component.ts</h1><p>The app works by allowing the user to set the number of seconds the timer will run max. The timer progresses by running an RxJS Observable interval every 10th of a second and incrementing the current value.</p>
+<p>I also defined several getters help deal with NaN values that can cause errors in the progress circle. They also help keep the HTML logic clean and readable.</p>
+<pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; Component, OnInit &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> &#123; Observable &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/Observable'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'rxjs/add/observable/interval'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'rxjs/add/operator/map'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'rxjs/add/operator/takeWhile'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'rxjs/add/operator/do'</span>;
+
+
+<span class="hljs-meta">@Component</span>(&#123;
+  selector: <span class="hljs-string">'app-root'</span>,
+  templateUrl: <span class="hljs-string">'./app.component.html'</span>,
+  styleUrls: [<span class="hljs-string">'./app.component.scss'</span>]
+&#125;)
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppComponent &#123;
+
+  max     = <span class="hljs-number">1</span>;
+  current = <span class="hljs-number">0</span>;
+
+
+  start() &#123;
+    <span class="hljs-keyword">const</span> interval = Observable.interval(<span class="hljs-number">100</span>);
+
+        interval
+          .takeWhile(_ =&gt; !<span class="hljs-keyword">this</span>.isFinished )
+          .do(<span class="hljs-function"><span class="hljs-params">i</span> =&gt;</span> <span class="hljs-keyword">this</span>.current += <span class="hljs-number">0.1</span>)
+          .subscribe();
+  &#125;
+
+
+  finish() &#123;
+    <span class="hljs-keyword">this</span>.current = <span class="hljs-keyword">this</span>.max;
+  &#125;
+
+
+  reset() &#123;
+    <span class="hljs-keyword">this</span>.current = <span class="hljs-number">0</span>;
+  &#125;
+
+
+
+  <span class="hljs-keyword">get</span> maxVal() &#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">isNaN</span>(<span class="hljs-keyword">this</span>.max) || <span class="hljs-keyword">this</span>.max &lt; <span class="hljs-number">0.1</span> ? <span class="hljs-number">0.1</span> : <span class="hljs-keyword">this</span>.max;
+  &#125;
+
+  <span class="hljs-keyword">get</span> currentVal() &#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">isNaN</span>(<span class="hljs-keyword">this</span>.current) || <span class="hljs-keyword">this</span>.current &lt; <span class="hljs-number">0</span> ? <span class="hljs-number">0</span> : <span class="hljs-keyword">this</span>.current;
+  &#125;
+
+  <span class="hljs-keyword">get</span> isFinished() &#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.currentVal &gt;= <span class="hljs-keyword">this</span>.maxVal;
+  &#125;
+
+&#125;</code></pre>
+<h1 id="app-component-html"><a href="#app-component-html" class="headerlink" title="app.component.html"></a>app.component.html</h1><p>In the HTML, we can declare the progress component and display the user interface elements conditionally based on the state of the timer.</p>
+<pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">main</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"content"</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Electron Timer<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"progress-wrapper"</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"maxVal"</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text"</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"!isFinished"</span>&gt;</span>
+          &#123;&#123; max - current | number: '1.1-1' &#125;&#125;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"text"</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"isFinished"</span>&gt;</span>
+            ding!
+            <span class="hljs-tag">&lt;<span class="hljs-name">audio</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"assets/chime.mp3"</span> <span class="hljs-attr">autoplay</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">audio</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">round-progress</span>
+                [<span class="hljs-attr">max</span>]=<span class="hljs-string">"max"</span>
+                [<span class="hljs-attr">current</span>]=<span class="hljs-string">"current"</span>
+                [<span class="hljs-attr">radius</span>]=<span class="hljs-string">"100"</span>
+                [<span class="hljs-attr">stroke</span>]=<span class="hljs-string">"25"</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">round-progress</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"controls-wrapper"</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>Seconds<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"input"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"number of seconds"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span>
+              [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"max"</span>
+              (<span class="hljs-attr">keydown</span>)=<span class="hljs-string">"reset()"</span>&gt;</span>
+
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"currentVal &lt;= 0"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"start()"</span>&gt;</span>Start<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"!isFinished"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"finish()"</span>&gt;</span>Finish<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span></code></pre>
+<h1 id="Packaging-for-Desktop-Operating-Systems"><a href="#Packaging-for-Desktop-Operating-Systems" class="headerlink" title="Packaging for Desktop Operating Systems"></a>Packaging for Desktop Operating Systems</h1><p>Now that we have a decent app ready for desktops, we need to package and distribute it. The electron packager tool will allow to package our code into an executable for desktop platforms - including Windows (win32), MacOS (darwin), and Linux. Keep in mind, there are several other electron packaging tools that might better fit your needs.</p>
+<pre><code class="hljs xml">npm install electron-packager -g
+npm install electron-packager --save-dev</code></pre>
+<p>Linux and MacOS developers will need to install WineHQ if they plan on building desktop apps for Windows.</p>
+<p>In this example, I am going to build an executable for Windows.</p>
+<pre><code class="hljs undefined">electron-packager . <span class="hljs-attribute">--platform</span>=win32</code></pre>
+<p>This will generate a directory /angular-electron-win32-x64/ that contains the executable file.</p>
+<p>And why not build one for MacOS while we’re at it.</p>
+<pre><code class="hljs undefined">electron-packager . <span class="hljs-attribute">--platform</span>=darwin</code></pre>
+<p>This will generate a directory /angular-electron-darwin-x64/ that contains the app. Zip it and extract it on a mac system and you should be able to run it natively. You will get warnings that it’s from an unknown developer, but this is expected and it’s perfectly safe to open - it’s your own code after all.</p>
+<h1 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h1><p>That’s it for the basic setup with Electron with Angular. In the future, I will post some more advanced examples of these technologies in action.</p>
+
+              <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                  <!-- 单元1 -->
+                  <ins class="adsbygoogle"
+                      style="display:block"
+                      data-ad-client="ca-pub-9508321495212724"
+                      data-ad-slot="3221759322"
+                      data-ad-format="auto"
+                      data-full-width-responsive="true"></ins>
+              <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/前端/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Angular/">Angular</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Electron/">Electron</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/10/16/0001-how-to-manage-different-environments-with-angular-cli/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">使用Angular cli管理多种环境配置</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/10/15/how-to-import-springboot/">
+                        <span class="hidden-mobile">Spring Boot依赖引入的多种方式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "构建基于Electron技术的Angular桌面应用&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script data-ad-client="ca-pub-9508321495212724" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,631 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="努力做最好的自己">
+  <meta name="author" content="TinyKing">
+  <meta name="keywords" content="undefined">
+  <title>细说ThreadLocal - 爱笑笑，爱生活</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css">
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>爱笑笑，爱生活</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-07-28 13:10" pubdate>
+      2021年7月28日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">细说ThreadLocal</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h2 id="1-ThreadLocal是什么"><a href="#1-ThreadLocal是什么" class="headerlink" title="1. ThreadLocal是什么"></a>1. ThreadLocal是什么</h2><p>通过源码开头的注释，可以看出 <code>ThreadLocal</code>为线程提供了一个线程本局部变量。它和普通变量不同，是以静态变量的方式来使用，同时又很好地实现了线程隔离。</p>
+<h2 id="2-怎么使用"><a href="#2-怎么使用" class="headerlink" title="2. 怎么使用"></a>2. 怎么使用</h2><h3 id="2-1-官方实例"><a href="#2-1-官方实例" class="headerlink" title="2.1 官方实例"></a>2.1 官方实例</h3><p>同样在源码开头的注释里面，提供了一个使用的例子：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.concurrent.atomic.AtomicInteger;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadId</span> </span>&#123;
+    <span class="hljs-comment">// Atomic integer containing the next thread ID to be assigned</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> AtomicInteger nextId = <span class="hljs-keyword">new</span> AtomicInteger(<span class="hljs-number">0</span>);
+
+    <span class="hljs-comment">// Thread local variable containing each thread's ID</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> ThreadLocal&lt;Integer&gt; threadId =
+        <span class="hljs-keyword">new</span> ThreadLocal&lt;Integer&gt;() &#123;
+        <span class="hljs-meta">@Override</span> <span class="hljs-function"><span class="hljs-keyword">protected</span> Integer <span class="hljs-title">initialValue</span><span class="hljs-params">()</span> </span>&#123;
+            <span class="hljs-keyword">return</span> nextId.getAndIncrement();
+        &#125;
+    &#125;;
+
+    <span class="hljs-comment">// Returns the current thread's unique ID, assigning it if necessary</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">get</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> threadId.get();
+    &#125;
+&#125;</code></pre>
+<p>在此例子中，直接使用<code>initialValue</code>的方法为实例进行数据初始化，实现每个线程在使用的过程中，都能获取一个单独的id。</p>
+<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadIdRunnable</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
+        String name = Thread.currentThread().getName();
+        System.out.println(<span class="hljs-string">"Thread name is "</span> + name + <span class="hljs-string">", threadId is "</span> + get());
+    &#125;
+&#125;</code></pre>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+    Thread t1 = <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> ThreadIdRunnable());
+    Thread t2 = <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> ThreadIdRunnable());
+    t1.start();
+    t2.start();
+&#125;</code></pre>
+<p>执行结果：<br><pre><code class="hljs undefined">Thread <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</span> Thread<span class="hljs-number">-0</span>, threadId <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+Thread <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</span> Thread<span class="hljs-number">-1</span>, threadId <span class="hljs-keyword">is</span> <span class="hljs-number">1</span></code></pre></p>
+<h3 id="2-2-应用场景"><a href="#2-2-应用场景" class="headerlink" title="2.2 应用场景"></a>2.2 应用场景</h3><p>日常开发过程中，应用的场景也是比较多。比如：</p>
+<ul>
+<li>request的请求处理的过程中，需要在不同的方法中使用用户的登录信息。</li>
+</ul>
+<h2 id="3-实现原理"><a href="#3-实现原理" class="headerlink" title="3. 实现原理"></a>3. 实现原理</h2><h3 id="3-1-数据结构"><a href="#3-1-数据结构" class="headerlink" title="3.1 数据结构"></a>3.1 数据结构</h3><p>通过源码可以看到，数据是存储在<strong>ThreadLocalMap</strong>中的。<strong>ThreadLocalMap</strong>的是通过Entry数据（Entry[] table）实现的。</p>
+<p><em>Entry</em> 类如下</p>
+<pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Entry</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">WeakReference</span>&lt;<span class="hljs-title">ThreadLocal</span>&lt;?&gt;&gt; </span>&#123;
+    <span class="hljs-comment">/** The value associated with this ThreadLocal. */</span>
+    Object value;
+
+    Entry(ThreadLocal&lt;?&gt; k, Object v) &#123;
+        <span class="hljs-keyword">super</span>(k);
+        value = v;
+    &#125;
+&#125;</code></pre>
+<p>总结一下就是，ThreadLocal是由一个名为ThreadLocalMap的哈希映射。哈希映射是由继承了索引用的Entry对象组成的数组。</p>
+<h3 id="3-2-hash计算"><a href="#3-2-hash计算" class="headerlink" title="3.2 hash计算"></a>3.2 hash计算</h3><p>ThreadLocal中的hash和平时创建类的hash code是有区别的。平时创建类时，都是通过重写hashCode方法。</p>
+<p>在ThreadLocal直接使用了一个final变量threadLocalHashCode来表示ThreadLocal实例的hash值，以此值参与后面的逻辑处理。使用AtomicInteger来处理线程安全的问题。</p>
+<p>在使用AtomicInteger生成threadLocalHashCode的过程中，使用了一个特殊的步长值 <code>HASH_INCREMENT = 0x61c88647</code>, 这个值可以实现threadLocalHashCode尽可能均匀的分布在2的N次幂的数组中，降低hash冲突的概率。可以在 <a href="https://www.javaspecialists.eu/archive/Issue164-Why-0x61c88647.html" target="_blank" rel="noopener">Why 0x61c88647?</a> 中找到相关的描述。</p>
+<pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> threadLocalHashCode = nextHashCode();
+
+<span class="hljs-comment">/**
+ * The next hash code to be given out. Updated atomically. Starts at
+ * zero.
+ */</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> AtomicInteger nextHashCode =
+    <span class="hljs-keyword">new</span> AtomicInteger();
+
+<span class="hljs-comment">/**
+ * The difference between successively generated hash codes - turns
+ * implicit sequential thread-local IDs into near-optimally spread
+ * multiplicative hash values for power-of-two-sized tables.
+ */</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> HASH_INCREMENT = <span class="hljs-number">0x61c88647</span>;
+
+<span class="hljs-comment">/**
+ * Returns the next hash code.
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">nextHashCode</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">return</span> nextHashCode.getAndAdd(HASH_INCREMENT);
+&#125;</code></pre>
+<h2 id="4-线程安全"><a href="#4-线程安全" class="headerlink" title="4. 线程安全"></a>4. 线程安全</h2><p>ThreadLocal本身并不存储数据，数据实际是存储在使用它的Thread中的。</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">set</span><span class="hljs-params">(T value)</span> </span>&#123;
+    Thread t = Thread.currentThread();
+    ThreadLocalMap map = getMap(t);
+    <span class="hljs-keyword">if</span> (map != <span class="hljs-keyword">null</span>)
+        map.set(<span class="hljs-keyword">this</span>, value);
+    <span class="hljs-keyword">else</span>
+        createMap(t, value);
+&#125;
+
+<span class="hljs-function">ThreadLocalMap <span class="hljs-title">getMap</span><span class="hljs-params">(Thread t)</span> </span>&#123;
+    <span class="hljs-keyword">return</span> t.threadLocals;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">createMap</span><span class="hljs-params">(Thread t, T firstValue)</span> </span>&#123;
+    t.threadLocals = <span class="hljs-keyword">new</span> ThreadLocalMap(<span class="hljs-keyword">this</span>, firstValue);
+&#125;</code></pre>
+<p>同过为每个线程创建一个独立的ThreadLocalMap，实现数据的多线程隔离。</p>
+<h2 id="5-内存泄漏"><a href="#5-内存泄漏" class="headerlink" title="5. 内存泄漏"></a>5. 内存泄漏</h2><h3 id="5-1-什么是内存泄漏"><a href="#5-1-什么是内存泄漏" class="headerlink" title="5.1 什么是内存泄漏"></a>5.1 什么是内存泄漏</h3><p>内存泄漏（Memory Leak）是指程序中已动态分配的堆内存由于某种原因程序未释放或无法释放，造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。</p>
+<h3 id="5-2-ThreadLocal的内存泄漏"><a href="#5-2-ThreadLocal的内存泄漏" class="headerlink" title="5.2 ThreadLocal的内存泄漏"></a>5.2 ThreadLocal的内存泄漏</h3><p>很多文章中提到了使用ThreadLocal，可能会产生内存泄漏的，这是为什么呢？</p>
+<p>上面也提到了ThreadLocal实际是为每个线程创建ThreadLocalMap，其引用被线程持有，这也就意味的ThreadLocalMap的生命周期和线程是一致的。线程结束了，ThreadLocalMap在GC的时候也会被回收。那它是怎产生内存泄漏的呢。</p>
+<p>关于这个还是要从线程的使用方面着手分析。</p>
+<p>我们知道线程资源是比较昂贵的，为了减少线程创建的开销，引入了池化技术。线程池有效的解决了复用的问题，减少频繁创建线程的问题。常用的池化技术有线程池，数据库连接池等等。</p>
+<p>但是线程池的复用线程复用也引来了新的问题，那就是线程的生命周期被无限拉长。也就是说ThreadLocalMap也不会被回收了。同一线程不断的使用不同的ThreadLocal实例，而value不释放，从而产生内存泄漏。</p>
+<p>可能有人会说，Entry是实现了WeakReference的，而弱引用在GC的时候会强制被回收的。没错，对于弱引用的确是在GC的时候会被回收的，但是Entry的key是ThreadLocal实例的所引用，也就是或在ThreadLocal实例只有Entry持有的时候，不会产生内存泄漏。</p>
+<p>在实际使用ThreadLocal的过程中，会将其创建为静态变量：<br><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> ThreadLocal&lt;Integer&gt; threadId</code></pre></p>
+<p>此时是强引用，在JVM的GC算法中，如果一个对象有它的强引用存在就不会被回收。</p>
+<h3 id="5-3-如何避免"><a href="#5-3-如何避免" class="headerlink" title="5.3 如何避免"></a>5.3 如何避免</h3><p>ThreadLocal提供了remove方法，用来使用value资源。为了避免内存蝎落，需要在线程的业务逻辑结束的时候，主动的调用remove。</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**
+ * Remove the entry for key.
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">remove</span><span class="hljs-params">(ThreadLocal&lt;?&gt; key)</span> </span>&#123;
+    Entry[] tab = table;
+    <span class="hljs-keyword">int</span> len = tab.length;
+    <span class="hljs-keyword">int</span> i = key.threadLocalHashCode &amp; (len-<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">for</span> (Entry e = tab[i];
+            e != <span class="hljs-keyword">null</span>;
+            e = tab[i = nextIndex(i, len)]) &#123;
+        <span class="hljs-keyword">if</span> (e.get() == key) &#123;
+            e.clear();
+            expungeStaleEntry(i);
+            <span class="hljs-keyword">return</span>;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+              <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                  <!-- 单元1 -->
+                  <ins class="adsbygoogle"
+                      style="display:block"
+                      data-ad-client="ca-pub-9508321495212724"
+                      data-ad-slot="3221759322"
+                      data-ad-format="auto"
+                      data-full-width-responsive="true"></ins>
+              <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/后端/">后端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JDK/">JDK</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/08/16/creating-efficient-docker-images-with-spring-boot-2-3/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/24/jackson-compare-two-json-objects/">
+                        <span class="hidden-mobile">基于Jackson的两个Json对象进行比较</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "细说ThreadLocal&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script data-ad-client="ca-pub-9508321495212724" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+</body>
+</html>

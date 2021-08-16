@@ -1,0 +1,611 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&quot;auto&quot;>
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="努力做最好的自己">
+  <meta name="author" content="TinyKing">
+  <meta name="keywords" content="undefined">
+  <title>记一次线上问题的排查过程 - 爱笑笑，爱生活</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css">
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>爱笑笑，爱生活</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2018-04-05 00:00" pubdate>
+      2018年4月5日 凌晨
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">记一次线上问题的排查过程</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>XX系统中，一个用户需要维护的项目数过多，填写的任务数超多，产生了一次工时保存中，只有前面一部分的xx数据持久化到数据库，后面的数据没有保存。</p>
+<p><code>图1</code></p>
+<p><img src="http://ww1.sinaimg.cn/large/806e3151ly1fptj4uwnnuj21200i8gm5.jpg" srcset="/img/loading.gif" alt></p>
+<h1 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h1><h2 id="1-增加日志，监控参数信息"><a href="#1-增加日志，监控参数信息" class="headerlink" title="1.增加日志，监控参数信息"></a>1.增加日志，监控参数信息</h2><p>首先想到的是否后面部分的数据在保存过程中发生了异常。排查异常日志，发现没有该问题存在。</p>
+<p>然后增加方法参数信息日志，数据参数信息。发现参数集合size=200，前端发送集合size=400。判断问题可以能是因为服务器容器环境(Nginx+Tomcat)导致</p>
+<h2 id="2-开发环境问题重现"><a href="#2-开发环境问题重现" class="headerlink" title="2.开发环境问题重现"></a>2.开发环境问题重现</h2><h3 id="2-1-模拟数据"><a href="#2-1-模拟数据" class="headerlink" title="2.1 模拟数据"></a>2.1 模拟数据</h3><p>在测试环境模拟线上数据。如<code>图1</code></p>
+<h3 id="2-2-只配置Tomcat"><a href="#2-2-只配置Tomcat" class="headerlink" title="2.2 只配置Tomcat"></a>2.2 只配置Tomcat</h3><p>在idea中直接启动tomcat，无nginx环境，如果没有问题，则可暂时确定为nginx问题。</p>
+<p>然而，在过程中发现了新的问题。</p>
+<pre><code class="hljs undefined"><span class="hljs-keyword">org.springframework.beans.InvalidPropertyException: </span>Invalid property <span class="hljs-string">'detail[256]'</span> of <span class="hljs-keyword">bean </span>class [com.suning.asvp.mer.entity.InviteCooperationInfo]: Index of out of <span class="hljs-keyword">bounds </span>in property path <span class="hljs-string">'detail[256]'</span><span class="hljs-comment">; nested exception is java.lang.IndexOutOfBoundsException: Index: 256, Size: 256  </span>
+    <span class="hljs-built_in">at</span> <span class="hljs-keyword">org.springframework.beans.BeanWrapperImpl.getPropertyValue(BeanWrapperImpl.java:833) </span>~[spring-<span class="hljs-keyword">beans-3.1.2.RELEASE.jar:3.1.2.RELEASE] </span> 
+    <span class="hljs-built_in">at</span> <span class="hljs-keyword">org.springframework.beans.BeanWrapperImpl.getNestedBeanWrapper(BeanWrapperImpl.java:576) </span>~[spring-<span class="hljs-keyword">beans-3.1.2.RELEASE.jar:3.1.2.RELEASE] </span> 
+    <span class="hljs-built_in">at</span> <span class="hljs-keyword">org.springframework.beans.BeanWrapperImpl.getBeanWrapperForPropertyPath(BeanWrapperImpl.java:553) </span>~[spring-<span class="hljs-keyword">beans-3.1.2.RELEASE.jar:3.1.2.RELEASE] </span> 
+    <span class="hljs-built_in">at</span> <span class="hljs-keyword">org.springframework.beans.BeanWrapperImpl.setPropertyValue(BeanWrapperImpl.java:914) </span>~[spring-<span class="hljs-keyword">beans-3.1.2.RELEASE.jar:3.1.2.RELEASE] </span> 
+    <span class="hljs-built_in">at</span> <span class="hljs-keyword">org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:76) </span>~[spring-<span class="hljs-keyword">beans-3.1.2.RELEASE.jar:3.1.2.RELEASE] </span> 
+    <span class="hljs-built_in">at</span> <span class="hljs-keyword">org.springframework.validation.DataBinder.applyPropertyValues(DataBinder.java:692) </span>~[spring-<span class="hljs-built_in">context</span><span class="hljs-number">-3</span>.<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.RELEASE.<span class="hljs-keyword">jar:3.1.2.RELEASE] </span> 
+    <span class="hljs-built_in">at</span> <span class="hljs-keyword">org.springframework.validation.DataBinder.doBind(DataBinder.java:588) </span>~[spring-<span class="hljs-built_in">context</span><span class="hljs-number">-3</span>.<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.RELEASE.<span class="hljs-keyword">jar:3.1.2.RELEASE] </span> 
+    <span class="hljs-built_in">at</span> <span class="hljs-keyword">org.springframework.web.bind.WebDataBinder.doBind(WebDataBinder.java:191) </span>~[spring-web<span class="hljs-number">-3</span>.<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.RELEASE.<span class="hljs-keyword">jar:3.1.2.RELEASE] </span> 
+    <span class="hljs-built_in">at</span> <span class="hljs-keyword">org.springframework.web.bind.ServletRequestDataBinder.bind(ServletRequestDataBinder.java:112) </span>~[spring-web<span class="hljs-number">-3</span>.<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.RELEASE.<span class="hljs-keyword">jar:3.1.2.RELEASE]</span></code></pre>
+<p>查看BeanWrapperImpl源码<br><pre><code class="hljs undefined"><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">value</span> instanceof List) &#123;  
+    <span class="hljs-built_in">int</span> <span class="hljs-built_in">index</span> = <span class="hljs-keyword">Integer</span>.parseInt(key);                        
+    List list = (List) <span class="hljs-keyword">value</span>;  
+    growCollectionIfNecessary(list, <span class="hljs-built_in">index</span>, indexedPropertyName, pd, i + <span class="hljs-number">1</span>);                       
+    <span class="hljs-keyword">value</span> = list.get(<span class="hljs-built_in">index</span>);// 测试报错时，此处list只有<span class="hljs-number">256</span>个，<span class="hljs-built_in">index</span>为<span class="hljs-number">256</span>时，取第<span class="hljs-number">257</span>个报错  
+&#125;</code></pre></p>
+<pre><code class="hljs undefined">@SuppressWarnings(<span class="hljs-string">"unchecked"</span>)  
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> growCollectionIfNecessary(  
+            Collection collection, <span class="hljs-built_in">int</span> index, <span class="hljs-keyword">String</span> name, PropertyDescriptor pd, <span class="hljs-built_in">int</span> nestingLevel) &#123;  
+
+
+        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.autoGrowNestedPaths) &#123;  
+            <span class="hljs-keyword">return</span>;  
+        &#125;  
+        <span class="hljs-built_in">int</span> <span class="hljs-built_in">size</span> = collection.<span class="hljs-built_in">size</span>();  
+        <span class="hljs-comment">// 当个数小于autoGrowCollectionLimit这个值时才会向list中添加新元素  </span>
+        <span class="hljs-keyword">if</span> (index &gt;= <span class="hljs-built_in">size</span> &amp;&amp; index &lt; <span class="hljs-keyword">this</span>.autoGrowCollectionLimit) &#123;  
+            Class elementType = GenericCollectionTypeResolver.getCollectionReturnType(pd.getReadMethod(), nestingLevel);  
+            <span class="hljs-keyword">if</span> (elementType != <span class="hljs-keyword">null</span>) &#123;  
+                <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = collection.<span class="hljs-built_in">size</span>(); i &lt; index + <span class="hljs-number">1</span>; i++) &#123;  
+                    collection.<span class="hljs-built_in">add</span>(newValue(elementType, name));  
+                &#125;  
+            &#125;  
+        &#125;  
+    &#125;</code></pre>
+<p>根据上面的分析找到autoGrowCollectionLimit的定义</p>
+<pre><code class="hljs undefined">public class DataBinder implements PropertyEditorRegistry, TypeConverter &#123;  
+
+    /** Default object name used for binding: <span class="hljs-string">"target"</span> */  
+   <span class="hljs-keyword"> public</span><span class="hljs-keyword"> static</span><span class="hljs-keyword"> final</span> String DEFAU<span class="hljs-class">LT_OBJECT_NAME = "target";</span>  
+
+    /** Default limit for<span class="hljs-built_in"> array </span>and collection growing: 256 */  
+   <span class="hljs-keyword"> public</span><span class="hljs-keyword"> static</span><span class="hljs-keyword"> final</span><span class="hljs-built_in"> int </span>DEFAU<span class="hljs-class">LT_AUTO_GROW_COLLECTION_LIMIT = 256;</span>  
+
+   <span class="hljs-keyword"> private</span><span class="hljs-built_in"> int </span>autoGrowCollection<span class="hljs-class">Limit = DEFAULT_AUTO_GROW_COLLECTION_LIMIT;</span></code></pre>
+<p>解决方案，是在自己的Controller中加入如下方法</p>
+<pre><code class="hljs undefined"><span class="hljs-meta">@InitBinder</span>  
+<span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">initBinder</span><span class="hljs-params">(WebDataBinder binder)</span> </span>&#123;  
+    binder.setAutoGrowNestedPaths(<span class="hljs-keyword">true</span>);  
+    binder.setAutoGrowCollectionLimit(<span class="hljs-number">1024</span>);  
+&#125;</code></pre>
+<p>==<strong>BUT</strong> 这个问题和线上的不同，只能算是意外收获。革命尚未成功，同志仍需努力！！！！==</p>
+<h3 id="2-3-增加Nginx"><a href="#2-3-增加Nginx" class="headerlink" title="2.3 增加Nginx"></a>2.3 增加Nginx</h3><p>经过2.2的奋斗，暂时判定是否为Nginx post请求参数做了限制。嗯，开搞~ 在开发环境配置Nginx代理，过程略·····</p>
+<p>nginx.conf 如下<br><pre><code class="hljs undefined"><span class="hljs-attribute">upstream</span> xxxxxxx &#123;
+	<span class="hljs-attribute">server</span> <span class="hljs-number">127.0.0.1:8080</span>  weight=<span class="hljs-number">10</span> max_fails=<span class="hljs-number">2</span> fail_timeout=<span class="hljs-number">30s</span> ;
+&#125;
+
+<span class="hljs-section">server</span> &#123;
+    <span class="hljs-attribute">listen</span>       <span class="hljs-number">80</span>;
+    <span class="hljs-attribute">server_name</span>  xxxxxxx.com;
+    <span class="hljs-attribute">client_max_body_size</span> <span class="hljs-number">100M</span>;  <span class="hljs-comment"># 配置post size</span>
+
+    <span class="hljs-comment">#charset koi8-r;</span>
+
+    <span class="hljs-comment">#access_log  logs/host.access.log  main;</span>
+
+   <span class="hljs-attribute">location</span> / &#123;
+		<span class="hljs-comment">#proxy_next_upstream     http_500 http_502 http_503 http_504 error timeout invalid_header;</span>
+		<span class="hljs-attribute">proxy_set_header</span>        Host  <span class="hljs-variable">$host</span>;
+		<span class="hljs-attribute">proxy_set_header</span>        X-Forwarded-For <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;
+		<span class="hljs-attribute">proxy_pass</span>              http://xxxxxxx;
+		<span class="hljs-attribute">expires</span>                 <span class="hljs-number">0</span>;
+	&#125;
+&#125;</code></pre></p>
+<p>对于<code>client_max_body_size 100M;</code>，网上都是与文件上传相关的。不过都是通过post， request body的方式上传数据，所以通用。</p>
+<p>测试~~</p>
+<p>功能正常，没有重现线上问题。 哭死~~~</p>
+<p>革命还要继续~~</p>
+<h3 id="2-4-Tomcat-post设置"><a href="#2-4-Tomcat-post设置" class="headerlink" title="2.4 Tomcat post设置"></a>2.4 Tomcat post设置</h3><p>去线上服务器拉去配置</p>
+<pre><code class="hljs undefined">&lt;Connector <span class="hljs-attribute">port</span>=<span class="hljs-string">"1601"</span> <span class="hljs-attribute">maxParameterCount</span>=<span class="hljs-string">"1000"</span> <span class="hljs-attribute">protocol</span>=<span class="hljs-string">"HTTP/1.1"</span> <span class="hljs-attribute">redirectPort</span>=<span class="hljs-string">"8443"</span> <span class="hljs-attribute">maxSpareThreads</span>=<span class="hljs-string">"750"</span> <span class="hljs-attribute">maxThreads</span>=<span class="hljs-string">"1000"</span> <span class="hljs-attribute">minSpareTHreads</span>=<span class="hljs-string">"50"</span> <span class="hljs-attribute">acceptCount</span>=<span class="hljs-string">"1000"</span> <span class="hljs-attribute">connectionTimeout</span>=<span class="hljs-string">"20000"</span> <span class="hljs-attribute">URIEncoding</span>=<span class="hljs-string">"utf-8"</span>/&gt;</code></pre>
+<p>经分析，发现线上没有body size的配置，却有<code>maxParameterCount=&quot;1000&quot;</code>。该参数为限制请求的参数个数，从而变相限制body size。</p>
+<p>在开发环境配置该参数，测试，<strong>问题重现</strong>。</p>
+<h2 id="3-解决"><a href="#3-解决" class="headerlink" title="3. 解决"></a>3. 解决</h2><p>问题原因定位好了，剩下的就是如何解决了。</p>
+<p>两个方案：</p>
+<ul>
+<li><p>修改线上配置</p>
+<p>  <em>该上实施难度系数高，因为公司使用的统一发布部署平台，开发人员无服务器操作权限。</em></p>
+</li>
+<li><p>修改代码</p>
+<p>  <em>修改保存逻辑，分片存储</em></p>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>问题排查，需要先对整体有个把握，然后分析影响范围。不能钻牛角尖，采用西医“头疼医头”的方式。有可能最后结果还是要医头，但此时的医头已经是建立在中医的辩证主义上，对症下药。</p>
+
+              <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                  <!-- 单元1 -->
+                  <ins class="adsbygoogle"
+                      style="display:block"
+                      data-ad-client="ca-pub-9508321495212724"
+                      data-ad-slot="3221759322"
+                      data-ad-format="auto"
+                      data-full-width-responsive="true"></ins>
+              <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/工具/">工具</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Nginx/">Nginx</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Tomcat/">Tomcat</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/04/09/rocketmq-architecture/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">RocketMQ架构简介</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/01/26/spring-annotation/">
+                        <span class="hidden-mobile">Spring常用Annotation详解</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "记一次线上问题的排查过程&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script data-ad-client="ca-pub-9508321495212724" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+</body>
+</html>
