@@ -1,7 +1,8 @@
 ---
 title: Angular开发必不可少的代理配置
 date: 2019-08-02 18:07:30
-tags:
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 
 

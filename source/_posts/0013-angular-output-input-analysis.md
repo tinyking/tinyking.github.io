@@ -5,6 +5,8 @@ tags:
     - Angular
 categories:
     - 前端
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 
 # @Output与@Input理解
@@ -43,7 +45,7 @@ set(name:string) {this._name = name;}
 Output的数据流方向与input是相反的，所以那就是child控制parent的数据显示，input是parent控制child的数据显示。
 
 **注意**
-Angular 2中，@Output的实现必须使用EventEmitter来实现。 
+Angular 2中，@Output的实现必须使用EventEmitter来实现。
 并且当你使用了tslint之后，变量不能加on，但是可以通过加入这样一段注释
 
 ```
@@ -61,7 +63,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 EventEmitter();中间的boolean参数是你需要传递数据的类型，当然可以是基本类型，也可以是自定义类型。
 
-我们还是老样子，通过一个例子来分析一下吧。 
+我们还是老样子，通过一个例子来分析一下吧。
 
 ![](https://ws1.sinaimg.cn/large/806e3151ly1fxtu7s2pydj218a0ueq92.jpg)
 

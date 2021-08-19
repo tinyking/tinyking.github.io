@@ -5,6 +5,8 @@ tags:
     - Nginx
 categories:
     - 工具
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 
 > 本文旨在用最通俗的语言讲述最枯燥的基本知识

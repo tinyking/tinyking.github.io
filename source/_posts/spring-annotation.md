@@ -6,6 +6,8 @@ tags:
     - Java
 categories:
     - 后端
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 
 
@@ -55,7 +57,7 @@ public @interface Autowired {
     public User(Address address) {
         this.address=address;     
     }
-    
+
 }
 
 <bean id="user" class="xx.User"/>
@@ -71,9 +73,9 @@ public @interface Autowired {
     @Autowired    
     @Qualifier("address1")    
     private Address address;    
-    
+
     ...
-    
+
 }
 ```
 
@@ -88,9 +90,9 @@ public class SpringCoreConfig {
     public AdminUser adminUser() {
         AdminUser adminUser = new AdminUser();
         return adminUser;    
-        
+
     }
-    
+
 }
 ```
 
@@ -153,9 +155,9 @@ public class AccountController {
     @RequestMapping("/login")
     public Result userLogin() {
         // ...    
-        
+
     }
-    
+
 }
 ```
 ### @ExceptionHandler
@@ -259,4 +261,3 @@ public void schedulg() {
 @ContextConfiguration(classes = SpringCoreConfig.class)
 public class UserServiceTest {}
 ```
-

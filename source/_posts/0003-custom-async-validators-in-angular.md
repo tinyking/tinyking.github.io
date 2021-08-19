@@ -5,6 +5,8 @@ tags:
     - Angular
 categories:
     - 前端
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 
 在实际工作中，我们经常需要一个基于后端API验证值的验证器。为此，Angular提供了一种定义自定义异步验证器的简便方法。

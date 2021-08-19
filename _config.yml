@@ -7,7 +7,7 @@ title: 爱笑笑，爱生活
 subtitle:
 description: 努力做最好的自己
 author: TinyKing
-language: zh-Hans
+language: zh-CN
 timezone:
 
 # URL
@@ -63,8 +63,9 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next2
+#theme: next2
 # theme: hexo-theme-snippet
+theme: fluid
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

@@ -1,10 +1,12 @@
 ---
 title: win10下手动编译Spring
 date: 2018-10-12 09:06:30
-tags: 
+tags:
     - Spring
 categories:
     - 后端
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 
 

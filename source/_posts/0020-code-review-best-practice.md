@@ -1,4 +1,6 @@
 ---
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 title: 代码Review最佳实践
 date: 2019-11-29 16:17
 ---
@@ -80,10 +82,10 @@ date: 2019-11-29 16:17
 - 安全
   - 验证API端点是否执行与其余代码库一致的适当授权和身份验证。 检查其他常见弱点，例如弱配置，恶意用户输入，缺少日志事件等。如有疑问，请向应用程序安全专家咨询Review。
 - 评论
-  - 简洁、友好、可操作的。不要忘了赞扬简洁、可读、高效、优雅的代码。 相反，拒绝或不批准代码Review并不粗鲁。 如果更改是多余的或无关紧要的，请拒绝并说明。 
+  - 简洁、友好、可操作的。不要忘了赞扬简洁、可读、高效、优雅的代码。 相反，拒绝或不批准代码Review并不粗鲁。 如果更改是多余的或无关紧要的，请拒绝并说明。
 - 面对面Review
   - 对于大多数代码检查而言，基于异步差异的工具（例如Reviewable，Gerrit或GitHub）都是不错的选择。 当在同一台屏幕或投影仪前亲自进行或通过VTC或屏幕共享工具远程执行时，复杂的更改或具有不同专业知识或经验的各方之间的评论可以更有效。
-  
+
 ## 示例
 在以下示例中，建议的评论注释在代码块中由 `// R：...` 注释标识。
 
@@ -102,7 +104,7 @@ class MyClass {
 interface MyInterface {
   /** Returns {@link Optional#empty} if s cannot be extracted. */
   public Optional<String> extractString(String s);  
-    
+
   /** Returns null if {@code s} cannot be rewritten. */
   //R: 应该协调返回值：在这里也使用Optional <>
   public String rewriteString(String s);
@@ -121,7 +123,7 @@ String joinAndConcatenate(Map<String, String> map, String keyValueSeparator, Str
 ```java
 //R: nit: I usually prefer numFoo over fooCount; up to you,
 //  but we should keep it consistent in this project
-int dayCount; 
+int dayCount;
 ```
 
 ### Bugs
@@ -136,11 +138,10 @@ for (int i = 0; i <= numIterations; ++i) {
 ### 架构疑虑
 
 ```java
-//R: I think we should avoid the dependency on OtherService. 
+//R: I think we should avoid the dependency on OtherService.
 // Can we discuss this in person?
-otherService.call(); 
+otherService.call();
 ```
 
 ## 总结
 通过有效的代码Review，可以提高项目代码质量，使团队开发人员形成统一风格，并同步项目细节。同时还可以提高团队人员的知识，提升自我。
-

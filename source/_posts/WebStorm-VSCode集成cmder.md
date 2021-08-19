@@ -1,4 +1,6 @@
 ---
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 title: WebStorm VSCode集成cmder
 date: 2019-06-26 18:27:25
 categories:

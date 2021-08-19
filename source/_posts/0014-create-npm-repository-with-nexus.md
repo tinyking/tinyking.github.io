@@ -6,6 +6,8 @@ tags:
     - Nexus
 categories:
     - 工具
+index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
 ---
 
 
