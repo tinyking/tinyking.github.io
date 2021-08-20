@@ -166,7 +166,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      85 字
+      86 字
     </span>
   
 
@@ -209,13 +209,19 @@
             <h1 style="display: none">Java系列  - JDK环境配置</h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><p>打开<code>/etc/profile</code>, 添加如下代码：<br><pre><code class="hljs bash"><span class="hljs-built_in">export</span> JAVA_HOME=/opt/jdk
+              <h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><p>打开<code>/etc/profile</code>, 添加如下代码：</p>
+<pre><code class="hljs bash"><span class="hljs-built_in">export</span> JAVA_HOME=/opt/jdk
 <span class="hljs-built_in">export</span> JRE_HOME=<span class="hljs-variable">$JAVA_HOME</span>/jre
 <span class="hljs-built_in">export</span> CLASSPATH=.:<span class="hljs-variable">$JAVA_HOME</span>/lib:<span class="hljs-variable">$JRE_HOME</span>/lib
-<span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$JAVA_HOME</span>/bin:<span class="hljs-variable">$PATH</span></code></pre></p>
-<p>执行代码，使配置生效<br><pre><code class="hljs bash"><span class="hljs-built_in">source</span> /etc/profile</code></pre></p>
-<p>安装命令 <strong>需要root权限</strong><br><pre><code class="hljs bash">alternatives --install /usr/bin/java java /opt/jdk/bin/java 1600
-alternatives --install /usr/bin/javac javac /opt/jdk/bin/javac 1600</code></pre></p>
+<span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$JAVA_HOME</span>/bin:<span class="hljs-variable">$PATH</span></code></pre>
+
+<p>执行代码，使配置生效</p>
+<pre><code class="hljs bash"><span class="hljs-built_in">source</span> /etc/profile</code></pre>
+
+<p>安装命令 <strong>需要root权限</strong></p>
+<pre><code class="hljs bash">alternatives --install /usr/bin/java java /opt/jdk/bin/java 1600
+alternatives --install /usr/bin/javac javac /opt/jdk/bin/javac 1600</code></pre>
+
 <h1 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h1><blockquote>
 <p>windows下，path路径以<code>;</code>分割，bat变量<code>%JAVA_HOME%</code></p>
 </blockquote>

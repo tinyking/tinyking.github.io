@@ -221,6 +221,7 @@
         <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>caffeine<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span></code></pre>
+
 <p>它们导入基本的Spring缓存支持，以及caffeine库。</p>
 <h2 id="3-配置"><a href="#3-配置" class="headerlink" title="3. 配置"></a>3. 配置</h2><p>现在我们需要在Spring引导应用程序中配置缓存。</p>
 <p>首先，我们制作了一种caffeine bean。这是主要配置，将控制缓存行为，如过期，缓存大小限制，以及更多:</p>
@@ -228,6 +229,7 @@
 <span class="hljs-function"><span class="hljs-keyword">public</span> Caffeine <span class="hljs-title">caffeineConfig</span><span class="hljs-params">()</span> </span>&#123;
     <span class="hljs-keyword">return</span> Caffeine.newBuilder().expireAfterWrite(<span class="hljs-number">60</span>, TimeUnit.MINUTES);
 &#125;</code></pre>
+
 <p>接下来，我们需要使用Spring CacheManager接口创建另一个bean。Caffeine提供了这个接口的实现，它需要我们上面创建的Caffeine对象:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@Bean</span>
 <span class="hljs-function"><span class="hljs-keyword">public</span> CacheManager <span class="hljs-title">cacheManager</span><span class="hljs-params">(Caffeine caffeine)</span> </span>&#123;
@@ -235,6 +237,7 @@
   caffeineCacheManager.setCaffeine(caffeine);
   <span class="hljs-keyword">return</span> caffeineCacheManager;
 &#125;</code></pre>
+
 <p>最后，我们需要在Spring Boot中使用@EnableCaching注释启用缓存。这可以添加到应用程序中的任何@Configuration类中。</p>
 <h2 id="4-示例"><a href="#4-示例" class="headerlink" title="4. 示例"></a>4. 示例</h2><p>启用缓存并配置为使用Caffeine后，让我们通过几个示例来了解如何在Spring Boot应用程序中使用缓存。</p>
 <p>在Spring Boot中使用缓存的主要方法是使用@Cacheable注释。这个注释适用于Spring bean的任何方法(甚至是整个类)。它指示已注册的缓存管理器将方法调用的结果存储在缓存中。</p>
@@ -246,6 +249,7 @@
         <span class="hljs-comment">// lookup and return result</span>
     &#125;
 &#125;</code></pre>
+
 <p>使用不带参数的@Cacheable注释将迫使Spring为缓存和缓存键使用默认名称。</p>
 <p>我们可以通过在注释中添加一些参数来覆盖这两种行为:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@Service</span>
@@ -255,6 +259,7 @@
         <span class="hljs-comment">// lookup and return result</span>
     &#125;
 &#125;</code></pre>
+
 <p>上面的示例告诉Spring使用名为address_cache的缓存和缓存键的customerId参数。</p>
 <p>最后，因为缓存管理器本身就是一个Spring bean，我们也可以将它自动绑定到任何其他bean中，并直接使用它:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@Service</span>
@@ -271,6 +276,7 @@
         <span class="hljs-comment">// lookup address, cache result, and return it</span>
     &#125;
 &#125;</code></pre>
+
 <h2 id="5-结论"><a href="#5-结论" class="headerlink" title="5. 结论"></a>5. 结论</h2><p>在本教程中，我们看到了如何配置Spring Boot来使用咖啡因缓存，以及如何在应用程序中使用缓存的一些示例。</p>
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

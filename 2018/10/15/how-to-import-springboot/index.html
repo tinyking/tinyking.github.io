@@ -229,6 +229,7 @@
     <span class="hljs-comment">&lt;!-- Additional lines to be added here... --&gt;</span>
 
 <span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span></code></pre>
+
 <p>使用parent继承的方式，简单、方便使用。但是有的时候项目又需要继承其他的parent，这个时候parent继承的方式就满足不了需求了。不过不用担心，还有其他方式。</p>
 <h2 id="2-使用import方式"><a href="#2-使用import方式" class="headerlink" title="2.使用import方式"></a>2.使用import方式</h2><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependencyManagement</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span>
@@ -242,6 +243,7 @@
         <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependencyManagement</span>&gt;</span></code></pre>
+
 <p>在parent的pom文件中，声明dependencyManagement，这样在实际的项目pom文件中，直接声明需要的spring boot包就可以，不需要填写version属性。</p>
 <p>还有一种是使用maven plugin。</p>
 <h2 id="3-使用Spring-boot-Maven插件"><a href="#3-使用Spring-boot-Maven插件" class="headerlink" title="3.使用Spring boot Maven插件"></a>3.使用Spring boot Maven插件</h2><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span>
@@ -252,6 +254,7 @@
         <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span></code></pre>
+
 <p>spring boot依赖管理，根据不同的实际需求，选择不同的管理方式，可以大大提高效率。</p>
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

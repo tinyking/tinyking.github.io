@@ -233,18 +233,22 @@
                 .addResourceLocations(<span class="hljs-string">"classpath:/META-INF/resources/webjars/"</span>);
     &#125;
 &#125;</code></pre>
+
 <p>默认情况下，这个配置bean总是被注入到Spring上下文中。因此，Swagger可用于所有环境。</p>
 <p>要在生产中禁用Swagger，让我们切换是否注入这个配置bean。</p>
 <h2 id="3-使用Spring配置文件"><a href="#3-使用Spring配置文件" class="headerlink" title="3.使用Spring配置文件"></a>3.使用Spring配置文件</h2><p>在Spring中，我们可以使用@Profile注释来启用或禁用bean的注入。</p>
 <p>让我们尝试使用SpEL表达来匹配“swagger”的轮廓，而不是“prod”的配置:</p>
 <pre><code class="hljs undefined"><span class="hljs-meta">@Profile(&#123;<span class="hljs-meta-string">"!prod &amp;&amp; swagger"</span>&#125;)</span></code></pre>
+
 <p>这迫使我们明确的环境，我们想要激活昂首阔步。它还有助于防止在生产中意外地打开它。</p>
-<p>我们可以在配置中添加注释:<br><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span>
+<p>我们可以在配置中添加注释:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Configuration</span>
 <span class="hljs-meta">@Profile</span>(&#123;<span class="hljs-string">"!prod &amp;&amp; swagger"</span>&#125;)
 <span class="hljs-meta">@EnableSwagger</span>2
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SwaggerConfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">WebMvcConfigurer</span> </span>&#123;
     ...
-&#125;</code></pre></p>
+&#125;</code></pre>
+
 <p>现在，让我们用spring.profiles的不同设置启动我们的应用程序来测试它是否工作 spring.profiles.active:</p>
 <pre><code class="hljs undefined">-Dspring<span class="hljs-selector-class">.profiles</span>.active=prod <span class="hljs-comment">// Swagger is disabled</span>
 
@@ -255,6 +259,7 @@
 -Dspring<span class="hljs-selector-class">.profiles</span>.active=swagger,anyOtherNotProd <span class="hljs-comment">// Swagger is enabled</span>
 
 <span class="hljs-attribute">none</span> // Swagger is disabled</code></pre>
+
 <h2 id="4-使用条件"><a href="#4-使用条件" class="headerlink" title="4. 使用条件"></a>4. 使用条件</h2><p>对于特性切换来说，Spring概要文件可能是一个过于粗粒度的解决方案。这种方法会导致配置错误和冗长的、难以管理的概要文件列表。</p>
 <p>作为另一种选择，我们可以使用@ConditionalOnExpression，它允许为启用bean指定自定义属性:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@Configuration</span>
@@ -263,16 +268,21 @@
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SwaggerConfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">WebMvcConfigurer</span> </span>&#123;
     ...
 &#125;</code></pre>
+
 <p>如果“useSwagger”属性丢失，这里的默认值为false。</p>
 <p>要测试这一点，我们可以在应用程序中设置该属性。属性(或application.yaml)文件，或设置为VM选项:</p>
 <pre><code class="hljs undefined"><span class="hljs-attr">-DuseSwagger</span>=<span class="hljs-literal">true</span></code></pre>
+
 <p>我们应该注意，这个示例没有包含任何保证生产实例不会意外地将useSwagger设置为true的方法。</p>
 <h2 id="5-避免陷阱"><a href="#5-避免陷阱" class="headerlink" title="5. 避免陷阱"></a>5. 避免陷阱</h2><p>如果启用Swagger是一种安全问题，那么我们需要选择一种不会出错但易于使用的策略。</p>
-<p>当我们使用@Profile时，一些SpEL表达可能会违背这些目标:<br><pre><code class="hljs java"><span class="hljs-meta">@Profile</span>(&#123;<span class="hljs-string">"!prod"</span>&#125;) <span class="hljs-comment">// Leaves Swagger enabled by default with no way to disable it in other profiles</span>
+<p>当我们使用@Profile时，一些SpEL表达可能会违背这些目标:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Profile</span>(&#123;<span class="hljs-string">"!prod"</span>&#125;) <span class="hljs-comment">// Leaves Swagger enabled by default with no way to disable it in other profiles</span>
 <span class="hljs-meta">@Profile</span>(&#123;<span class="hljs-string">"swagger"</span>&#125;) <span class="hljs-comment">// Allows activating Swagger in prod as well</span>
-<span class="hljs-meta">@Profile</span>(&#123;<span class="hljs-string">"!prod"</span>, <span class="hljs-string">"swagger"</span>&#125;) <span class="hljs-comment">// Equivalent to &#123;"!prod || swagger"&#125; so it's worse than &#123;"!prod"&#125; as it provides a way to activate Swagger in prod too</span></code></pre></p>
+<span class="hljs-meta">@Profile</span>(&#123;<span class="hljs-string">"!prod"</span>, <span class="hljs-string">"swagger"</span>&#125;) <span class="hljs-comment">// Equivalent to &#123;"!prod || swagger"&#125; so it's worse than &#123;"!prod"&#125; as it provides a way to activate Swagger in prod too</span></code></pre>
+
 <p>这就是为什么我们使用@Profile的例子:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@Profile</span>(&#123;<span class="hljs-string">"!prod &amp;&amp; swagger"</span>&#125;)</code></pre>
+
 <p>这个解决方案可能是最严格的，因为它在默认情况下禁用了Swagger，并保证在“prod”中不能启用它。</p>
 <h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h2><p>在本文中，我们研究了在生产中禁用Swagger的解决方案。</p>
 <p>我们了解了如何通过@Profile和@ConditionalOnExpression注释来切换打开Swagger的bean。我们还考虑了如何防止错误配置和不希望看到的默认值。</p>

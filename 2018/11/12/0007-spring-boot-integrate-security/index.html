@@ -276,6 +276,7 @@
         <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span></code></pre>
+
 <p>2 . 准备你的数据库，设计表结构，要用户使用登入登出，新建用户表。</p>
 <pre><code class="hljs sql"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">EXISTS</span> <span class="hljs-string">`user`</span>;
 <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">`user`</span>  (
@@ -293,6 +294,7 @@
 ) <span class="hljs-keyword">ENGINE</span> = <span class="hljs-keyword">InnoDB</span> AUTO_INCREMENT = <span class="hljs-number">2</span> <span class="hljs-built_in">CHARACTER</span> <span class="hljs-keyword">SET</span> = utf8 <span class="hljs-keyword">COLLATE</span> = utf8_general_ci ROW_FORMAT = <span class="hljs-keyword">Compact</span>;
 
 <span class="hljs-keyword">SET</span> FOREIGN_KEY_CHECKS = <span class="hljs-number">1</span>;</code></pre>
+
 <p>3 . 用户对象User.java :</p>
 <pre><code class="hljs java"><span class="hljs-keyword">import</span> javax.persistence.*;
 
@@ -412,6 +414,7 @@
                 <span class="hljs-string">'&#125;'</span>;
     &#125;
 &#125;</code></pre>
+
 <p>4 . application.yml配置一些基本属性</p>
 <pre><code class="hljs yaml"><span class="hljs-attr">spring:</span>
   <span class="hljs-attr">resources:</span>
@@ -432,6 +435,7 @@
   <span class="hljs-attr">error:</span>
     <span class="hljs-attr">whitelabel:</span>
       <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span></code></pre>
+
 <p>5 . 考虑我们应用的效率 , 可以配置数据源和线程池 :</p>
 <pre><code class="hljs java"><span class="hljs-keyword">package</span> com.wuxicloud.config;
 
@@ -509,6 +513,7 @@
         <span class="hljs-keyword">return</span> filterRegistrationBean;
     &#125;
 &#125;</code></pre>
+
 <p>配置线程池 :</p>
 <pre><code class="hljs java"><span class="hljs-keyword">package</span> com.wuxicloud.config;
 
@@ -535,6 +540,7 @@
         <span class="hljs-keyword">return</span> executor;
     &#125;
 &#125;</code></pre>
+
 <p>6.用户需要根据用户名进行登录，访问数据库 :</p>
 <pre><code class="hljs java"><span class="hljs-keyword">import</span> com.wuxicloud.model.User;
 <span class="hljs-keyword">import</span> org.springframework.data.jpa.repository.JpaRepository;
@@ -547,6 +553,7 @@
     <span class="hljs-function">User <span class="hljs-title">findByUsername</span><span class="hljs-params">(String username)</span></span>;
 
 &#125;</code></pre>
+
 <p>7.构建真正用于SpringSecurity登录的安全用户(UserDetails)，我这里使用新建了一个POJO来实现 :</p>
 <pre><code class="hljs java"><span class="hljs-keyword">package</span> com.wuxicloud.security;
 
@@ -606,6 +613,7 @@
         <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
     &#125;
 &#125;</code></pre>
+
 <p>8 . 核心配置，配置SpringSecurity访问策略，包括登录处理，登出处理，资源访问，密码基本加密。</p>
 <pre><code class="hljs java"><span class="hljs-keyword">package</span> com.wuxicloud.config;
 
@@ -706,6 +714,7 @@
         &#125;;
     &#125;
 &#125;</code></pre>
+
 <p>9.至此，已经基本将配置搭建好了，从上面核心可以看出，配置的登录页的url 为/login，可以创建基本的Controller来验证登录了。</p>
 <pre><code class="hljs java"><span class="hljs-keyword">package</span> com.wuxicloud.web;
 
@@ -750,6 +759,7 @@
         <span class="hljs-keyword">return</span> ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     &#125;
 &#125;</code></pre>
+
 <p>11 . SpringBoot基本的启动类 Application.class</p>
 <pre><code class="hljs java"><span class="hljs-keyword">package</span> com.wuxicloud;
 
@@ -766,6 +776,7 @@
         SpringApplication.run(Application<span class="hljs-class">.<span class="hljs-keyword">class</span>, <span class="hljs-title">args</span>)</span>;
     &#125;
 &#125;</code></pre>
+
 <p>11.根据Freemark和Controller里面可看出配置的视图为 /templates/index.html和/templates/index.login。所以创建基本的登录页面和登录成功页面。</p>
 <p>login.html</p>
 <pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
@@ -782,6 +793,7 @@
 <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+
 <p>注意 : 这里方法必须是POST，因为GET在controller被重写了，用户名的name属性必须是username，密码的name属性必须是password</p>
 <p>index.html</p>
 <pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
@@ -796,6 +808,7 @@
 <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/logout"</span>&gt;</span>注销<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+
 <p>注意 : 为了从session中获取到登录的用户信息，根据配置SpringSecurity的用户信息会放在Session.SPRING_SECURITY_CONTEXT.authentication.principal里面，根据FreeMarker模板引擎的特点，可以通过这种方式进行获取 : &lt;#assign user=Session.SPRING_SECURITY_CONTEXT.authentication.principal/&gt;</p>
 <p>12 . 为了方便测试，我们在数据库中插入一条记录，注意，从WebSecurity.java配置可以知道密码会被加密，所以我们插入的用户密码应该是被加密的。</p>
 <p>这里假如我们使用的密码为admin，则加密过后的字符串是 $2a$04$1OiUa3yEchBXQBJI8JaMyuKZNlwzWvfeQjKAHnwAEQwnacjt6ukqu</p>
@@ -818,8 +831,10 @@
         System.out.println(enPassword);
     &#125;
 &#125;</code></pre>
+
 <p>测试登录，从上面的加密的密码我们插入一条数据到数据库中。</p>
 <pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> <span class="hljs-string">`USER`</span> <span class="hljs-keyword">VALUES</span> (<span class="hljs-number">1</span>, <span class="hljs-string">'d242ae49-4734-411e-8c8d-d2b09e87c3c8'</span>, <span class="hljs-string">'EalenXie'</span>, <span class="hljs-string">'$2a$04$petEXpgcLKfdLN4TYFxK0u8ryAzmZDHLASWLX/XXm8hgQar1C892W'</span>, <span class="hljs-string">'SSSSS'</span>, <span class="hljs-string">'ssssssssss'</span>, <span class="hljs-number">1</span>, <span class="hljs-string">'g'</span>, <span class="hljs-string">'0:0:0:0:0:0:0:1'</span>, <span class="hljs-string">'2018-07-11 11:26:27'</span>);</code></pre>
+
 <p>13 . 启动项目进行测试 ，访问 localhost:8083</p>
 <p><img src="https://images2018.cnblogs.com/blog/994599/201807/994599-20180711154124007-1732228495.png" srcset="/img/loading.gif" alt="img"></p>
 <p>点击登录，登录失败会留在当前页面重新登录，成功则进入index.html</p>

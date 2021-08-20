@@ -227,6 +227,7 @@
 	<span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">required</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">true</span></span>;
 
 &#125;</code></pre>
+
 <p>在构造方法上使用此注解时，需要注意的是，一个类只允许有一个构造方法使用此注解。==此外，在Spring4.3后，如果一个类仅仅只有一个构造方法，那么即使不使用此注解，spring也会自动注入相关的bean。==</p>
 <pre><code class="hljs undefined"><span class="hljs-meta">@Componentpublic</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>&#123;
     <span class="hljs-keyword">private</span> Address address;
@@ -237,6 +238,7 @@
 &#125;
 
 &lt;bean id=<span class="hljs-string">"user"</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"xx.User"</span>/&gt;</code></pre>
+
 <h3 id="Qualifier"><a href="#Qualifier" class="headerlink" title="@Qualifier"></a>@Qualifier</h3><p>此注解是和<code>@Autowired</code>一起使用的。使用此注解可以让你对注入的过程有更多的控制，用@Qulifier指定要绑定的bean的名称。当一个type有多个bean时，使用@Autowired的时候需要配合上@Qulifier才能正常。</p>
 <pre><code class="hljs undefined"><span class="hljs-variable">@Componentpublic</span> class User &#123;
     <span class="hljs-variable">@Autowired</span>    
@@ -246,6 +248,7 @@
     ...
 
 &#125;</code></pre>
+
 <h3 id="Configuration"><a href="#Configuration" class="headerlink" title="@Configuration"></a>@Configuration</h3><p>此注解一般和@Configuration注解一起使用，指定Spring扫描注解的package。如果没有指定包，那么默认会扫描此配置类所在的package。</p>
 <pre><code class="hljs undefined"><span class="hljs-meta">@Configuartion</span>
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpringCoreConfig</span> </span>&#123;
@@ -257,6 +260,7 @@
     &#125;
 
 &#125;</code></pre>
+
 <h3 id="Lazy"><a href="#Lazy" class="headerlink" title="@Lazy"></a>@Lazy</h3><p>此注解使用在Spring的组件类上。默认的，Spring中Bean的依赖一开始就被创建和配置。如果想要延迟初始化一个bean，那么可以在此类上使用Lazy注解，表示此bean只有在第一次被使用的时候才会被创建和初始化。此注解也可以使用在被@Configuration注解的类上，表示其中所有被@Bean注解的方法都会延迟初始化。</p>
 <h3 id="Value"><a href="#Value" class="headerlink" title="@Value"></a>@Value</h3><p>此注解使用在字段、构造器参数和方法参数上。@Value可以指定属性取值的表达式，支持通过#{}使用SpringEL来取值，也支持使用${}来将属性来源中(Properties文件呢、本地环境变量、系统属性等)的值注入到bean的属性中。此注解的注入时发生在AutowiredAnnotationBeanPostProcessor中。</p>
 <h2 id="Stereotype注解"><a href="#Stereotype注解" class="headerlink" title="Stereotype注解"></a>Stereotype注解</h2><h3 id="Component"><a href="#Component" class="headerlink" title="@Component"></a>@Component</h3><p>此注解使用在class上来声明一个Spring组件(Bean), 将其加入到应用上下文中。</p>
@@ -296,18 +300,23 @@
     &#125;
 
 &#125;</code></pre>
+
 <h3 id="ExceptionHandler"><a href="#ExceptionHandler" class="headerlink" title="@ExceptionHandler"></a>@ExceptionHandler</h3><p>此注解使用在方法级别，声明对Exception的处理逻辑。可以指定目标Exception。</p>
 <h3 id="InitBinder"><a href="#InitBinder" class="headerlink" title="@InitBinder"></a>@InitBinder</h3><p>此注解使用在方法上，声明对WebDataBinder的初始化(绑定请求参数到JavaBean上的DataBinder)。在controller上使用此注解可以自定义请求参数的绑定。</p>
 <h3 id="MatrixVariable"><a href="#MatrixVariable" class="headerlink" title="@MatrixVariable"></a>@MatrixVariable</h3><p>此注解使用在请求handler方法的参数上，Spring可以注入matrix url中相关的值。这里的矩阵变量可以出现在url中的任何地方，变量之间用;分隔。如下：</p>
 <pre><code class="hljs undefined"><span class="hljs-regexp">//</span> GET <span class="hljs-regexp">/pets/</span><span class="hljs-number">42</span>;q=<span class="hljs-number">11</span>;r=<span class="hljs-number">22</span>@RequestMapping(value = <span class="hljs-string">"/pets/&#123;petId&#125;"</span>)public void findPet(@PathVariable String petId, @MatrixVariable int q) &#123;    <span class="hljs-regexp">//</span> petId == <span class="hljs-number">42</span>    <span class="hljs-regexp">//</span> q == <span class="hljs-number">11</span>&#125;</code></pre>
+
 <p>需要注意的是默认Spring mvc是不支持矩阵变量的，需要开启。</p>
 <pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">mvc:annotation-driven</span> <span class="hljs-attr">enable-matrix-variables</span>=<span class="hljs-string">"true"</span> /&gt;</span></code></pre>
+
 <p>注解配置则需要如下开启：</p>
 <pre><code class="hljs undefined"><span class="hljs-meta">@Configurationpublic</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WebConfig</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">WebMvcConfigurerAdapter</span> </span>&#123;     <span class="hljs-meta">@Override</span>    public void configurePathMatch(<span class="hljs-type">PathMatchConfigurer</span> configurer) &#123;        <span class="hljs-type">UrlPathHelper</span> urlPathHelper = <span class="hljs-keyword">new</span> <span class="hljs-type">UrlPathHelper</span>();        urlPathHelper.setRemoveSemicolonContent(<span class="hljs-literal">false</span>);        configurer.setUrlPathHelper(urlPathHelper);    &#125;&#125;</code></pre>
+
 <h3 id="PathVariable"><a href="#PathVariable" class="headerlink" title="@PathVariable"></a>@PathVariable</h3><p>此注解使用在请求handler方法的参数上。@RequestMapping可以定义动态路径，如:</p>
 <pre><code class="hljs undefined"><span class="hljs-selector-tag">RequestMapping</span>(<span class="hljs-string">"/users/&#123;uid&#125;"</span>)
 <span class="hljs-selector-tag">public</span> <span class="hljs-selector-tag">String</span> <span class="hljs-selector-tag">execute</span>(<span class="hljs-variable">@PathVariable</span>(<span class="hljs-string">"uid"</span>) String uid)&#123;
 &#125;</code></pre>
+
 <h3 id="RequestAttribute"><a href="#RequestAttribute" class="headerlink" title="@RequestAttribute"></a>@RequestAttribute</h3><p>此注解用在请求handler方法的参数上，用于将web请求中的属性(requst attributes，是服务器放入的属性值)绑定到方法参数上。</p>
 <h3 id="RequestBody"><a href="#RequestBody" class="headerlink" title="@RequestBody"></a>@RequestBody</h3><p>此注解用在请求handler方法的参数上，用于将http请求的Body映射绑定到此参数上。HttpMessageConverter负责将对象转换为http请求。</p>
 <h3 id="RequestHeader"><a href="#RequestHeader" class="headerlink" title="@RequestHeader"></a>@RequestHeader</h3><p>此注解用在请求handler方法的参数上，用于将http请求头部的值绑定到参数上。</p>
@@ -329,6 +338,7 @@ public PUser getUser() &#123;&#125;
     User.class
 &#125;)
 public class UserController &#123;&#125;</code></pre>
+
 <h2 id="数据访问注解"><a href="#数据访问注解" class="headerlink" title="数据访问注解"></a>数据访问注解</h2><h3 id="Transactional"><a href="#Transactional" class="headerlink" title="@Transactional"></a>@Transactional</h3><p>此注解使用在接口定义、接口中的方法、类定义或者类中的public方法上。需要注意的是此注解并不激活事务行为，它仅仅是一个元数据，会被一些运行时基础设施来消费。</p>
 <h2 id="任务执行、调度注解"><a href="#任务执行、调度注解" class="headerlink" title="任务执行、调度注解"></a>任务执行、调度注解</h2><h3 id="Scheduled"><a href="#Scheduled" class="headerlink" title="@Scheduled"></a>@Scheduled</h3><p>此注解使用在方法上，声明此方法被定时调度。使用了此注解的方法返回类型需要是Void，并且不能接受任何参数。</p>
 <pre><code class="hljs undefined"><span class="hljs-variable">@Scheduled</span>(fixedDelay=<span class="hljs-number">1000</span>)
@@ -337,6 +347,7 @@ public void schedule() &#123;&#125;
 <span class="hljs-variable">@Scheduled</span>(fixedRate=<span class="hljs-number">1000</span>)
 public void schedulg() &#123;
 &#125;</code></pre>
+
 <p>第二个与第一个不同之处在于其不会等待上一次的任务执行结束。</p>
 <h3 id="Async"><a href="#Async" class="headerlink" title="@Async"></a>@Async</h3><p>此注解使用在方法上，声明此方法会在一个单独的线程中执行。不同于Scheduled注解，此注解可以接受参数。<br>使用此注解的方法的返回类型可以是Void也可是返回值。但是返回值的类型必须是一个Future。</p>
 <h2 id="测试注解"><a href="#测试注解" class="headerlink" title="测试注解"></a>测试注解</h2><h3 id="ContextConfiguration"><a href="#ContextConfiguration" class="headerlink" title="@ContextConfiguration"></a>@ContextConfiguration</h3><p>此注解使用在Class上，声明测试使用的配置文件，此外，也可以指定加载上下文的类。</p>
@@ -344,6 +355,7 @@ public void schedulg() &#123;
 <pre><code class="hljs undefined"><span class="hljs-variable">@RunWith</span>(SpringJUnit4ClassRunner.class)
 <span class="hljs-variable">@ContextConfiguration</span>(classes = SpringCoreConfig.class)
 public class UserServiceTest &#123;&#125;</code></pre>
+
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                   <!-- 单元1 -->

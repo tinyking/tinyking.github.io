@@ -210,52 +210,87 @@
             
             <div class="markdown-body" id="post-body">
               <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>JavaScript是一种客户端脚本语言，Web工程都会用到它，这份指南列出了编写JavaScript时需要遵守的规则。</p>
-<h2 id="JavaScript语言规范"><a href="#JavaScript语言规范" class="headerlink" title="JavaScript语言规范"></a>JavaScript语言规范</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>声明变量必须加上var<br>关键字:<br><pre><code class="hljs undefined">var a1 = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
-var b1 = <span class="hljs-number">11</span><span class="hljs-comment">;</span></code></pre></p>
+<h2 id="JavaScript语言规范"><a href="#JavaScript语言规范" class="headerlink" title="JavaScript语言规范"></a>JavaScript语言规范</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>声明变量必须加上var<br>关键字:</p>
+<pre><code class="hljs undefined">var a1 = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
+var b1 = <span class="hljs-number">11</span><span class="hljs-comment">;</span></code></pre>
+
 <p>当你没有写var<br>，变量就会暴露在全局上下文中，这样很可能会和现有的变量冲突。另外，如果没有加上，很难明确该变量的作用域是什么，变量很可能在局部作用域中，很容易泄漏到Document或者Window中，所以务必用var<br>变量。</p>
-<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>常量的形式如：<code>NAMES_LIKE_THIS</code>，即使用大写字符，并用下划线分割，你也可用<code>@const</code>标记来指明它是一个常量，但请不要使用<code>const</code>关键字。<br>对于基本类型的常量，只需要转换命名：<br><pre><code class="hljs undefined"><span class="hljs-comment">/**
+<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>常量的形式如：<code>NAMES_LIKE_THIS</code>，即使用大写字符，并用下划线分割，你也可用<code>@const</code>标记来指明它是一个常量，但请不要使用<code>const</code>关键字。<br>对于基本类型的常量，只需要转换命名：</p>
+<pre><code class="hljs undefined"><span class="hljs-comment">/**
  * The number of seconds of minute.
  * @type &#123;number&#125;
  */</span>
-eflag.example.SECONDES_IN_<span class="hljs-built_in">A_MINUTE</span> = <span class="hljs-number">60</span><span class="hljs-comment">;</span></code></pre></p>
-<p>对于非基本类型，使用<code>@const</code><br>标记：<br><pre><code class="hljs undefined"><span class="hljs-comment">/**
+eflag.example.SECONDES_IN_<span class="hljs-built_in">A_MINUTE</span> = <span class="hljs-number">60</span><span class="hljs-comment">;</span></code></pre>
+
+<p>对于非基本类型，使用<code>@const</code><br>标记：</p>
+<pre><code class="hljs undefined"><span class="hljs-comment">/**
  * The number of seconds in each of the given units.
  * <span class="hljs-doctag">@type</span> &#123;Object.&lt;number&gt;&#125;
  * <span class="hljs-doctag">@const</span>
  */</span>
-eflag.example.SECONDS_TABLE = &#123;<span class="hljs-string">minute:</span> <span class="hljs-number">60</span>,<span class="hljs-string">hour:</span> <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,<span class="hljs-string">day:</span> <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">24</span>&#125;</code></pre></p>
+eflag.example.SECONDS_TABLE = &#123;<span class="hljs-string">minute:</span> <span class="hljs-number">60</span>,<span class="hljs-string">hour:</span> <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,<span class="hljs-string">day:</span> <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">24</span>&#125;</code></pre>
+
 <p>至于关键字<code>const</code>，因为IE不能识别，所以不要使用。</p>
-<h3 id="分号"><a href="#分号" class="headerlink" title="分号"></a>分号</h3><p>总是使用分号。 如果仅依靠语句间的隐式分割，有时会很麻烦，使用分号，你自己更能清楚那里是语句的起止。<br>行末分号：<br><pre><code class="hljs undefined"><span class="hljs-string">var</span> <span class="hljs-string">foo</span> <span class="hljs-string">=</span> <span class="hljs-number">1</span><span class="hljs-string">,bar</span> <span class="hljs-string">=</span> <span class="hljs-number">2</span><span class="hljs-string">,baz</span> <span class="hljs-string">=</span> <span class="hljs-number">3</span><span class="hljs-string">;</span>
-<span class="hljs-string">var</span> <span class="hljs-string">obj</span> <span class="hljs-string">=</span> <span class="hljs-string">&#123;foo:</span> <span class="hljs-number">1</span><span class="hljs-string">,bar:</span> <span class="hljs-number">2</span><span class="hljs-string">,baz:</span> <span class="hljs-number">3</span><span class="hljs-string">&#125;;</span></code></pre></p>
-<h3 id="单引号-39-39-和双引号-quot-quot"><a href="#单引号-39-39-和双引号-quot-quot" class="headerlink" title="单引号(&#39;&#39;)和双引号(&quot;&quot;)"></a>单引号(<code>&#39;&#39;</code>)和双引号(<code>&quot;&quot;</code>)</h3><p>由于JavaScript对于单引号和双引号都可以识别为字符串，但为了统一规范，所以在JavaScript中字符串的定义要求使用单引号：<br><pre><code class="hljs undefined"><span class="hljs-attribute">var val</span> = <span class="hljs-string">'a'</span>;</code></pre></p>
-<p>同样，html中属性使用的是双引号：<br><pre><code class="hljs undefined">&lt;input <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"text"</span>&gt;</code></pre></p>
-<p>在JavaScript中动态生成html标签时：<br><pre><code class="hljs undefined"><span class="hljs-keyword">var</span> <span class="hljs-number">_</span><span class="hljs-keyword">input</span> = '&lt;<span class="hljs-keyword">input</span> <span class="hljs-keyword">type</span>=<span class="hljs-string">"text"</span>&gt;';</code></pre></p>
-<h3 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h3><p>参数和括号间五空格：<br><pre><code class="hljs undefined"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span><span class="hljs-params">(arg1, arg2)</span></span>&#123;&#125;</code></pre></p>
-<p>冒号后面有空格<br><pre><code class="hljs undefined">&#123;<span class="hljs-attribute">foo</span>: <span class="hljs-number">1</span>,bar: <span class="hljs-number">2</span>,baz: <span class="hljs-number">3</span>&#125;</code></pre></p>
-<p>条件语句有空格<br><pre><code class="hljs undefined"><span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>) &#123;&#125;
+<h3 id="分号"><a href="#分号" class="headerlink" title="分号"></a>分号</h3><p>总是使用分号。 如果仅依靠语句间的隐式分割，有时会很麻烦，使用分号，你自己更能清楚那里是语句的起止。<br>行末分号：</p>
+<pre><code class="hljs undefined"><span class="hljs-string">var</span> <span class="hljs-string">foo</span> <span class="hljs-string">=</span> <span class="hljs-number">1</span><span class="hljs-string">,bar</span> <span class="hljs-string">=</span> <span class="hljs-number">2</span><span class="hljs-string">,baz</span> <span class="hljs-string">=</span> <span class="hljs-number">3</span><span class="hljs-string">;</span>
+<span class="hljs-string">var</span> <span class="hljs-string">obj</span> <span class="hljs-string">=</span> <span class="hljs-string">&#123;foo:</span> <span class="hljs-number">1</span><span class="hljs-string">,bar:</span> <span class="hljs-number">2</span><span class="hljs-string">,baz:</span> <span class="hljs-number">3</span><span class="hljs-string">&#125;;</span></code></pre>
+
+<h3 id="单引号-39-39-和双引号-quot-quot"><a href="#单引号-39-39-和双引号-quot-quot" class="headerlink" title="单引号(&#39;&#39;)和双引号(&quot;&quot;)"></a>单引号(<code>&#39;&#39;</code>)和双引号(<code>&quot;&quot;</code>)</h3><p>由于JavaScript对于单引号和双引号都可以识别为字符串，但为了统一规范，所以在JavaScript中字符串的定义要求使用单引号：</p>
+<pre><code class="hljs undefined"><span class="hljs-attribute">var val</span> = <span class="hljs-string">'a'</span>;</code></pre>
+
+<p>同样，html中属性使用的是双引号：</p>
+<pre><code class="hljs undefined">&lt;input <span class="hljs-class"><span class="hljs-keyword">type</span></span>=<span class="hljs-string">"text"</span>&gt;</code></pre>
+
+<p>在JavaScript中动态生成html标签时：</p>
+<pre><code class="hljs undefined"><span class="hljs-keyword">var</span> <span class="hljs-number">_</span><span class="hljs-keyword">input</span> = '&lt;<span class="hljs-keyword">input</span> <span class="hljs-keyword">type</span>=<span class="hljs-string">"text"</span>&gt;';</code></pre>
+
+<h3 id="空格"><a href="#空格" class="headerlink" title="空格"></a>空格</h3><p>参数和括号间五空格：</p>
+<pre><code class="hljs undefined"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span><span class="hljs-params">(arg1, arg2)</span></span>&#123;&#125;</code></pre>
+
+<p>冒号后面有空格</p>
+<pre><code class="hljs undefined">&#123;<span class="hljs-attribute">foo</span>: <span class="hljs-number">1</span>,bar: <span class="hljs-number">2</span>,baz: <span class="hljs-number">3</span>&#125;</code></pre>
+
+<p>条件语句有空格</p>
+<pre><code class="hljs undefined"><span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>) &#123;&#125;
 <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;&#125;
-<span class="hljs-keyword">switch</span>(v)&#123;&#125;</code></pre></p>
-<h3 id="Tips-and-Tricks"><a href="#Tips-and-Tricks" class="headerlink" title="Tips and Tricks"></a>Tips and Tricks</h3><h3 id="True和False布尔表达式"><a href="#True和False布尔表达式" class="headerlink" title="True和False布尔表达式"></a>True和False布尔表达式</h3><p>下面的布尔表达式都会返回<code>false</code>：<br><pre><code class="hljs undefined"><span class="hljs-literal">null</span>
+<span class="hljs-keyword">switch</span>(v)&#123;&#125;</code></pre>
+
+<h3 id="Tips-and-Tricks"><a href="#Tips-and-Tricks" class="headerlink" title="Tips and Tricks"></a>Tips and Tricks</h3><h3 id="True和False布尔表达式"><a href="#True和False布尔表达式" class="headerlink" title="True和False布尔表达式"></a>True和False布尔表达式</h3><p>下面的布尔表达式都会返回<code>false</code>：</p>
+<pre><code class="hljs undefined"><span class="hljs-literal">null</span>
 <span class="hljs-literal">undefined</span>
 <span class="hljs-string">''</span>
 空字符串
-<span class="hljs-number">0</span></code></pre></p>
-<p>数字<code>0</code> 但小心下面的，可都返回<code>true</code>：<br><pre><code class="hljs undefined"><span class="hljs-string">'0'</span>
+<span class="hljs-number">0</span></code></pre>
+
+<p>数字<code>0</code> 但小心下面的，可都返回<code>true</code>：</p>
+<pre><code class="hljs undefined"><span class="hljs-string">'0'</span>
 字符串<span class="hljs-number">0</span>
 [<span class="hljs-meta"></span>]
 空数组
 &#123;&#125;
-空对象</code></pre></p>
-<p>如果你想检查字符串是否为<code>null</code>或<code>空</code>：<br><pre><code class="hljs undefined">if (y != null &amp;&amp; y != <span class="hljs-string">''</span>) &#123;&#125;</code></pre></p>
-<p>写成这样会更好：<br><pre><code class="hljs undefined"><span class="hljs-selector-tag">if</span> (<span class="hljs-selector-tag">y</span>) &#123;&#125;</code></pre></p>
-<h3 id="条件（三元）操作符"><a href="#条件（三元）操作符" class="headerlink" title="条件（三元）操作符(?:)"></a>条件（三元）操作符(<code>?:</code>)</h3><p>三元操作符用于替代下面的代码：<br><pre><code class="hljs undefined"><span class="hljs-keyword">if</span> (<span class="hljs-keyword">val</span> != <span class="hljs-number">0</span>) &#123;
+空对象</code></pre>
+
+<p>如果你想检查字符串是否为<code>null</code>或<code>空</code>：</p>
+<pre><code class="hljs undefined">if (y != null &amp;&amp; y != <span class="hljs-string">''</span>) &#123;&#125;</code></pre>
+
+<p>写成这样会更好：</p>
+<pre><code class="hljs undefined"><span class="hljs-selector-tag">if</span> (<span class="hljs-selector-tag">y</span>) &#123;&#125;</code></pre>
+
+<h3 id="条件（三元）操作符"><a href="#条件（三元）操作符" class="headerlink" title="条件（三元）操作符(?:)"></a>条件（三元）操作符(<code>?:</code>)</h3><p>三元操作符用于替代下面的代码：</p>
+<pre><code class="hljs undefined"><span class="hljs-keyword">if</span> (<span class="hljs-keyword">val</span> != <span class="hljs-number">0</span>) &#123;
   <span class="hljs-keyword">return</span> foo();
 &#125; <span class="hljs-keyword">else</span> &#123;
   <span class="hljs-keyword">return</span> bar();
-&#125;</code></pre></p>
-<p>你可以写成：<br><pre><code class="hljs undefined"><span class="hljs-keyword">return</span> <span class="hljs-keyword">val</span> ? foo() : bar();</code></pre></p>
-<p>在生成HTML代码时也是很有用的：<br><pre><code class="hljs undefined">var html = <span class="hljs-string">'&lt;input type="</span>checkbox<span class="hljs-string">"'</span> + (isChecked ? <span class="hljs-string">' checked'</span> : <span class="hljs-string">''</span>)+ (isEnabled ? <span class="hljs-string">''</span> : <span class="hljs-string">' disabled'</span>)+ <span class="hljs-string">' name="</span>foo<span class="hljs-string">"&gt;'</span>;</code></pre></p>
-<h3 id="amp-amp-和"><a href="#amp-amp-和" class="headerlink" title="&amp;&amp;和||"></a><code>&amp;&amp;</code>和<code>||</code></h3><p>二元布尔操作符是可短路的，只有在必要的时候才会计算到最后一项。 <code>||</code>被称作为<code>default</code>操作符，因为可以这样：<br><pre><code class="hljs undefined"><span class="hljs-comment">/**
+&#125;</code></pre>
+
+<p>你可以写成：</p>
+<pre><code class="hljs undefined"><span class="hljs-keyword">return</span> <span class="hljs-keyword">val</span> ? foo() : bar();</code></pre>
+
+<p>在生成HTML代码时也是很有用的：</p>
+<pre><code class="hljs undefined">var html = <span class="hljs-string">'&lt;input type="</span>checkbox<span class="hljs-string">"'</span> + (isChecked ? <span class="hljs-string">' checked'</span> : <span class="hljs-string">''</span>)+ (isEnabled ? <span class="hljs-string">''</span> : <span class="hljs-string">' disabled'</span>)+ <span class="hljs-string">' name="</span>foo<span class="hljs-string">"&gt;'</span>;</code></pre>
+
+<h3 id="amp-amp-和"><a href="#amp-amp-和" class="headerlink" title="&amp;&amp;和||"></a><code>&amp;&amp;</code>和<code>||</code></h3><p>二元布尔操作符是可短路的，只有在必要的时候才会计算到最后一项。 <code>||</code>被称作为<code>default</code>操作符，因为可以这样：</p>
+<pre><code class="hljs undefined"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@param <span class="hljs-type">&#123;*=&#125;</span> <span class="hljs-variable">opt_win</span></span>
  */</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">opt_win</span>) </span>&#123;
@@ -266,15 +301,19 @@ eflag.example.SECONDS_TABLE = &#123;<span class="hljs-string">minute:</span> <sp
     win = <span class="hljs-built_in">window</span>;
   &#125;
 <span class="hljs-comment">// ...</span>
-&#125;</code></pre></p>
-<p>你可以使用它来简化上面的代码：<br><pre><code class="hljs undefined"><span class="hljs-comment">/**
+&#125;</code></pre>
+
+<p>你可以使用它来简化上面的代码：</p>
+<pre><code class="hljs undefined"><span class="hljs-comment">/**
  * <span class="hljs-doctag">@param <span class="hljs-type">&#123;*=&#125;</span> <span class="hljs-variable">opt_win</span></span>
  */</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">opt_win</span>) </span>&#123;
   <span class="hljs-keyword">var</span> win = opt_win || <span class="hljs-built_in">window</span>;
   <span class="hljs-comment">// ...</span>
-&#125;</code></pre></p>
-<h3 id="使用join-来创建字符串"><a href="#使用join-来创建字符串" class="headerlink" title="使用join()来创建字符串"></a>使用<code>join()</code>来创建字符串</h3><p>通常是这样使用的：<br><pre><code class="hljs undefined"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">listHtml</span><span class="hljs-params">(items)</span> &#123;</span>
+&#125;</code></pre>
+
+<h3 id="使用join-来创建字符串"><a href="#使用join-来创建字符串" class="headerlink" title="使用join()来创建字符串"></a>使用<code>join()</code>来创建字符串</h3><p>通常是这样使用的：</p>
+<pre><code class="hljs undefined"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">listHtml</span><span class="hljs-params">(items)</span> &#123;</span>
   var html = <span class="hljs-string">'&lt;div class="foo"'</span>;
   <span class="hljs-keyword">for</span> (var <span class="hljs-built_in">i</span> = <span class="hljs-number">0</span>; <span class="hljs-built_in">i</span> &lt; items.<span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span>++) &#123;
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">i</span> &gt; <span class="hljs-number">0</span>) &#123;
@@ -284,14 +323,17 @@ eflag.example.SECONDS_TABLE = &#123;<span class="hljs-string">minute:</span> <sp
   &#125;
   html += <span class="hljs-string">'&lt;/div&gt;'</span>;
   <span class="hljs-keyword">return</span> html;
-&#125;</code></pre></p>
-<p>但这样在IE下非常慢，可以用下面的方式：<br><pre><code class="hljs undefined"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">listHtml</span><span class="hljs-params">(items)</span> &#123;</span>
+&#125;</code></pre>
+
+<p>但这样在IE下非常慢，可以用下面的方式：</p>
+<pre><code class="hljs undefined"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">listHtml</span><span class="hljs-params">(items)</span> &#123;</span>
   var html = [];
   <span class="hljs-keyword">for</span> (var <span class="hljs-built_in">i</span> = <span class="hljs-number">0</span>; <span class="hljs-built_in">i</span> &lt; items.<span class="hljs-built_in">length</span>; <span class="hljs-built_in">i</span>++) &#123;
     html[<span class="hljs-built_in">i</span>] = itemHtml(items[<span class="hljs-built_in">i</span>]);
   &#125;
   <span class="hljs-keyword">return</span> <span class="hljs-string">'&lt;div class="foo"&gt;'</span> + html.join(<span class="hljs-string">', '</span>) + <span class="hljs-string">'&lt;/div&gt;'</span>;
-&#125;</code></pre></p>
+&#125;</code></pre>
+
 <p>你也可以使用数组作为字符串构造器，然后通过<code>myArray.join(&#39;&#39;)</code><br>转换成字符串，不过由于赋值操作快于数组的<code>push()</code>，所以尽量使用复制操作。</p>
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

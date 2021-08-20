@@ -230,11 +230,13 @@
 <p>你可以从 <code>@angular/material/prebuilt-themes</code> 直接把主题文件包含到应用中。</p>
 <p>如果你正在使用 Angular CLI，那么只需要在 <code>styles.css</code> 文件中添加一行就可以了：</p>
 <pre><code class="hljs scss"><span class="hljs-keyword">@import</span> <span class="hljs-string">'@angular/material/prebuilt-themes/deeppurple-amber.css'</span>;</code></pre>
+
 <p>如果你使用的 <code>ng add @angular/material</code> 添加的依赖，Material Schematics 会在控制台给出交互信息，在选择相应的主题后，会自动将样式添加到 <code>angular.json</code> 中：</p>
 <pre><code class="hljs json">"styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
    ],</code></pre>
+
 <p><a name="76fe220f"></a></p>
 <h2 id="自定义主题"><a href="#自定义主题" class="headerlink" title="自定义主题"></a>自定义主题</h2><p>自定义主题文件要做两件事：</p>
 <ol>
@@ -262,6 +264,7 @@
 
 <span class="hljs-comment">// 启动主题</span>
 <span class="hljs-keyword">@include</span> angular-material-theme(<span class="hljs-variable">$candy-app-theme</span>);</code></pre>
+
 <p><a name="a54b8e84"></a></p>
 <h2 id="多重主题"><a href="#多重主题" class="headerlink" title="多重主题"></a>多重主题</h2><p>你可以通过多次调用 <code>angular-material-theme</code> 混入器，每次包含一些额外的 CSS 类，来为应用创建多个主题。</p>
 <p>记住，只能包含 <code>@mat-core</code> 一次；不应该让每个主题都包含它一次。</p>
@@ -294,6 +297,7 @@
 <span class="hljs-selector-class">.unicorn-dark-theme</span> &#123;
   <span class="hljs-keyword">@include</span> angular-material-theme(<span class="hljs-variable">$dark-theme</span>);
 &#125;</code></pre>
+
 <p><a name="be9cb3aa"></a></p>
 <h2 id="基于浮层的组件"><a href="#基于浮层的组件" class="headerlink" title="基于浮层的组件"></a>基于浮层的组件</h2><p>由于某些组件（比如菜单、选择框、对话框等）位于全局的浮层容器中，所以想要让它们被主题的 css 类选择器（比如 <code>.unicorn-dark-theme</code>）影响到还需要做一个额外的步骤。</p>
 <p>要做到这一点，你可以给全局浮层容器添加一个合适的类。比如上面的例子要改成这样：</p>
@@ -307,10 +311,12 @@
     overlayContainer.getContainerElement().classList.add(<span class="hljs-string">'unicorn-dark-theme'</span>);
   &#125;
 &#125;</code></pre>
+
 <p>当然，浮层容器也是渲染在 body 中的，所以可以在 body 中添加样式</p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"unicorn-dark-theme"</span>&gt;</span>
     <span class="hljs-comment">&lt;!--....--&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></code></pre>
+
 <p>这样就不需要上面的 <code>ts</code> 类了。</p>
 <p><a name="4b02068c"></a></p>
 <h2 id="主题动态切换"><a href="#主题动态切换" class="headerlink" title="主题动态切换"></a>主题动态切换</h2><p>在上面多主题的基础上，我们实现主题的动态切换。可以通过修改 body 的 class，从而实现主题的切换。</p>
@@ -322,6 +328,7 @@
     <span class="hljs-keyword">this</span>.document.body.classList.toggle(theme);
   &#125;
 &#125;</code></pre>
+
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                   <!-- 单元1 -->

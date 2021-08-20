@@ -252,11 +252,13 @@
 <p>请依次进入View &gt;&gt; Integrated Terminal，这将打开Visual Studio Code的终端窗口。</p>
 <p>请执行以下命令，以创建相应的组件：</p>
 <pre><code class="hljs undefined"><span class="hljs-attribute">ng g c animationdemo</span></code></pre>
+
 <p>它将在/src/app文件夹内创建我们的组件–animationdemo。</p>
 <p>为了用到Angular动画，我们需要在应用中导入特定的动画模块–BrowserAnimationsModule。请打开app.module.ts文件，并添加如下的导入定义：</p>
 <pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123; BrowserAnimationsModule &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser/animations'</span>;  
 <span class="hljs-comment">// other import definitions  </span>
 <span class="hljs-meta">@NgModule</span>(&#123; imports: [BrowserAnimationsModule <span class="hljs-comment">// other imports]&#125;)</span></code></pre>
+
 <h2 id="理解Angular动画的语法"><a href="#理解Angular动画的语法" class="headerlink" title="理解Angular动画的语法"></a>理解Angular动画的语法</h2><p>下面，我们在组件的元数据中编写动画代码。其语法如下：</p>
 <pre><code class="hljs ts"><span class="hljs-meta">@Component</span>(&#123;
 <span class="hljs-comment">// other component properties.</span>
@@ -267,18 +269,21 @@
     ]
   ]
 &#125;)</code></pre>
+
 <p>此处，我们用到了名为animations的属性。该属性的输入是一个阵列，此阵列包含一个或多个“触发器”。同时，每个触发器都带有唯一的名称、和用来定义动画的状态和各种转换的具体实现。</p>
 <p>另外，每一个状态函数都会通过“stateName”来唯一地识别其状态、并用样式函数来显示在该状态下的元素样式。</p>
 <p>当然，每个转换函数也都通过stateChangeExpression，来定义元素状态转换、并定义动画的不同步骤所对应的阵列，从而能够显示出转换是如何发生的。在此，我们就可以用逗号分隔的数值，来将多个触发器函数包括到动画的属性之中。</p>
 <p>由于这些功能(触发、状态、和转换)都被定义在@angular/animations模块之中，因此，我们需要在自己的组件导入该模块。</p>
 <p>为了将动画应用到某个元素之上，我们需要在元素的定义中包含触发器的名称，即：在元素的标签里使用@后面加触发器名称的格式。对应的代码示例如下：</p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> @<span class="hljs-attr">changeSize</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+
 <p>这是将触发器changeSize应用到元素的上。</p>
 <p>下面，让我们创建更多的动画，以更好地理解Angular的动画概念吧。</p>
 <p>更改大小的动画</p>
 <p>我们将创建一个动画，来实现一键改变的大小。</p>
 <p>请打开animationdemo.component.ts文件，将如下代码添加到导入定义之中。</p>
 <pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123; trigger, state, style, animate, transition &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/animations'</span>;</code></pre>
+
 <p>在组件的元数据中添加如下的动画属性定义。</p>
 <pre><code class="hljs ts">animations: [
   trigger(<span class="hljs-string">'changeDivSize'</span>, [
@@ -296,6 +301,7 @@
     transition(<span class="hljs-string">'final=&gt;initial'</span>, animate(<span class="hljs-string">'1000ms'</span>))
   ]),
 ]</code></pre>
+
 <p>在此，我们定义了一个触发器—changeDivSize，而且该触发器里的两个功能函数。该元素在“初始”状态时呈现绿色，并随着宽度和高度的增加，在“最终”状态时呈现为红色。</p>
 <p>同时，我们定义了状态的转换规则：从“初始”态到“最终”态将持续1500毫秒，而从“最终”态返回“初始”态则为1000毫秒。</p>
 <p>为了改变元素的状态，我们在组件的类定义中定义了一个功能函数。我们将如下代码包含在AnimationdemoComponent类中：</p>
@@ -303,6 +309,7 @@
 changeState() &#123;
   <span class="hljs-keyword">this</span>.currentState = <span class="hljs-keyword">this</span>.currentState === <span class="hljs-string">'initial'</span> ? <span class="hljs-string">'final'</span> : <span class="hljs-string">'initial'</span>;
 &#125;</code></pre>
+
 <p>此处，我们定义了一个changeState方法，来切换元素的状态。</p>
 <p>请打开animationdemo.component.html文件，并添加以下代码：</p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Change the div size<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
@@ -310,10 +317,12 @@ changeState() &#123;
 <span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">div</span> [@<span class="hljs-attr">changeDivSize</span>]=<span class="hljs-string">currentState</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span></code></pre>
+
 <p>我们定义了一个按钮，来调用点击时的changeState函数。由于我们前面已经定义了元素，并对它应用了changeDivSize动画触发器，因此当按钮被点击时，它会更新元素的状态，其大小则会伴随着转换效果而发生变化。</p>
 <p>在执行该应用之前，我们也需要将引用包含在app.component.html文件内的Animationdemo组件中。</p>
 <p>打开app.component.html文件，您会发现该文件中已包含了一些默认的HTML代码。请删除所有的代码，并按照下图所示放置组件的选择器：</p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">app-animationdemo</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-animationdemo</span>&gt;</span></code></pre>
+
 <p>请在Visual Studio Code的终端窗口里运行ng serve命令，以执行该代码。运行完毕后，它会提示您在浏览器中打开<a href="http://localhost:4200。随后，您就会在浏览器中看到如下点击按钮的动画效果。" target="_blank" rel="noopener">http://localhost:4200。随后，您就会在浏览器中看到如下点击按钮的动画效果。</a></p>
 <h2 id="气球动画效果"><a href="#气球动画效果" class="headerlink" title="气球动画效果"></a>气球动画效果</h2><p>在前面的动画示例中，转化仅发生在两个方向。而在本节中，我们将学习如何改变所有方向上的尺寸。这与气球的充、放气比较类似，故称为气球动画效果。</p>
 <p>请在动画属性中添加如下的触发器定义。</p>
@@ -329,6 +338,7 @@ changeState() &#123;
    transition(<span class="hljs-string">'final=&gt;initial'</span>, animate(<span class="hljs-string">'1000ms'</span>)),
    transition(<span class="hljs-string">'initial=&gt;final'</span>, animate(<span class="hljs-string">'1500ms'</span>))
  ]),</code></pre>
+
 <p>在此，我们使用转换属性来更改所有方向的尺寸大小。当该元素的状态发生变化时转换随即发生。</p>
 <p>请在app.component.html文件中添加如下HTML代码。</p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Balloon Effect<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
@@ -336,6 +346,7 @@ changeState() &#123;
   <span class="hljs-attr">style</span>=<span class="hljs-string">"width:100px;height:100px; border-radius: 100%; margin: 3rem; background-color: green"</span>
   [@<span class="hljs-attr">balloonEffect</span>]=<span class="hljs-string">currentState</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+
 <p>在此，我们定义了一个div，并通过CSS样式来定义成一个圆圈。我们将通过点击div去调用changeState，从而实现元素状态的切换。</p>
 <p>下图便是该动画在浏览器中的运行效果：</p>
 <p>淡入和淡出动画</p>
@@ -351,6 +362,7 @@ addItem() &#123;
 removeItem() &#123;
   <span class="hljs-keyword">this</span>.listItem.length -= <span class="hljs-number">1</span>;
 &#125;</code></pre>
+
 <p>请在该动画的属性中添加如下的触发器定义。</p>
 <pre><code class="hljs ts">trigger(<span class="hljs-string">'fadeInOut'</span>, [
   state(<span class="hljs-string">'void'</span>, style(&#123;
@@ -358,8 +370,9 @@ removeItem() &#123;
   &#125;)),
   transition(<span class="hljs-string">'void &lt;=&gt; *'</span>, animate(<span class="hljs-number">1000</span>)),
 ]),</code></pre>
+
 <p>在此，我们定义了触发器fadeInOut。当该元素被添加到DOM时，它的状态就从void转换为wildcard，我们表示为void =&gt; <em>。而当该元素从DOM删除时，它的状态就从wildcard转换为void，我们表示为</em> =&gt; void。</p>
-<p>我们给动画的不同方向使用相同的动画定时，其语法为&lt;=&gt;。正如该触发器所定义的，动画从void =&gt; <em> 和 </em> =&gt; void，都需要1000毫秒才能完成。</p>
+<p>我们给动画的不同方向使用相同的动画定时，其语法为&lt;=&gt;。正如该触发器所定义的，动画从void =&gt; * 和 * =&gt; void，都需要1000毫秒才能完成。</p>
 <p>请在app.component.html文件中添加如下HTML代码。</p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Fade-In and Fade-Out animation<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">button</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"addItem()"</span>&gt;</span>Add List<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
@@ -371,11 +384,12 @@ removeItem() &#123;
     <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+
 <p>在此，我们定义了两个按钮来添加和删除条目。我们将fadeInOut触发器与元素绑定，以实现在对DOM进行添加、删除时，能够出现淡入和淡出的效果。</p>
 <p>下图便是该动画在浏览器中的运行效果：</p>
 <p>进入和离开动画</p>
 <p>此外，我们还能够通过对DOM的添加，实现某个元素从左边进入屏幕;而在删除时，能让该元素从右边离开屏幕。</p>
-<p>由于从void =&gt; <em> 和 </em> =&gt; void 的转换十分常见。因此，Angular为这些动画提供了别名机制：</p>
+<p>由于从void =&gt; * 和 * =&gt; void 的转换十分常见。因此，Angular为这些动画提供了别名机制：</p>
 <ul>
 <li>对于 void =&gt; * ，我们可以用’:enter’</li>
 <li>对于 * =&gt; void ，我们可以用’:leave’</li>
@@ -392,6 +406,7 @@ removeItem() &#123;
     animate(<span class="hljs-string">'0.3s ease-out'</span>, style(&#123; transform: <span class="hljs-string">'translateX(100%)'</span> &#125;))
   ])
 ])</code></pre>
+
 <p>在此，我们定义了触发器EnterLeave。那么’:enter’的转换需要等待300毫秒，然后运行0.5秒，并实现滑入的效果;而’:leave’的转换只运行0.3秒，实现滑出的效果。</p>
 <p>请在app.component.html文件中添加如下HTML代码。</p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Enter and Leave animation<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
@@ -404,6 +419,7 @@ removeItem() &#123;
     <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+
 <p>在此，我们定义了两个按钮来对列表添加和删除条目。我们将EnterLeave触发器与元素绑定，以实现在对DOM进行添加、删除时，出现滑入和滑出的效果。</p>
 <p>下图便是该动画在浏览器中的运行效果：</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>综上所述，我们针对Angular 6的动画效果，探讨了动画状态和转换的概念，也通过一个应用示例展示了实际的动画代码与效果。</p>

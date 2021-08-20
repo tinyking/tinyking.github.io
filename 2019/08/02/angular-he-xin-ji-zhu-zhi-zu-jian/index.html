@@ -230,6 +230,7 @@
   templateUrl: <span class="hljs-string">'required.component.html'</span>
 &#125;)
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> RequiredComponent &#123; &#125;</code></pre>
+
 <p><a name="wtq6O"></a></p>
 <h2 id="模板-amp-样式"><a href="#模板-amp-样式" class="headerlink" title="模板 &amp; 样式"></a>模板 &amp; 样式</h2><p>模板是html文件，里面可以包含一些逻辑。</p>
 <p>我们可以通过两种方式来指定组件的模板：</p>
@@ -239,16 +240,20 @@
 <pre><code class="hljs typescript"><span class="hljs-meta">@Component</span>(&#123;
   templateUrl: <span class="hljs-string">'hero.component.html'</span>
 &#125;)</code></pre>
+
 <ol start="2">
 <li>通过使用内联方式指定模板</li>
 </ol>
 <pre><code class="hljs typescript"><span class="hljs-meta">@Component</span>(&#123;
   template: <span class="hljs-string">'&lt;div&gt;This is a template.&lt;/div&gt;'</span>
 &#125;)</code></pre>
+
 <p>组件中定义的模板可以包含样式，我们可以在@Component中定义当前模板的样式。在组件中定义的样式和应用的style.css中定义是有区别的。组件中定义的任何样式，作用域都被限制在此组件内。<br>例如，我们在组件中添加样式：</p>
 <pre><code class="hljs css"><span class="hljs-selector-tag">div</span> &#123;<span class="hljs-attribute">background</span>: red;&#125;</code></pre>
+
 <p>组件模板内的所有的div背景都会渲染成红色，但是其他组件中的div不会受到此样式的影响。<br>编译后的代码类似如下这样：</p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css"><span class="hljs-selector-tag">div</span><span class="hljs-selector-attr">[_ngcontent-c1]</span> &#123;<span class="hljs-attribute">background</span>:red;&#125;</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span></code></pre>
+
 <p>我们可以通过两种方式为组件的模板定义样式：</p>
 <ol>
 <li>通过文件的方式</li>
@@ -256,10 +261,12 @@
 <pre><code class="hljs typescript"><span class="hljs-meta">@Component</span>(&#123;
   styleUrls: [<span class="hljs-string">'hero.component.css'</span>]
 &#125;)</code></pre>
+
 <ol start="2">
 <li>通过内联的方式</li>
 </ol>
 <pre><code class="hljs typescript">styles: [<span class="hljs-string">`div &#123;background: red;&#125;`</span>]</code></pre>
+
 <p><a name="kG6AR"></a></p>
 <h2 id="如何选择"><a href="#如何选择" class="headerlink" title="如何选择"></a>如何选择</h2><p>不论模版还是样式，组件都提供来两种方式来声明它们。理论上我们可以随心所欲，自由组合。但实际的开发过程中我们还是需要有自己的原则：根据实际内容的多少来选择声明方式，内容较多就选择文件方式，这样可以使代码结构更加清晰，整洁。</p>
 <p><a name="H1L5Y"></a></p>
@@ -268,6 +275,7 @@
   <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">formControlName</span>=<span class="hljs-string">"name"</span>/&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span>&gt;</span> Show hero name<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></code></pre>
+
 <p><code>hero.component.ts</code> </p>
 <pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; FromControl, FormGroup, Validators &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/forms'</span>;
 <span class="hljs-keyword">import</span> &#123; Component &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
@@ -286,6 +294,7 @@
     <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.form.controls.name.value);
   &#125;
 &#125;</code></pre>
+
 <p><code>hero.component.spec.ts</code> </p>
 <pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; ComponentFixture, TestBed, <span class="hljs-keyword">async</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core/testing'</span>;
 
@@ -332,6 +341,7 @@ describe(<span class="hljs-string">'HeroComponent'</span>, <span class="hljs-fun
     expect(component.form.invalid).toBeTruthy();
   &#125;);
 &#125;)</code></pre>
+
 <p><a name="RVpq8"></a></p>
 <h2 id="嵌套组件"><a href="#嵌套组件" class="headerlink" title="嵌套组件"></a>嵌套组件</h2><p>组件是通过selector来渲染的，所以我们就可以通过嵌套的方式来使用所有的组件。</p>
 <pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; Component, Input &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
@@ -344,6 +354,7 @@ describe(<span class="hljs-string">'HeroComponent'</span>, <span class="hljs-fun
   <span class="hljs-meta">@Input</span>()
   <span class="hljs-keyword">public</span> name: <span class="hljs-built_in">string</span> = <span class="hljs-string">''</span>;
 &#125;</code></pre>
+
 <p>我们就可以在其他的组件中，通过使用app-required标签来嵌套我们的组件。</p>
 <pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; Component, Input &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
 
@@ -358,6 +369,7 @@ describe(<span class="hljs-string">'HeroComponent'</span>, <span class="hljs-fun
   <span class="hljs-meta">@Input</span>()
   <span class="hljs-keyword">public</span> name = <span class="hljs-string">''</span>;
 &#125;</code></pre>
+
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                   <!-- 单元1 -->

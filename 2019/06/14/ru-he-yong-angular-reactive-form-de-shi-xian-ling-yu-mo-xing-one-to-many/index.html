@@ -211,11 +211,14 @@
             <div class="markdown-body" id="post-body">
               <p>在应用系统中，必不可少的一样功能就是表单录入。在Angular中，提供了两种表单模式：<strong>响应式表单</strong>和<strong>模板驱动表单</strong>。</p>
 <h2 id="Angular表单"><a href="#Angular表单" class="headerlink" title="Angular表单"></a>Angular表单</h2><h3 id="模板驱动表单"><a href="#模板驱动表单" class="headerlink" title="模板驱动表单"></a>模板驱动表单</h3><p>模板驱动表单是通过使用<code>ngModel</code>创建双向数据绑定，以读取和写入输入控件的值。如下：</p>
-<p>首先ts文件里面创建模型：<br><pre><code class="hljs typescript">model = <span class="hljs-keyword">new</span> Hero(<span class="hljs-number">18</span>, <span class="hljs-string">'Dr IQ'</span>, <span class="hljs-keyword">this</span>.powers[<span class="hljs-number">0</span>], <span class="hljs-string">'Chuck Overstreet'</span>);</code></pre></p>
+<p>首先ts文件里面创建模型：</p>
+<pre><code class="hljs typescript">model = <span class="hljs-keyword">new</span> Hero(<span class="hljs-number">18</span>, <span class="hljs-string">'Dr IQ'</span>, <span class="hljs-keyword">this</span>.powers[<span class="hljs-number">0</span>], <span class="hljs-string">'Chuck Overstreet'</span>);</code></pre>
+
 <p>然后再html文件中，通过ngModel指令，实现模型数据的双向绑定:</p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form-control"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"name"</span>
        <span class="hljs-attr">required</span>
        [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"model.name"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"name"</span>&gt;</span></code></pre>
+
 <p>应为在<code>input</code>上通过<code>ngModel</code>实现了对<code>model.name</code>的双向绑定，此时，我们在界面的<code>input</code>中输入的内容会实时的反应到ts中的<code>model</code>中。</p>
 <h3 id="响应式表单"><a href="#响应式表单" class="headerlink" title="响应式表单"></a>响应式表单</h3><p>响应式表单使用显式的、不可变的方式，管理表单在特定的时间点上的状态。对表单状态的每一次变更都会返回一个新的状态，这样可以在变化时维护模型的整体性。响应式表单是围绕 Observable 的流构建的，表单的输入和值都是通过这些输入值组成的流来提供的，它可以同步访问。</p>
 <p>当使用响应式表单时，FormControl 类是最基本的构造块。要注册单个的表单控件，请在组件中导入 FormControl 类，并创建一个 FormControl 的新实例，把它保存在类的某个属性中。</p>
@@ -230,12 +233,15 @@
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> NameEditorComponent &#123;
   name = <span class="hljs-keyword">new</span> FormControl(<span class="hljs-string">''</span>);
 &#125;</code></pre>
+
 <p>在组件类中创建了控件之后，你还要把它和模板中的一个表单控件关联起来。修改模板，为表单控件添加 formControl 绑定，formControl 是由 ReactiveFormsModule 中的 FormControlDirective 提供的。</p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>
   Name:
   <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> [<span class="hljs-attr">formControl</span>]=<span class="hljs-string">"name"</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span></code></pre>
-<h2 id="one-to-many的领域模型"><a href="#one-to-many的领域模型" class="headerlink" title="one-to-many的领域模型"></a>one-to-many的领域模型</h2><p>我们现在有个数据字典的数据模型，每个字典又包含了多个字典项。我们用TypeScript描述下我们的模型:<br><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Dict &#123;
+
+<h2 id="one-to-many的领域模型"><a href="#one-to-many的领域模型" class="headerlink" title="one-to-many的领域模型"></a>one-to-many的领域模型</h2><p>我们现在有个数据字典的数据模型，每个字典又包含了多个字典项。我们用TypeScript描述下我们的模型:</p>
+<pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Dict &#123;
     id: <span class="hljs-built_in">number</span>;
     code: <span class="hljs-built_in">string</span>;
     name: <span class="hljs-built_in">string</span>;
@@ -246,7 +252,8 @@
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Item &#123;
     code: <span class="hljs-built_in">string</span>;
     value: <span class="hljs-built_in">string</span>;
-&#125;</code></pre></p>
+&#125;</code></pre>
+
 <p>在这个数据字典的模型中，<code>Dict</code>和<code>Item</code>的关系就是<code>one-to-many</code>。</p>
 <h2 id="响应式表单实现字典模型"><a href="#响应式表单实现字典模型" class="headerlink" title="响应式表单实现字典模型"></a>响应式表单实现字典模型</h2><p>如果只是字典模型，没有字典项<code>Item</code>的话，在Angular的官方文档中已经给出了这样的模型实现方式：</p>
 <pre><code class="hljs typescript">
@@ -271,6 +278,7 @@
     <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.formGroup.value);
   &#125;
 &#125;</code></pre>
+
 <p>在上面的代码中，我们通过<code>FormBuilder</code>来创建<code>FormGroup</code>，然后我们就可以在html中使用它：</p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">form</span> [<span class="hljs-attr">formGroup</span>]=<span class="hljs-string">"formGroup"</span> (<span class="hljs-attr">ngSubmit</span>)=<span class="hljs-string">"doSubmit()"</span>&gt;</span>
@@ -286,6 +294,7 @@
     <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span>&gt;</span> Submit<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+
 <p>这种常规的模型实现起来还是比较简单的。</p>
 <p>那么对于one-to-many的模型我们应该怎么去实现呢？</p>
 <p>首先，我们来分析这个Dict模型。我们会发现items是一个Item[]，此时，我们可以在官方文档中找到，在响应式表单中有一个FormArray用来表示FormControl的数组模式。</p>
@@ -317,6 +326,7 @@
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.formGroup.get(<span class="hljs-string">'items'</span>) <span class="hljs-keyword">as</span> FormArray;
   &#125;
 &#125;</code></pre>
+
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">form</span> [<span class="hljs-attr">formGroup</span>]=<span class="hljs-string">"formGroup"</span> (<span class="hljs-attr">ngSubmit</span>)=<span class="hljs-string">"doSubmit()"</span>&gt;</span>
 
@@ -346,6 +356,7 @@
     <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span>&gt;</span> Submit<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>复杂的东西都是由简单的组成的。就是Java中的基本数据类型一样。通过数据结构+算法，我们可以组装出复杂的对象，最后以应用的方式展示出来。所以，任何复杂的东西，只要我们认真分析，总能找到简单的实现方法。</p>
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

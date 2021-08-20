@@ -240,6 +240,7 @@
   <span class="hljs-comment">/** Overrides the sticky CSS class set by the `CdkTable`. */</span>
   <span class="hljs-keyword">protected</span> stickyCssClass = <span class="hljs-string">'mat-table-sticky'</span>;
 &#125;</code></pre>
+
 <p>在MatTable的源码中，我们可以看到为host属性设置了<code>&#39;class&#39;: &#39;mat-table&#39;</code>，在我们使用MatTable组件时，就会添加上默认的样式: <code>mat-table</code>.</p>
 <blockquote>
 <p><strong>注意</strong></p>
@@ -269,6 +270,7 @@
   <span class="hljs-comment">// 使用HostBinding装饰器</span>
   <span class="hljs-meta">@HostBinding</span>(<span class="hljs-string">'class.mat-table'</span>) clz = <span class="hljs-literal">true</span>;
 &#125;</code></pre>
+
 <h2 id="方法三：Renderer2"><a href="#方法三：Renderer2" class="headerlink" title="方法三：Renderer2"></a>方法三：Renderer2</h2><p><code>Renderer2</code>是Angular的渲染引擎，我们可以通过它来为自定义组件添加默认样式。</p>
 <p>还是以MatTable为例，需要做一下改造来实现相应的功能：</p>
 <pre><code class="hljs typescript"><span class="hljs-meta">@Component</span>(&#123;
@@ -294,6 +296,7 @@
       render.addClass(eleRef.nativeElement, <span class="hljs-string">'mat-table'</span>);
   &#125;
 &#125;</code></pre>
+
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>很多时候，实现一个功能的方法有很多，需要我们不断的去挖掘，去思考。条条大路通罗马，只要努力了总会有收获。</p>
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

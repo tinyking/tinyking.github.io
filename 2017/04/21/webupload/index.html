@@ -251,39 +251,39 @@ $(<span class="hljs-string">"#myModal"</span>).on(<span class="hljs-string">"sho
         &#125;
     &#125;);
 &#125;);</code></pre>
+
 <p>单单这样也会有问题，这样每次弹出模态框之后都加载一个边框，使按钮越来越大，所以需要在关闭模态框后销毁webuploader</p>
 <pre><code class="hljs javascript"><span class="hljs-comment">//关闭模态框销毁WebUploader，解决再次打开模态框时按钮越变越大问题</span>
 $(<span class="hljs-string">'#myModal'</span>).on(<span class="hljs-string">'hide.bs.modal'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
     $(<span class="hljs-string">"#responeseText"</span>).text(<span class="hljs-string">""</span>);
     uploader.destroy();
 &#125;);</code></pre>
+
 <hr>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">事件</th>
-<th style="text-align:left">描述</th>
+<th align="left">事件</th>
+<th align="left">描述</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">show.bs.modal</td>
-<td style="text-align:left">在调用 show 方法后触发。</td>
+<tbody><tr>
+<td align="left">show.bs.modal</td>
+<td align="left">在调用 show 方法后触发。</td>
 </tr>
 <tr>
-<td style="text-align:left">shown.bs.modal</td>
-<td style="text-align:left">当模态框对用户可见时触发（将等待 CSS 过渡效果完成）。</td>
+<td align="left">shown.bs.modal</td>
+<td align="left">当模态框对用户可见时触发（将等待 CSS 过渡效果完成）。</td>
 </tr>
 <tr>
-<td style="text-align:left">hide.bs.modal</td>
-<td style="text-align:left">当调用 hide 实例方法时触发。</td>
+<td align="left">hide.bs.modal</td>
+<td align="left">当调用 hide 实例方法时触发。</td>
 </tr>
 <tr>
-<td style="text-align:left">hidden.bs.modal</td>
-<td style="text-align:left">当模态框完全对用户隐藏时触发。</td>
+<td align="left">hidden.bs.modal</td>
+<td align="left">当模态框完全对用户隐藏时触发。</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                   <!-- 单元1 -->

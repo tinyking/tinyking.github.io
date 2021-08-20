@@ -235,6 +235,7 @@
           &#125;
         &#125;
 &#125;</code></pre>
+
 <p>在上面的配置中，我们用到自定义的<code>extra-webpack.config.js</code>，因此我们需要手动创建该文件，内容为：</p>
 <pre><code class="hljs javascript"><span class="hljs-meta">
 'use strict'</span>;
@@ -245,6 +246,7 @@
 <span class="hljs-built_in">module</span>.exports = &#123;
     <span class="hljs-attr">plugins</span>: [<span class="hljs-keyword">new</span> webpack.ContextReplacementPlugin(<span class="hljs-regexp">/moment[/\\]locale$/</span>, /zh-cn/)]
 &#125;;</code></pre>
+
 <p>至此，我们的moment.js的优化配置已完成。</p>
 <p>再次执行<code>webpack-bundle-analyzer</code>分析：</p>
 <p><img src="https://cdn.nlark.com/yuque/0/2019/png/269363/1561537017238-assets/web-upload/ffc4b654-ab56-4185-8b4b-df925e8052d1.png" srcset="/img/loading.gif" alt="PIC"></p>

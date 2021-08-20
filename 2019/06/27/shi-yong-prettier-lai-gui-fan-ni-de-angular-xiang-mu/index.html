@@ -213,7 +213,9 @@
 <p>今天，我们就来分享一个叫prettier的前端工具，来实现我们前端项目的规范化。</p>
 <h2 id="接下来，我们一步一步的在Angular项目中集成prettier"><a href="#接下来，我们一步一步的在Angular项目中集成prettier" class="headerlink" title="接下来，我们一步一步的在Angular项目中集成prettier"></a>接下来，我们一步一步的在Angular项目中集成prettier</h2><p>创建一个Angular项目</p>
 <pre><code class="hljs sh">ng new prettierProject</code></pre>
+
 <h2 id="1-安装prettier"><a href="#1-安装prettier" class="headerlink" title="1. 安装prettier"></a>1. 安装prettier</h2><pre><code class="hljs sh">npm install --save-dev --save-exact prettier</code></pre>
+
 <h2 id="2-配置prettier"><a href="#2-配置prettier" class="headerlink" title="2. 配置prettier"></a>2. 配置prettier</h2><p>在项目的根目录下创建<code>.prettierrc</code>文件</p>
 <pre><code class="hljs json">&#123;
   <span class="hljs-attr">"singleQuote"</span>: <span class="hljs-literal">true</span>,
@@ -245,12 +247,14 @@
     &#125;
   ]
 &#125;</code></pre>
+
 <h2 id="3-配置prettier-ignore"><a href="#3-配置prettier-ignore" class="headerlink" title="3. 配置prettier ignore"></a>3. 配置prettier ignore</h2><p>在项目的根目录下创建<code>.prettierignore</code>文件:</p>
 <pre><code class="hljs text">package.json
 package-lock.json
 dist
 .angulardoc.json
 .vscode/*</code></pre>
+
 <p>这个文件会告诉prettier那些文件不需要它进行格式化。</p>
 <h2 id="4-VS-Code集成prettier"><a href="#4-VS-Code集成prettier" class="headerlink" title="4. VS Code集成prettier"></a>4. VS Code集成prettier</h2><p>安装插件</p>
 <p><a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode" target="_blank" rel="noopener">Prettier — Code formatter</a></p>
@@ -259,8 +263,10 @@ dist
 <pre><code class="hljs json">&#123;
     <span class="hljs-attr">"editor.formatOnSave"</span>: <span class="hljs-literal">true</span>
 &#125;</code></pre>
+
 <p>通过这个配置可以让我们在保存文件的时候，VS Code自动帮我们格式化，这样我们在写代码的时候，就可以不必为调格式浪费太多的时间。</p>
 <h2 id="5-配置prettier和tslint共存"><a href="#5-配置prettier和tslint共存" class="headerlink" title="5. 配置prettier和tslint共存"></a>5. 配置prettier和tslint共存</h2><pre><code class="hljs sh">npm install --save-dev tslint-config-prettier</code></pre>
+
 <p>在<code>tslint.json</code>文件中添加下面的配置：</p>
 <pre><code class="hljs json">&#123;
     <span class="hljs-attr">"extends"</span>: [
@@ -268,14 +274,17 @@ dist
         <span class="hljs-string">"tslint-config-prettier"</span>
     ]
 &#125;</code></pre>
+
 <h2 id="6-配置git-hook"><a href="#6-配置git-hook" class="headerlink" title="6. 配置git hook"></a>6. 配置git hook</h2><p>安装<code>husky</code>，创建一个Git hook</p>
 <pre><code class="hljs sh">npm install  --save-dev pretty-quick husky</code></pre>
+
 <p>在<code>package.json</code>中添加下面的配置:</p>
 <pre><code class="hljs json">"husky": &#123;
     "hooks": &#123;
       "pre-commit": "pretty-quick --staged"
     &#125;
 &#125;</code></pre>
+
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                   <!-- 单元1 -->

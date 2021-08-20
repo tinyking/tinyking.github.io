@@ -166,7 +166,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      696 字
+      697 字
     </span>
   
 
@@ -251,15 +251,19 @@
 <p>在group配置中，name同样是必须的。此外还多了一个members的配置，将左侧的npm-hosted,npm-proxy添加到右侧的members中，这样就可以通过group同时访问npm-hosted,npm-proxy中的资源了。</p>
 <h1 id="发布到npm私服"><a href="#发布到npm私服" class="headerlink" title="发布到npm私服"></a>发布到npm私服</h1><p><img src="https://ws1.sinaimg.cn/large/806e3151ly1fyczztbu5ij20k009jgp4.jpg" srcset="/img/loading.gif" alt></p>
 <p>首先，需要配置权限，将npm Bearer Token Realm启用。</p>
-<p>配置本机的npm登陆<br><pre><code class="hljs undefined">npm login --registry=http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">8888</span><span class="hljs-regexp">/repository/</span>npm-hosted<span class="hljs-regexp">/</span></code></pre></p>
+<p>配置本机的npm登陆</p>
+<pre><code class="hljs undefined">npm login --registry=http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">8888</span><span class="hljs-regexp">/repository/</span>npm-hosted<span class="hljs-regexp">/</span></code></pre>
+
 <p>然后输入用户名密码，邮箱，成功后会在<code>.npmrc</code>文件中生成一条记录</p>
 <pre><code class="hljs undefined">/<span class="hljs-regexp">/localhost:8888/repository</span><span class="hljs-regexp">/npm-hosted/</span><span class="hljs-symbol">:_authToken=NpmToken</span>.<span class="hljs-number">16b06</span>a38-cae5<span class="hljs-number">-32</span>ca<span class="hljs-number">-8a5</span>f<span class="hljs-number">-2310</span>ef16e156</code></pre>
+
 <p>在确保项目有 package.json 前提下，执行：</p>
 <pre><code class="hljs undefined">npm publish  --registry=http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">8888</span><span class="hljs-regexp">/repository/</span>npm-hosted<span class="hljs-regexp">/</span></code></pre>
+
 <p>即可在私服中查询到已发的npm组件<br><img src="https://ws1.sinaimg.cn/large/806e3151ly1fyd02la9jnj21h60ez3zv.jpg" srcset="/img/loading.gif" alt></p>
 <hr>
 <blockquote>
-<p>Author ：笑笑粑粑<br>曾用网名：TinyKing<br>微信公众号：Java码农<br>知乎专栏： <a href="https://zhuanlan.zhihu.com/tinyking" target="_blank" rel="noopener">爱笑笑爱分享</a><br>个人博客： <a href="https://www.wangjianchao.cn/" target="_blank" rel="noopener">爱笑笑，爱生活</a><br>自我评价： 一个爱好广泛的CRUD程序猿 \^_^   </p>
+<p>Author ：笑笑粑粑<br>曾用网名：TinyKing<br>微信公众号：Java码农<br>知乎专栏： <a href="https://zhuanlan.zhihu.com/tinyking" target="_blank" rel="noopener">爱笑笑爱分享</a><br>个人博客： <a href="https://www.wangjianchao.cn/" target="_blank" rel="noopener">爱笑笑，爱生活</a><br>自我评价： 一个爱好广泛的CRUD程序猿 ^_^   </p>
 </blockquote>
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

@@ -211,10 +211,12 @@
             <div class="markdown-body" id="post-body">
               <p>在使用Spring Security集成Oauth2.0做Auth server时，使用自定义的UserDetailsService实现时，在Controller层通过自动注入，可以获取详细的用户信息。</p>
 <a id="more"></a>
+
 <pre><code class="hljs java"><span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">"/user"</span>)
 <span class="hljs-function"><span class="hljs-keyword">public</span> Principal <span class="hljs-title">user</span><span class="hljs-params">(Principal user)</span> </span>&#123;
   <span class="hljs-keyword">return</span> user;
 &#125;</code></pre>
+
 <p>但是，使用自定义的Provider去做账户校验时，获取的Principal就只含有用户名信息。</p>
 <p>分析原码发现</p>
 <pre><code class="hljs java"><span class="hljs-comment">// org.springframework.security.oauth2.provider.token.DefaultUserAuthenticationConverter</span>
@@ -231,6 +233,7 @@
   &#125;
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
 &#125;</code></pre>
+
 <p>通过jwt方式进行认证的会执行<code>DefaultUserAuthenticationConverter</code>代码，其中的userDetailsService是null，所以返回的principal就只有用户名。</p>
 <p>可以通过在创建<code>DefaultUserAuthenticationConverter</code>时，给他set上userDetailsService，这样就获取更多的信息了。</p>
 <p>如下：</p>
@@ -251,6 +254,7 @@
     defaultUserAuthenticationConverter.setUserDetailsService(userDetailsService);
     <span class="hljs-keyword">return</span> defaultUserAuthenticationConverter;
 &#125;</code></pre>
+
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                   <!-- 单元1 -->

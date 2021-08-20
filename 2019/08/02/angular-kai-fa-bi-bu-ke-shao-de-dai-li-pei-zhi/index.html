@@ -220,8 +220,10 @@
     <span class="hljs-attr">"secure"</span>: <span class="hljs-literal">false</span>
   &#125;
 &#125;</code></pre>
+
 <p>我们通过 <code>--proxy-config</code> 参数来加载代理配置文件：</p>
 <pre><code class="hljs bash">ng serve --proxy-config=proxy.conf.json</code></pre>
+
 <p>我们还可以在 <code>angular.json</code> 中通过 <code>proxyConfig</code> 属性来设置代理：</p>
 <pre><code class="hljs json">"architect": &#123;
   "serve": &#123;
@@ -230,6 +232,7 @@
       "browserTarget": "your-application-name:build",
       "proxyConfig": "proxy.conf.json"
     &#125;,</code></pre>
+
 <blockquote>
 <p><code>angular.json</code> 是Angular CLI的配置文件</p>
 </blockquote>
@@ -237,6 +240,7 @@
 <h2 id="路径重写"><a href="#路径重写" class="headerlink" title="路径重写"></a>路径重写</h2><p>在基本代理中，我们配置了<code>http://localhost:4200/api</code> 代理后端服务 <code>http://localhost:8080/api</code>。而在实际开发中，我们的后端服务可能没有提供 <code>/api</code> 前缀，实际的后端服务可能是这样的：</p>
 <pre><code class="hljs undefined"><span class="hljs-symbol">http:</span><span class="hljs-comment">//localhost:8080/users</span>
 <span class="hljs-symbol">http:</span><span class="hljs-comment">//localhost:8080/orders</span></code></pre>
+
 <p>在这种情况下，上面配置的基本代理就无法满足我们的需求了，因此后端不存在 <code>http://localhost:8080/api/users</code> 服务。幸运的是， <code>Angular CLI</code> 代理提供了路径重写功能。</p>
 <pre><code class="hljs json">&#123;
   <span class="hljs-attr">"/api"</span>: &#123;
@@ -247,6 +251,7 @@
     &#125;
   &#125;
 &#125;</code></pre>
+
 <p>此时我们在浏览器访问 <code>http://localhost:4200/api/users</code> , 代理服务会给我们代理到后端服务 <code>http://localhost:8080/users</code> 上。</p>
 <p>路径重写功能可以让我们很好的区分前端路由和后端服务。可以一目了然的知道<code>http://localhost:4200/api/users</code>访问的是一个后端服务。</p>
 <p><a name="5vMiu"></a></p>
@@ -262,6 +267,7 @@
     <span class="hljs-attr">"changeOrigin"</span>: <span class="hljs-literal">true</span>
   &#125;
 &#125;</code></pre>
+
 <p>这样，我们访问 <code>http://localhost:4200/api/users</code> 就会被代理到<code>http://test.domain.com/users</code> 。</p>
 <p><a name="P0aeg"></a></p>
 <h2 id="代理日志"><a href="#代理日志" class="headerlink" title="代理日志"></a>代理日志</h2><p>在使用前端代理的过程中，如果想要调试代理是否正常工作，还可以添加 <code>logLevel</code> 选项：</p>
@@ -275,6 +281,7 @@
     <span class="hljs-attr">"logLevel"</span>: <span class="hljs-string">"debug"</span>
   &#125;
 &#125;</code></pre>
+
 <p><code>logLevel</code> 支持的级别选项有 <code>debug</code> , <code>info</code> , <code>warn</code> , <code>silent</code> ，默认是 <code>info</code> 级别.</p>
 <p><a name="n4saq"></a></p>
 <h2 id="多代理入口"><a href="#多代理入口" class="headerlink" title="多代理入口"></a>多代理入口</h2><p>如果前端需要配置多个入口代理到同一个后端服务，不想使用前面的路径重写方式，我们可以创建一个 <code>proxy.conf.js</code> 文件来替代我们上面的 <code>proxy.conf.json</code> ：</p>
@@ -295,6 +302,7 @@
 ]
 
 <span class="hljs-built_in">module</span>.exports = PROXY_CONFIG;</code></pre>
+
 <p>修改我们的 <code>angular.json</code> 中的 <code>proxyConfig</code> 为 <code>proxy.conf.js</code> ：</p>
 <pre><code class="hljs json">"architect": &#123;
   "serve": &#123;
@@ -303,7 +311,8 @@
       "browserTarget": "your-application-name:build",
       "proxyConfig": "proxy.conf.js"
     &#125;,</code></pre>
-<p><img src="https://user-gold-cdn.xitu.io/2019/7/23/16c1ed307173ecee?w=900&amp;h=450&amp;f=png&amp;s=153639" srcset="/img/loading.gif" alt></p>
+
+<p><img src="https://user-gold-cdn.xitu.io/2019/7/23/16c1ed307173ecee?w=900&h=450&f=png&s=153639" srcset="/img/loading.gif" alt></p>
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                   <!-- 单元1 -->

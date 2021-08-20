@@ -216,11 +216,14 @@
 <pre><code class="hljs Java"><span class="hljs-meta">@Configuration</span>
 <span class="hljs-meta">@EnableAsync</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">VehicleFactoryConfig</span> </span>&#123;&#125;</code></pre>
+
 <p>现在，我们已经启用了异步调用，我们可以使用<code>@Async</code>来定义支持它的方法。</p>
 <h2 id="3-EnableScheduling"><a href="#3-EnableScheduling" class="headerlink" title="3. @EnableScheduling"></a>3. @EnableScheduling</h2><p>通过这个注释，我们可以在应用程序中启用调度。</p>
-<p>我们还必须将它与@Configuration一起使用:<br><pre><code class="hljs Java"><span class="hljs-meta">@Configuration</span>
+<p>我们还必须将它与@Configuration一起使用:</p>
+<pre><code class="hljs Java"><span class="hljs-meta">@Configuration</span>
 <span class="hljs-meta">@EnableScheduling</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">VehicleFactoryConfig</span> </span>&#123;&#125;</code></pre></p>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">VehicleFactoryConfig</span> </span>&#123;&#125;</code></pre>
+
 <p>因此，我们现在可以使用<code>@Scheduled</code>定期运行方法。</p>
 <h2 id="4-Async"><a href="#4-Async" class="headerlink" title="4. @Async"></a>4. @Async</h2><p>我们可以定义希望在不同线程上执行的方法，从而异步地运行它们。</p>
 <p>为了实现这一点，我们可以用@Async注释方法:</p>
@@ -228,6 +231,7 @@
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">repairCar</span><span class="hljs-params">()</span> </span>&#123;
     <span class="hljs-comment">// ...</span>
 &#125;</code></pre>
+
 <p>如果我们将这个注释应用到一个类，那么所有方法都将被异步调用。</p>
 <p>注意，我们需要使用@EnableAsync或XML配置启用异步调用，以使该注释工作。</p>
 <h2 id="5-Scheduled"><a href="#5-Scheduled" class="headerlink" title="5. @Scheduled"></a>5. @Scheduled</h2><p>如果我们需要一个方法定期执行，我们可以使用这个注释:</p>
@@ -235,21 +239,26 @@
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">checkVehicle</span><span class="hljs-params">()</span> </span>&#123;
     <span class="hljs-comment">// ...</span>
 &#125;</code></pre>
+
 <p>我们可以使用它在固定的时间间隔内执行一个方法，或者我们可以使用类似cron的表达式对其进行微调。</p>
-<p><code>@Scheduled</code>利用了Java 8的重复注释功能，这意味着我们可以用它多次标记一个方法:<br><pre><code class="hljs Java"><span class="hljs-meta">@Scheduled</span>(fixedRate = <span class="hljs-number">10000</span>)
+<p><code>@Scheduled</code>利用了Java 8的重复注释功能，这意味着我们可以用它多次标记一个方法:</p>
+<pre><code class="hljs Java"><span class="hljs-meta">@Scheduled</span>(fixedRate = <span class="hljs-number">10000</span>)
 <span class="hljs-meta">@Scheduled</span>(cron = <span class="hljs-string">"0 * * * * MON-FRI"</span>)
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">checkVehicle</span><span class="hljs-params">()</span> </span>&#123;
     <span class="hljs-comment">// ...</span>
-&#125;</code></pre></p>
+&#125;</code></pre>
+
 <p>注意，用@Scheduled注释的方法应该有一个空返回类型。</p>
 <p>此外，我们必须使这个注释的调度能够与@EnableScheduling或XML配置一起工作。</p>
-<h2 id="6-Schedules"><a href="#6-Schedules" class="headerlink" title="6. @Schedules"></a>6. @Schedules</h2><p>我们可以使用这个注释来指定多个<code>@Scheduled</code>规则:<br><pre><code class="hljs Java"><span class="hljs-meta">@Schedules</span>(&#123;
+<h2 id="6-Schedules"><a href="#6-Schedules" class="headerlink" title="6. @Schedules"></a>6. @Schedules</h2><p>我们可以使用这个注释来指定多个<code>@Scheduled</code>规则:</p>
+<pre><code class="hljs Java"><span class="hljs-meta">@Schedules</span>(&#123;
 <span class="hljs-meta">@Scheduled</span>(fixedRate = <span class="hljs-number">10000</span>),
 <span class="hljs-meta">@Scheduled</span>(cron = <span class="hljs-string">"0 * * * * MON-FRI"</span>)
 &#125;)
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">checkVehicle</span><span class="hljs-params">()</span> </span>&#123;
   <span class="hljs-comment">// ...</span>
-&#125;</code></pre></p>
+&#125;</code></pre>
+
 <p>注意，自从Java 8以来，我们可以通过上面描述的重复注释功能实现相同的功能。</p>
 <h2 id="7-结论"><a href="#7-结论" class="headerlink" title="7. 结论"></a>7. 结论</h2><p>在本文中，我们概述了最常见的Spring调度注释。</p>
 

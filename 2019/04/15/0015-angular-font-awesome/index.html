@@ -209,7 +209,7 @@
             <h1 style="display: none">Angular项目中集成Font Awesome图标</h1>
             
             <div class="markdown-body" id="post-body">
-              <p><img src="https://cdn.nlark.com/yuque/0/2019/png/269363/1555038251526-53b022c7-d2ea-4e41-adcd-dd4a4454c98b.png#align=left&amp;display=inline&amp;height=420&amp;name=%E7%B4%A0%E6%9D%90%E5%88%B6%E4%BD%9C.png&amp;originHeight=720&amp;originWidth=1280&amp;size=588090&amp;status=done&amp;width=746" srcset="/img/loading.gif" alt="素材制作.png"><br><br>通过三部操作就可以在Angular项目中使用Font Awesome图标：</p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2019/png/269363/1555038251526-53b022c7-d2ea-4e41-adcd-dd4a4454c98b.png#align=left&display=inline&height=420&name=%E7%B4%A0%E6%9D%90%E5%88%B6%E4%BD%9C.png&originHeight=720&originWidth=1280&size=588090&status=done&width=746" srcset="/img/loading.gif" alt="素材制作.png"><br><br>通过三部操作就可以在Angular项目中使用Font Awesome图标：</p>
 <ol>
 <li>安装</li>
 <li>样式配置</li>
@@ -218,22 +218,28 @@
 <p><a name="e655a410"></a></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>通过 <code>NPM</code> 安装，并保存到 <code>package.json</code> </p>
 <pre><code class="hljs undefined">npm install --<span class="hljs-built_in">save</span> <span class="hljs-built_in">font</span>-awesome</code></pre>
+
 <p><a name="9ae6f0a6"></a></p>
 <h1 id="配置样式-css"><a href="#配置样式-css" class="headerlink" title="配置样式 css"></a>配置样式 css</h1><p>在 <code>style.css</code> </p>
 <pre><code class="hljs css"><span class="hljs-keyword">@import</span> <span class="hljs-string">'~font-awesome/css/font-awesome.css'</span>;</code></pre>
+
 <p><a name="ca2b37d4"></a></p>
 <h1 id="配置样式-scss"><a href="#配置样式-scss" class="headerlink" title="配置样式 scss"></a>配置样式 scss</h1><p>在 <code>style.scss</code> </p>
 <pre><code class="hljs css">$fa-font-path: "../node_modules/font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome.scss';</code></pre>
+
 <p><a name="1e1072c7"></a></p>
 <h1 id="在Angular使用"><a href="#在Angular使用" class="headerlink" title="在Angular使用"></a>在Angular使用</h1><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"fa fa-area-chart"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span></code></pre>
+
 <p><a name="c7feb89a"></a></p>
 <h1 id="配合Angular-Material"><a href="#配合Angular-Material" class="headerlink" title="配合Angular Material"></a>配合Angular Material</h1><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppModule &#123;
   <span class="hljs-keyword">constructor</span>(<span class="hljs-params">matIconRegistry: MatIconRegistry</span>) &#123;
     matIconRegistry.registerFontClassAlias(<span class="hljs-string">'fontawesome'</span>, <span class="hljs-string">'fa'</span>);
   &#125;
 &#125;</code></pre>
+
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">mat-icon</span> <span class="hljs-attr">fontSet</span>=<span class="hljs-string">"fontawesome"</span> <span class="hljs-attr">fontIcon</span>=<span class="hljs-string">"fa-area-chart"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">mat-icon</span>&gt;</span></code></pre>
+
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                   <!-- 单元1 -->

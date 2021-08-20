@@ -218,11 +218,13 @@
 <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getEmployeesById</span><span class="hljs-params">(@PathVariable String id)</span> </span>&#123;
     <span class="hljs-keyword">return</span> <span class="hljs-string">"ID: "</span> + id;
 &#125;</code></pre>
+
 <p>在本例中，我们使用@PathVariable注解来提取由变量{id}表示的URI模板化部分。</p>
 <p>一个简单的GET请求<code>/api/employees/{id}</code>将调用getEmployeesById提取id值:</p>
 <pre><code class="hljs text">http://localhost:8080/api/employees/111
 ----
 ID: 111</code></pre>
+
 <p>现在，让我们进一步研究这个注解并查看它的属性。</p>
 <h2 id="3-指定路径变量名"><a href="#3-指定路径变量名" class="headerlink" title="3.指定路径变量名"></a>3.指定路径变量名</h2><p>在前面的示例中，我们跳过了定义模板路径变量的名称，因为方法参数的名称和路径变量的名称是相同的。</p>
 <p>但是，如果路径变量名称不同，我们可以在<code>@PathVariable</code>注解的参数中指定:</p>
@@ -231,9 +233,11 @@ ID: 111</code></pre>
 <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getEmployeesByIdWithVariableName</span><span class="hljs-params">(@PathVariable(<span class="hljs-string">"id"</span>)</span> String employeeId) </span>&#123;
     <span class="hljs-keyword">return</span> <span class="hljs-string">"ID: "</span> + employeeId;
 &#125;</code></pre>
+
 <pre><code class="hljs undefined"><span class="hljs-section">http://localhost:8080/api/employeeswithvariable/1
 ----</span>
 ID: 1</code></pre>
+
 <p>为了清晰起见，我们还可以将路径变量名定义为<code>@PathVariable(value= &quot;id&quot;)</code>，而不是<code>PathVariable(&quot;id&quot;)</code>。</p>
 <h2 id="4-单个请求中的多个路径变量"><a href="#4-单个请求中的多个路径变量" class="headerlink" title="4. 单个请求中的多个路径变量"></a>4. 单个请求中的多个路径变量</h2><p>根据用例，我们可以在控制器方法的请求URI中有多个路径变量，它也有多个方法参数:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">"/api/employees/&#123;id&#125;/&#123;name&#125;"</span>)
@@ -241,9 +245,11 @@ ID: 1</code></pre>
 <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getEmployeesByIdAndName</span><span class="hljs-params">(@PathVariable String id, @PathVariable String name)</span> </span>&#123;
     <span class="hljs-keyword">return</span> <span class="hljs-string">"ID: "</span> + id + <span class="hljs-string">", name: "</span> + name;
 &#125;</code></pre>
+
 <pre><code class="hljs undefined"><span class="hljs-section">http://localhost:8080/api/employees/1/bar
 ----</span>
 ID: 1, name: bar</code></pre>
+
 <p>我们还可以使用类型为<code>java.util.Map&lt;String, String &gt;</code>的方法参数处理多个<code>@PathVariable</code>参数:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">"/api/employeeswithmapvariable/&#123;id&#125;/&#123;name&#125;"</span>)
 <span class="hljs-meta">@ResponseBody</span>
@@ -256,15 +262,18 @@ ID: 1, name: bar</code></pre>
         <span class="hljs-keyword">return</span> <span class="hljs-string">"Missing Parameters"</span>;
     &#125;
 &#125;</code></pre>
+
 <pre><code class="hljs undefined"><span class="hljs-section">http://localhost:8080/api/employees/1/bar
 ----</span>
 ID: 1, name: bar</code></pre>
+
 <h2 id="5-可选路径变量"><a href="#5-可选路径变量" class="headerlink" title="5. 可选路径变量"></a>5. 可选路径变量</h2><p>在Spring中，使用<code>@PathVariable</code>注解的方法参数在默认情况下是必需的:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@GetMapping</span>(value = &#123; <span class="hljs-string">"/api/employeeswithrequired"</span>, <span class="hljs-string">"/api/employeeswithrequired/&#123;id&#125;"</span> &#125;)
 <span class="hljs-meta">@ResponseBody</span>
 <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getEmployeesByIdWithRequired</span><span class="hljs-params">(@PathVariable String id)</span> </span>&#123;
     <span class="hljs-keyword">return</span> <span class="hljs-string">"ID: "</span> + id;
 &#125;</code></pre>
+
 <p>从它的外观来看，上面的控制器应该同时处理<code>/api/employeeswithrequired</code>和<code>/api/employeeswithrequired/1</code>请求路径。但是，由于@PathVariables标注的方法参数在默认情况下是强制的，所以它不处理发送到<code>/api/employeeswithrequired</code>路径的请求:</p>
 <pre><code class="hljs undefined"><span class="hljs-section">http://localhost:8080/api/employeeswithrequired
 ----</span>
@@ -273,6 +282,7 @@ ID: 1, name: bar</code></pre>
 <span class="hljs-section">http://localhost:8080/api/employeeswithrequired/1
 ----</span>
 ID: 111</code></pre>
+
 <p>我们有两种处理方法。</p>
 <h3 id="5-1-将-PathVariable设置为不需要"><a href="#5-1-将-PathVariable设置为不需要" class="headerlink" title="5.1. 将@PathVariable设置为不需要"></a>5.1. 将@PathVariable设置为不需要</h3><p>我们可以将<code>@PathVariable</code>的必需属性设置为<code>false</code>，使其可选。因此，修改我们之前的例子，我们现在可以处理有和没有路径变量的URI版本:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@GetMapping</span>(value = &#123; <span class="hljs-string">"/api/employeeswithrequiredfalse"</span>, <span class="hljs-string">"/api/employeeswithrequiredfalse/&#123;id&#125;"</span> &#125;)
@@ -284,9 +294,11 @@ ID: 111</code></pre>
         <span class="hljs-keyword">return</span> <span class="hljs-string">"ID missing"</span>;
     &#125;
 &#125;</code></pre>
+
 <pre><code class="hljs undefined"><span class="hljs-section">http://localhost:8080/api/employeeswithrequiredfalse
 ----</span>
 ID missing</code></pre>
+
 <h3 id="5-2-使用java-util-Optional"><a href="#5-2-使用java-util-Optional" class="headerlink" title="5.2. 使用java.util.Optional"></a>5.2. 使用java.util.Optional</h3><p>从Spring 4.1开始，我们还可以使用<code>java.util.Optional&lt;T&gt;</code>(在Java 8+中可用)来处理一个非强制路径变量:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@GetMapping</span>(value = &#123; <span class="hljs-string">"/api/employeeswithoptional"</span>, <span class="hljs-string">"/api/employeeswithoptional/&#123;id&#125;"</span> &#125;)
 <span class="hljs-meta">@ResponseBody</span>
@@ -297,10 +309,12 @@ ID missing</code></pre>
         <span class="hljs-keyword">return</span> <span class="hljs-string">"ID missing"</span>;
     &#125;
 &#125;</code></pre>
+
 <p>现在，如果我们没有在请求中指定路径变量id，我们会得到默认响应:</p>
 <pre><code class="hljs undefined"><span class="hljs-section">http://localhost:8080/api/employeeswithoptional
 ----</span>
 ID missing</code></pre>
+
 <h3 id="5-3-使用类型为Map-lt-String-String-gt-的方法参数"><a href="#5-3-使用类型为Map-lt-String-String-gt-的方法参数" class="headerlink" title="5.3. 使用类型为Map&lt;String, String&gt;的方法参数"></a>5.3. 使用类型为Map&lt;String, String&gt;的方法参数</h3><p>如前面所示，我们可以使用<code>java.util.Map&lt;String, String&gt;</code>类型的单个方法参数。映射以处理请求URI中的所有路径变量。我们也可以使用这个策略来处理可选路径变量的情况:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@GetMapping</span>(value = &#123; <span class="hljs-string">"/api/employeeswithmap/&#123;id&#125;"</span>, <span class="hljs-string">"/api/employeeswithmap"</span> &#125;)
 <span class="hljs-meta">@ResponseBody</span>
@@ -312,6 +326,7 @@ ID missing</code></pre>
         <span class="hljs-keyword">return</span> <span class="hljs-string">"ID missing"</span>;
     &#125;
 &#125;</code></pre>
+
 <h2 id="6-PathVariable的默认值"><a href="#6-PathVariable的默认值" class="headerlink" title="6. @PathVariable的默认值"></a>6. @PathVariable的默认值</h2><p>在开箱即用的情况下，没有为用<code>@PathVariable</code>注解的方法参数定义默认值的规定。但是，我们可以使用上面讨论的相同策略来满足<code>@PathVariable</code>的默认值情况。我们只需要检查路径变量是否为null。</p>
 <p>例如，使用<code>java.util.Optional&lt;String&gt;</code>，我们可以确定路径变量是否为空。如果它是null，那么我们可以响应请求的默认值:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@GetMapping</span>(value = &#123; <span class="hljs-string">"/api/defaultemployeeswithoptional"</span>, <span class="hljs-string">"/api/defaultemployeeswithoptional/&#123;id&#125;"</span> &#125;)
@@ -323,6 +338,7 @@ ID missing</code></pre>
         <span class="hljs-keyword">return</span> <span class="hljs-string">"ID: Default Employee"</span>;
     &#125;
 &#125;</code></pre>
+
 <h2 id="7-结论"><a href="#7-结论" class="headerlink" title="7. 结论"></a>7. 结论</h2><p>在本文中，我们讨论了如何使用Spring的@PathVariable注解。我们还确定了有效使用<code>@PathVariable</code>注解来适应不同用例的各种方法，比如可选参数和处理默认值。</p>
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

@@ -212,12 +212,15 @@
               <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><code>webpack-bundle-analyzer</code>是一个前端分析工具，可以生成可视化大小的webpack输出文件与互动缩放树形图，为开发人员对Application进行优化提供更为直观的指导依据。</p>
 <h2 id="Angular集成webpack-bundle-analyzer"><a href="#Angular集成webpack-bundle-analyzer" class="headerlink" title="Angular集成webpack-bundle-analyzer"></a>Angular集成webpack-bundle-analyzer</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><code>webpack-bundle-analyzer</code>是一个开发者工具，实际发布的Application并不依赖于它，因此，我们需要将<code>webpack-bundle-analyzer</code>安装到<code>devDependencies</code>:</p>
 <pre><code class="hljs bash">npm i -D webpack-bundle-analyzer</code></pre>
+
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>修改package.json文件，在scripts中，增加新的执行命令：</p>
 <pre><code class="hljs json">"scripts": &#123;
   "bundle-report": "ng build --configuration=production --stats-json &amp;&amp; webpack-bundle-analyzer dist/stats.json"
 &#125;,</code></pre>
+
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>此时就可以使用新添加的命令对Angular Application进行分析了：</p>
 <pre><code class="hljs bash">npm run bundle-report</code></pre>
+
 <p><img src="https://cdn.nlark.com/yuque/0/2019/png/269363/1561538113639-assets/web-upload/c6b3fa2a-2b5f-44aa-b14b-27d5f1cbe0e8.png" srcset="/img/loading.gif" alt></p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>通过使用<code>webpack-bundle-analyzer</code>，我们可以直观的看到那些模块体积比较大，这样我们就可以有针对性的对其进行优化。对应Web应用来说，文件越小是越好的，性能也会更优。</p>
 

@@ -214,6 +214,7 @@
 <pre><code class="hljs undefined"><span class="hljs-string">zuul:</span>
     servlet-<span class="hljs-string">path:</span> /
     sensitive-<span class="hljs-string">headers:</span></code></pre>
+
 <p>在这种配置下，zuul对于后台其他restful服务进行的自动转发：</p>
 <p>如eureka中注册了a服务，当访问<code>/a/service</code>时，zuul自动将该请求转发到a服务上。</p>
 <p>通过修改配置，实现了静态资源的集成，配置如下：</p>
@@ -224,6 +225,7 @@
 <span class="hljs-symbol">    routes:</span>
 <span class="hljs-symbol">        a:</span> <span class="hljs-meta-keyword">/a/</span>**
 <span class="hljs-symbol">        b:</span> <span class="hljs-meta-keyword">/b/</span>**</code></pre>
+
 <p>禁用zuul的自动路由配置，通过指定路由，去掉<code>serlvet-path</code></p>
 <p>实现集成静态资源。</p>
 

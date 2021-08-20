@@ -209,11 +209,14 @@
             <h1 style="display: none">Keepalived 简单配置</h1>
             
             <div class="markdown-body" id="post-body">
-              <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>解压文件<br><pre><code class="hljs bash">tar -xvf keepalived-x.x.x.tar.gz</code></pre></p>
+              <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>解压文件</p>
+<pre><code class="hljs bash">tar -xvf keepalived-x.x.x.tar.gz</code></pre>
+
 <p>进入文件夹<code>keepalived-x.x.x</code></p>
 <pre><code class="hljs undefined">./configure
 
 <span class="hljs-built_in">make</span> &amp;&amp; <span class="hljs-built_in">make</span> install</code></pre>
+
 <p>在安装过程中需要注意以下几点：</p>
 <ul>
 <li>gcc环境</li>
@@ -225,9 +228,11 @@
 <span class="hljs-comment"># mkdir /etc/keepalived  </span>
 <span class="hljs-comment"># cp /usr/local/etc/keepalived/keepalived.conf /etc/keepalived/</span>
 <span class="hljs-comment"># cp /usr/local/sbin/keepalived /usr/sbin/</span></code></pre>
+
 <p>做成系统启动服务方便管理.</p>
 <pre><code class="hljs bash"><span class="hljs-comment"># vi /etc/rc.local   </span>
 /etc/init.d/keepalived start</code></pre>
+
 <p>增加上面一行。</p>
 <p>修改配置<code>/etc/keepalived/keepalived.conf</code></p>
 <pre><code class="hljs config">! Configuation File for keepalived
@@ -259,6 +264,7 @@ vrrp_instance VI_1 &#123;
         10.0.0.111   # 虚拟ip设置，可以是多个，主从一致
     &#125;
 &#125;</code></pre>
+
 <blockquote>
 <p>参考文档 <a href="http://wenku.baidu.com/view/8e38022d2af90242a895e532.html" target="_blank" rel="noopener">http://wenku.baidu.com/view/8e38022d2af90242a895e532.html</a></p>
 </blockquote>

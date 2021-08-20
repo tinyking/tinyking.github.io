@@ -219,6 +219,7 @@
     response.addHeader(<span class="hljs-string">"Baeldung-Example-Header"</span>, <span class="hljs-string">"Value-HttpServletResponse"</span>);
     <span class="hljs-keyword">return</span> <span class="hljs-string">"Response with header using HttpServletResponse"</span>;
 &#125;</code></pre>
+
 <p>如示例中所示，我们不必返回响应对象。</p>
 <h3 id="2-2-使用ResponseEntity"><a href="#2-2-使用ResponseEntity" class="headerlink" title="2.2. 使用ResponseEntity"></a>2.2. 使用ResponseEntity</h3><p>在这种情况下，让我们使用ResponseEntity类提供的BodyBuilder:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">"/response-entity-builder-with-http-headers"</span>)
@@ -231,6 +232,7 @@
       .headers(responseHeaders)
       .body(<span class="hljs-string">"Response with header using ResponseEntity"</span>);
 &#125;</code></pre>
+
 <p>HttpHeaders类提供了许多方便的方法来设置最常见的头信息。</p>
 <h3 id="2-3-为所有响应添加header"><a href="#2-3-为所有响应添加header" class="headerlink" title="2.3. 为所有响应添加header"></a>2.3. 为所有响应添加header</h3><p>现在假设我们想要为许多端点设置一个特定的头。</p>
 <p>当然，如果我们必须在每个映射方法上复制前面的代码，那将是令人沮丧的。</p>
@@ -257,6 +259,7 @@
         <span class="hljs-comment">// ...</span>
     &#125;
 &#125;</code></pre>
+
 <p>@WebFilter注释允许我们指出这个过滤器将对哪些urlPatterns有效。</p>
 <p>正如我们在本文中指出的，为了让我们的过滤器被Spring发现，我们需要在Spring应用程序类中添加@ServletComponentScan注释:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@ServletComponentScan</span>
@@ -267,6 +270,7 @@
         SpringApplication.run(ResponseHeadersApplication<span class="hljs-class">.<span class="hljs-keyword">class</span>, <span class="hljs-title">args</span>)</span>;
     &#125;
 &#125;</code></pre>
+
 <p>如果我们不需要@WebFilter提供的任何功能，我们可以通过在过滤器类中使用@Component注释来避免这最后一步。</p>
 <h2 id="3-响应性header"><a href="#3-响应性header" class="headerlink" title="3.响应性header"></a>3.响应性header</h2><p>同样，我们将看到如何使用ServerHttpResponse、ResponseEntity或ServerResponse(针对功能性端点)类和接口在单个端点响应上设置报头。</p>
 <p>我们还将学习如何实现一个Spring 5 WebFilter来在所有的响应中添加一个头。</p>
@@ -276,6 +280,7 @@
     response.getHeaders().add(<span class="hljs-string">"Baeldung-Example-Header"</span>, <span class="hljs-string">"Value-ServerHttpResponse"</span>);
     <span class="hljs-keyword">return</span> Mono.just(<span class="hljs-string">"Response with header using ServerHttpResponse"</span>);
 &#125;</code></pre>
+
 <h3 id="3-2-使用ResponseEntity"><a href="#3-2-使用ResponseEntity" class="headerlink" title="3.2. 使用ResponseEntity"></a>3.2. 使用ResponseEntity</h3><p>我们可以使用ResponseEntity类，就像我们做的非反应端点:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">"/response-entity"</span>)
 <span class="hljs-keyword">public</span> Mono&lt;ResponseEntity&lt;String&gt;&gt; usingResponseEntityBuilder() &#123;
@@ -287,6 +292,7 @@
       .header(responseHeaderKey, responseHeaderValue)
       .body(responseBody));
 &#125;</code></pre>
+
 <h3 id="3-3-使用-ServerResponse"><a href="#3-3-使用-ServerResponse" class="headerlink" title="3.3. 使用 ServerResponse"></a>3.3. 使用 ServerResponse</h3><p>最后两小节中介绍的类和接口可以在@Controller注释类中使用，但不适合新的Spring 5 Functional Web框架。</p>
 <p>如果我们想在HandlerFunction上设置一个头，那么我们需要得到ServerResponse接口:</p>
 <pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> Mono&lt;ServerResponse&gt; <span class="hljs-title">useHandler</span><span class="hljs-params">(<span class="hljs-keyword">final</span> ServerRequest request)</span> </span>&#123;
@@ -294,6 +300,7 @@
         .header(<span class="hljs-string">"Baeldung-Example-Header"</span>, <span class="hljs-string">"Value-Handler"</span>)
         .body(Mono.just(<span class="hljs-string">"Response with header using Handler"</span>),String<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>;
 &#125;</code></pre>
+
 <h3 id="3-4-为所有响应添加header"><a href="#3-4-为所有响应添加header" class="headerlink" title="3.4. 为所有响应添加header"></a>3.4. 为所有响应添加header</h3><p>最后，Spring 5提供了一个WebFilter接口来为服务检索到的所有响应设置一个头:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@Component</span>
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddResponseHeaderWebFilter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">WebFilter</span> </span>&#123;
@@ -306,6 +313,7 @@
         <span class="hljs-keyword">return</span> chain.filter(exchange);
     &#125;
 &#125;</code></pre>
+
 <h2 id="4-结论"><a href="#4-结论" class="headerlink" title="4. 结论"></a>4. 结论</h2><p>总之,我们学到许多不同的方式设置一个头的反应,如果我们想要把它放在一个端点或如果我们想配置所有rest api,即使我们迁移活性堆栈,现在我们有知识做所有这些事情。</p>
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

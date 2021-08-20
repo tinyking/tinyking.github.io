@@ -218,18 +218,25 @@
 </ul>
 <p>Angular CLI提供了一种环境功能，允许运行针对特定环境的构建。 例如，以下是如何运行生产构建：</p>
 <pre><code class="hljs undefined">ng build --env=<span class="hljs-keyword">prod</span>   <span class="hljs-comment">// For Angular 2 to 5</span></code></pre>
-<p>在升级到Angular 6+后，构建命令如下：<br><pre><code class="hljs undefined">ng build <span class="hljs-attribute">--configuration</span>=production</code></pre></p>
-<p>上面代码中的prod标志是指v6之前的.angular-cli.json的环境部分的prod（v6+则是production）属性。<br>默认情况下有两个选项：dev和prod<br><pre><code class="hljs json">"environments": &#123;
+
+<p>在升级到Angular 6+后，构建命令如下：</p>
+<pre><code class="hljs undefined">ng build <span class="hljs-attribute">--configuration</span>=production</code></pre>
+
+<p>上面代码中的prod标志是指v6之前的.angular-cli.json的环境部分的prod（v6+则是production）属性。<br>默认情况下有两个选项：dev和prod</p>
+<pre><code class="hljs json">"environments": &#123;
   "dev": "environments/environment.ts",
   "prod": "environments/environment.prod.ts"
-&#125;</code></pre></p>
+&#125;</code></pre>
+
 <p>您可以在此处添加所需的环境。 例如，如果您需要QA构建选项，只需在.angular-cli.json中添加以下条目：</p>
 <pre><code class="hljs json">"environments": &#123;
   "dev": "environments/environment.ts",
   "prod": "environments/environment.prod.ts",
   "qa": "environments/environment.qa.ts"
 &#125;</code></pre>
-<p>对于v6 +，angular.json environments现在称为configurations。 以下是在v6之后添加新qa环境的方法：<br><pre><code class="hljs json">"configurations": &#123;
+
+<p>对于v6 +，angular.json environments现在称为configurations。 以下是在v6之后添加新qa环境的方法：</p>
+<pre><code class="hljs json">"configurations": &#123;
   "production": &#123; ... &#125;,
   "qa": &#123;
     "fileReplacements": [
@@ -239,30 +246,39 @@
       &#125;
     ]
   &#125;
-&#125;</code></pre></p>
+&#125;</code></pre>
+
 <p>然后，您必须在environments目录中创建实际文件environment.qa.ts。</p>
-<p>下面是默认的dev配置：<br><pre><code class="hljs undefined">// The file contents for the current environment will overwrite these during <span class="hljs-keyword">build</span>.
+<p>下面是默认的dev配置：</p>
+<pre><code class="hljs undefined">// The file contents for the current environment will overwrite these during <span class="hljs-keyword">build</span>.
 // The <span class="hljs-keyword">build</span> <span class="hljs-keyword">system</span> defaults <span class="hljs-keyword">to</span> the dev environment which uses <span class="hljs-symbol">`environment.ts`</span>, but <span class="hljs-keyword">if</span> you <span class="hljs-keyword">do</span>
 // <span class="hljs-symbol">`ng build --env=prod`</span> <span class="hljs-keyword">then</span> <span class="hljs-symbol">`environment.prod.ts`</span> will be used instead.
 // The list of which env maps <span class="hljs-keyword">to</span> which file can be found <span class="hljs-keyword">in</span> <span class="hljs-symbol">`.angular-cli.json`</span>.
 export const environment = &#123;
   production: <span class="hljs-literal">false</span>
-&#125;;</code></pre></p>
-<p>您可以在上面的environment对象中添加任何特定于环境的属性。 例如，让我们添加一个服务器URL：<br><pre><code class="hljs undefined"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> environment = &#123;
+&#125;;</code></pre>
+
+<p>您可以在上面的environment对象中添加任何特定于环境的属性。 例如，让我们添加一个服务器URL：</p>
+<pre><code class="hljs undefined"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> environment = &#123;
   production: <span class="hljs-literal">false</span>,
   serverUrl: <span class="hljs-string">"http://dev.server.mycompany.com"</span>
-&#125;;</code></pre></p>
-<p>然后，您需要做的就是为QA提供不同的URL，即在environment.qa.ts中定义具有正确值的相同属性：<br><pre><code class="hljs undefined"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> environment = &#123;
+&#125;;</code></pre>
+
+<p>然后，您需要做的就是为QA提供不同的URL，即在environment.qa.ts中定义具有正确值的相同属性：</p>
+<pre><code class="hljs undefined"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> environment = &#123;
   production: <span class="hljs-literal">false</span>,
   serverUrl: <span class="hljs-string">"http://qa.server.mycompany.com"</span>
-&#125;;</code></pre></p>
-<p>既然已经定义了您的环境，那么如何在代码中使用这些属性？ 很简单，您只需要导入环境对象，如下所示：<br><pre><code class="hljs undefined"><span class="hljs-keyword">import</span> &#123;environment&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'../../environments/environment'</span>;
+&#125;;</code></pre>
+
+<p>既然已经定义了您的环境，那么如何在代码中使用这些属性？ 很简单，您只需要导入环境对象，如下所示：</p>
+<pre><code class="hljs undefined"><span class="hljs-keyword">import</span> &#123;environment&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'../../environments/environment'</span>;
 
 
 @Injectable()
 <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AuthService</span> &#123;</span>
 
-  <span class="hljs-name">LOGIN_URL</span>: <span class="hljs-built_in">string</span> = environment.serverUrl + <span class="hljs-string">'/login'</span> ;</code></pre></p>
+  <span class="hljs-name">LOGIN_URL</span>: <span class="hljs-built_in">string</span> = environment.serverUrl + <span class="hljs-string">'/login'</span> ;</code></pre>
+
 <p>然后，当您运行QA构建时，Angular CLI将使用environment.qa.ts来读取environment.serverUrl属性值，并且您已设置为将该构建部署到QA环境。</p>
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

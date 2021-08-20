@@ -211,23 +211,32 @@
             <div class="markdown-body" id="post-body">
               <h1 id="TypeScript编码指南"><a href="#TypeScript编码指南" class="headerlink" title="TypeScript编码指南"></a>TypeScript编码指南</h1><p><img src="https://cdn.pixabay.com/photo/2016/10/20/08/39/business-1754904_960_720.jpg" srcset="/img/loading.gif" alt></p>
 <h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><ol>
-<li>使用 <code>PascalCase</code> 方式对类进行命名.</li>
-<li>接口命名中不要使用前缀字母 <code>I</code> .</li>
-<li>使用 <code>PascalCase</code> 方式对枚举值进行命名.</li>
-<li>使用 <code>camelCase</code> 方式对函数进行命名.</li>
-<li>使用 <code>camelCase</code> 方式对属性和本地变量进行命名.</li>
-<li>私有属性命名不要使用前缀 <code>_</code> .</li>
+<li><p>使用 <code>PascalCase</code> 方式对类进行命名.</p>
+</li>
+<li><p>接口命名中不要使用前缀字母 <code>I</code> .</p>
+</li>
+<li><p>使用 <code>PascalCase</code> 方式对枚举值进行命名.</p>
+</li>
+<li><p>使用 <code>camelCase</code> 方式对函数进行命名.</p>
+</li>
+<li><p>使用 <code>camelCase</code> 方式对属性和本地变量进行命名.</p>
+</li>
+<li><p>私有属性命名不要使用前缀 <code>_</code> .</p>
+</li>
 <li><p>尽可能在命名中使用整个单词 .</p>
 <h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a><a href="https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines#components" target="_blank" rel="noopener"></a>组件</h2></li>
 <li><p>每个逻辑组件一个文件 (例如： parser, scanner, emitter, checker).</p>
 </li>
-<li>不要添加新文件. :)</li>
+<li><p>不要添加新文件. :)</p>
+</li>
 <li><p>带有”.generated.*”后缀的文件是自动生成的，不要手动去修改.</p>
 <h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a><a href="https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines#types" target="_blank" rel="noopener"></a>类型</h2></li>
 <li><p>除非您需要跨多个组件共享，否则不要导出类型/函数.</p>
 </li>
-<li>不要向全局命名空间引入新类型/值.</li>
-<li>共享类型应在 <code>types.ts</code> 中定义.</li>
+<li><p>不要向全局命名空间引入新类型/值.</p>
+</li>
+<li><p>共享类型应在 <code>types.ts</code> 中定义.</p>
+</li>
 <li><p>在文件中，应首先输入类型定义.</p>
 <h2 id="null-和-undefined"><a href="#null-和-undefined" class="headerlink" title="null 和 undefined"></a><a href="https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines#null-and-undefined" target="_blank" rel="noopener"></a><code>null</code> 和 <code>undefined</code></h2></li>
 <li><p>使用 <code>undefined</code> , 不要使用 <code>null</code> .</p>

@@ -239,9 +239,12 @@
     <span class="hljs-keyword">return</span> <span class="hljs-string">`第<span class="hljs-subst">$&#123;startIndex + <span class="hljs-number">1</span>&#125;</span>-<span class="hljs-subst">$&#123;endIndex&#125;</span>条, 总共<span class="hljs-subst">$&#123;length&#125;</span>条`</span>;
   &#125;
 &#125;</code></pre>
-<p>在<code>app.module.ts</code>中声明该Provider：<br><pre><code class="hljs typescript">providers: [
+
+<p>在<code>app.module.ts</code>中声明该Provider：</p>
+<pre><code class="hljs typescript">providers: [
    &#123;provide: MatPaginatorIntl, useClass: MatPaginatorIntlCro &#125;
-   ]</code></pre></p>
+   ]</code></pre>
+
 <p>这样在再使用分页组件时，相关信息将显示中文。</p>
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

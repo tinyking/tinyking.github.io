@@ -230,6 +230,7 @@
         <span class="hljs-keyword">return</span> threadId.get();
     &#125;
 &#125;</code></pre>
+
 <p>在此例子中，直接使用<code>initialValue</code>的方法为实例进行数据初始化，实现每个线程在使用的过程中，都能获取一个单独的id。</p>
 <pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadIdRunnable</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>&#123;
     <span class="hljs-meta">@Override</span>
@@ -238,14 +239,18 @@
         System.out.println(<span class="hljs-string">"Thread name is "</span> + name + <span class="hljs-string">", threadId is "</span> + get());
     &#125;
 &#125;</code></pre>
+
 <pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
     Thread t1 = <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> ThreadIdRunnable());
     Thread t2 = <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> ThreadIdRunnable());
     t1.start();
     t2.start();
 &#125;</code></pre>
-<p>执行结果：<br><pre><code class="hljs undefined">Thread <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</span> Thread<span class="hljs-number">-0</span>, threadId <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
-Thread <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</span> Thread<span class="hljs-number">-1</span>, threadId <span class="hljs-keyword">is</span> <span class="hljs-number">1</span></code></pre></p>
+
+<p>执行结果：</p>
+<pre><code class="hljs undefined">Thread <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</span> Thread<span class="hljs-number">-0</span>, threadId <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+Thread <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</span> Thread<span class="hljs-number">-1</span>, threadId <span class="hljs-keyword">is</span> <span class="hljs-number">1</span></code></pre>
+
 <h3 id="2-2-应用场景"><a href="#2-2-应用场景" class="headerlink" title="2.2 应用场景"></a>2.2 应用场景</h3><p>日常开发过程中，应用的场景也是比较多。比如：</p>
 <ul>
 <li>request的请求处理的过程中，需要在不同的方法中使用用户的登录信息。</li>
@@ -261,6 +266,7 @@ Thread <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</sp
         value = v;
     &#125;
 &#125;</code></pre>
+
 <p>总结一下就是，ThreadLocal是由一个名为ThreadLocalMap的哈希映射。哈希映射是由继承了索引用的Entry对象组成的数组。</p>
 <h3 id="3-2-hash计算"><a href="#3-2-hash计算" class="headerlink" title="3.2 hash计算"></a>3.2 hash计算</h3><p>ThreadLocal中的hash和平时创建类的hash code是有区别的。平时创建类时，都是通过重写hashCode方法。</p>
 <p>在ThreadLocal直接使用了一个final变量threadLocalHashCode来表示ThreadLocal实例的hash值，以此值参与后面的逻辑处理。使用AtomicInteger来处理线程安全的问题。</p>
@@ -287,6 +293,7 @@ Thread <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</sp
 <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">nextHashCode</span><span class="hljs-params">()</span> </span>&#123;
     <span class="hljs-keyword">return</span> nextHashCode.getAndAdd(HASH_INCREMENT);
 &#125;</code></pre>
+
 <h2 id="4-线程安全"><a href="#4-线程安全" class="headerlink" title="4. 线程安全"></a>4. 线程安全</h2><p>ThreadLocal本身并不存储数据，数据实际是存储在使用它的Thread中的。</p>
 <pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">set</span><span class="hljs-params">(T value)</span> </span>&#123;
     Thread t = Thread.currentThread();
@@ -304,6 +311,7 @@ Thread <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</sp
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">createMap</span><span class="hljs-params">(Thread t, T firstValue)</span> </span>&#123;
     t.threadLocals = <span class="hljs-keyword">new</span> ThreadLocalMap(<span class="hljs-keyword">this</span>, firstValue);
 &#125;</code></pre>
+
 <p>同过为每个线程创建一个独立的ThreadLocalMap，实现数据的多线程隔离。</p>
 <h2 id="5-内存泄漏"><a href="#5-内存泄漏" class="headerlink" title="5. 内存泄漏"></a>5. 内存泄漏</h2><h3 id="5-1-什么是内存泄漏"><a href="#5-1-什么是内存泄漏" class="headerlink" title="5.1 什么是内存泄漏"></a>5.1 什么是内存泄漏</h3><p>内存泄漏（Memory Leak）是指程序中已动态分配的堆内存由于某种原因程序未释放或无法释放，造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。</p>
 <h3 id="5-2-ThreadLocal的内存泄漏"><a href="#5-2-ThreadLocal的内存泄漏" class="headerlink" title="5.2 ThreadLocal的内存泄漏"></a>5.2 ThreadLocal的内存泄漏</h3><p>很多文章中提到了使用ThreadLocal，可能会产生内存泄漏的，这是为什么呢？</p>
@@ -312,7 +320,9 @@ Thread <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</sp
 <p>我们知道线程资源是比较昂贵的，为了减少线程创建的开销，引入了池化技术。线程池有效的解决了复用的问题，减少频繁创建线程的问题。常用的池化技术有线程池，数据库连接池等等。</p>
 <p>但是线程池的复用线程复用也引来了新的问题，那就是线程的生命周期被无限拉长。也就是说ThreadLocalMap也不会被回收了。同一线程不断的使用不同的ThreadLocal实例，而value不释放，从而产生内存泄漏。</p>
 <p>可能有人会说，Entry是实现了WeakReference的，而弱引用在GC的时候会强制被回收的。没错，对于弱引用的确是在GC的时候会被回收的，但是Entry的key是ThreadLocal实例的所引用，也就是或在ThreadLocal实例只有Entry持有的时候，不会产生内存泄漏。</p>
-<p>在实际使用ThreadLocal的过程中，会将其创建为静态变量：<br><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> ThreadLocal&lt;Integer&gt; threadId</code></pre></p>
+<p>在实际使用ThreadLocal的过程中，会将其创建为静态变量：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> ThreadLocal&lt;Integer&gt; threadId</code></pre>
+
 <p>此时是强引用，在JVM的GC算法中，如果一个对象有它的强引用存在就不会被回收。</p>
 <h3 id="5-3-如何避免"><a href="#5-3-如何避免" class="headerlink" title="5.3 如何避免"></a>5.3 如何避免</h3><p>ThreadLocal提供了remove方法，用来使用value资源。为了避免内存蝎落，需要在线程的业务逻辑结束的时候，主动的调用remove。</p>
 <pre><code class="hljs java"><span class="hljs-comment">/**
@@ -332,6 +342,7 @@ Thread <span class="hljs-built_in">name</span> <span class="hljs-keyword">is</sp
         &#125;
     &#125;
 &#125;</code></pre>
+
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                   <!-- 单元1 -->

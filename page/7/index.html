@@ -241,18 +241,21 @@ Spring Boot:旨在简化创建产品级的 Spring 应用和服务，简化了配
           
             
           
-          安装解压文件tar -xvf keepalived-x.x.x.tar.gz
+          安装解压文件
+tar -xvf keepalived-x.x.x.tar.gz
+
 进入文件夹keepalived-x.x.x
 ./configure
 
 make &amp;&amp; make install
+
 在安装过程中需要注意以下几点：
 
 gcc环境
 openssl环境
 root权限
 
-配置# cp /usr/local/etc/rc.d/init.d/keepalived /etc/rc.d/i
+配置# cp /usr/local/etc/rc.d/init.d/keepalived /etc/rc.
         </a>
       </p>
 
@@ -363,12 +366,16 @@ root权限
           
             
           
-          Linux打开/etc/profile, 添加如下代码：export JAVA_HOME=/opt/jdk
+          Linux打开/etc/profile, 添加如下代码：
+export JAVA_HOME=/opt/jdk
 export JRE_HOME=$JAVA_HOME/jre
 export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib
 export PATH=$JAVA_HOME/bin:$PATH
-执行代码，使配置生效source /etc/profile
-安装命令
+
+执行代码，使配置生效
+source /etc/profile
+
+
         </a>
       </p>
 
@@ -422,9 +429,11 @@ export PATH=$JAVA_HOME/bin:$PATH
             
           
           背景JavaScript是一种客户端脚本语言，Web工程都会用到它，这份指南列出了编写JavaScript时需要遵守的规则。
-JavaScript语言规范变量声明变量必须加上var关键字:var a1 = 1;
+JavaScript语言规范变量声明变量必须加上var关键字:
+var a1 = 1;
 var b1 = 11;
-当你没有写var，变量就会暴露在全局上下文中，这样很可能会和现有的变量冲突。另外，如果没有加上，很难明确该变量的作用域是什么，变量很可能在局部作用域中，很容易泄漏
+
+当你没有写var，变量就会暴露在全局上下文中，这样很可能会和现有的变量冲突。另外，如果没有加上，很难明确该变量的作用域是什么，变量很可能在局部作用域中，很容易
         </a>
       </p>
 
@@ -538,7 +547,8 @@ var b1 = 11;
             
           
           不论使用Linux开发，还是使用Linux生产，都不可避免环境变量的配置。通常都是去修改系统文件：/etc/profile, /etc/enviroment, ~/.bashrc, ~/.profile等等，在这些文件的末尾export上自己想要添加的环境变量，source一下该文件，配置就立刻生效了。
-今天通过阅读/etc/profile文件：# /etc/profile: system-wid
+今天通过阅读/etc/profile文件：
+# /etc/profile: system-wi
         </a>
       </p>
 
@@ -591,11 +601,14 @@ var b1 = 11;
           
             
           
-          方法1： 用SET PASSWORD命令　　mysql -u root
+          方法1： 用SET PASSWORD命令
+　　mysql -u root
 　　mysql&gt; SET PASSWORD FOR 'root'@'localhost' = PASSWORD('newpass');
-方法2：用mysqladmin　　mysqladmin -u root password "newpass"
+
+方法2：用mysqladmin
+　　mysqladmin -u root password "newpass"
 　　如果root已经设置过密码，采用如下方法
-　　mysqladmin -u
+　　mysqladmin
         </a>
       </p>
 

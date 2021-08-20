@@ -223,10 +223,13 @@
 <pre><code class="hljs undefined"><span class="hljs-built_in">npm</span> install -g @angular/cli
 ng <span class="hljs-keyword">new</span> angular-electron
 cd angular-electron</code></pre>
+
 <h1 id="Update-index-html"><a href="#Update-index-html" class="headerlink" title="Update index.html"></a>Update index.html</h1><p>The generated root page in Angular points the base href to <code>/</code> - this will cause problems with Electron later on, so let’s update it now. Just add a period in front of the slash in <code>src/index.html</code>.</p>
 <pre><code class="hljs undefined">&lt;base <span class="hljs-attribute">href</span>=<span class="hljs-string">"./"</span>&gt;</code></pre>
+
 <h1 id="Install-Electron"><a href="#Install-Electron" class="headerlink" title="Install Electron"></a>Install Electron</h1><p>You can install Electron in the Angular development environment.</p>
 <pre><code class="hljs undefined">npm install electron --<span class="hljs-built_in">save</span>-<span class="hljs-built_in">dev</span></code></pre>
+
 <h1 id="Configure-Electron"><a href="#Configure-Electron" class="headerlink" title="Configure Electron"></a>Configure Electron</h1><p>The next step is to configure Electron. There are all sorts of possibilities for customization and we’re just scratching the surface.</p>
 <h1 id="main-js"><a href="#main-js" class="headerlink" title="main.js"></a>main.js</h1><p>Create a new file named main.js in the root of your project - this is the Electron NodeJS backend. This is the entry point for Electron and defines how our desktop app will react to various events performed via the desktop operating system.</p>
 <p>The createWindow function defines the properties of the program window that the user will see. There are many more window options that faciliate additional customization, child windows, modals, etc.</p>
@@ -274,6 +277,7 @@ app.on(<span class="hljs-string">'activate'</span>, <span class="hljs-function">
     createWindow()
   &#125;
 &#125;)</code></pre>
+
 <p>That’s it for the Electron setup, all the desktop app magic is happens under the hood.</p>
 <h1 id="Custom-Build-Command"><a href="#Custom-Build-Command" class="headerlink" title="Custom Build Command"></a>Custom Build Command</h1><p>The deployed desktop app will be an Angular AOT build - this happens by default when you run ng build –prod. It’s useful to have a command that will run an AOT production build and start Electron at the same time. This can be easily configured in the package.json file.</p>
 <h1 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h1><pre><code class="hljs json">&#123;
@@ -293,8 +297,10 @@ app.on(<span class="hljs-string">'activate'</span>, <span class="hljs-function">
   &#125;,
 
 &#125;</code></pre>
+
 <h1 id="Run-the-command"><a href="#Run-the-command" class="headerlink" title="Run the command"></a>Run the command</h1><p>You can run your angular app as an native desktop app with the following command.</p>
 <pre><code class="hljs undefined">npm <span class="hljs-keyword">run</span><span class="bash"> electron-build</span></code></pre>
+
 <p>At this point, you can run the command (it will take a few seconds) and it will create the dist/ folder and will automatically bring up a window on your operating system with default Angular app.</p>
 <p>This setup does not support hot code reloads. Whenever you change some Angular code, you need to rerun the electron-build command. It is possible to setup hot reloads by pointing the window to a remote URL (such as <a href="https://localhost:4200" target="_blank" rel="noopener">https://localhost:4200</a>) and running ng serve in a separate terminal.</p>
 <h1 id="Building-the-Angular-App"><a href="#Building-the-Angular-App" class="headerlink" title="Building the Angular App"></a>Building the Angular App</h1><p>Now we need to build an Angular App that’s worthy of being installed. I am building a single page timer that will animate a progress circle, then make a chime sound when complete.</p>
@@ -302,6 +308,7 @@ app.on(<span class="hljs-string">'activate'</span>, <span class="hljs-function">
 <p>To keep things super simple, I am writing all the code in the app.component</p>
 <h1 id="Install-Round-Progress-Bar"><a href="#Install-Round-Progress-Bar" class="headerlink" title="Install Round Progress Bar"></a>Install Round Progress Bar</h1><p>To get the progress timer looking good quickly, I installed the angular-svg-round-progressbar package. It gives us a pre-built component that we can animate based on the current state of the timer.</p>
 <pre><code class="hljs undefined">npm <span class="hljs-keyword">install</span> angular-svg-<span class="hljs-keyword">round</span>-progressbar <span class="hljs-comment">--save</span></code></pre>
+
 <p>Then add it to the app.module.ts (also add the FormsModule).</p>
 <pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; BrowserModule &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;
 <span class="hljs-keyword">import</span> &#123; NgModule &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
@@ -324,6 +331,7 @@ app.on(<span class="hljs-string">'activate'</span>, <span class="hljs-function">
   bootstrap: [AppComponent]
 &#125;)
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppModule &#123; &#125;</code></pre>
+
 <h1 id="app-component-ts"><a href="#app-component-ts" class="headerlink" title="app.component.ts"></a>app.component.ts</h1><p>The app works by allowing the user to set the number of seconds the timer will run max. The timer progresses by running an RxJS Observable interval every 10th of a second and incrementing the current value.</p>
 <p>I also defined several getters help deal with NaN values that can cause errors in the progress circle. They also help keep the HTML logic clean and readable.</p>
 <pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; Component, OnInit &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
@@ -379,6 +387,7 @@ app.on(<span class="hljs-string">'activate'</span>, <span class="hljs-function">
   &#125;
 
 &#125;</code></pre>
+
 <h1 id="app-component-html"><a href="#app-component-html" class="headerlink" title="app.component.html"></a>app.component.html</h1><p>In the HTML, we can declare the progress component and display the user interface elements conditionally based on the state of the timer.</p>
 <pre><code class="hljs HTML"><span class="hljs-tag">&lt;<span class="hljs-name">main</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"content"</span>&gt;</span>
 
@@ -418,15 +427,19 @@ app.on(<span class="hljs-string">'activate'</span>, <span class="hljs-function">
 
 
 <span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span></code></pre>
+
 <h1 id="Packaging-for-Desktop-Operating-Systems"><a href="#Packaging-for-Desktop-Operating-Systems" class="headerlink" title="Packaging for Desktop Operating Systems"></a>Packaging for Desktop Operating Systems</h1><p>Now that we have a decent app ready for desktops, we need to package and distribute it. The electron packager tool will allow to package our code into an executable for desktop platforms - including Windows (win32), MacOS (darwin), and Linux. Keep in mind, there are several other electron packaging tools that might better fit your needs.</p>
 <pre><code class="hljs xml">npm install electron-packager -g
 npm install electron-packager --save-dev</code></pre>
+
 <p>Linux and MacOS developers will need to install WineHQ if they plan on building desktop apps for Windows.</p>
 <p>In this example, I am going to build an executable for Windows.</p>
 <pre><code class="hljs undefined">electron-packager . <span class="hljs-attribute">--platform</span>=win32</code></pre>
+
 <p>This will generate a directory /angular-electron-win32-x64/ that contains the executable file.</p>
 <p>And why not build one for MacOS while we’re at it.</p>
 <pre><code class="hljs undefined">electron-packager . <span class="hljs-attribute">--platform</span>=darwin</code></pre>
+
 <p>This will generate a directory /angular-electron-darwin-x64/ that contains the app. Zip it and extract it on a mac system and you should be able to run it natively. You will get warnings that it’s from an unknown developer, but this is expected and it’s perfectly safe to open - it’s your own code after all.</p>
 <h1 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h1><p>That’s it for the basic setup with Electron with Angular. In the future, I will post some more advanced examples of these technologies in action.</p>
 

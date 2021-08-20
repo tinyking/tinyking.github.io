@@ -210,7 +210,8 @@
             
             <div class="markdown-body" id="post-body">
               <p>不论使用Linux开发，还是使用Linux生产，都不可避免环境变量的配置。通常都是去修改系统文件：<code>/etc/profile</code>, <code>/etc/enviroment</code>, <code>~/.bashrc</code>, <code>~/.profile</code>等等，在这些文件的末尾<code>export</code>上自己想要添加的环境变量，<code>source</code>一下该文件，配置就立刻生效了。</p>
-<p>今天通过阅读<code>/etc/profile</code>文件：<br><pre><code class="hljs bash"><span class="hljs-comment"># /etc/profile: system-wide .profile file for the Bourne shell (sh(1))</span>
+<p>今天通过阅读<code>/etc/profile</code>文件：</p>
+<pre><code class="hljs bash"><span class="hljs-comment"># /etc/profile: system-wide .profile file for the Bourne shell (sh(1))</span>
 <span class="hljs-comment"># and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).</span>
 
 <span class="hljs-keyword">if</span> [ <span class="hljs-string">"`id -u`"</span> -eq 0 ]; <span class="hljs-keyword">then</span>
@@ -243,7 +244,8 @@
     <span class="hljs-keyword">fi</span>
   <span class="hljs-keyword">done</span>
   <span class="hljs-built_in">unset</span> i
-<span class="hljs-keyword">fi</span></code></pre></p>
+<span class="hljs-keyword">fi</span></code></pre>
+
 <p>发现最后一个<code>for</code>循环，其作用是搜用<code>/etc/profile.d</code>下的所有的<code>.sh</code>结尾的可执行文件，并运行。<br>因此，我们就可以根据不同的功能编写不同的可执行文件，将他们放到<code>/etc/profile.d</code>下，如<code>jdk.sh</code>，<code>ant.sh</code>，<code>maven.sh</code>等等。</p>
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

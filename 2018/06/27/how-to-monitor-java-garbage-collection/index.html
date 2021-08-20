@@ -235,6 +235,7 @@ S0C       S1C       S0U    S1U      EC         EU          OC         OU        
 <span class="hljs-number">3008.0</span>   <span class="hljs-number">3072.0</span>    <span class="hljs-number">0.0</span>     <span class="hljs-number">1511.1</span>   <span class="hljs-number">343360.0</span>   <span class="hljs-number">47793.0</span>     <span class="hljs-number">699072.0</span>   <span class="hljs-number">283690.2</span>   <span class="hljs-number">75392.0</span>    <span class="hljs-number">41064.3</span>    <span class="hljs-number">2540</span>    <span class="hljs-number">18.454</span>    <span class="hljs-number">4</span>      <span class="hljs-number">1.133</span>    <span class="hljs-number">19.588</span>
 
 $&gt;</code></pre>
+
 <p>Just like in the example, the real type data will be output along with the following columns:</p>
 <p><strong><code>S0C    S1C     S0U     S1U    EC     EU     OC     OU     PC</code></strong>.</p>
 <p><strong>vmid</strong> (Virtual Machine ID), as its name implies, is the ID for the VM. Java applications running either on a local machine or on a remote machine can be specified using vmid. The vmid for Java application running on a local machine is called <strong>lvmid</strong> (Local vmid), and usually is PID. To find out the lvmid, you can write the PID value using a <strong>ps</strong> command or Windows task manager, but we suggest <strong>jps</strong> because PID and lvmid does not always match. <strong>jps</strong> stands for Java PS. <strong>jps</strong> shows vmids and main method information. Just like ps shows PIDs and process names.</p>
@@ -245,49 +246,47 @@ $&gt;</code></pre>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Option Name</th>
-<th style="text-align:left">Description</th>
+<th align="left">Option Name</th>
+<th align="left">Description</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">gc</td>
-<td style="text-align:left">It shows the current size for each heap area and its current usage (Ede, survivor, old, etc.), total number of GC performed, and the accumulated time for GC operations.</td>
+<tbody><tr>
+<td align="left">gc</td>
+<td align="left">It shows the current size for each heap area and its current usage (Ede, survivor, old, etc.), total number of GC performed, and the accumulated time for GC operations.</td>
 </tr>
 <tr>
-<td style="text-align:left">gccapactiy</td>
-<td style="text-align:left">It shows the minimum size (ms) and maximum size (mx) of each heap area, current size, and the number of GC performed for each area. (Does not show current usage and accumulated time for GC operations.)</td>
+<td align="left">gccapactiy</td>
+<td align="left">It shows the minimum size (ms) and maximum size (mx) of each heap area, current size, and the number of GC performed for each area. (Does not show current usage and accumulated time for GC operations.)</td>
 </tr>
 <tr>
-<td style="text-align:left">gccause</td>
-<td style="text-align:left">It shows the “information provided by -gcutil” + reason for the last GC and the reason for the current GC.</td>
+<td align="left">gccause</td>
+<td align="left">It shows the “information provided by -gcutil” + reason for the last GC and the reason for the current GC.</td>
 </tr>
 <tr>
-<td style="text-align:left">gcnew</td>
-<td style="text-align:left">Shows the GC performance data for the new area.</td>
+<td align="left">gcnew</td>
+<td align="left">Shows the GC performance data for the new area.</td>
 </tr>
 <tr>
-<td style="text-align:left">gcnewcapacity</td>
-<td style="text-align:left">Shows statistics for the size of new area.</td>
+<td align="left">gcnewcapacity</td>
+<td align="left">Shows statistics for the size of new area.</td>
 </tr>
 <tr>
-<td style="text-align:left">gcold</td>
-<td style="text-align:left">Shows the GC performance data for the old area.</td>
+<td align="left">gcold</td>
+<td align="left">Shows the GC performance data for the old area.</td>
 </tr>
 <tr>
-<td style="text-align:left">gcoldcapacity</td>
-<td style="text-align:left">Shows statistics for the size of old area.</td>
+<td align="left">gcoldcapacity</td>
+<td align="left">Shows statistics for the size of old area.</td>
 </tr>
 <tr>
-<td style="text-align:left">gcpermcapacity</td>
-<td style="text-align:left">Shows statistics for the permanent area.</td>
+<td align="left">gcpermcapacity</td>
+<td align="left">Shows statistics for the permanent area.</td>
 </tr>
 <tr>
-<td style="text-align:left">gcutil</td>
-<td style="text-align:left">Shows the usage for each heap area in percentage. Also shows the total number of GC performed and the accumulated time for GC operations.</td>
+<td align="left">gcutil</td>
+<td align="left">Shows the usage for each heap area in percentage. Also shows the total number of GC performed and the accumulated time for GC operations.</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                   <!-- 单元1 -->

@@ -209,19 +209,27 @@
             <h1 style="display: none">MySQL修改root密码的多种方法</h1>
             
             <div class="markdown-body" id="post-body">
-              <p>方法1： 用SET PASSWORD命令<br><pre><code class="hljs undefined">　　mysql -u root
-　　mysql&gt; <span class="hljs-keyword">SET</span> PASSWORD <span class="hljs-comment">FOR</span> <span class="hljs-comment">'root'</span><span class="hljs-comment">@</span><span class="hljs-comment">'localhost'</span><span class="hljs-comment"> = PASSWORD(</span><span class="hljs-comment">'newpass'</span><span class="hljs-comment">)</span>;</code></pre></p>
-<p>方法2：用mysqladmin<br><pre><code class="hljs undefined">　　mysqladmin -u<span class="hljs-built_in"> root</span> password <span class="hljs-string">"newpass"</span>
+              <p>方法1： 用SET PASSWORD命令</p>
+<pre><code class="hljs undefined">　　mysql -u root
+　　mysql&gt; <span class="hljs-keyword">SET</span> PASSWORD <span class="hljs-comment">FOR</span> <span class="hljs-comment">'root'</span><span class="hljs-comment">@</span><span class="hljs-comment">'localhost'</span><span class="hljs-comment"> = PASSWORD(</span><span class="hljs-comment">'newpass'</span><span class="hljs-comment">)</span>;</code></pre>
+
+<p>方法2：用mysqladmin</p>
+<pre><code class="hljs undefined">　　mysqladmin -u<span class="hljs-built_in"> root</span> password <span class="hljs-string">"newpass"</span>
 　　如<span class="hljs-built_in">果root</span>已经设置过密码，采用如下方法
-　　mysqladmin -u<span class="hljs-built_in"> root</span> password oldpass <span class="hljs-string">"newpass"</span></code></pre></p>
-<p>方法3： 用UPDATE直接编辑user表<br><pre><code class="hljs undefined">　　mysql -u root
+　　mysqladmin -u<span class="hljs-built_in"> root</span> password oldpass <span class="hljs-string">"newpass"</span></code></pre>
+
+<p>方法3： 用UPDATE直接编辑user表</p>
+<pre><code class="hljs undefined">　　mysql -u root
 　　mysql&gt; use mysql;
 　　mysql&gt; UPDATE<span class="hljs-built_in"> user </span><span class="hljs-builtin-name">SET</span> Password = PASSWORD(<span class="hljs-string">'newpass'</span>) WHERE<span class="hljs-built_in"> user </span>= <span class="hljs-string">'root'</span>;
-　　mysql&gt; FLUSH PRIVILEGES;</code></pre></p>
-<p>在丢失root密码的时候，可以这样<br><pre><code class="hljs undefined">　　mysqld_safe --skip-grant-tables&amp;
+　　mysql&gt; FLUSH PRIVILEGES;</code></pre>
+
+<p>在丢失root密码的时候，可以这样</p>
+<pre><code class="hljs undefined">　　mysqld_safe --skip-grant-tables&amp;
 　　mysql -u root mysql
 　　mysql&gt; UPDATE<span class="hljs-built_in"> user </span><span class="hljs-builtin-name">SET</span> <span class="hljs-attribute">password</span>=PASSWORD("new password<span class="hljs-string">") WHERE user='root';
-　　mysql&gt; FLUSH PRIVILEGES;</span></code></pre></p>
+　　mysql&gt; FLUSH PRIVILEGES;</span></code></pre>
+
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                   <!-- 单元1 -->

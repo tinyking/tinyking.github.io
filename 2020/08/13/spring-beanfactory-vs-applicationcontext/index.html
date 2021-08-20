@@ -222,8 +222,10 @@
 
     <span class="hljs-comment">//standard setters and getters</span>
 &#125;</code></pre>
+
 <p>我们将在我们的BeanFactory配置文件中定义postConstruct()方法作为init-method, ioc-container-difference-example.xml</p>
 <pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"student"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"com.baeldung.ioccontainer.bean.Student"</span> <span class="hljs-attr">init-method</span>=<span class="hljs-string">"postConstruct"</span>/&gt;</span></code></pre>
+
 <p>现在，让我们编写一个创建BeanFactory的测试用例来检查它是否加载了Student bean:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@Test</span>
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenBFInitialized_thenStudentNotInitialized</span><span class="hljs-params">()</span> </span>&#123;
@@ -232,6 +234,7 @@
 
     assertFalse(Student.isBeanInstantiated());
 &#125;</code></pre>
+
 <p>这里，Student对象没有初始化。换句话说，只有BeanFactory被初始化。只有当我们显式地调用getBean()方法时，BeanFactory中定义的bean才会被加载。</p>
 <p>让我们检查一下我们手动调用getBean()方法的学生bean的初始化:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@Test</span>
@@ -242,14 +245,17 @@
 
     assertTrue(Student.isBeanInstantiated());
 &#125;</code></pre>
+
 <p>在这里，Student bean成功加载。因此，BeanFactory只在需要时加载bean。</p>
 <h3 id="2-2-使用ApplicationContext进行即时加载"><a href="#2-2-使用ApplicationContext进行即时加载" class="headerlink" title="2.2. 使用ApplicationContext进行即时加载"></a>2.2. 使用ApplicationContext进行即时加载</h3><p>现在，让我们在BeanFactory的位置使用ApplicationContext。</p>
-<p>我们将只定义ApplicationContext，它将使用快速加载策略立即加载所有bean:<br><pre><code class="hljs java"><span class="hljs-meta">@Test</span>
+<p>我们将只定义ApplicationContext，它将使用快速加载策略立即加载所有bean:</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Test</span>
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenAppContInitialized_thenStudentInitialized</span><span class="hljs-params">()</span> </span>&#123;
     ApplicationContext context = <span class="hljs-keyword">new</span> ClassPathXmlApplicationContext(<span class="hljs-string">"ioc-container-difference-example.xml"</span>);
 
     assertTrue(Student.isBeanInstantiated());
-&#125;</code></pre></p>
+&#125;</code></pre>
+
 <p>在这里，即使我们没有调用getBean()方法，也会创建Student对象。</p>
 <p>ApplicationContext被认为是一个重IOC容器，因为它的快速加载策略在启动时加载所有bean。相比之下，BeanFactory是轻量级的，在内存受限的系统中非常方便。尽管如此，我们将在下一节中看到为什么ApplicationContext在大多数用例中是首选。</p>
 <h2 id="3-企业应用程序功能"><a href="#3-企业应用程序功能" class="headerlink" title="3.企业应用程序功能"></a>3.企业应用程序功能</h2><p>ApplicationContext以更加面向框架的风格增强了BeanFactory，并提供了几个适合企业应用程序的特性。</p>
@@ -268,8 +274,10 @@
 
     <span class="hljs-comment">// standard setters and getters</span>
 &#125;</code></pre>
+
 <p>在这里，我们覆盖了postProcessBeanFactory()方法以检查其注册。</p>
-<p>其次，我们有另一个类CustomBeanPostProcessor，它实现了BeanPostProcessor:<br><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomBeanPostProcessor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">BeanPostProcessor</span> </span>&#123;
+<p>其次，我们有另一个类CustomBeanPostProcessor，它实现了BeanPostProcessor:</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomBeanPostProcessor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">BeanPostProcessor</span> </span>&#123;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> isBeanPostProcessorRegistered = <span class="hljs-keyword">false</span>;
 
     <span class="hljs-meta">@Override</span>
@@ -279,13 +287,15 @@
     &#125;
 
     <span class="hljs-comment">//standard setters and getters</span>
-&#125;</code></pre></p>
+&#125;</code></pre>
+
 <p>在这里，我们覆盖了postprocessbeforeinitialize()方法来检查其注册。</p>
 <p>同时，我们已经在我们的ioc-container-difference-example.xml配置文件中配置了两个类:</p>
 <pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"customBeanPostProcessor"</span>
   <span class="hljs-attr">class</span>=<span class="hljs-string">"com.baeldung.ioccontainer.bean.CustomBeanPostProcessor"</span> /&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"customBeanFactoryPostProcessor"</span>
   <span class="hljs-attr">class</span>=<span class="hljs-string">"com.baeldung.ioccontainer.bean.CustomBeanFactoryPostProcessor"</span> /&gt;</span></code></pre>
+
 <p>让我们看一个测试用例来检查这两个类在启动时是否被自动注册:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@Test</span>
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">whenBFInitialized_thenBFPProcessorAndBPProcessorNotRegAutomatically</span><span class="hljs-params">()</span> </span>&#123;
@@ -295,6 +305,7 @@
     assertFalse(CustomBeanFactoryPostProcessor.isBeanFactoryPostProcessorRegistered());
     assertFalse(CustomBeanPostProcessor.isBeanPostProcessorRegistered());
 &#125;</code></pre>
+
 <p>从我们的测试中可以看出，自动注册并没有发生。</p>
 <p>现在，让我们来看一个在BeanFactory中手动添加它们的测试用例:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@Test</span>
@@ -312,6 +323,7 @@
     Student student = (Student) factory.getBean(<span class="hljs-string">"student"</span>);
     assertTrue(CustomBeanPostProcessor.isBeanPostProcessorRegistered());
 &#125;</code></pre>
+
 <p>在这里，我们使用postProcessBeanFactory()方法注册CustomBeanFactoryPostProcessor，使用addBeanPostProcessor()方法注册CustomBeanPostProcessor。在本例中，它们都成功注册。</p>
 <h3 id="4-2-注册ApplicationContext"><a href="#4-2-注册ApplicationContext" class="headerlink" title="4.2. 注册ApplicationContext"></a>4.2. 注册ApplicationContext</h3><p>如前所述，ApplicationContext自动注册这两个类而不需要编写额外的代码。</p>
 <p>让我们在单元测试中验证这个行为:</p>
@@ -323,6 +335,7 @@
     assertTrue(CustomBeanFactoryPostProcessor.isBeanFactoryPostProcessorRegistered());
     assertTrue(CustomBeanPostProcessor.isBeanPostProcessorRegistered());
 &#125;</code></pre>
+
 <p>我们可以看到，在这个例子中，两个类的自动注册都是成功的。</p>
 <p>因此，使用ApplicationContext总是明智的，因为Spring 2.0(及以上版本)大量使用BeanPostProcessor。</p>
 <p>还值得注意的是，如果您使用的是普通的BeanFactory，那么事务和AOP等特性将不会生效(至少在不编写额外代码的情况下不会)。这可能会导致混淆，因为配置看起来没有任何问题。</p>

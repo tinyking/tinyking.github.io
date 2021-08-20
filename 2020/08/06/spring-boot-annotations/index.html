@@ -219,12 +219,14 @@
         SpringApplication.run(VehicleFactoryApplication<span class="hljs-class">.<span class="hljs-keyword">class</span>, <span class="hljs-title">args</span>)</span>;
     &#125;
 &#125;</code></pre>
+
 <p><code>@SpringBootApplication</code>用默认属性封装了<code>@Configuration</code>、<code>@EnableAutoConfiguration</code>和<code>@ComponentScan</code>注解。</p>
 <h2 id="3-EnableAutoConfiguration"><a href="#3-EnableAutoConfiguration" class="headerlink" title="3. @EnableAutoConfiguration"></a>3. @EnableAutoConfiguration</h2><p><code>@EnableAutoConfiguration</code>，顾名思义，启用自动配置。这意味着Spring Boot在它的类路径中查找自动配置bean，并自动应用它们。</p>
 <p>注意，我们必须使用@Configuration的注释:</p>
 <pre><code class="hljs Java"><span class="hljs-meta">@Configuration</span>
 <span class="hljs-meta">@EnableAutoConfiguration</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">VehicleFactoryConfig</span> </span>&#123;&#125;</code></pre>
+
 <h2 id="4-自动配置条件"><a href="#4-自动配置条件" class="headerlink" title="4. 自动配置条件"></a>4. 自动配置条件</h2><p>通常，当我们编写自定义的自动配置时，我们希望Spring有条件地使用它们。我们可以通过本节中的注释实现这一点。</p>
 <p>我们可以将注释放在<code>@Configuration</code>类或<code>@Bean</code>方法上。</p>
 <h3 id="4-1-ConditionalOnClass-和-ConditionalOnMissingClass"><a href="#4-1-ConditionalOnClass-和-ConditionalOnMissingClass" class="headerlink" title="4.1. @ConditionalOnClass 和 @ConditionalOnMissingClass"></a>4.1. @ConditionalOnClass 和 @ConditionalOnMissingClass</h3><p>使用这些条件，Spring只会在注释参数中的类存在/不存在的情况下使用标记的自动配置bean:</p>
@@ -233,12 +235,14 @@
 <span class="hljs-title">class</span> <span class="hljs-title">MySQLAutoconfiguration</span> </span>&#123;
     <span class="hljs-comment">//...</span>
 &#125;</code></pre>
+
 <h3 id="4-2-ConditionalOnBean-和-ConditionalOnMissingBean"><a href="#4-2-ConditionalOnBean-和-ConditionalOnMissingBean" class="headerlink" title="4.2. @ConditionalOnBean 和 @ConditionalOnMissingBean"></a>4.2. @ConditionalOnBean 和 @ConditionalOnMissingBean</h3><p>我们可以使用这些注释来定义基于特定bean的存在或不存在的条件:</p>
 <pre><code class="hljs Java"><span class="hljs-meta">@Bean</span>
 <span class="hljs-meta">@ConditionalOnBean</span>(name = <span class="hljs-string">"dataSource"</span>)
 <span class="hljs-function">LocalContainerEntityManagerFactoryBean <span class="hljs-title">entityManagerFactory</span><span class="hljs-params">()</span> </span>&#123;
     <span class="hljs-comment">// ...</span>
 &#125;</code></pre>
+
 <h3 id="4-3-ConditionalOnProperty"><a href="#4-3-ConditionalOnProperty" class="headerlink" title="4.3. @ConditionalOnProperty"></a>4.3. @ConditionalOnProperty</h3><p>通过这个注释，我们可以为属性的值设置条件:</p>
 <pre><code class="hljs Java"><span class="hljs-meta">@Bean</span>
 <span class="hljs-meta">@ConditionalOnProperty</span>(
@@ -248,27 +252,32 @@
 <span class="hljs-function">DataSource <span class="hljs-title">dataSource</span><span class="hljs-params">()</span> </span>&#123;
     <span class="hljs-comment">// ...</span>
 &#125;</code></pre>
+
 <h3 id="4-4-ConditionalOnResource"><a href="#4-4-ConditionalOnResource" class="headerlink" title="4.4. @ConditionalOnResource"></a>4.4. @ConditionalOnResource</h3><p>我们可以让Spring只在有特定资源时使用定义:</p>
 <pre><code class="hljs Java"><span class="hljs-meta">@ConditionalOnResource</span>(resources = <span class="hljs-string">"classpath:mysql.properties"</span>)
 <span class="hljs-function">Properties <span class="hljs-title">additionalProperties</span><span class="hljs-params">()</span> </span>&#123;
     <span class="hljs-comment">// ...</span>
 &#125;</code></pre>
+
 <h3 id="4-5-ConditionalOnWebApplication-和-ConditionalOnNotWebApplication"><a href="#4-5-ConditionalOnWebApplication-和-ConditionalOnNotWebApplication" class="headerlink" title="4.5. @ConditionalOnWebApplication 和 @ConditionalOnNotWebApplication"></a>4.5. @ConditionalOnWebApplication 和 @ConditionalOnNotWebApplication</h3><p>通过这些注释，我们可以根据当前应用程序是否是web应用程序来创建条件:</p>
 <pre><code class="hljs Java"><span class="hljs-meta">@ConditionalOnWebApplication</span>
 <span class="hljs-function">HealthCheckController <span class="hljs-title">healthCheckController</span><span class="hljs-params">()</span> </span>&#123;
     <span class="hljs-comment">// ...</span>
 &#125;</code></pre>
+
 <h3 id="4-6-ConditionalExpression"><a href="#4-6-ConditionalExpression" class="headerlink" title="4.6. @ConditionalExpression"></a>4.6. @ConditionalExpression</h3><p>我们可以在更复杂的情况下使用此注释。当SpEL表达式被赋值为真时，Spring将使用标记的定义:</p>
 <pre><code class="hljs Java"><span class="hljs-meta">@Bean</span>
 <span class="hljs-meta">@ConditionalOnExpression</span>(<span class="hljs-string">"$&#123;usemysql&#125; &amp;&amp; $&#123;mysqlserver == 'local'&#125;"</span>)
 <span class="hljs-function">DataSource <span class="hljs-title">dataSource</span><span class="hljs-params">()</span> </span>&#123;
     <span class="hljs-comment">// ...</span>
 &#125;</code></pre>
+
 <h3 id="4-7-Conditional"><a href="#4-7-Conditional" class="headerlink" title="4.7. @Conditional"></a>4.7. @Conditional</h3><p>对于更复杂的条件，我们可以创建一个评估自定义条件的类。我们告诉Spring使用<code>@Conditional</code>:</p>
 <pre><code class="hljs Java"><span class="hljs-meta">@Conditional</span>(HibernateCondition<span class="hljs-class">.<span class="hljs-keyword">class</span>)
 <span class="hljs-title">Properties</span> <span class="hljs-title">additionalProperties</span>() </span>&#123;
   <span class="hljs-comment">//...</span>
 &#125;</code></pre>
+
 <h2 id="5-结论"><a href="#5-结论" class="headerlink" title="5. 结论"></a>5. 结论</h2><p>在本文中，我们概述了如何调优自动配置过程，并为自定义自动配置bean提供条件。</p>
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

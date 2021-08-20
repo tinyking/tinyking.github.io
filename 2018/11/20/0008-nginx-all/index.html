@@ -248,8 +248,10 @@
         <span class="hljs-attribute">proxy_pass</span> http://<span class="hljs-variable">$http_host</span><span class="hljs-variable">$request_uri</span>;
     &#125;  
 &#125;</code></pre>
+
 <p>这样就可以做到内网中端口为8080的服务器主动请求到1.2.13.4的主机上，如在Linux下可以：</p>
 <pre><code class="hljs undefined"><span class="hljs-number">1</span>curl --proxy <span class="hljs-string">proxy_server:</span><span class="hljs-number">8080</span> <span class="hljs-string">http:</span><span class="hljs-comment">//www.taobao.com/</span></code></pre>
+
 <p>正向代理的关键配置：</p>
 <blockquote>
 <ol>
@@ -291,6 +293,7 @@
         <span class="hljs-attribute">proxy_max_temp_file_size</span> <span class="hljs-number">0</span>;
    &#125;
 &#125;</code></pre>
+
 <p>这样就可以通过a.xxx.com来访问a项目对应的网站了，而不需要带上难看的端口号。<br>反向代理的配置关键点是：</p>
 <blockquote>
 <ol>
@@ -319,6 +322,7 @@
    <span class="hljs-built_in"> server </span>1.2.3.5;
    <span class="hljs-built_in"> server </span>1.2.3.6;
 &#125;</code></pre>
+
 <blockquote>
 <ol>
 <li>ip_hash：每个请求按访问IP的hash结果分配，同一个IP客户端固定访问一个后端服务器。可以保证来自同一ip的请求被打到固定的机器上，可以解决session问题。</li>
@@ -331,6 +335,7 @@
    <span class="hljs-built_in"> server </span>1.2.3.5;
    <span class="hljs-built_in"> server </span>1.2.3.6;
 &#125;</code></pre>
+
 <blockquote>
 <ol>
 <li>url_hash：按访问url的hash结果来分配请求，相同的url固定转发到同一个后端服务器处理。</li>
@@ -343,6 +348,7 @@
     hash <span class="hljs-variable">$request_uri</span>;
     hash_method crc32;
 &#125;</code></pre>
+
 <blockquote>
 <ol>
 <li>fair：按后端服务器的响应时间来分配请求，响应时间短的优先分配。</li>
@@ -354,6 +360,7 @@
    <span class="hljs-built_in"> server </span>1.2.3.6;
     fair;
 &#125;</code></pre>
+
 <p>而在每一种模式中，每一台服务器后面的可以携带的参数有：</p>
 <blockquote>
 <ol>
@@ -370,12 +377,14 @@
    <span class="hljs-built_in"> server </span>1.2.3.5 <span class="hljs-attribute">weight</span>=50;
    <span class="hljs-built_in"> server </span>1.2.3.6 <span class="hljs-attribute">weight</span>=20;
 &#125;</code></pre>
+
 <p>如下面的配置是指：<strong>负载中有三台服务器，服务器4的失败超时时间为60s，服务器5暂不参与负载，服务器6只用作备份机。</strong></p>
 <pre><code class="hljs undefined">upstream serverList &#123;
    <span class="hljs-built_in"> server </span>1.2.3.4 <span class="hljs-attribute">fail_timeout</span>=60s;
    <span class="hljs-built_in"> server </span>1.2.3.5 down;
    <span class="hljs-built_in"> server </span>1.2.3.6 backup;
 &#125;</code></pre>
+
 <blockquote>
 <p>下面是一个配置负载均衡的示例（只写了关键配置）：<br>其中：</p>
 <ol>
@@ -401,6 +410,7 @@
         <span class="hljs-attribute">proxy_set_header</span>   Host             <span class="hljs-variable">$host</span>;
    &#125;
 &#125;</code></pre>
+
 <h3 id="5-静态服务器"><a href="#5-静态服务器" class="headerlink" title="5. 静态服务器"></a>5. 静态服务器</h3><p>现在很多项目流行前后分离，也就是前端服务器和后端服务器分离，分别部署，这样的方式能让前后端人员能各司其职，不需要互相依赖，而前后分离中，前端项目的运行是不需要用Tomcat、Apache等服务器环境的，因此可以直接用nginx来作为静态服务器。</p>
 <blockquote>
 <p>静态服务器的配置如下,其中关键配置为：</p>
@@ -418,29 +428,35 @@
                <span class="hljs-attribute">index</span>  index.html;
            &#125;
     &#125;</code></pre>
+
 <h3 id="6-nginx的安装"><a href="#6-nginx的安装" class="headerlink" title="6. nginx的安装"></a>6. nginx的安装</h3><p>学了这么多nginx的配置用法之后，我们需要对每一个知识点做一下测试，才能印象深刻，在此之前，我们需要知道nginx是怎么安装，下面以Linux环境为例，简述yum方式安装nginx的步骤：</p>
 <ol>
 <li>安装依赖：</li>
 </ol>
 <pre><code class="hljs undefined">//一键安装上面四个依赖
 yum -y install gcc <span class="hljs-literal">zlib</span> <span class="hljs-literal">zlib</span>-devel pcre-devel openssl openssl-devel</code></pre>
+
 <ol>
 <li>安装nginx：</li>
 </ol>
 <pre><code class="hljs undefined">yum <span class="hljs-keyword">install</span> nginx</code></pre>
+
 <ol>
 <li>检查是否安装成功：</li>
 </ol>
 <pre><code class="hljs undefined"><span class="hljs-attribute">nginx -v</span></code></pre>
+
 <ol>
 <li>启动/挺尸nginx：</li>
 </ol>
 <pre><code class="hljs undefined">/etc/init.d/nginx <span class="hljs-literal">start</span>
 /etc/init.d/nginx <span class="hljs-literal">stop</span></code></pre>
+
 <ol>
 <li>编辑配置文件：</li>
 </ol>
 <pre><code class="hljs undefined"><span class="hljs-regexp">/etc/</span>nginx<span class="hljs-regexp">/nginx.conf</span></code></pre>
+
 <p>这些步骤都完成之后，我们就可以进入nginx的配置文件nginx.conf对上面的各个知识点，进行配置和测试了。</p>
 <blockquote>
 <p>来自：<a href="https://mp.weixin.qq.com/s/DDbLVj0jxpfOmJDZxt9SYg" target="_blank" rel="noopener">编程无界</a>（微信号：qianshic），作者：假不理</p>

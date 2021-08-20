@@ -219,6 +219,7 @@
 <h2 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h2><h3 id="类声明"><a href="#类声明" class="headerlink" title="类声明"></a>类声明</h3><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HashMap</span>&lt;<span class="hljs-title">K</span>, <span class="hljs-title">V</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractMap</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Map</span>&lt;<span class="hljs-title">K</span>, <span class="hljs-title">V</span>&gt;, <span class="hljs-title">Cloneable</span>, <span class="hljs-title">Serializable</span> </span>&#123;
     <span class="hljs-comment">// ...</span>
 &#125;</code></pre>
+
 <ul>
 <li><code>Map</code> -  <code>AbstractMap&lt;K,V&gt;</code>本身实现了<code>Map&lt;K,V&gt;</code>接口，在这里再次强调了<code>HashMap</code>实现了<code>Map</code></li>
 <li><code>Cloneable</code>  实现了克隆接口</li>
@@ -244,20 +245,24 @@
         <span class="hljs-keyword">this</span>.next = next;
     &#125;
 &#125;</code></pre>
+
 <p>上面代码描述了<code>HashMap</code>的底层数据结构：<code>数组</code> + <code>链表</code>。</p>
 <blockquote>
 <p><em>在1.8中，增加了红黑树，带详细研究…</em></p>
 </blockquote>
-<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>对于构造函数，提供了多个重载，以方便创建实例：<br><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HashMap</span><span class="hljs-params">()</span>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>对于构造函数，提供了多个重载，以方便创建实例：</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HashMap</span><span class="hljs-params">()</span>
 <span class="hljs-keyword">public</span> <span class="hljs-title">HashMap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> initialCapacity)</span>
 <span class="hljs-keyword">public</span> <span class="hljs-title">HashMap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> initialCapacity, <span class="hljs-keyword">float</span> loadFactor)</span>
-<span class="hljs-keyword">public</span> <span class="hljs-title">HashMap</span><span class="hljs-params">(Map&lt;? extends K, ? extends V&gt; m)</span></span></code></pre></p>
+<span class="hljs-keyword">public</span> <span class="hljs-title">HashMap</span><span class="hljs-params">(Map&lt;? extends K, ? extends V&gt; m)</span></span></code></pre>
+
 <p>在构造函数中，<code>initialCapacity</code>和<code>loadFactor</code>两个参数对map的性能有很大的影响。</p>
 <ul>
 <li><code>initialCapacity</code>: 初始化大小， 即<code>table</code>数组的长度，如果此值太小，可能会因引起<code>table</code>频繁调整数组大小，如果太大，实际内容很少，则造成资源浪费，默认 1 &lt;&lt; 4。</li>
 <li><code>loadFactor</code>: 加载因子，取值范围（0,1）的浮点数，如果此值太小，可能会因引起<code>table</code>频繁调整数组大小，如果太大，<code>table</code>大小很长时间不调整，调整时内容移动大。默认值0.75</li>
 </ul>
 <pre><code class="hljs java">i = (n - <span class="hljs-number">1</span>) &amp; h;</code></pre>
+
 <p>计算key在table中的索引,h为key的hashcode，n为当前table的大小。</p>
 <p>HashMap为非线程安全Map，其中key和value均可以为null。</p>
 

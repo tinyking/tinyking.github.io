@@ -214,11 +214,14 @@
 <h2 id="2-Unix-Cron"><a href="#2-Unix-Cron" class="headerlink" title="2. Unix Cron"></a>2. Unix Cron</h2><p>在大多数基于unix的系统中，Cron有5个字段:分钟(0-59)、小时(0-23)、月份(1-31)、月份(1-12或名称)和星期(0-7或名称)。</p>
 <p>我们可以在每个字段中添加一些特殊的值，比如星号(*):</p>
 <pre><code class="hljs undefined"><span class="hljs-symbol">5 </span><span class="hljs-number">0</span> * * *</code></pre>
+
 <p>该任务将在每天午夜后5分钟执行。也可以使用一系列的值:</p>
 <pre><code class="hljs undefined"><span class="hljs-symbol">5 </span><span class="hljs-number">0</span>-<span class="hljs-number">5</span> * * *</code></pre>
+
 <p>在这里，调度器将在午夜后5分钟执行任务，也将在每天1、2、3、4和5点后5分钟执行任务。</p>
 <p>或者，我们可以使用一个值列表:</p>
 <pre><code class="hljs undefined"><span class="hljs-symbol">5 </span><span class="hljs-number">0</span>,<span class="hljs-number">3</span> * * *</code></pre>
+
 <p>现在调度器每天在午夜后5分钟和3点后5分钟执行作业。原始的Cron表达式提供了比我们到目前为止介绍的更多的特性。</p>
 <p>但是，它有一个很大的限制:我们不能用第二个精度调度作业，因为它没有专门的第二个字段。</p>
 <p>让我们看看Spring是如何修复这个限制的。</p>
@@ -226,8 +229,10 @@
 <p>与基于unix的系统中的Cron表达式不同，Spring中的Cron表达式有6个空格分隔的字段:秒、分钟、小时、日、月和工作日。</p>
 <p>例如，每十秒钟运行一个任务，我们可以做:</p>
 <pre><code class="hljs undefined"><span class="hljs-emphasis">*/10 *</span> <span class="hljs-emphasis">* *</span> <span class="hljs-emphasis">* *</span></code></pre>
+
 <p>此外，每20秒运行一个任务，从早上8点到每天10m:</p>
 <pre><code class="hljs undefined">*/<span class="hljs-number">20</span> * <span class="hljs-number">8</span><span class="hljs-number">-10</span> * * *</code></pre>
+
 <p>如上例所示，第一个字段表示表达式的第二部分。这就是两种实现之间的区别。尽管第二个字段不同，但Spring支持来自原始Cron的许多特性，比如范围号或列表。</p>
 <p>从实现的角度来看，CronSequenceGenerator类负责在Spring中解析Cron表达式。</p>
 <h2 id="4-结论"><a href="#4-结论" class="headerlink" title="4. 结论"></a>4. 结论</h2><p>在这个简短的教程中，我们看到了Spring和大多数基于unix的系统之间Cron实现的差异。在这个过程中，我们看到了这两种实现的一些示例。</p>

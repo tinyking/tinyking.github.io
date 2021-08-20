@@ -226,6 +226,7 @@
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.http.get(<span class="hljs-string">'http://localhost:3000/api/products'</span>);
   &#125;
 &#125;</code></pre>
+
 <p>The code above is straightforward - we specify the <code>getProducts()</code> method that returns the HTTP GET call.</p>
 <p>It’s time to consume this service in the component. And what we’ll do here is create an Observable and assign the result of the <code>getProducts()</code> method to it. Furthermore, we’ll make that call every 1 second, so if there’s an update at the API level, we can refresh the template:</p>
 <pre><code class="hljs typescript"><span class="hljs-comment">// some.component.ts</span>
@@ -252,11 +253,13 @@
                         .startWith(<span class="hljs-number">0</span>).switchMap(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-keyword">this</span>.api.getProducts());
   &#125;
 &#125;</code></pre>
+
 <p>And last but not least, we need to apply the async pipe in our template:</p>
 <pre><code class="hljs html"><span class="hljs-comment">&lt;!-- some.component.html --&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">li</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"let product of products$ | async"</span>&gt;</span>&#123;&#123; product.prod_name &#125;&#125; for &#123;&#123; product.price | currency:'£'&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></code></pre>
+
 <p>This way, if we push a new item to the API (or remove one or multiple item(s)) the updates are going to be visible in the component in 1 second.</p>
 <h2 id="Sockets"><a href="#Sockets" class="headerlink" title="Sockets"></a>Sockets</h2><p>Another approach to creating a component and a service that accepts push data from the server is by implementing sockets. To achieve such functionality, changes need to be performed both at the API and the Client side as well.</p>
 <h2 id="API-level-modifications"><a href="#API-level-modifications" class="headerlink" title="API level modifications"></a>API level modifications</h2><p>At the API level, we need to enable sockets, and one of the most used packages that developers use is <code>socket.io</code> which can be installed via <code>npm i socket.io</code>.</p>
@@ -296,6 +299,7 @@ server.post(<span class="hljs-string">'/api/products'</span>, <span class="hljs-
 &#125;);
 
 server.listen(port, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-built_in">console</span>.info(<span class="hljs-string">`Server is up on <span class="hljs-subst">$&#123;port&#125;</span>.`</span>));</code></pre>
+
 <blockquote>
 <p>Note how Restify requires us to use <code>server.server</code> when requiring <code>socket.io</code>.</p>
 </blockquote>
@@ -306,6 +310,7 @@ server.listen(port, <span class="hljs-function"><span class="hljs-params">()</sp
   socket.on(<span class="hljs-string">'clientData'</span>, <span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(data));
   socket.on(<span class="hljs-string">'disconnect'</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> sockets.delete(socket));
 &#125;);</code></pre>
+
 <p>When a new product is added (in this case it’s just a simple push to the <code>products</code> array), then we again, emit the updated array to all the clients who are connected:</p>
 <pre><code class="hljs typescript">server.post(<span class="hljs-string">'/api/products'</span>, <span class="hljs-function">(<span class="hljs-params">request, response</span>) =&gt;</span> &#123;
   <span class="hljs-keyword">const</span> product = request.body;
@@ -316,6 +321,7 @@ server.listen(port, <span class="hljs-function"><span class="hljs-params">()</sp
   &#125;
   response.json(products);
 &#125;);</code></pre>
+
 <blockquote>
 <p>Note, that in this article we’re only going through the basics and henceforth the API is kept at an elementary level.</p>
 </blockquote>
@@ -344,6 +350,7 @@ server.listen(port, <span class="hljs-function"><span class="hljs-params">()</sp
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Observable(<span class="hljs-function"><span class="hljs-params">observer</span> =&gt;</span> <span class="hljs-keyword">this</span>.observer = observer);
   &#125;
 &#125;</code></pre>
+
 <p>Here we are creating an observer first, then connect to the socket server running on port 3000 (or whatever port we have specified for the API). If data is emitted from the socket server (which happens on the first load as well as when someone adds a new product), an observable is created. This is what gets passed on to the component and then to the template which still utilises the async pipe - the rest of the code does not change.</p>
 <p>Adding a new product will also now mean that the list of products is updated.</p>
 <h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>In this article, we had a look at two ways to achieve real-time data updates in Angular components.</p>

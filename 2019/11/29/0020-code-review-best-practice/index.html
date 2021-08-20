@@ -301,6 +301,7 @@
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> countTotalPageVisits;  <span class="hljs-comment">//R: 变量命名不一致</span>
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> uniqueUsersCount;
 &#125;</code></pre>
+
 <h3 id="方法签名不一致"><a href="#方法签名不一致" class="headerlink" title="方法签名不一致"></a>方法签名不一致</h3><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">MyInterface</span> </span>&#123;
   <span class="hljs-comment">/** Returns &#123;<span class="hljs-doctag">@link</span> Optional#empty&#125; if s cannot be extracted. */</span>
   <span class="hljs-function"><span class="hljs-keyword">public</span> Optional&lt;String&gt; <span class="hljs-title">extractString</span><span class="hljs-params">(String s)</span></span>;  
@@ -309,18 +310,23 @@
   <span class="hljs-comment">//R: 应该协调返回值：在这里也使用Optional &lt;&gt;</span>
   <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">rewriteString</span><span class="hljs-params">(String s)</span></span>;
 &#125;</code></pre>
+
 <h3 id="类库使用"><a href="#类库使用" class="headerlink" title="类库使用"></a>类库使用</h3><pre><code class="hljs java"><span class="hljs-comment">//R: 使用Guava's MapJoiner替换以下方法</span>
 <span class="hljs-function">String <span class="hljs-title">joinAndConcatenate</span><span class="hljs-params">(Map&lt;String, String&gt; map, String keyValueSeparator, String keySeparator)</span></span>;</code></pre>
+
 <h3 id="个人倾向"><a href="#个人倾向" class="headerlink" title="个人倾向"></a>个人倾向</h3><pre><code class="hljs java"><span class="hljs-comment">//R: nit: I usually prefer numFoo over fooCount; up to you,</span>
 <span class="hljs-comment">//  but we should keep it consistent in this project</span>
 <span class="hljs-keyword">int</span> dayCount;</code></pre>
+
 <h3 id="Bugs"><a href="#Bugs" class="headerlink" title="Bugs"></a>Bugs</h3><pre><code class="hljs java"><span class="hljs-comment">//R: 代码处理numIterations+1的情况，如果是故意这样处理，是否考虑变更numIterations值</span>
 <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= numIterations; ++i) &#123;
   ...
 &#125;</code></pre>
+
 <h3 id="架构疑虑"><a href="#架构疑虑" class="headerlink" title="架构疑虑"></a>架构疑虑</h3><pre><code class="hljs java"><span class="hljs-comment">//R: I think we should avoid the dependency on OtherService.</span>
 <span class="hljs-comment">// Can we discuss this in person?</span>
 otherService.call();</code></pre>
+
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过有效的代码Review，可以提高项目代码质量，使团队开发人员形成统一风格，并同步项目细节。同时还可以提高团队人员的知识，提升自我。</p>
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

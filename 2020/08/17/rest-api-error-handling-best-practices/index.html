@@ -240,6 +240,7 @@
 <h3 id="3-2-默认Spring错误响应"><a href="#3-2-默认Spring错误响应" class="headerlink" title="3.2. 默认Spring错误响应"></a>3.2. 默认Spring错误响应</h3><p>这些原则是如此普遍，以至于Spring已经在其默认的错误处理机制中编写了它们。</p>
 <p>为了演示，假设我们有一个简单的Spring REST应用程序，它管理图书，有一个端点根据ID检索图书:</p>
 <pre><code class="hljs undefined">curl -X GET -H <span class="hljs-string">"Accept: application/json"</span> http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">8082</span><span class="hljs-regexp">/spring-rest/</span>api<span class="hljs-regexp">/book/</span><span class="hljs-number">1</span></code></pre>
+
 <p>如果没有ID为1的书，我们期望控制器会抛出BookNotFoundException异常。在这个端点上执行GET，我们看到这个异常被抛出，响应体为:</p>
 <pre><code class="hljs json">&#123;
     <span class="hljs-attr">"timestamp"</span>:<span class="hljs-string">"2019-09-16T22:14:45.624+0000"</span>,
@@ -248,6 +249,7 @@
     <span class="hljs-attr">"message"</span>:<span class="hljs-string">"No message available"</span>,
     <span class="hljs-attr">"path"</span>:<span class="hljs-string">"/api/book/1"</span>
 &#125;</code></pre>
+
 <p>注意，这个默认的错误处理程序包括错误发生时的时间戳、HTTP状态代码、标题(错误字段)、消息(默认为空)和错误发生时的URL路径。</p>
 <p>这些字段为客户端或开发人员提供信息，以帮助解决问题，还构成了标准错误处理机制的一些字段。</p>
 <p>另外，请注意，当BookNotFoundException被抛出时，Spring会自动返回一个HTTP状态码为500。尽管有些api会返回500状态码或其他通用代码，正如我们将在Facebook和Twitter api中看到的那样——为了简单起见，对于所有错误，最好尽可能使用最具体的错误代码。</p>
@@ -264,6 +266,7 @@
     <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Incorrect username and password"</span>,
     <span class="hljs-attr">"detail"</span>: <span class="hljs-string">"Ensure that the username and password included in the request are correct"</span>
 &#125;</code></pre>
+
 <p>错误字段不应该与响应代码匹配。相反，它应该是应用程序特有的错误代码。通常，错误字段没有约定，希望它是唯一的。</p>
 <p>通常，该字段只包含字母数字和连接字符，如破折号或下划线。例如，0001、auth-0001和incorrect-user-pass都是错误代码的典型示例。</p>
 <p>通常认为主体的消息部分在用户界面上是可显示的。因此，如果我们支持国际化，就应该翻译这个标题。因此，如果客户端发送一个带有对应于法语的Accept-Language头的请求，则title值应该被翻译成法语。</p>
@@ -275,6 +278,7 @@
     <span class="hljs-attr">"detail"</span>: <span class="hljs-string">"Ensure that the username and password included in the request are correct"</span>,
     <span class="hljs-attr">"help"</span>: <span class="hljs-string">"https://example.com/help/error/auth-0001"</span>
 &#125;</code></pre>
+
 <p>有时，我们可能希望为一个请求报告多个错误。在这种情况下，我们应该返回一个列表中的错误:</p>
 <pre><code class="hljs json">&#123;
     <span class="hljs-attr">"errors"</span>: [
@@ -287,6 +291,7 @@
         ...
     ]
 &#125;</code></pre>
+
 <p>当出现单个错误时，我们使用包含一个元素的列表进行响应。注意，对于简单的应用程序来说，响应多个错误可能过于复杂。在许多情况下，使用第一个或最重要的错误来响应就足够了。</p>
 <h3 id="3-4-标准响应体"><a href="#3-4-标准响应体" class="headerlink" title="3.4. 标准响应体"></a>3.4. 标准响应体</h3><p>虽然大多数REST api遵循类似的约定，但具体细节通常不同，包括字段的名称和响应体中包含的信息。这些差异使得库和框架很难统一地处理错误。</p>
 <p>为了标准化REST API错误处理，IETF设计了RFC 7807，它创建了一个通用的错误处理模式。</p>
@@ -306,11 +311,13 @@
     <span class="hljs-attr">"detail"</span>: <span class="hljs-string">"Authentication failed due to incorrect username or password."</span>,
     <span class="hljs-attr">"instance"</span>: <span class="hljs-string">"/login/log/abc123"</span>
 &#125;</code></pre>
+
 <p>请注意，type字段对错误类型进行分类，而instance分别以类似于类和对象的方式标识错误的特定发生。</p>
 <p>通过使用uri，客户机可以按照这些路径查找有关错误的更多信息，就像使用HATEOAS链接导航REST API一样。</p>
 <h2 id="4-示例"><a href="#4-示例" class="headerlink" title="4. 示例"></a>4. 示例</h2><p>上述实践在一些最流行的REST api中很常见。虽然字段或格式的具体名称可能在不同的站点之间有所不同，但一般的模式几乎是通用的。</p>
 <h3 id="4-1-Twitter"><a href="#4-1-Twitter" class="headerlink" title="4.1. Twitter"></a>4.1. Twitter</h3><p>例如，让我们发送一个GET请求而不提供必需的身份验证数据:</p>
 <pre><code class="hljs undefined">curl -<span class="hljs-keyword">X</span> GET http<span class="hljs-variable">s:</span>//api.twitter.<span class="hljs-keyword">com</span>/<span class="hljs-number">1.1</span>/statuses/<span class="hljs-keyword">update</span>.json?include_entities=true</code></pre>
+
 <p>Twitter API响应一个错误，如下正文:</p>
 <pre><code class="hljs json">&#123;
     <span class="hljs-attr">"errors"</span>: [
@@ -320,11 +327,13 @@
         &#125;
     ]
 &#125;</code></pre>
+
 <p>此响应包括一个包含单个错误的列表，以及错误代码和消息。在Twitter的例子中，没有详细的信息，并且使用一个普遍的错误——而不是更具体的401错误——来表示认证失败。</p>
 <p>有时更通用的状态代码更容易实现，我们将在下面的Spring示例中看到这一点。它允许开发人员捕获异常组，而不区分应该返回的状态代码。但是，在可能的情况下，应该使用最特定的状态代码。</p>
 <h3 id="4-2-Facebook"><a href="#4-2-Facebook" class="headerlink" title="4.2. Facebook"></a>4.2. Facebook</h3><p>与Twitter类似，Facebook的Graph REST API也在响应中包含详细信息。</p>
 <p>例如，让我们用Facebook Graph API执行一个POST请求来验证:</p>
 <pre><code class="hljs undefined">curl -X GET https:<span class="hljs-regexp">//g</span>raph.facebook.com<span class="hljs-regexp">/oauth/</span>access_token?client_id=foo&amp;client_secret=bar&amp;grant_type=baz</code></pre>
+
 <p>我们收到以下错误:</p>
 <pre><code class="hljs json">&#123;
     <span class="hljs-attr">"error"</span>: &#123;
@@ -334,6 +343,7 @@
         <span class="hljs-attr">"fbtrace_id"</span>: <span class="hljs-string">"AWswcVwbcqfgrSgjG80MtqJ"</span>
     &#125;
 &#125;</code></pre>
+
 <p>像Twitter一样，Facebook也使用通用错误——而不是更具体的400级错误——来表示失败。除了消息和数字代码外，Facebook还包括一个类型字段，用于对错误进行分类，以及一个作为内部支持标识符的跟踪ID (fbtrace_id)。</p>
 <h2 id="5-结论"><a href="#5-结论" class="headerlink" title="5. 结论"></a>5. 结论</h2><p>在本文中，我们研究了一些REST API错误处理的最佳实践，包括:</p>
 <ul>

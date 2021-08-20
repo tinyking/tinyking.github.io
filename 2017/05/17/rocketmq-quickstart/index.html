@@ -223,12 +223,15 @@
 <span class="hljs-meta">&gt;</span><span class="bash"> <span class="hljs-built_in">cd</span> incubator-rocketmq</span>
 <span class="hljs-meta">&gt;</span><span class="bash"> mvn -Prelease-all -DskipTests clean install -U</span>
 <span class="hljs-meta">&gt;</span><span class="bash"> <span class="hljs-built_in">cd</span> distribution/target/apache-rocketmq</span></code></pre>
+
 <h1 id="启动Name-Server"><a href="#启动Name-Server" class="headerlink" title="启动Name Server"></a>启动Name Server</h1><pre><code class="hljs undefined">&gt; nohup sh bin/mqnamesrv &amp;
 &gt; tail -f ~/logs/rocketmqlogs/namesrv.log
 The Name<span class="hljs-built_in"> Server </span>boot success<span class="hljs-built_in">..</span>.</code></pre>
+
 <h1 id="启动Broker"><a href="#启动Broker" class="headerlink" title="启动Broker"></a>启动Broker</h1><pre><code class="hljs undefined">&gt; nohup sh <span class="hljs-keyword">bin/mqbroker </span>-n localhost:<span class="hljs-number">9876</span> &amp;
 &gt; tail -f ~/logs/rocketmqlogs/<span class="hljs-keyword">broker.log
 </span><span class="hljs-symbol">The</span> <span class="hljs-keyword">broker[%s, </span><span class="hljs-number">172</span>.<span class="hljs-number">30</span>.<span class="hljs-number">30</span>.<span class="hljs-number">233</span>:<span class="hljs-number">10911</span>] <span class="hljs-keyword">boot </span>success...</code></pre>
+
 <p>需要提供一个可以网络访问的ip。</p>
 <h1 id="发送-amp-接受消息"><a href="#发送-amp-接受消息" class="headerlink" title="发送&amp;接受消息"></a>发送&amp;接受消息</h1><p>发送&amp;接受消息之前需要通过设置环境变量<code>NAMESRV_ADDR</code>，用于通知客户端需要访问的服务地址。</p>
 <pre><code class="hljs undefined">&gt; <span class="hljs-builtin-name">export</span> <span class="hljs-attribute">NAMESRV_ADDR</span>=localhost:9876
@@ -237,6 +240,7 @@ SendResult [<span class="hljs-attribute">sendStatus</span>=SEND_OK, msgId= <span
 
 &gt; sh bin/tools.sh org.apache.rocketmq.example.quickstart.Consumer
 ConsumeMessageThread_%d Receive New Messages: [MessageExt<span class="hljs-built_in">..</span>.</code></pre>
+
 <h1 id="停止服务"><a href="#停止服务" class="headerlink" title="停止服务"></a>停止服务</h1><pre><code class="hljs undefined">&gt; <span class="hljs-keyword">sh </span><span class="hljs-keyword">bin/mqshutdown </span><span class="hljs-keyword">broker
 </span>The mqbroker(<span class="hljs-number">36695</span>) is running...
 Send <span class="hljs-keyword">shutdown </span>request to mqbroker(<span class="hljs-number">36695</span>) OK
@@ -244,6 +248,7 @@ Send <span class="hljs-keyword">shutdown </span>request to mqbroker(<span class=
 &gt; <span class="hljs-keyword">sh </span><span class="hljs-keyword">bin/mqshutdown </span>namesrv
 The mqnamesrv(<span class="hljs-number">36664</span>) is running...
 Send <span class="hljs-keyword">shutdown </span>request to mqnamesrv(<span class="hljs-number">36664</span>) OK</code></pre>
+
 
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                   <!-- 单元1 -->
