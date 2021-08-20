@@ -269,7 +269,7 @@
 
 <p>解决方案，是在自己的Controller中加入如下方法</p>
 <pre><code class="hljs undefined"><span class="hljs-meta">@InitBinder</span>  
-<span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">initBinder</span><span class="hljs-params">(WebDataBinder binder)</span> </span>&#123;  
+<span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initBinder</span><span class="hljs-params">(WebDataBinder binder)</span> </span>&#123;  
     binder.setAutoGrowNestedPaths(<span class="hljs-keyword">true</span>);  
     binder.setAutoGrowCollectionLimit(<span class="hljs-number">1024</span>);  
 &#125;</code></pre>

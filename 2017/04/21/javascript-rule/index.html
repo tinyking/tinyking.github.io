@@ -211,8 +211,8 @@
             <div class="markdown-body" id="post-body">
               <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>JavaScript是一种客户端脚本语言，Web工程都会用到它，这份指南列出了编写JavaScript时需要遵守的规则。</p>
 <h2 id="JavaScript语言规范"><a href="#JavaScript语言规范" class="headerlink" title="JavaScript语言规范"></a>JavaScript语言规范</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>声明变量必须加上var<br>关键字:</p>
-<pre><code class="hljs undefined">var a1 = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
-var b1 = <span class="hljs-number">11</span><span class="hljs-comment">;</span></code></pre>
+<pre><code class="hljs undefined"><span class="hljs-keyword">var</span> a1 = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">var</span> b1 = <span class="hljs-number">11</span>;</code></pre>
 
 <p>当你没有写var<br>，变量就会暴露在全局上下文中，这样很可能会和现有的变量冲突。另外，如果没有加上，很难明确该变量的作用域是什么，变量很可能在局部作用域中，很容易泄漏到Document或者Window中，所以务必用var<br>变量。</p>
 <h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>常量的形式如：<code>NAMES_LIKE_THIS</code>，即使用大写字符，并用下划线分割，你也可用<code>@const</code>标记来指明它是一个常量，但请不要使用<code>const</code>关键字。<br>对于基本类型的常量，只需要转换命名：</p>
@@ -251,8 +251,8 @@ eflag.example.SECONDS_TABLE = &#123;<span class="hljs-string">minute:</span> <sp
 <pre><code class="hljs undefined">&#123;<span class="hljs-attribute">foo</span>: <span class="hljs-number">1</span>,bar: <span class="hljs-number">2</span>,baz: <span class="hljs-number">3</span>&#125;</code></pre>
 
 <p>条件语句有空格</p>
-<pre><code class="hljs undefined"><span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>) &#123;&#125;
-<span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;&#125;
+<pre><code class="hljs undefined"><span class="hljs-keyword">if</span> (<span class="hljs-keyword">true</span>) &#123;&#125;
+<span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;&#125;
 <span class="hljs-keyword">switch</span>(v)&#123;&#125;</code></pre>
 
 <h3 id="Tips-and-Tricks"><a href="#Tips-and-Tricks" class="headerlink" title="Tips and Tricks"></a>Tips and Tricks</h3><h3 id="True和False布尔表达式"><a href="#True和False布尔表达式" class="headerlink" title="True和False布尔表达式"></a>True和False布尔表达式</h3><p>下面的布尔表达式都会返回<code>false</code>：</p>
@@ -376,9 +376,9 @@ eflag.example.SECONDS_TABLE = &#123;<span class="hljs-string">minute:</span> <sp
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2017/04/21/jdk-profile/">
+                      <a href="/2017/04/21/firewalld/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java系列  - JDK环境配置</span>
+                        <span class="hidden-mobile">CentOS7使用firewalld打开关闭防火墙与端口</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -386,8 +386,8 @@ eflag.example.SECONDS_TABLE = &#123;<span class="hljs-string">minute:</span> <sp
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2017/04/21/linux-command/">
-                        <span class="hidden-mobile">Linux常用系统命令</span>
+                      <a href="/2017/04/21/jdk-profile/">
+                        <span class="hidden-mobile">Java系列  - JDK环境配置</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

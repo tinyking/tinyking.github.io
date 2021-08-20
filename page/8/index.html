@@ -170,27 +170,29 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2017/04/21/logback-xml/" target="_self">
-          <img src="https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg" srcset="/img/loading.gif" alt="Logback配置文件">
+        <a href="/2017/04/21/webupload/" target="_self">
+          <img src="https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg" srcset="/img/loading.gif" alt="Bootstrap模态框使WebUploader点击失效问题解决">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
-        <a href="/2017/04/21/logback-xml/">Logback配置文件</a>
+        <a href="/2017/04/21/webupload/">Bootstrap模态框使WebUploader点击失效问题解决</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2017/04/21/logback-xml/">
+        <a href="/2017/04/21/webupload/">
           
           
             
           
-          &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;configuration&gt;
-	&lt;!-- 定义变量 --&gt;
-	&lt;property name="LOG_HOME" value="/mnt/raid5/log/web" /&gt;
-	&lt;property name="LOG_DEBUG_HOME" value="$&#123
+          在使用Bootstrap模态框页面上使用上传组件WebUploader，发现点击失效。
+解决方法：
+var uploader;
+//在点击弹出模态框的时候再初始化WebUploader，解决点击上传无反应问题
+$("#myModal").on("shown.bs.modal",function()&#123;
+    uploader = WebUploader.create(&#123;
+   
         </a>
       </p>
 
@@ -204,13 +206,20 @@
           </div>
         
         
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/前端/">前端</a>
+            
+          </div>
+        
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Java/">Java</a>
+              <a href="/tags/Bootstrap/">Bootstrap</a>
             
-              <a href="/tags/Log/">Log</a>
+              <a href="/tags/webuploader/">webuploader</a>
             
           </div>
         
