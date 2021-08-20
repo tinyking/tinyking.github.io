@@ -7,8 +7,7 @@ tags:
 categories:
     - 后端
 excerpt: 本文介绍了Spring 调度的常用注解。
-index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
-banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+index_img: https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F1f2abd1d67247ad82eda8069cd73c61a189b7ad1.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1632028951&t=4969344ee49ff8b1b313b3ceffe1c1d5
 ---
 
 ## 1. 概述

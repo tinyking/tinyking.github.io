@@ -1,6 +1,5 @@
 ---
-index_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
-banner_img: https://i.loli.net/2020/08/17/35FZ8rubRnfAKhG.jpg
+index_img: https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic1.zhimg.com%2Fv2-1b2f4bbab5617fca4bb118562ec97b4f_1200x500.jpg&refer=http%3A%2F%2Fpic1.zhimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1632029423&t=765c7518a5e6ced63fd65e173525913b
 title: Spring Boot依赖引入的多种方式
 date: 2018-10-15 09:06:30
 tags:
