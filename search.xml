@@ -8664,4 +8664,22 @@ ID missing</code></pre>
         <tag>Spring</tag>
       </tags>
   </entry>
+  <entry>
+    <title>git修改已提交记录的用户信息</title>
+    <url>/2021/08/20/2021-08-21-git-xiu-gai-yi-ti-jiao-ji-lu-de-yong-hu-xin-xi/</url>
+    <content><![CDATA[<h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>因为使用的是个人电脑，配置的git全局config的用户信息是和github的账户一致的。新下载的工作git，由于没有单独设置局部的用户信息，导致提交记录使用的是github用户，在push代码的时候，git server提示用户信息校验不通过。因此需要修改一下已提交的git记录中的用户信息。</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>需要首先设置局部的用户信息，设置完成后再按如下操作步骤进行记录信息的修改。</p>
+<pre><code class="hljs undefined"><span class="hljs-comment"># 第一步，（n）代表提交次数</span>
+git rebase -i HEAD~n
+<span class="hljs-comment"># 第二步</span>
+然后按<span class="hljs-string">`i`</span>编辑，把<span class="hljs-string">`pick`</span> 改成 <span class="hljs-string">`edit`</span>，按<span class="hljs-string">'Esc'</span>退出编辑，按<span class="hljs-string">`:wq`</span>保存退出
+<span class="hljs-comment"># 第三步</span>
+git commit --amend --author=<span class="hljs-string">"作者 &lt;邮箱@xxxx.com&gt;"</span> --<span class="hljs-keyword">no</span>-edit
+<span class="hljs-comment"># 第四步</span>
+git rebase --<span class="hljs-keyword">continue</span>
+<span class="hljs-comment"># 第五步</span>
+git <span class="hljs-keyword">push</span> --force</code></pre>
+
+]]></content>
+  </entry>
 </search>
