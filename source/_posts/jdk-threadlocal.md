@@ -5,6 +5,7 @@ tags:
     - JDK
 categories:
     - 后端
+index_img: https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.vfast.com.cn%2Fuploadfile%2F2017%2F0905%2F20170905051708372.jpg&refer=http%3A%2F%2Fwww.vfast.com.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1632028648&t=853f670d642f60c88808e9047a7fdf1b
 ---
 
 ## 1. ThreadLocal是什么
